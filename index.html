@@ -462,7 +462,7 @@ function send(){
   hist.push({role:'user',content:msg});
   busy=true;document.getElementById('sb').disabled=true;
   var tid=appendTyping();
-  fetch('/netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist})}).then(function(r){return r.json()}).then(function(data){
+  fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist})}).then(function(r){return r.json()}).then(function(data){
     removeTyping(tid);
     var reply=data.reply||'Er ging iets mis.';
     appendMsg('ai',reply);hist.push({role:'assistant',content:reply});
