@@ -60,8 +60,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
 .sp-soc-lbl{font-size:11px;color:rgba(255,255,255,.8);letter-spacing:.03em}
 
 /* CHAT */
-#chat{height:100vh;display:none;flex-direction:column;overflow:hidden;background:var(--bg);position:fixed;inset:0;z-index:10;max-width:680px;margin:0 auto}
-#chat.active{display:flex}
+#chat{height:100vh;display:none;flex-direction:column;overflow:hidden;background:var(--bg);position:fixed;top:0;left:0;right:0;z-index:100}
+#chat.active{display:flex;max-width:680px;margin:0 auto;left:50%;transform:translateX(-50%)}
 .chdr{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.5rem;border-bottom:1px solid var(--b);flex-shrink:0}
 .chdr-l{display:flex;flex-direction:column}
 .chdr-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:500}
