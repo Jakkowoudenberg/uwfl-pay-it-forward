@@ -556,17 +556,97 @@ function submitForm(){
 }
 
 // LANG
-function setLang(lang){
-  currentLang=lang;
-  document.getElementById('sp-sub').textContent=LANG[lang].sub;
-  document.getElementById('main-btn').textContent=LANG[lang].btn;
-  var jb=document.getElementById('join-btn');if(jb)jb.textContent=LANG[lang].join;
-  var ql=LANG[lang].ql;
-  var keys=['project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','join'];
-  for(var i=0;i<keys.length;i++){var el=document.getElementById('ql-'+keys[i]);if(el){var sp=el.querySelector('.ql-lbl');if(sp)sp.textContent=ql[keys[i]];}}
-  document.querySelectorAll('.flag-btn').forEach(function(b){b.classList.remove('active')});
-  event.target.classList.add('active');
+var TRANS_CACHE = {};
+var TRANS_LOADING = false;
+
+function applyLang(lang){
+  currentLang = lang;
+  var L = LANG[lang] || LANG['nl'];
+  document.getElementById('sp-sub').textContent = L.sub || LANG['nl'].sub;
+  document.getElementById('main-btn').textContent = L.btn || LANG['nl'].btn;
+  var jb = document.getElementById('join-btn'); if(jb) jb.textContent = L.join || LANG['nl'].join;
+  var ql = L.ql || LANG['nl'].ql;
+  var keys = ['project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','join'];
+  for(var i=0;i<keys.length;i++){var el=document.getElementById('ql-'+keys[i]);if(el){var sp=el.querySelector('.ql-lbl');if(sp&&ql[keys[i]])sp.textContent=ql[keys[i]];}}
   closeSplashInfo();
+}
+
+function setLang(lang){
+  document.querySelectorAll('.flag-btn').forEach(function(b){b.classList.remove('active')});
+  if(event && event.target) event.target.classList.add('active');
+
+  // NL is master — no translation needed
+  if(lang === 'nl'){ applyLang('nl'); return; }
+
+  // Already cached — apply immediately
+  if(TRANS_CACHE[lang]){ applyLang(lang); return; }
+
+  // Show loading toast
+  var toast = document.getElementById('lang-toast');
+  if(!toast){
+    toast = document.createElement('div');
+    toast.id = 'lang-toast';
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(196,154,108,.95);color:#fff;padding:.5rem 1.4rem;border-radius:20px;font-size:13px;font-family:Inter,sans-serif;z-index:9999;pointer-events:none;transition:opacity .3s';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = '🌍 Vertaling laden...';
+  toast.style.opacity = '1';
+
+  // Build NL source to translate
+  var nlL = LANG['nl'];
+  var langNames = {en:'English',es:'Spanish (Spain)',fr:'French',de:'German',it:'Italian'};
+  var toTrans = {
+    sub: nlL.sub,
+    btn: nlL.btn,
+    join: nlL.join,
+    ql: nlL.ql,
+    cards: {}
+  };
+  var nlCards = nlL.cards || {};
+  Object.keys(nlCards).forEach(function(k){
+    if(nlCards[k] && k !== 'contact' && k !== 'specs'){
+      toTrans.cards[k] = {title: nlCards[k].title, body: nlCards[k].body};
+    }
+  });
+
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:4000,
+      messages:[{role:'user',content:'Translate this JSON from Dutch to '+langNames[lang]+'. Rules: keep ALL HTML tags exactly as-is. Keep "Pay it Forward", "UWFL", "United Wood Floor Layers", "white oak", "European oak", "square edged", numbers unchanged. Return ONLY valid JSON, no markdown backticks, no explanation.\n\n'+JSON.stringify(toTrans)}]
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var txt = (data.content&&data.content[0])?data.content[0].text:'{}';
+    txt = txt.replace(/```json|```/g,'').trim();
+    var tr = JSON.parse(txt);
+    // Merge: keep existing LANG structure, overlay with translations
+    if(!LANG[lang]) LANG[lang] = {};
+    if(tr.sub) LANG[lang].sub = tr.sub;
+    if(tr.btn) LANG[lang].btn = tr.btn;
+    if(tr.join) LANG[lang].join = tr.join;
+    if(tr.ql) LANG[lang].ql = Object.assign({}, LANG['nl'].ql, tr.ql);
+    if(tr.cards){
+      if(!LANG[lang].cards) LANG[lang].cards = {};
+      Object.keys(tr.cards).forEach(function(k){
+        LANG[lang].cards[k] = tr.cards[k];
+      });
+      // Keep contact card from NL (has form fields)
+      LANG[lang].cards.contact = LANG['nl'].cards.contact;
+    }
+    TRANS_CACHE[lang] = true;
+    toast.style.opacity = '0';
+    applyLang(lang);
+  })
+  .catch(function(err){
+    console.error('Translation error:',err);
+    toast.textContent = '⚠️ Vertaling mislukt — NL gebruikt';
+    setTimeout(function(){toast.style.opacity='0';},2000);
+    applyLang('nl');
+  });
 }
 
 // AI CHAT
