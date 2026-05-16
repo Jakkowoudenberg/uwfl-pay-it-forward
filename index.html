@@ -451,7 +451,6 @@ function closeChat(){document.getElementById('chat').classList.remove('open');}
 // SPLASH INFO — show info on splash without opening chat
 function splashInfo(topic) {
   var lang = currentLang || 'nl';
-  var cards = LANG[lang] && LANG[lang].cards ? LANG[lang].cards : LANG['nl'].cards;
   var panel = document.getElementById('sp-info');
   var titleEl = document.getElementById('sp-info-title');
   var bodyEl = document.getElementById('sp-info-body');
@@ -556,8 +555,37 @@ function submitForm(){
 }
 
 // LANG
-var TRANS_CACHE = {};
-var TRANS_LOADING = false;
+var TRANS_CACHE = {};    // lang -> {ui done}
+var CARD_CACHE = {};     // lang+key -> translated card
+var langNames = {en:'English',es:'Spanish (Spain)',fr:'French',de:'German',it:'Italian'};
+
+function showToast(msg, hide){
+  var t = document.getElementById('lang-toast');
+  if(!t){
+    t = document.createElement('div');
+    t.id = 'lang-toast';
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(196,154,108,.95);color:#fff;padding:.5rem 1.4rem;border-radius:20px;font-size:13px;font-family:Inter,sans-serif;z-index:9999;pointer-events:none;transition:opacity .3s';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  if(hide) setTimeout(function(){t.style.opacity='0';}, hide);
+}
+
+function callTranslate(content, targetLang, cb){
+  fetch('/.netlify/functions/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({mode:'translate', targetLang: targetLang, content: content})
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var txt = (data.translated||'{}').replace(/```json|```/g,'').trim();
+    try { cb(null, JSON.parse(txt)); }
+    catch(e){ cb(e); }
+  })
+  .catch(cb);
+}
 
 function applyLang(lang){
   currentLang = lang;
@@ -574,78 +602,44 @@ function applyLang(lang){
 function setLang(lang){
   document.querySelectorAll('.flag-btn').forEach(function(b){b.classList.remove('active')});
   if(event && event.target) event.target.classList.add('active');
-
-  // NL is master — no translation needed
   if(lang === 'nl'){ applyLang('nl'); return; }
-
-  // Already cached — apply immediately
   if(TRANS_CACHE[lang]){ applyLang(lang); return; }
 
-  // Show loading toast
-  var toast = document.getElementById('lang-toast');
-  if(!toast){
-    toast = document.createElement('div');
-    toast.id = 'lang-toast';
-    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(196,154,108,.95);color:#fff;padding:.5rem 1.4rem;border-radius:20px;font-size:13px;font-family:Inter,sans-serif;z-index:9999;pointer-events:none;transition:opacity .3s';
-    document.body.appendChild(toast);
-  }
-  toast.textContent = '🌍 Vertaling laden...';
-  toast.style.opacity = '1';
-
-  // Build NL source to translate
+  // Only translate UI strings — fast (<3s)
+  showToast('🌍 ...');
   var nlL = LANG['nl'];
-  var langNames = {en:'English',es:'Spanish (Spain)',fr:'French',de:'German',it:'Italian'};
-  var toTrans = {
-    sub: nlL.sub,
-    btn: nlL.btn,
-    join: nlL.join,
-    ql: nlL.ql,
-    cards: {}
-  };
-  var nlCards = nlL.cards || {};
-  Object.keys(nlCards).forEach(function(k){
-    if(nlCards[k] && k !== 'contact' && k !== 'specs'){
-      toTrans.cards[k] = {title: nlCards[k].title, body: nlCards[k].body};
-    }
-  });
-
-  fetch('/.netlify/functions/chat',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({
-      mode: 'translate',
-      targetLang: langNames[lang],
-      content: toTrans
-    })
-  })
-  .then(function(r){return r.json();})
-  .then(function(data){
-    var txt = data.translated || '{}';
-    txt = txt.replace(/```json|```/g,'').trim();
-    var tr = JSON.parse(txt);
-    // Merge: keep existing LANG structure, overlay with translations
+  callTranslate({sub:nlL.sub, btn:nlL.btn, join:nlL.join, ql:nlL.ql}, langNames[lang], function(err, tr){
+    if(err){ showToast('⚠️ Fout', 2000); applyLang('nl'); return; }
     if(!LANG[lang]) LANG[lang] = {};
     if(tr.sub) LANG[lang].sub = tr.sub;
     if(tr.btn) LANG[lang].btn = tr.btn;
     if(tr.join) LANG[lang].join = tr.join;
-    if(tr.ql) LANG[lang].ql = Object.assign({}, LANG['nl'].ql, tr.ql);
-    if(tr.cards){
-      if(!LANG[lang].cards) LANG[lang].cards = {};
-      Object.keys(tr.cards).forEach(function(k){
-        LANG[lang].cards[k] = tr.cards[k];
-      });
-      // Keep contact card from NL (has form fields)
-      LANG[lang].cards.contact = LANG['nl'].cards.contact;
-    }
+    if(tr.ql) LANG[lang].ql = Object.assign({}, nlL.ql, tr.ql);
+    LANG[lang].cards = LANG[lang].cards || {};
     TRANS_CACHE[lang] = true;
-    toast.style.opacity = '0';
+    document.getElementById('lang-toast').style.opacity = '0';
     applyLang(lang);
-  })
-  .catch(function(err){
-    console.error('Translation error:',err);
-    toast.textContent = '⚠️ Vertaling mislukt — NL gebruikt';
-    setTimeout(function(){toast.style.opacity='0';},2000);
-    applyLang('nl');
+  });
+}
+
+// Called when a card is opened in a non-NL language
+function getTranslatedCard(lang, key, cb){
+  if(lang === 'nl'){ cb(LANG['nl'].cards[key]); return; }
+  var cacheKey = lang + '_' + key;
+  if(CARD_CACHE[cacheKey]){ cb(CARD_CACHE[cacheKey]); return; }
+  var nlCard = LANG['nl'].cards[key];
+  if(!nlCard){ cb(null); return; }
+  // Special cards — no translation needed
+  if(key === 'contact' || key === 'specs'){ cb(nlCard); return; }
+  showToast('🌍 ...');
+  callTranslate({title: nlCard.title, body: nlCard.body}, langNames[lang]||lang, function(err, tr){
+    document.getElementById('lang-toast').style.opacity = '0';
+    if(err || !tr){ cb(nlCard); return; }
+    var card = {title: tr.title||nlCard.title, body: tr.body||nlCard.body};
+    CARD_CACHE[cacheKey] = card;
+    if(!LANG[lang].cards) LANG[lang].cards = {};
+    LANG[lang].cards[key] = card;
+    cb(card);
   });
 }
 
