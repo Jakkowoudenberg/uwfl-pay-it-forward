@@ -468,9 +468,19 @@ function splashInfo(topic) {
     openChat();
     setTimeout(function(){ showCard('join'); }, 150);
     return;
-  } else if (cards[topic]) {
-    titleEl.textContent = cards[topic].title;
-    bodyEl.innerHTML = cards[topic].body;
+  } else {
+    var nlCard = LANG['nl'].cards && LANG['nl'].cards[topic];
+    if(!nlCard){ panel.classList.add('visible'); return; }
+    titleEl.textContent = nlCard.title;
+    bodyEl.innerHTML = nlCard.body;
+    panel.classList.add('visible');
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    if(lang !== 'nl'){
+      getTranslatedCard(lang, topic, function(card){
+        if(card){ titleEl.textContent = card.title; bodyEl.innerHTML = card.body; }
+      });
+    }
+    return;
   }
 
   panel.classList.add('visible');
