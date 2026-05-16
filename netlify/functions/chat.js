@@ -55,7 +55,7 @@ HELP 3 PEOPLE:
 
 THE ARTWORK:
 - A monumental floor/artwork built from all 1m2 panels
-- Will travel internationally as a messenger of craftsmanship and Pay It Forward
+- The idea is to let the artwork travel internationally as a messenger of craftsmanship and Pay It Forward
 - Will eventually be DONATED (never sold) to a school, vocational training, or public space
 - Destination chosen democratically: participants nominate and vote
 - Cannot be owned by any individual, sold, or used commercially
