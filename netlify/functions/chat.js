@@ -175,18 +175,18 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     <div class="sp-stat"><span class="sp-n">1m2+</span><span class="sp-l">Per maker</span></div>
   </div>
   <div class="sp-grid">
-    <button class="sp-tp" id="ql-project" onclick="splashInfo(&apos;project&apos;)">&#x1F4CB; <span class="ql-lbl">Wat is dit?</span></button>
-    <button class="sp-tp" id="ql-meedoen" onclick="splashInfo(&apos;meedoen&apos;)">&#x270B; <span class="ql-lbl">Waarom meedoen?</span></button>
-    <button class="sp-tp" id="ql-paneel" onclick="splashInfo(&apos;paneel&apos;)">&#x1FAB5; <span class="ql-lbl">Het paneel</span></button>
-    <button class="sp-tp" id="ql-3mensen" onclick="splashInfo(&apos;3mensen&apos;)">&#x1F91D; <span class="ql-lbl">Help 3 mensen</span></button>
-    <button class="sp-tp" id="ql-ketting" onclick="splashInfo(&apos;ketting&apos;)">&#x221E; <span class="ql-lbl">Kettingreactie</span></button>
-    <button class="sp-tp" id="ql-filosofie" onclick="splashInfo(&apos;filosofie&apos;)">&#x1F4AD; <span class="ql-lbl">Filosofie</span></button>
-    <button class="sp-tp" id="ql-kunstwerk" onclick="splashInfo(&apos;kunstwerk&apos;)">&#x1F3DB; <span class="ql-lbl">Kunstwerk</span></button>
-    <button class="sp-tp" id="ql-deelnemers" onclick="splashInfo(&apos;deelnemers&apos;)">&#x1F30D; <span class="ql-lbl">Deelnemers</span></button>
-    <button class="sp-tp" id="ql-specs" onclick="splashInfo(&apos;specs&apos;)">&#x1F4D0; <span class="ql-lbl">Bouwtekening</span></button>
-    <button class="sp-tp" id="ql-payitforward" onclick="splashInfo(&apos;payitforward&apos;)">&#x1F4AA; <span class="ql-lbl">Pay it Forward</span></button>
-    <button class="sp-tp" id="ql-contact" onclick="splashInfo(&apos;contact&apos;)">&#x2709; <span class="ql-lbl">Contact</span></button>
-    <button class="sp-tp" id="ql-join" onclick="splashInfo(&apos;join&apos;)">+ <span class="ql-lbl">Doe mee</span></button>
+    <button class="sp-tp" id="ql-project" onclick="splashInfo('project')">&#x1F4CB; <span class="ql-lbl">Wat is dit?</span></button>
+    <button class="sp-tp" id="ql-meedoen" onclick="splashInfo('meedoen')">&#x270B; <span class="ql-lbl">Waarom meedoen?</span></button>
+    <button class="sp-tp" id="ql-paneel" onclick="splashInfo('paneel')">&#x1FAB5; <span class="ql-lbl">Het paneel</span></button>
+    <button class="sp-tp" id="ql-3mensen" onclick="splashInfo('3mensen')">&#x1F91D; <span class="ql-lbl">Help 3 mensen</span></button>
+    <button class="sp-tp" id="ql-ketting" onclick="splashInfo('ketting')">&#x221E; <span class="ql-lbl">Kettingreactie</span></button>
+    <button class="sp-tp" id="ql-filosofie" onclick="splashInfo('filosofie')">&#x1F4AD; <span class="ql-lbl">Filosofie</span></button>
+    <button class="sp-tp" id="ql-kunstwerk" onclick="splashInfo('kunstwerk')">&#x1F3DB; <span class="ql-lbl">Kunstwerk</span></button>
+    <button class="sp-tp" id="ql-deelnemers" onclick="splashInfo('deelnemers')">&#x1F30D; <span class="ql-lbl">Deelnemers</span></button>
+    <button class="sp-tp" id="ql-specs" onclick="splashInfo('specs')">&#x1F4D0; <span class="ql-lbl">Bouwtekening</span></button>
+    <button class="sp-tp" id="ql-payitforward" onclick="splashInfo('payitforward')">&#x1F4AA; <span class="ql-lbl">Pay it Forward</span></button>
+    <button class="sp-tp" id="ql-contact" onclick="splashInfo('contact')">&#x2709; <span class="ql-lbl">Contact</span></button>
+    <button class="sp-tp" id="ql-join" onclick="splashInfo('join')">+ <span class="ql-lbl">Doe mee</span></button>
   </div>
 
   <!-- INFO PANEL — appears on splash, no chat -->
@@ -213,7 +213,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     </div>
     <div class="chdr-r">
       <button class="hbtn" onclick="closeChat()">&larr; Home</button>
-      <button class="hbtn" onclick="clearCards();showCard(&apos;join&apos;)">+ Doe mee</button>
+      <button class="hbtn" onclick="clearCards();showCard('join')">+ Doe mee</button>
     </div>
   </div>
   <div class="msgs" id="msgs">
@@ -450,10 +450,13 @@ function closeChat(){document.getElementById('chat').classList.remove('open');}
 
 // SPLASH INFO — show info on splash without opening chat
 function splashInfo(topic) {
+  console.log('splashInfo called:', topic);
   var lang = currentLang || 'nl';
   var panel = document.getElementById('sp-info');
   var titleEl = document.getElementById('sp-info-title');
   var bodyEl = document.getElementById('sp-info-body');
+  console.log('panel:', panel, 'titleEl:', titleEl, 'bodyEl:', bodyEl);
+  console.log('LANG.nl.cards:', LANG && LANG.nl && LANG.nl.cards ? Object.keys(LANG.nl.cards) : 'MISSING');
 
   document.querySelectorAll('.sp-tp').forEach(function(b){b.classList.remove('active')});
   var btn = document.getElementById('ql-'+topic);
