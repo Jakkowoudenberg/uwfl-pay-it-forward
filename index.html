@@ -374,8 +374,10 @@ function splashInfo(topic) {
     titleEl.textContent = 'Bouwtekening — Pay It Forward Panels';
     bodyEl.innerHTML = '<div style="background:#fff;border-radius:8px;padding:8px;margin-bottom:.75rem"><img src="data:image/svg+xml;base64,'+DRW_SVG+'" style="width:100%;display:block;border-radius:4px;" alt="Bouwtekening"/></div><div class="specs"><span><strong>Buitenmaat:</strong> 100 x 100 cm</span><span><strong>Eiken lijst:</strong> 5 cm — molenwiek patroon</span><span><strong>Freestyle:</strong> 90 x 90 cm</span><span><strong>Dikte:</strong> 24 mm</span></div>';
   } else if (topic === 'join') {
-    titleEl.textContent = 'Doe mee aan de beweging';
-    bodyEl.innerHTML = '<div class="ibox"><p>&#x1FAB5; <strong>Maker</strong> — Maak minimaal 1 m2, help 3 mensen.</p></div><div class="ibox"><p>&#x1F91D; <strong>Deelnemer</strong> — Help 3 mensen en geef het door.</p></div><p style="margin-top:.75rem;font-size:13px;color:rgba(255,255,255,.6)">Klik op "Stel mij een vraag" om je aan te melden via de chat.</p>';
+    closeSplashInfo();
+    openChat();
+    setTimeout(function(){ showCard('join'); }, 150);
+    return;
   } else if (cards[topic]) {
     titleEl.textContent = cards[topic].title;
     bodyEl.innerHTML = cards[topic].body;
