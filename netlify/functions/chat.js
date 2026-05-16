@@ -455,36 +455,37 @@ function splashInfo(topic) {
   var titleEl = document.getElementById('sp-info-title');
   var bodyEl = document.getElementById('sp-info-body');
 
-  // Highlight active button
   document.querySelectorAll('.sp-tp').forEach(function(b){b.classList.remove('active')});
   var btn = document.getElementById('ql-'+topic);
   if(btn) btn.classList.add('active');
 
-  if (topic === 'specs') {
-    titleEl.textContent = 'Bouwtekening — Pay It Forward Panels';
-    bodyEl.innerHTML = (function(){var l=currentLang||'nl';var t=DRW_TEXTS[l]||DRW_TEXTS['nl'];var labels={nl:{bm:'Buitenmaat',elijst:'Eiken lijst',hs:'Houtsoort lijst',fs:'Freestyle',dk:'Dikte',hsval:'White oak of European oak — bij white oak bij voorkeur de donkerdere delen gebruiken',mw:'molenwiek patroon met de klok mee'},en:{bm:'Outer size',elijst:'Oak frame',hs:'Wood species',fs:'Freestyle',dk:'Thickness',hsval:'White oak or European oak — prefer darker grain when using white oak',mw:'windmill pattern clockwise'},es:{bm:'Medida exterior',elijst:'Marco de roble',hs:'Especie de madera',fs:'Freestyle',dk:'Grosor',hsval:'Roble blanco o europeo — preferir partes más oscuras en roble blanco',mw:'patrón en sentido horario'},fr:{bm:'Dimension extérieure',elijst:'Cadre en chêne',hs:'Essence de bois',fs:'Freestyle',dk:'Épaisseur',hsval:'Chêne blanc ou européen — privilégier les parties plus foncées',mw:'motif dans le sens horaire'},de:{bm:'Außenmaß',elijst:'Eichenrahmen',hs:'Holzart',fs:'Freestyle',dk:'Stärke',hsval:'Weißeiche oder europäische Eiche — bei Weißeiche dunklere Partien bevorzugen',mw:'Windmühlenmuster im Uhrzeigersinn'},it:{bm:'Dimensione esterna',elijst:'Cornice in quercia',hs:'Specie di legno',fs:'Freestyle',dk:'Spessore',hsval:'Quercia bianca o europea — preferire le parti più scure',mw:'motivo in senso orario'}};var lb=labels[l]||labels['nl'];return '<div style="background:#fff;border-radius:8px;padding:8px;margin-bottom:.75rem"><img src="data:image/svg+xml;base64,'+getSVGBase64(l)+'" style="width:100%;display:block;border-radius:4px;" alt="Bouwtekening"/></div><div class="specs"><span><strong>'+lb.bm+':</strong> 100 x 100 cm</span><span><strong>'+lb.elijst+':</strong> 5 cm — '+lb.mw+'</span><span><strong>'+lb.hs+':</strong> '+lb.hsval+'</span><span><strong>'+lb.fs+':</strong> 90 x 90 cm</span><span><strong>'+lb.dk+':</strong> 24 mm</span></div>';})()
-  } else if (topic === 'join') {
+  if(topic === 'join'){
     closeSplashInfo();
     openChat();
     setTimeout(function(){ showCard('join'); }, 150);
     return;
-  } else {
-    var nlCard = LANG['nl'].cards && LANG['nl'].cards[topic];
-    if(!nlCard){ panel.classList.add('visible'); return; }
-    titleEl.textContent = nlCard.title;
-    bodyEl.innerHTML = nlCard.body;
+  }
+
+  if(topic === 'specs'){
+    titleEl.textContent = 'Bouwtekening — Pay It Forward Panels';
+    bodyEl.innerHTML = (function(){var l=currentLang||'nl';var t=DRW_TEXTS[l]||DRW_TEXTS['nl'];var labels={nl:{bm:'Buitenmaat',elijst:'Eiken lijst',hs:'Houtsoort lijst',fs:'Freestyle',dk:'Dikte',hsval:'White oak of European oak — bij white oak bij voorkeur de donkerdere delen gebruiken',mw:'molenwiek patroon met de klok mee'},en:{bm:'Outer size',elijst:'Oak frame',hs:'Wood species',fs:'Freestyle',dk:'Thickness',hsval:'White oak or European oak — prefer darker grain when using white oak',mw:'windmill pattern clockwise'},es:{bm:'Medida exterior',elijst:'Marco de roble',hs:'Especie de madera',fs:'Freestyle',dk:'Grosor',hsval:'Roble blanco o europeo — preferir partes más oscuras en roble blanco',mw:'patrón en sentido horario'},fr:{bm:'Dimension extérieure',elijst:'Cadre en chêne',hs:'Essence de bois',fs:'Freestyle',dk:'Épaisseur',hsval:'Chêne blanc ou européen — privilégier les parties plus foncées',mw:'motif dans le sens horaire'},de:{bm:'Außenmaß',elijst:'Eichenrahmen',hs:'Holzart',fs:'Freestyle',dk:'Stärke',hsval:'Weißeiche oder europäische Eiche — bei Weißeiche dunklere Partien bevorzugen',mw:'Windmühlenmuster im Uhrzeigersinn'},it:{bm:'Dimensione esterna',elijst:'Cornice in quercia',hs:'Specie di legno',fs:'Freestyle',dk:'Spessore',hsval:'Quercia bianca o europea — preferire le parti più scure',mw:'motivo in senso orario'}};var lb=labels[l]||labels['nl'];return '<div style="background:#fff;border-radius:8px;padding:8px;margin-bottom:.75rem"><img src="data:image/svg+xml;base64,'+getSVGBase64(l)+'" style="width:100%;display:block;border-radius:4px;" alt="Bouwtekening"/></div><div class="specs"><span><strong>'+lb.bm+':</strong> 100 x 100 cm</span><span><strong>'+lb.elijst+':</strong> 5 cm — '+lb.mw+'</span><span><strong>'+lb.hs+':</strong> '+lb.hsval+'</span><span><strong>'+lb.fs+':</strong> 90 x 90 cm</span><span><strong>'+lb.dk+':</strong> 24 mm</span></div>';}());
     panel.classList.add('visible');
     panel.scrollIntoView({behavior:'smooth', block:'nearest'});
-    if(lang !== 'nl'){
-      getTranslatedCard(lang, topic, function(card){
-        if(card){ titleEl.textContent = card.title; bodyEl.innerHTML = card.body; }
-      });
-    }
     return;
   }
 
+  // All other cards
+  var nlCard = LANG['nl'].cards && LANG['nl'].cards[topic];
+  if(!nlCard) return;
+  titleEl.textContent = nlCard.title;
+  bodyEl.innerHTML = nlCard.body;
   panel.classList.add('visible');
   panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  if(lang !== 'nl'){
+    getTranslatedCard(lang, topic, function(card){
+      if(card){ titleEl.textContent = card.title; bodyEl.innerHTML = card.body; }
+    });
+  }
 }
 
 function closeSplashInfo() {
