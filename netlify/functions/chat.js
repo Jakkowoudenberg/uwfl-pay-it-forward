@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!-- v1778945296 -->
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
@@ -450,13 +450,10 @@ function closeChat(){document.getElementById('chat').classList.remove('open');}
 
 // SPLASH INFO — show info on splash without opening chat
 function splashInfo(topic) {
-  console.log('splashInfo called:', topic);
   var lang = currentLang || 'nl';
   var panel = document.getElementById('sp-info');
   var titleEl = document.getElementById('sp-info-title');
   var bodyEl = document.getElementById('sp-info-body');
-  console.log('panel:', panel, 'titleEl:', titleEl, 'bodyEl:', bodyEl);
-  console.log('LANG.nl.cards:', LANG && LANG.nl && LANG.nl.cards ? Object.keys(LANG.nl.cards) : 'MISSING');
 
   document.querySelectorAll('.sp-tp').forEach(function(b){b.classList.remove('active')});
   var btn = document.getElementById('ql-'+topic);
