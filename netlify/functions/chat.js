@@ -163,7 +163,37 @@ exports.handler = async function(event) {
   };
 
   try {
-    const { messages } = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
+
+    // TRANSLATE MODE
+    if (body.mode === 'translate') {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': process.env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-5',
+          max_tokens: 4000,
+          messages: [{
+            role: 'user',
+            content: 'Translate this JSON from Dutch to ' + body.targetLang + '. Rules: keep ALL HTML tags exactly as-is. Keep "Pay it Forward", "UWFL", "United Wood Floor Layers", "white oak", "European oak", "square edged", numbers unchanged. Return ONLY valid JSON, no markdown backticks, no explanation.\n\n' + JSON.stringify(body.content)
+          }]
+        })
+      });
+      const data = await response.json();
+      const translated = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ translated })
+      };
+    }
+
+    // CHAT MODE
+    const { messages } = body;
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
