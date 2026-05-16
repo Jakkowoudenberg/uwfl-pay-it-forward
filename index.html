@@ -48,6 +48,11 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 .sp-info p:last-child{margin-bottom:0}
 .sp-info strong{color:var(--tx);font-weight:500}
 .sp-info img{width:100%;display:block;border-radius:6px;margin-bottom:.75rem}
+.card-loading{display:flex;align-items:center;justify-content:center;gap:6px;padding:2rem 0}
+.card-loading span{width:8px;height:8px;border-radius:50%;background:var(--wood);opacity:.3;animation:cardpulse 1.2s ease-in-out infinite}
+.card-loading span:nth-child(2){animation-delay:.2s}
+.card-loading span:nth-child(3){animation-delay:.4s}
+@keyframes cardpulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
 .srow{display:flex;gap:7px;margin:.75rem 0}
 .sbox{flex:1;background:rgba(255,255,255,.08);border-radius:8px;padding:.65rem;text-align:center;border:1px solid rgba(255,255,255,.15)}
 .sn{font-size:1.4rem;font-weight:600;color:#e8b87a;display:block;line-height:1}
@@ -477,14 +482,27 @@ function splashInfo(topic) {
   // All other cards
   var nlCard = LANG['nl'].cards && LANG['nl'].cards[topic];
   if(!nlCard) return;
-  titleEl.textContent = nlCard.title;
-  bodyEl.innerHTML = nlCard.body;
-  panel.classList.add('visible');
-  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
-  if(lang !== 'nl'){
+  if(lang !== 'nl' && !CARD_CACHE[lang+'_'+topic]){
+    // Show loading state
+    titleEl.textContent = '...';
+    bodyEl.innerHTML = '<div class="card-loading"><span></span><span></span><span></span></div>';
+    panel.classList.add('visible');
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
     getTranslatedCard(lang, topic, function(card){
-      if(card){ titleEl.textContent = card.title; bodyEl.innerHTML = card.body; }
+      var c = card || nlCard;
+      titleEl.textContent = c.title;
+      bodyEl.innerHTML = c.body;
     });
+  } else {
+    titleEl.textContent = nlCard.title;
+    bodyEl.innerHTML = nlCard.body;
+    panel.classList.add('visible');
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    if(lang !== 'nl'){
+      getTranslatedCard(lang, topic, function(card){
+        if(card){ titleEl.textContent = card.title; bodyEl.innerHTML = card.body; }
+      });
+    }
   }
 }
 
