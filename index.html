@@ -609,18 +609,18 @@ function setLang(lang){
     }
   });
 
-  fetch('https://api.anthropic.com/v1/messages',{
+  fetch('/.netlify/functions/chat',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens:4000,
-      messages:[{role:'user',content:'Translate this JSON from Dutch to '+langNames[lang]+'. Rules: keep ALL HTML tags exactly as-is. Keep "Pay it Forward", "UWFL", "United Wood Floor Layers", "white oak", "European oak", "square edged", numbers unchanged. Return ONLY valid JSON, no markdown backticks, no explanation.\n\n'+JSON.stringify(toTrans)}]
+      mode: 'translate',
+      targetLang: langNames[lang],
+      content: toTrans
     })
   })
   .then(function(r){return r.json();})
   .then(function(data){
-    var txt = (data.content&&data.content[0])?data.content[0].text:'{}';
+    var txt = data.translated || '{}';
     txt = txt.replace(/```json|```/g,'').trim();
     var tr = JSON.parse(txt);
     // Merge: keep existing LANG structure, overlay with translations
