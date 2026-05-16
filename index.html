@@ -423,6 +423,13 @@ function selRoute(r){
   }
   document.getElementById('jfields').style.display='block';
   document.getElementById('ftrade').style.display=r==='maker'?'block':'none';
+  // Update textarea label based on role
+  var fmlabel = document.querySelector('#jfields .fld:last-of-type label');
+  if(fmlabel){
+    if(r==='bijdrager') fmlabel.textContent='Waar zou je ons mee willen en kunnen helpen?';
+    else if(r==='sponsor') fmlabel.textContent='Vertel ons over jezelf of je bedrijf (optioneel)';
+    else fmlabel.textContent='Waarom doe jij mee? (optioneel)';
+  }
   document.getElementById('msgs').scrollTop=99999;
 }
 function submitForm(){
