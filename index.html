@@ -354,7 +354,7 @@ var LANG = {
       kunstwerk: {title:'Wat gebeurt met het kunstwerk?',body:'<p>Het monumentale kunstwerk \u2014 opgebouwd uit alle 1 m2 panelen \u2014 is het idee <strong>internationaal</strong> te reizen als boodschapper van vakmanschap en Pay It Forward.</p><div class="qcard">Het wordt nooit verkocht. Het is van niemand \u2014 en daarom van iedereen.</div><p>Daarna wordt het <strong>geschonken</strong> aan een school, vakopleiding of publieke ruimte. De bestemming bepalen de deelnemers zelf via voordracht en stemming. Doel: premiere op de <strong>NWFA Expo 2027</strong>, 27-29 april in Texas.</p>'},
       payitforward: {title:'Pay it Forward',body:'<p>Pay it Forward betekent: je ontvangt iets goeds — en in plaats van het terug te geven, geef je het <strong>door aan drie anderen</strong>. Niet als verplichting. Als keuze.</p><div class="qcard">Jij helpt 3 mensen. Die helpen elk 3 anderen. En zo verder. 1 → 3 → 9 → 27 → 81 → 243...</div><p>Het maakt niet uit hoe groot of klein de hulp is. Praktisch, emotioneel, materieel. Het enige wat telt is dat het doorgaat.</p><p style="margin-top:.5rem;font-size:12px;color:rgba(255,255,255,.6)">Elke deelnemer — maker óf gewoon mens — geeft deze belofte.</p>'},
       contact: {title:'Contact',body:'<div class="fld"><label>Naam</label><input type="text" id="cnt-naam" placeholder="Jouw naam"></div><div class="fld"><label>E-mail</label><input type="email" id="cnt-email" placeholder="jij@voorbeeld.nl"></div><div class="fld"><label>Bericht</label><textarea id="cnt-msg" placeholder="Jouw vraag of bericht..." style="height:100px"></textarea></div><button class="jsub" onclick="sendContact()">Verstuur</button><p class="jhint">We reageren zo snel mogelijk.</p>'},
-      deelnemers: {title:'Wie doen er mee?',body:'<div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Landen</span></div></div><div class="clist"><div class="crow"><span>&#x1F1FA;&#x1F1F8; United States</span><div class="cbw"><div class="cb" style="width:100%"></div></div><span>13</span></div><div class="crow"><span>&#x1F1F3;&#x1F1F1; Nederland</span><div class="cbw"><div class="cb" style="width:77%"></div></div><span>10</span></div><div class="crow"><span>&#x1F1EA;&#x1F1F8; Spanje</span><div class="cbw"><div class="cb" style="width:23%"></div></div><span>3</span></div><div class="crow"><span>&#x1F1E7;&#x1F1EA; Belgi\u00eb</span><div class="cbw"><div class="cb" style="width:15%"></div></div><span>2</span></div><div class="crow"><span>&#x1F1E9;&#x1F1EA; Duitsland</span><div class="cbw"><div class="cb" style="width:8%"></div></div><span>1</span></div><div class="crow"><span>&#x1F1EE;&#x1F1F9; Itali\u00eb</span><div class="cbw"><div class="cb" style="width:8%"></div></div><span>1</span></div><div class="crow"><span>&#x1F1E8;&#x1F1E6; Canada</span><div class="cbw"><div class="cb" style="width:8%"></div></div><span>1</span></div><div class="crow"><span>&#x1F1F5;&#x1F1F9; Portugal</span><div class="cbw"><div class="cb" style="width:8%"></div></div><span>1</span></div></div><p style="margin-top:.75rem">Bekijk alle initiators op <a href="https://www.unitedwoodfloorlayers.com/initiators/" target="_blank" style="color:var(--wood)">de website \u2192</a></p>'}
+      deelnemers: {title:'Wie doen er mee?',body:'<div id=\"participants-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Deelnemers laden...</div><div id=\"participants-list\"></div>'}
     }
   },
   en: {
@@ -371,7 +371,7 @@ var LANG = {
       ketting: {title:'The chain reaction',body:'<div class="chain"><p>1 \u2192 3 people</p><p>3 x 3 = 9</p><p>9 x 3 = 27</p><p>27 x 3 = 81</p><p>81 x 3 = 243</p><p>243 x 3 = 729...</p><p>After that it becomes impossible to count.</p></div><p>With 100 makers: already 300 people in the first ring, 900 in the second, 2,700 in the third. That is the power of passing it on.</p>'},
       filosofie: {title:'The philosophy',body:'<p>There is no better. Only different. An apprentice laying their first herringbone is just as valuable as a master with 30 years of experience.</p><div class="qcard">It is not about perfection. It is about participation.</div><p>This project is not a competition, not a marketing campaign, not an ego platform. It is a tribute to craftsmanship and proof that collaboration is greater than competition.</p><p>If someone drops out due to circumstances: no shame, no judgment. The door stays open.</p>'},
       kunstwerk: {title:'What happens to the artwork?',body:'<p>The monumental artwork \u2014 built from all 1 m2 panels \u2014 travels <strong>internationally</strong> as a messenger of craftsmanship and Pay It Forward.</p><div class="qcard">It will never be sold. It belongs to no one \u2014 and therefore to everyone.</div><p>It will then be <strong>donated</strong> to a school, vocational training or public space. The destination is chosen by participants via nomination and vote. Goal: premiere at the <strong>NWFA Expo 2027</strong>, April 27-29 in Texas.</p>'},
-      deelnemers: {title:'Who is participating?',body:'<div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Countries</span></div></div><div class="clist"><div class="crow"><span>&#x1F1FA;&#x1F1F8; United States</span><div class="cbw"><div class="cb" style="width:100%"></div></div><span>13</span></div><div class="crow"><span>&#x1F1F3;&#x1F1F1; Netherlands</span><div class="cbw"><div class="cb" style="width:77%"></div></div><span>10</span></div><div class="crow"><span>&#x1F1EA;&#x1F1F8; Spain</span><div class="cbw"><div class="cb" style="width:23%"></div></div><span>3</span></div><div class="crow"><span>&#x1F1E7;&#x1F1EA; Belgium</span><div class="cbw"><div class="cb" style="width:15%"></div></div><span>2</span></div><div class="crow"><span>&#x1F1E9;&#x1F1EA; Germany</span><div class="cbw"><div class="cb" style="width:8%"></div></div><span>1</span></div><div class="crow"><span>&#x1F1EE;&#x1F1F9; Italy</span><div class="cbw"><div class="cb" style="width:8%"></div></div><span>1</span></div><div class="crow"><span>&#x1F1E8;&#x1F1E6; Canada</span><div class="cbw"><div class="cb" style="width:8%"></div></div><span>1</span></div><div class="crow"><span>&#x1F1F5;&#x1F1F9; Portugal</span><div class="cbw"><div class="cb" style="width:8%"></div></div><span>1</span></div></div>'}
+      deelnemers: {title:'Who is participating?',body:'<div id=\"participants-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Loading participants...</div><div id=\"participants-list\"></div>'}
     }
   },
   es: {
@@ -456,6 +456,83 @@ function openChat(){document.getElementById('chat').classList.add('open');}
 function closeChat(){document.getElementById('chat').classList.remove('open');}
 
 // SPLASH INFO — show info on splash without opening chat
+var PARTICIPANTS_CACHE = null;
+
+var COUNTRY_FLAGS = {
+  'Netherlands': '🇳🇱', 'United States': '🇺🇸', 'Spain': '🇪🇸',
+  'Belgium': '🇧🇪', 'Germany': '🇩🇪', 'Italy': '🇮🇹',
+  'Canada': '🇨🇦', 'Portugal': '🇵🇹', 'France': '🇫🇷',
+  'Australia': '🇦🇺', 'United Kingdom': '🇬🇧'
+};
+
+function loadParticipants() {
+  var list = document.getElementById('participants-list');
+  var loading = document.getElementById('participants-loading');
+  if(!list) return;
+
+  if(PARTICIPANTS_CACHE) { renderParticipants(PARTICIPANTS_CACHE); return; }
+
+  fetch('/.netlify/functions/participants')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      PARTICIPANTS_CACHE = data;
+      renderParticipants(data);
+    })
+    .catch(function(err){
+      if(loading) loading.textContent = 'Could not load participants.';
+    });
+}
+
+function renderParticipants(data) {
+  var loading = document.getElementById('participants-loading');
+  var list = document.getElementById('participants-list');
+  if(!list) return;
+  if(loading) loading.style.display = 'none';
+
+  // Count totals
+  var total = data.length;
+  var countries = {};
+  data.forEach(function(p){ if(p.country) countries[p.country] = (countries[p.country]||0)+1; });
+  var countryCount = Object.keys(countries).length;
+
+  // Stats
+  var html = '<div class="srow"><div class="sbox"><span class="sn">'+total+'</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">'+countryCount+'</span><span class="sl">Countries</span></div></div>';
+
+  // Categories in order
+  var cats = ['Initiator','Maker','Contributor','Participant','Sponsor'];
+  var catIcons = {'Initiator':'🌱','Maker':'🪵','Contributor':'💪','Participant':'🤝','Sponsor':'💰'};
+
+  cats.forEach(function(cat) {
+    var members = data.filter(function(p){ return p.type === cat; });
+    if(!members.length) return;
+
+    html += '<div style="margin-top:1rem"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--wood);margin-bottom:.5rem">'+catIcons[cat]+' '+cat+'s ('+members.length+')</div>';
+
+    // Group by country alphabetically
+    var byCountry = {};
+    members.forEach(function(p){
+      var c = p.country || 'Unknown';
+      if(!byCountry[c]) byCountry[c] = [];
+      byCountry[c].push(p);
+    });
+
+    Object.keys(byCountry).sort().forEach(function(country){
+      var flag = COUNTRY_FLAGS[country] || '🌍';
+      html += '<div style="margin-top:.6rem"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:.3rem">'+flag+' '+country+' ('+byCountry[country].length+')</div>';
+      byCountry[country].forEach(function(p){
+        html += '<div style="font-size:12px;padding:.35rem .5rem;border-left:2px solid var(--dim);margin-left:.25rem;margin-bottom:.2rem;color:rgba(255,255,255,.85)">';
+        html += '<strong>'+p.name+'</strong>';
+        if(p.company) html += ' <span style="opacity:.6">— '+p.company+'</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+
+  list.innerHTML = html;
+}
+
 function splashInfo(topic) {
   var lang = currentLang || 'nl';
   var panel = document.getElementById('sp-info');
@@ -494,12 +571,14 @@ function splashInfo(topic) {
       var c = card || nlCard;
       titleEl.textContent = c.title;
       bodyEl.innerHTML = c.body;
+      if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
     });
   } else {
     titleEl.textContent = nlCard.title;
     bodyEl.innerHTML = nlCard.body;
     panel.classList.add('visible');
     panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
     if(lang !== 'en'){
       getTranslatedCard(lang, topic, function(card){
         if(card){ titleEl.textContent = card.title; bodyEl.innerHTML = card.body; }
@@ -578,7 +657,11 @@ function submitForm(){
   var cc=(document.getElementById('fcc')||{value:''}).value;
   var tel=(document.getElementById('ftel')||{value:''}).value;
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
-  fetch('https://script.google.com/macros/s/AKfycbxp3RB7h1Cg_2eFfenO78dRjuD-l-XTJliibReTWtLopiAz5MfloqVMFDzcS_PgfWI/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:(document.getElementById('fm')||{value:''}).value})}).catch(function(e){console.log(e)});
+  var regData = {naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
+  // Send to Google Sheets
+  fetch('https://script.google.com/macros/s/AKfycbxp3RB7h1Cg_2eFfenO78dRjuD-l-XTJliibReTWtLopiAz5MfloqVMFDzcS_PgfWI/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(e){console.log(e)});
+  // Send to Supabase
+  fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(e){console.log(e)});
   var jc=document.getElementById('jcard');if(jc)jc.remove();
   var w=document.getElementById('msgs');
   var ok=document.createElement('div');ok.className='msg ai';
