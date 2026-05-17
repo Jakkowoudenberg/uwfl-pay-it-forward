@@ -739,16 +739,41 @@ function setLang(lang, evtTarget){
   if(lang === 'en'){ applyLang('en'); return; }
   if(TRANS_CACHE[lang]){ applyLang(lang); return; }
 
-  // Translate UI + ALL cards in one call
-  showToast('🌍 Translating...');
+  // Step 1: Translate UI fast, then pre-fetch cards in background
+  showToast('🌍 ...');
   var nlL = LANG['en'];
+  var qlArray = Object.keys(nlL.ql).map(function(k){ return {k:k, v:nlL.ql[k]}; });
 
-  // Build all card content to translate at once
-  var cardKeys = ['project','meedoen','paneel','ketting','filosofie','kunstwerk','payitforward','3mensen'];
-  var cardsToTranslate = {};
-  cardKeys.forEach(function(k){
-    var card = nlL.cards && nlL.cards[k];
-    if(card) cardsToTranslate[k] = {title: card.title, body: card.body};
+  callTranslate({sub:nlL.sub, btn:nlL.btn, join:nlL.join, ql:qlArray}, langNames[lang], function(err, tr){
+    if(err){ showToast('⚠️ Error', 2000); applyLang('en'); return; }
+    if(!LANG[lang]) LANG[lang] = {};
+    if(tr.sub) LANG[lang].sub = tr.sub;
+    if(tr.btn) LANG[lang].btn = tr.btn;
+    if(tr.join) LANG[lang].join = tr.join;
+    if(tr.ql && Array.isArray(tr.ql)) {
+      var mergedQl = {};
+      tr.ql.forEach(function(item){ if(item.k) mergedQl[item.k] = item.v || nlL.ql[item.k]; });
+      Object.keys(nlL.ql).forEach(function(k){ if(!mergedQl[k]) mergedQl[k] = nlL.ql[k]; });
+      LANG[lang].ql = mergedQl;
+    } else {
+      LANG[lang].ql = Object.assign({}, nlL.ql, tr.ql||{});
+    }
+    LANG[lang].cards = LANG[lang].cards || {};
+    TRANS_CACHE[lang] = true;
+    var toast = document.getElementById('lang-toast');
+    if(toast) toast.style.opacity = '0';
+    applyLang(lang);
+
+    // Step 2: Pre-fetch cards in background one by one
+    var cardKeys = ['project','meedoen','paneel','ketting','filosofie','kunstwerk','payitforward','3mensen'];
+    var i = 0;
+    function fetchNext() {
+      if(i >= cardKeys.length) return;
+      var k = cardKeys[i++];
+      if(CARD_CACHE[lang+'_'+k]) { fetchNext(); return; }
+      getTranslatedCard(lang, k, function(){ fetchNext(); });
+    }
+    setTimeout(fetchNext, 500);
   });
 
   var toTranslate = {
