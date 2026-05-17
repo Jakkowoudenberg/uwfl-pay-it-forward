@@ -739,30 +739,52 @@ function setLang(lang, evtTarget){
   if(lang === 'en'){ applyLang('en'); return; }
   if(TRANS_CACHE[lang]){ applyLang(lang); return; }
 
-  // Only translate UI strings — fast (<3s)
-  showToast('🌍 ...');
+  // Translate UI + ALL cards in one call
+  showToast('🌍 Translating...');
   var nlL = LANG['en'];
-  // Send ql as array of {key, value} to preserve keys after translation
-  var qlArray = Object.keys(nlL.ql).map(function(k){ return {k:k, v:nlL.ql[k]}; });
-  callTranslate({sub:nlL.sub, btn:nlL.btn, join:nlL.join, ql:qlArray}, langNames[lang], function(err, tr){
-    if(err){ showToast('⚠️ Fout', 2000); applyLang('nl'); return; }
+
+  // Build all card content to translate at once
+  var cardKeys = ['project','meedoen','paneel','ketting','filosofie','kunstwerk','payitforward','3mensen'];
+  var cardsToTranslate = {};
+  cardKeys.forEach(function(k){
+    var card = nlL.cards && nlL.cards[k];
+    if(card) cardsToTranslate[k] = {title: card.title, body: card.body};
+  });
+
+  var toTranslate = {
+    sub: nlL.sub, btn: nlL.btn, join: nlL.join,
+    ql: Object.keys(nlL.ql).map(function(k){ return {k:k, v:nlL.ql[k]}; }),
+    cards: cardsToTranslate
+  };
+
+  callTranslate(toTranslate, langNames[lang], function(err, tr){
+    if(err){ showToast('⚠️ Error', 2000); applyLang('en'); return; }
     if(!LANG[lang]) LANG[lang] = {};
     if(tr.sub) LANG[lang].sub = tr.sub;
     if(tr.btn) LANG[lang].btn = tr.btn;
     if(tr.join) LANG[lang].join = tr.join;
-    // Rebuild ql from array, fallback to NL per key
     if(tr.ql && Array.isArray(tr.ql)) {
       var mergedQl = {};
       tr.ql.forEach(function(item){ if(item.k) mergedQl[item.k] = item.v || nlL.ql[item.k]; });
-      // Fill any missing keys from NL
       Object.keys(nlL.ql).forEach(function(k){ if(!mergedQl[k]) mergedQl[k] = nlL.ql[k]; });
       LANG[lang].ql = mergedQl;
     } else {
       LANG[lang].ql = Object.assign({}, nlL.ql, tr.ql||{});
     }
-    LANG[lang].cards = LANG[lang].cards || {};
+    LANG[lang].cards = {};
+    if(tr.cards) {
+      Object.keys(tr.cards).forEach(function(k){
+        if(tr.cards[k] && tr.cards[k].title){
+          LANG[lang].cards[k] = tr.cards[k];
+          CARD_CACHE[lang+'_'+k] = tr.cards[k];
+        }
+      });
+    }
+    LANG[lang].cards.contact = nlL.cards.contact;
+    LANG[lang].cards.deelnemers = nlL.cards.deelnemers;
     TRANS_CACHE[lang] = true;
-    document.getElementById('lang-toast').style.opacity = '0';
+    var toast = document.getElementById('lang-toast');
+    if(toast) toast.style.opacity = '0';
     applyLang(lang);
   });
 }
