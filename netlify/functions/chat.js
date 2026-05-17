@@ -208,7 +208,7 @@ exports.handler = async function(event) {
           max_tokens: 4000,
           messages: [{
             role: 'user',
-            content: 'Translate this JSON from Dutch to ' + body.targetLang + '. Rules: keep ALL HTML tags exactly as-is. Keep "Pay it Forward", "UWFL", "United Wood Floor Layers", "white oak", "European oak", "square edged", numbers unchanged. Return ONLY valid JSON, no markdown backticks, no explanation.\n\n' + JSON.stringify(body.content)
+            content: 'Translate this JSON from English to ' + body.targetLang + '. Rules: keep ALL HTML tags exactly as-is. Keep "Pay it Forward", "UWFL", "United Wood Floor Layers", "white oak", "European oak", "square edged", "FSC", "PEFC", "NWFA", numbers unchanged. The cards object contains multiple card objects each with title and body — translate all of them. Return ONLY valid JSON, no markdown backticks, no explanation.\n\n' + JSON.stringify(body.content)
           }]
         })
       });
