@@ -730,6 +730,18 @@ function applyLang(lang){
   var ql = L.ql || LANG['en'].ql;
   var keys = ['project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','join'];
   for(var i=0;i<keys.length;i++){var el=document.getElementById('ql-'+keys[i]);if(el){var sp=el.querySelector('.ql-lbl');if(sp&&ql[keys[i]])sp.textContent=ql[keys[i]];}}
+
+  // If a card is open, reload it in the new language
+  var panel = document.getElementById('sp-info');
+  if(panel && panel.classList.contains('visible')) {
+    var activeBtn = document.querySelector('.sp-tp.active');
+    if(activeBtn) {
+      var activeTopic = activeBtn.id.replace('ql-','');
+      if(activeTopic && activeTopic !== 'join') {
+        setTimeout(function(){ splashInfo(activeTopic); }, 100);
+      }
+    }
+  }
 }
 
 function setLang(lang, evtTarget){
