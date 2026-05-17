@@ -165,6 +165,35 @@ exports.handler = async function(event) {
   try {
     const body = JSON.parse(event.body);
 
+    // REGISTER MODE — save to Supabase
+    if (body.mode === 'register') {
+      const reg = body.data;
+      const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/registrations`, {
+        method: 'POST',
+        headers: {
+          'apikey': process.env.SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          name: reg.naam,
+          company: reg.bedrijf || null,
+          email: reg.email,
+          country: reg.land,
+          phone: reg.telefoon || null,
+          type: reg.type,
+          trade: reg.vak || null,
+          message: reg.bericht || null
+        })
+      });
+      return {
+        statusCode: response.ok ? 200 : 500,
+        headers,
+        body: JSON.stringify({ ok: response.ok })
+      };
+    }
+
     // TRANSLATE MODE
     if (body.mode === 'translate') {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
