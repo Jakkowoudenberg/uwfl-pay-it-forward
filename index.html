@@ -177,7 +177,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
   </div>
   <div class="sp-stats">
     <div class="sp-stat"><span class="sp-n" id="cnt">0</span><span class="sp-l">Participants</span></div>
-    <div class="sp-stat"><span class="sp-n">8</span><span class="sp-l">Landen</span></div>
+    <div class="sp-stat"><span class="sp-n" id="cnt-countries">8</span><span class="sp-l">Countries</span></div>
     <div class="sp-stat"><span class="sp-n">1m2+</span><span class="sp-l">Per maker</span></div>
   </div>
   <div class="sp-grid">
@@ -345,7 +345,7 @@ var LANG = {
     join: '+ Doe mee',
     ql: {project:'Wat is dit?',meedoen:'Waarom meedoen?',paneel:'Het paneel','3mensen':'Help 3 mensen',ketting:'Kettingreactie',filosofie:'Filosofie',kunstwerk:'Kunstwerk',deelnemers:'Deelnemers',specs:'Bouwtekening',payitforward:'Pay it Forward',contact:'Contact',join:'Doe mee'},
     cards: {
-      project: {title:'Wat is het Pay It Forward Project?',body:'<p>UWFL is geen bedrijf, geen merk en geen vereniging \u2014 het is een <strong>wereldwijde beweging van vakmensen</strong> die zich verenigen rond \u00e9\u00e9n gezamenlijk kunstwerk en \u00e9\u00e9n gedeelde intentie: verbinden, doorgeven en betekenis geven aan vakmanschap.</p><div class="qcard">Het werk is van niemand \u2014 en daarom van iedereen.</div><div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Landen</span></div><div class="sbox"><span class="sn">1m2+</span><span class="sl">Per maker</span></div></div><p>Het idee is het kunstwerk de wereld over te laten reizen en het vervolgens te uiteindelijk geschonken aan een school of publieke ruimte. Nooit verkocht.</p>'},
+      project: {title:'Wat is het Pay It Forward Project?',body:'<p>UWFL is geen bedrijf, geen merk en geen vereniging \u2014 het is een <strong>wereldwijde beweging van vakmensen</strong> die zich verenigen rond \u00e9\u00e9n gezamenlijk kunstwerk en \u00e9\u00e9n gedeelde intentie: verbinden, doorgeven en betekenis geven aan vakmanschap.</p><div class="qcard">Het werk is van niemand \u2014 en daarom van iedereen.</div><div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Landen</span></div><div class="sbox"><span class="sn">1m2+</span><span class="sl">Per maker</span></div></div><p>Het idee is het kunstwerk de wereld over te laten reizen en het vervolgens te uiteindelijk geschonken aan een school of publieke ruimte. Nooit verkocht.</p>'},
       meedoen: {title:'Waarom meedoen?',body:'<p>Omdat vakmanschap meer is dan een vak. Het is een verhaal, een taal, een manier van kijken naar de wereld. En samen vertellen we dat verhaal beter dan alleen.</p><div class="qcard">Elke maker brengt zijn eigen handtekening. Elk paneel is uniek. Samen vormen ze iets wat niemand alleen had kunnen maken.</div><p>Je hoeft geen professional te zijn. Je hoeft alleen aanwezig te zijn \u2014 met je handen, je intentie en je bereidheid om iets door te geven.</p><p style="margin-top:.75rem;font-size:12px;color:rgba(255,255,255,.6)">\u2193 Klik op <strong>+ Doe mee</strong> om je aan te sluiten.</p>'},
       paneel: {title:'Het paneel maken',body:'<p>Elke maker maakt <strong>minimaal 1 m2</strong> \u2014 meer mag en is zelfs welkom. Binnen de vaste eiken molenwiek lijst totale vrijheid: elk patroon, elke techniek, elk hout.</p><div class="specs"><span><strong>Buitenmaat:</strong> 100 x 100 cm</span><span><strong>Eiken molenwiek lijst:</strong> 5 cm breed rondom \u2014 altijd aanwezig, verbindt alles</span><span><strong>Freestyle vlak:</strong> 90 x 90 cm \u2014 volledig vrij</span><span><strong>Dikte:</strong> 24 mm totaal (6 mm massief + 18 mm berken multiplex)</span><span><strong>Afwerking:</strong> Square edged \u2014 geen tong en groef</span></div><p>Je design mag visueel over de lijst heen lopen of doorgaan op meerdere panelen \u2014 de lijst is er altijd fysiek, maar is geen kooi. Gebruik restmateriaal. Geen financiële drempel.</p><p style="margin-top:.5rem">Vragen over je paneel? Stel ze in de <a href="https://www.facebook.com/share/g/1A7TcWkA3R/" target="_blank" style="color:var(--wood)">Facebook groep \u2192</a></p>'},
       '3mensen': {title:'Help 3 mensen',body:'<p>Elke deelnemer verbindt zich eraan om <strong>minimaal 3 mensen te helpen</strong> \u2014 praktisch, emotioneel of materieel. Klein of groot. Wat je kunt.</p><div class="qcard">Geen controle, geen rapportage, geen afvinkcultuur. Alleen jouw eigen geweten en intentie.</div><p>De ontvanger mag niets terugdoen \u2014 maar moet het doorgeven aan 3 anderen. Zo ontstaat een kettingreactie van menselijkheid die niemand meer kan stoppen.</p>'},
@@ -381,14 +381,14 @@ var LANG = {
     join: '+ \u00danete',
     ql: {project:'\u00bfQu\u00e9 es esto?',meedoen:'\u00bfPor qu\u00e9 unirse?',paneel:'El panel','3mensen':'Ayuda a 3 personas',ketting:'Reacci\u00f3n en cadena',filosofie:'Filosof\u00eda',kunstwerk:'La obra',deelnemers:'Participantes',specs:'Plano t\u00e9cnico',payitforward:'Pay it Forward',contact:'Contacto',join:'\u00danete'},
     cards: {
-      project: {title:'\u00bfQu\u00e9 es el Proyecto Pay It Forward?',body:'<p>UWFL no es una empresa ni una marca \u2014 es un <strong>movimiento mundial de artesanos</strong> unidos en torno a una obra de arte compartida.</p><div class="qcard">La obra no pertenece a nadie \u2014 y por eso pertenece a todos.</div><div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Participantes</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Pa\u00edses</span></div></div><p>La obra viaja por el mundo y ser\u00e1 donada. Nunca vendida.</p>'},
+      project: {title:'\u00bfQu\u00e9 es el Proyecto Pay It Forward?',body:'<p>UWFL no es una empresa ni una marca \u2014 es un <strong>movimiento mundial de artesanos</strong> unidos en torno a una obra de arte compartida.</p><div class="qcard">La obra no pertenece a nadie \u2014 y por eso pertenece a todos.</div><div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Participantes</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Pa\u00edses</span></div></div><p>La obra viaja por el mundo y ser\u00e1 donada. Nunca vendida.</p>'},
       meedoen: {title:'\u00bfC\u00f3mo participo?',body:'<div class="ibox"><p>&#x1FAB5; <strong>Creador</strong> \u2014 Crea al menos 1 m2, ayuda a 3 personas. Abierto a todos, sin selecci\u00f3n por nivel.</p></div><div class="ibox"><p>&#x1F91D; <strong>Participante</strong> \u2014 Sin panel. Ayuda a 3 personas y p\u00e1sala.</p></div><div class="ibox"><p>&#x1F4AA; <strong>Colaborador</strong> \u2014 Tambi\u00e9n necesitamos ayuda en log\u00edstica, comunicaci\u00f3n, fotograf\u00eda, traducci\u00f3n y m\u00e1s.</p></div><p style="margin-top:.5rem"><a href="https://www.unitedwoodfloorlayers.com/join-us/" target="_blank" style="color:var(--wood)">Reg\u00edstrate en el sitio web \u2192</a></p>'},
       paneel: {title:'Crear el panel',body:'<div class="specs"><span><strong>Medida exterior:</strong> 100 x 100 cm</span><span><strong>Marco de roble:</strong> 5 cm \u2014 patr\u00f3n molino, siempre presente</span><span><strong>\u00c1rea libre:</strong> 90 x 90 cm</span><span><strong>Grosor:</strong> 24 mm total</span></div><p>Tu dise\u00f1o puede desbordarse visualmente sobre el marco. El marco siempre est\u00e1 f\u00edsicamente, pero no es una jaula.</p>'},
       '3mensen': {title:'Ayuda a 3 personas',body:'<p>Cada participante se compromete a <strong>ayudar a al menos 3 personas</strong> \u2014 pr\u00e1cticamente, emocionalmente o materialmente.</p><div class="qcard">Sin control, sin informes. Solo tu propia conciencia e intenci\u00f3n.</div>'},
       ketting: {title:'La reacci\u00f3n en cadena',body:'<div class="chain"><p>1 \u2192 3</p><p>3 x 3 = 9</p><p>9 x 3 = 27</p><p>27 x 3 = 81</p><p>81 x 3 = 243...</p></div>'},
       filosofie: {title:'La filosof\u00eda',body:'<p>No hay mejor. Solo diferente. Un aprendiz vale tanto como un maestro con 30 a\u00f1os.</p><div class="qcard">No se trata de perfecci\u00f3n. Se trata de participaci\u00f3n.</div>'},
       kunstwerk: {title:'\u00bfQu\u00e9 pasa con la obra?',body:'<p>La obra la idea es hacer viajar la obra internacionalmente y ser\u00e1 <strong>donada</strong> a una escuela o espacio p\u00fablico. Nunca vendida.</p><p>Destino: premiere en la <strong>NWFA Expo 2027</strong>, 27-29 de abril en Texas.</p>'},
-      deelnemers: {title:'\u00bfQui\u00e9n participa?',body:'<div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Participantes</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Pa\u00edses</span></div></div>'}
+      deelnemers: {title:'\u00bfQui\u00e9n participa?',body:'<div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Participantes</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Pa\u00edses</span></div></div>'}
     }
   },
   fr: {
@@ -397,14 +397,14 @@ var LANG = {
     join: '+ Rejoignez-nous',
     ql: {project:'C\'est quoi?',meedoen:'Pourquoi rejoindre?',paneel:'Le panneau','3mensen':'Aidez 3 personnes',ketting:'R\u00e9action en cha\u00eene',filosofie:'Philosophie',kunstwerk:'L\'oeuvre',deelnemers:'Participants',specs:'Plan technique',payitforward:'Pay it Forward',contact:'Contact',join:'Rejoindre'},
     cards: {
-      project: {title:'Qu\'est-ce que le Projet Pay It Forward?',body:'<p>UWFL n\'est pas une entreprise \u2014 c\'est un <strong>mouvement mondial d\'artisans</strong> unis autour d\'une oeuvre commune.</p><div class="qcard">L\'oeuvre n\'appartient \u00e0 personne \u2014 et appartient donc \u00e0 tout le monde.</div><div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Pays</span></div></div>'},
+      project: {title:'Qu\'est-ce que le Projet Pay It Forward?',body:'<p>UWFL n\'est pas une entreprise \u2014 c\'est un <strong>mouvement mondial d\'artisans</strong> unis autour d\'une oeuvre commune.</p><div class="qcard">L\'oeuvre n\'appartient \u00e0 personne \u2014 et appartient donc \u00e0 tout le monde.</div><div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Pays</span></div></div>'},
       meedoen: {title:'Comment participer?',body:'<div class="ibox"><p>&#x1FAB5; <strong>Cr\u00e9ateur</strong> \u2014 Cr\u00e9ez au moins 1 m2, aidez 3 personnes. Ouvert \u00e0 tous.</p></div><div class="ibox"><p>&#x1F91D; <strong>Participant</strong> \u2014 Aidez 3 personnes et transmettez.</p></div><div class="ibox"><p>&#x1F4AA; <strong>Contributeur</strong> \u2014 Nous avons aussi besoin d\'aide pour la logistique, communication, traduction et plus.</p></div><p style="margin-top:.5rem"><a href="https://www.unitedwoodfloorlayers.com/join-us/" target="_blank" style="color:var(--wood)">Inscrivez-vous sur le site \u2192</a></p>'},
       paneel: {title:'Cr\u00e9er le panneau',body:'<div class="specs"><span><strong>Dimension:</strong> 100 x 100 cm</span><span><strong>Cadre ch\u00eane:</strong> 5 cm \u2014 toujours pr\u00e9sent</span><span><strong>Zone libre:</strong> 90 x 90 cm</span><span><strong>\u00c9paisseur:</strong> 24 mm</span></div><p>Votre design peut d\u00e9border visuellement sur le cadre. Le cadre est toujours l\u00e0 physiquement, mais ce n\'est pas une cage.</p>'},
       '3mensen': {title:'Aider 3 personnes',body:'<p>Chaque participant s\'engage \u00e0 <strong>aider au moins 3 personnes</strong>.</p><div class="qcard">Pas de contr\u00f4le. Juste votre conscience et intention.</div>'},
       ketting: {title:'La r\u00e9action en cha\u00eene',body:'<div class="chain"><p>1 \u2192 3</p><p>3 x 3 = 9</p><p>9 x 3 = 27</p><p>27 x 3 = 81</p><p>81 x 3 = 243...</p></div>'},
       filosofie: {title:'La philosophie',body:'<p>Il n\'y a pas de meilleur. Seulement diff\u00e9rent.</p><div class="qcard">Ce n\'est pas une question de perfection. C\'est une question de participation.</div>'},
       kunstwerk: {title:'Que se passe-t-il avec l\'oeuvre?',body:'<p>L\'oeuvre l’idée est de faire voyager l’oeuvre internationalement et sera <strong>donn\u00e9e</strong>. Jamais vendue.</p><p>Objectif: premi\u00e8re \u00e0 la <strong>NWFA Expo 2027</strong>, 27-29 avril au Texas.</p>'},
-      deelnemers: {title:'Qui participe?',body:'<div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Pays</span></div></div>'}
+      deelnemers: {title:'Qui participe?',body:'<div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Pays</span></div></div>'}
     }
   },
   de: {
@@ -414,14 +414,14 @@ var LANG = {
     join: '+ Mitmachen',
     ql: {project:'Was ist das?',meedoen:'Warum mitmachen?',paneel:'Das Panel','3mensen':'3 Menschen helfen',ketting:'Kettenreaktion',filosofie:'Philosophie',kunstwerk:'Das Kunstwerk',deelnemers:'Teilnehmer',specs:'Technische Zeichnung',payitforward:'Pay it Forward',contact:'Kontakt',join:'Mitmachen'},
     cards: {
-      project: {title:'Was ist das Pay It Forward Projekt?',body:'<p>UWFL ist kein Unternehmen \u2014 es ist eine <strong>weltweite Bewegung von Handwerkern</strong> rund um ein gemeinsames Kunstwerk.</p><div class="qcard">Das Werk geh\u00f6rt niemandem \u2014 und geh\u00f6rt daher allen.</div><div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Teilnehmer</span></div><div class="sbox"><span class="sn">8</span><span class="sl">L\u00e4nder</span></div></div>'},
+      project: {title:'Was ist das Pay It Forward Projekt?',body:'<p>UWFL ist kein Unternehmen \u2014 es ist eine <strong>weltweite Bewegung von Handwerkern</strong> rund um ein gemeinsames Kunstwerk.</p><div class="qcard">Das Werk geh\u00f6rt niemandem \u2014 und geh\u00f6rt daher allen.</div><div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Teilnehmer</span></div><div class="sbox"><span class="sn">8</span><span class="sl">L\u00e4nder</span></div></div>'},
       meedoen: {title:'Wie mache ich mit?',body:'<div class="ibox"><p>&#x1FAB5; <strong>Macher</strong> \u2014 Erstelle mindestens 1 m2, hilf 3 Menschen. F\u00fcr alle offen.</p></div><div class="ibox"><p>&#x1F91D; <strong>Teilnehmer</strong> \u2014 Hilf 3 Menschen und gib es weiter.</p></div><div class="ibox"><p>&#x1F4AA; <strong>Beitragende</strong> \u2014 Wir brauchen auch Hilfe bei Logistik, Kommunikation, \u00dcbersetzung und mehr.</p></div><p style="margin-top:.5rem"><a href="https://www.unitedwoodfloorlayers.com/join-us/" target="_blank" style="color:var(--wood)">Auf der Website anmelden \u2192</a></p>'},
       paneel: {title:'Das Panel erstellen',body:'<div class="specs"><span><strong>Ma\u00df:</strong> 100 x 100 cm</span><span><strong>Eichenrahmen:</strong> 5 cm \u2014 immer vorhanden</span><span><strong>Freestyle:</strong> 90 x 90 cm</span><span><strong>St\u00e4rke:</strong> 24 mm</span></div><p>Dein Design darf visuell \u00fcber den Rahmen hinausgehen. Der Rahmen ist immer physisch da, aber kein K\u00e4fig.</p>'},
       '3mensen': {title:'3 Menschen helfen',body:'<p>Jeder Teilnehmer verpflichtet sich, <strong>mindestens 3 Menschen zu helfen</strong>.</p><div class="qcard">Keine Kontrolle. Nur dein eigenes Gewissen und deine Absicht.</div>'},
       ketting: {title:'Die Kettenreaktion',body:'<div class="chain"><p>1 \u2192 3</p><p>3 x 3 = 9</p><p>9 x 3 = 27</p><p>27 x 3 = 81</p><p>81 x 3 = 243...</p></div>'},
       filosofie: {title:'Die Philosophie',body:'<p>Es gibt kein Besser. Nur Anders.</p><div class="qcard">Es geht nicht um Perfektion. Es geht um Teilnahme.</div>'},
       kunstwerk: {title:'Was passiert mit dem Kunstwerk?',body:'<p>Das Kunstwerk ist die Idee, das Kunstwerk international reisen zu lassen und wird <strong>gespendet</strong>. Nie verkauft.</p><p>Ziel: Premiere auf der <strong>NWFA Expo 2027</strong>, 27.-29. April in Texas.</p>'},
-      deelnemers: {title:'Wer macht mit?',body:'<div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Teilnehmer</span></div><div class="sbox"><span class="sn">8</span><span class="sl">L\u00e4nder</span></div></div>'}
+      deelnemers: {title:'Wer macht mit?',body:'<div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Teilnehmer</span></div><div class="sbox"><span class="sn">8</span><span class="sl">L\u00e4nder</span></div></div>'}
     }
   },
   it: {
@@ -431,25 +431,53 @@ var LANG = {
     join: '+ Unisciti',
     ql: {project:'Cos\'è questo?',meedoen:'Perch\u00e9 unirsi?',paneel:'Il pannello','3mensen':'Aiuta 3 persone',ketting:'Reazione a catena',filosofie:'Filosofia',kunstwerk:'L\'opera',deelnemers:'Partecipanti',specs:'Disegno tecnico',payitforward:'Pay it Forward',contact:'Contatto',join:'Unisciti'},
     cards: {
-      project: {title:'Cos\'è il Progetto Pay It Forward?',body:'<p>UWFL non \u00e8 un\'azienda \u2014 \u00e8 un <strong>movimento globale di artigiani</strong> uniti attorno a un\'opera d\'arte condivisa.</p><div class="qcard">L\'opera non appartiene a nessuno \u2014 e quindi appartiene a tutti.</div><div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Partecipanti</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Paesi</span></div></div>'},
+      project: {title:'Cos\'è il Progetto Pay It Forward?',body:'<p>UWFL non \u00e8 un\'azienda \u2014 \u00e8 un <strong>movimento globale di artigiani</strong> uniti attorno a un\'opera d\'arte condivisa.</p><div class="qcard">L\'opera non appartiene a nessuno \u2014 e quindi appartiene a tutti.</div><div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Partecipanti</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Paesi</span></div></div>'},
       meedoen: {title:'Come partecipo?',body:'<div class="ibox"><p>&#x1FAB5; <strong>Creatore</strong> \u2014 Crea almeno 1 m2, aiuta 3 persone. Aperto a tutti.</p></div><div class="ibox"><p>&#x1F91D; <strong>Partecipante</strong> \u2014 Aiuta 3 persone e passa avanti.</p></div><div class="ibox"><p>&#x1F4AA; <strong>Contributore</strong> \u2014 Abbiamo anche bisogno di aiuto per logistica, comunicazione, traduzione e altro.</p></div><p style="margin-top:.5rem"><a href="https://www.unitedwoodfloorlayers.com/join-us/" target="_blank" style="color:var(--wood)">Iscriviti sul sito \u2192</a></p>'},
       paneel: {title:'Creare il pannello',body:'<div class="specs"><span><strong>Misura:</strong> 100 x 100 cm</span><span><strong>Cornice rovere:</strong> 5 cm \u2014 sempre presente</span><span><strong>Area freestyle:</strong> 90 x 90 cm</span><span><strong>Spessore:</strong> 24 mm</span></div><p>Il tuo design pu\u00f2 debordare visivamente sulla cornice. La cornice \u00e8 sempre l\u00ec fisicamente, ma non \u00e8 una gabbia.</p>'},
       '3mensen': {title:'Aiuta 3 persone',body:'<p>Ogni partecipante si impegna ad <strong>aiutare almeno 3 persone</strong>.</p><div class="qcard">Nessun controllo. Solo la tua coscienza e intenzione.</div>'},
       ketting: {title:'La reazione a catena',body:'<div class="chain"><p>1 \u2192 3</p><p>3 x 3 = 9</p><p>9 x 3 = 27</p><p>27 x 3 = 81</p><p>81 x 3 = 243...</p></div>'},
       filosofie: {title:'La filosofia',body:'<p>Non c\'è meglio. Solo diverso.</p><div class="qcard">Non si tratta di perfezione. Si tratta di partecipazione.</div>'},
       kunstwerk: {title:'Cosa succede all\'opera?',body:'<p>L\'opera l’idea è far viaggiare l’opera internazionalmente e sar\u00e0 <strong>donata</strong>. Mai venduta.</p><p>Obiettivo: premiere alla <strong>NWFA Expo 2027</strong>, 27-29 aprile in Texas.</p>'},
-      deelnemers: {title:'Chi partecipa?',body:'<div class="srow"><div class="sbox"><span class="sn">33</span><span class="sl">Partecipanti</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Paesi</span></div></div>'}
+      deelnemers: {title:'Chi partecipa?',body:'<div class="srow"><div class="sbox"><span class="sn">34</span><span class="sl">Partecipanti</span></div><div class="sbox"><span class="sn">8</span><span class="sl">Paesi</span></div></div>'}
     }
   }
 };
 
 var hist = [], busy = false, selr = null, currentLang = 'en';
 
-// counter
+// Live counter from Supabase
 var cnt = 0;
-document.addEventListener('DOMContentLoaded',function(){applyLang('en');});
-function tick(){if(cnt<33){cnt++;document.getElementById('cnt').textContent=cnt;setTimeout(tick,50);}}
-setTimeout(tick,500);
+document.addEventListener('DOMContentLoaded', function(){
+  applyLang('en');
+  // Fetch live count
+  fetch('/.netlify/functions/participants')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(Array.isArray(data)){
+        var target = data.length;
+        var countries = {};
+        data.forEach(function(p){ if(p.country) countries[p.country] = true; });
+        var countryCount = Object.keys(countries).length;
+        // Animate counter
+        var i = 0;
+        function tick(){
+          if(i < target){ i++; document.getElementById('cnt').textContent = i; setTimeout(tick, 40); }
+        }
+        setTimeout(tick, 500);
+        // Update countries stat
+        var cEl = document.getElementById('cnt-countries');
+        if(cEl) cEl.textContent = countryCount;
+        // Cache for participants list
+        PARTICIPANTS_CACHE = data;
+      }
+    })
+    .catch(function(){
+      // Fallback to 34
+      var i = 0;
+      function tick(){ if(i<34){i++;document.getElementById('cnt').textContent=i;setTimeout(tick,50);} }
+      setTimeout(tick,500);
+    });
+});
 
 // OPEN/CLOSE CHAT
 function openChat(){document.getElementById('chat').classList.add('open');}
