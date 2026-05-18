@@ -720,13 +720,13 @@ function submitForm(){
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(){});
   btn.textContent="I'm in";btn.disabled=false;
   var safeN=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  var jc=document.getElementById('jcard');
-  if(jc){
-    jc.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2.5rem;margin-bottom:.75rem">\uD83C\uDF31</div><p style="font-size:16px;font-weight:600;color:#fff;margin-bottom:.5rem">Welcome, '+safeN+'!</p><p style="opacity:.8;font-size:13px;color:#fff">You are now part of a worldwide movement.<br><br>Make your panel. Help 3 people. Pass it forward.</p></div>';
-  } else {
-    var bodyEl=document.getElementById('sp-info-body');
-    if(bodyEl)bodyEl.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2.5rem;margin-bottom:.75rem">\uD83C\uDF31</div><p style="font-size:16px;font-weight:600;color:#fff;margin-bottom:.5rem">Welcome, '+safeN+'!</p><p style="opacity:.8;font-size:13px;color:#fff">You are now part of a worldwide movement.<br><br>Make your panel. Help 3 people. Pass it forward.</p></div>';
-  }
+  // Open chat and show welcome message
+  openChat();
+  clearCards();
+  var w=document.getElementById('msgs');
+  var ok=document.createElement('div');ok.className='msg ai';
+  ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong>Welcome, '+safeN+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br>What happens next:<br>\u2022 Make your 1m\u00b2 panel in your own style<br>\u2022 Help 3 people \u2014 in any way you choose<br>\u2022 Share your panel and inspire others<br><br>Questions? Just ask me anything about the project!</div>';
+  w.appendChild(ok);w.scrollTop=99999;
 }
 
 // LANG
