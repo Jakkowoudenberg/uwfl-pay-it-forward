@@ -673,7 +673,7 @@ function sendSuggestion(){
   if(!m){alert('Please enter your suggestion.');return;}
   var n=(document.getElementById('sug-name')||{value:''}).value.trim();
   var e=(document.getElementById('sug-email')||{value:''}).value.trim();
-  fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Suggestion',naam:n||'Anonymous',email:e,bericht:m})}).catch(function(){});
+  fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Suggestion',naam:n||'Anonymous',email:e,bericht:m})}).catch(function(){});
   var bodyEl=document.getElementById('sp-info-body');
   if(bodyEl)bodyEl.innerHTML='<p style="color:rgba(255,255,255,.9);padding:1rem 0">Thank you! Your suggestion has been received.</p>';
 }
@@ -683,7 +683,7 @@ function sendContact(){
   var e=(document.getElementById('cnt-email')||{value:''}).value.trim();
   var m=(document.getElementById('cnt-msg')||{value:''}).value.trim();
   if(!n||!e||!m){alert('Please fill in all fields.');return;}
-  fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Contact',naam:n,email:e,bericht:m})}).catch(function(){});
+  fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Contact',naam:n,email:e,bericht:m})}).catch(function(){});
   var panel=document.getElementById('sp-info');
   if(panel){
     var body=document.getElementById('sp-info-body');
@@ -707,7 +707,7 @@ function submitForm(){
   var regData={naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
   if(testMode){
     var testData=Object.assign({},regData,{naam:'[TEST] '+n});
-    fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(){});
+    fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(){});
     btn.textContent="I'm in";btn.disabled=false;
     var safeN2=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
     openChat();
@@ -720,7 +720,7 @@ function submitForm(){
     },200);
     return;
   }
-  fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(){});
+  fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(){});
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(){});
   btn.textContent="I'm in";btn.disabled=false;
   var safeN=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
