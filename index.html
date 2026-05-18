@@ -481,9 +481,9 @@ document.addEventListener('DOMContentLoaded', function(){
     })
     .catch(function(){
       // Fallback to 34
-      var i = 0;
-      function tick(){ if(i<34){i++;document.getElementById('cnt').textContent=i;setTimeout(tick,50);} }
-      setTimeout(tick,500);
+      var j = 0;
+      function tickFallback(){ if(j<34){j++;document.getElementById('cnt').textContent=j;setTimeout(tickFallback,50);} }
+      setTimeout(tickFallback,500);
     });
 });
 
@@ -682,7 +682,7 @@ function sendContact(){
   var n=(document.getElementById('cnt-naam')||{value:''}).value.trim();
   var e=(document.getElementById('cnt-email')||{value:''}).value.trim();
   var m=(document.getElementById('cnt-msg')||{value:''}).value.trim();
-  if(!n||!e||!m){alert('Vul alle velden in.');return;}
+  if(!n||!e||!m){alert('Please fill in all fields.');return;}
   fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Contact',naam:n,email:e,bericht:m})}).catch(function(){});
   var panel=document.getElementById('sp-info');
   if(panel){
@@ -691,7 +691,6 @@ function sendContact(){
   }
 }
 function submitForm(){
-  console.log('submitForm called, selr=', selr);
   var n=document.getElementById('fn').value.trim();
   var e=document.getElementById('fe').value.trim();
   var l=document.getElementById('fl').value;
@@ -700,21 +699,20 @@ function submitForm(){
   var tel=(document.getElementById('ftel')||{value:''}).value.trim();
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
   var testMode = n.toLowerCase() === 'test';
-  console.log('n=',n,'e=',e,'l=',l,'m=',m,'tel=',tel,'selr=',selr,'testMode=',testMode);
   if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
   if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');return;}
   if(!tel&&!testMode){alert('Please enter your phone number.');return;}
   if(checkSpam('join'))return;
-  console.log('All checks passed, sending...');
   var btn=document.querySelector('.jsub');btn.textContent='Sending...';btn.disabled=true;
-  console.log('btn found:', btn, 'jcard:', document.getElementById('jcard'), 'sp-info-body:', document.getElementById('sp-info-body'));
   var regData={naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
   if(testMode){
     var testData=Object.assign({},regData,{naam:'[TEST] '+n});
     fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(){});
-    var body=document.getElementById('sp-info-body');
-    if(body)body.innerHTML='<div style="background:rgba(255,165,0,.15);border:1px solid rgba(255,165,0,.5);border-radius:8px;padding:1rem;margin-bottom:1rem"><strong style="color:orange">🧪 TEST MODE</strong><br><span style="font-size:12px;opacity:.8">Email sent with [TEST] prefix. Nothing saved to database or participant list.</span></div>';
     btn.textContent="I'm in";btn.disabled=false;
+    var jcT=document.getElementById('jcard');
+    if(jcT){
+      jcT.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2rem;margin-bottom:.5rem">🧪</div><p style="font-size:14px;font-weight:600;color:orange;margin-bottom:.5rem">TEST MODE</p><p style="opacity:.8;font-size:12px;color:#fff">Email sent with [TEST] prefix.<br>Nothing saved to database or participant list.</p></div>';
+    }
     return;
   }
   fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(){});
@@ -830,42 +828,6 @@ function setLang(lang, evtTarget){
     setTimeout(fetchNext, 500);
   });
 
-  var toTranslate = {
-    sub: nlL.sub, btn: nlL.btn, join: nlL.join,
-    ql: Object.keys(nlL.ql).map(function(k){ return {k:k, v:nlL.ql[k]}; }),
-    cards: cardsToTranslate
-  };
-
-  callTranslate(toTranslate, langNames[lang], function(err, tr){
-    if(err){ showToast('⚠️ Error', 2000); applyLang('en'); return; }
-    if(!LANG[lang]) LANG[lang] = {};
-    if(tr.sub) LANG[lang].sub = tr.sub;
-    if(tr.btn) LANG[lang].btn = tr.btn;
-    if(tr.join) LANG[lang].join = tr.join;
-    if(tr.ql && Array.isArray(tr.ql)) {
-      var mergedQl = {};
-      tr.ql.forEach(function(item){ if(item.k) mergedQl[item.k] = item.v || nlL.ql[item.k]; });
-      Object.keys(nlL.ql).forEach(function(k){ if(!mergedQl[k]) mergedQl[k] = nlL.ql[k]; });
-      LANG[lang].ql = mergedQl;
-    } else {
-      LANG[lang].ql = Object.assign({}, nlL.ql, tr.ql||{});
-    }
-    LANG[lang].cards = {};
-    if(tr.cards) {
-      Object.keys(tr.cards).forEach(function(k){
-        if(tr.cards[k] && tr.cards[k].title){
-          LANG[lang].cards[k] = tr.cards[k];
-          CARD_CACHE[lang+'_'+k] = tr.cards[k];
-        }
-      });
-    }
-    LANG[lang].cards.contact = nlL.cards.contact;
-    LANG[lang].cards.deelnemers = nlL.cards.deelnemers;
-    TRANS_CACHE[lang] = true;
-    var toast = document.getElementById('lang-toast');
-    if(toast) toast.classList.remove('show');
-    applyLang(lang);
-  });
 }
 
 // Called when a card is opened in a non-NL language
@@ -908,9 +870,9 @@ function send(){
   var tid=appendTyping();
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist})}).then(function(r){return r.json()}).then(function(data){
     removeTyping(tid);
-    var reply=data.reply||'Er ging iets mis.';
+    var reply=data.reply||'Something went wrong. Please try again.';
     appendMsg('ai',reply);hist.push({role:'assistant',content:reply});
-  }).catch(function(){removeTyping(tid);appendMsg('ai','Verbindingsfout.');}).finally(function(){busy=false;document.getElementById('sb').disabled=false;});
+  }).catch(function(){removeTyping(tid);appendMsg('ai','Connection error. Please try again.');}).finally(function(){busy=false;document.getElementById('sb').disabled=false;});
 }
 function appendMsg(r,t){
   var w=document.getElementById('msgs');var d=document.createElement('div');d.className='msg '+r;
