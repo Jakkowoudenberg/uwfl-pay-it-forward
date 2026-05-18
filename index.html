@@ -709,26 +709,29 @@ function submitForm(){
     var testData=Object.assign({},regData,{naam:'[TEST] '+n});
     fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(){});
     btn.textContent="I'm in";btn.disabled=false;
-    var safeN=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var safeN2=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
     openChat();
-    clearCards();
-    var wT=document.getElementById('msgs');
-    var okT=document.createElement('div');okT.className='msg ai';
-    okT.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong style="color:orange">\uD83E\uDDEA TEST MODE \uD83E\uDDEA</strong><br><br><strong>Welcome, '+safeN+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br>What happens next:<br>\u2022 Make your 1m\u00b2 panel in your own style<br>\u2022 Help 3 people \u2014 in any way you choose<br>\u2022 Share your panel and inspire others<br><br><em style="opacity:.6;font-size:11px">This was a test \u2014 email sent, nothing saved to database.</em><br><br>Questions? Just ask me anything about the project!</div>';
-    wT.appendChild(okT);wT.scrollTop=99999;
+    setTimeout(function(){
+      clearCards();
+      var wT=document.getElementById('msgs');
+      var okT=document.createElement('div');okT.className='msg ai';
+      okT.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong style="color:orange">\uD83E\uDDEA TEST MODE \uD83E\uDDEA</strong><br><br><strong>Welcome, '+safeN2+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br>What happens next:<br>\u2022 Make your 1m\u00b2 panel in your own style<br>\u2022 Help 3 people \u2014 in any way you choose<br>\u2022 Share your panel and inspire others<br><br><em style="opacity:.6;font-size:11px">This was a test \u2014 email sent, nothing saved to database.</em><br><br>Questions? Just ask me anything about the project!</div>';
+      if(wT){wT.appendChild(okT);wT.scrollTop=99999;}
+    },200);
     return;
   }
   fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(){});
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(){});
   btn.textContent="I'm in";btn.disabled=false;
   var safeN=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  // Open chat and show welcome message
   openChat();
-  clearCards();
-  var w=document.getElementById('msgs');
-  var ok=document.createElement('div');ok.className='msg ai';
-  ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong>Welcome, '+safeN+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br>What happens next:<br>\u2022 Make your 1m\u00b2 panel in your own style<br>\u2022 Help 3 people \u2014 in any way you choose<br>\u2022 Share your panel and inspire others<br><br>Questions? Just ask me anything about the project!</div>';
-  w.appendChild(ok);w.scrollTop=99999;
+  setTimeout(function(){
+    clearCards();
+    var w=document.getElementById('msgs');
+    var ok=document.createElement('div');ok.className='msg ai';
+    ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong>Welcome, '+safeN+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br>What happens next:<br>\u2022 Make your 1m\u00b2 panel in your own style<br>\u2022 Help 3 people \u2014 in any way you choose<br>\u2022 Share your panel and inspire others<br><br>Questions? Just ask me anything about the project!</div>';
+    if(w){w.appendChild(ok);w.scrollTop=99999;}
+  },200);
 }
 
 // LANG
