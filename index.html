@@ -699,12 +699,12 @@ function submitForm(){
   var m=(document.getElementById('fm')||{value:''}).value.trim();
   if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
   var testMode = n.toLowerCase() === 'test';
-  if(!selr){alert('Kies hoe je wil meedoen.');return;}
+  if(!selr){alert('Please select how you want to join.');return;}
   var btn=document.querySelector('.jsub');btn.textContent='Versturen...';btn.disabled=true;
   var cc=(document.getElementById('fcc')||{value:''}).value;
   var tel=(document.getElementById('ftel')||{value:''}).value;
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
-  if(!tel){alert('Please enter your phone number.');return;}
+  if(!tel&&!testMode){alert('Please enter your phone number.');btn.textContent='I\'m in';btn.disabled=false;return;}
   var regData = {naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
   if(testMode){
     // TEST MODE — send email only, don't save to Supabase or show on site
