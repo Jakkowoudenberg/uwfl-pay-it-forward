@@ -258,7 +258,7 @@ function checkSpam(name){
   var hp=document.getElementById('hp-'+name);
   if(hp&&hp.value){console.log('bot');return true;}
   if(FORM_LOADED[name]&&(now-FORM_LOADED[name])<2000){alert('Te snel. Probeer opnieuw.');return true;}
-  if(now-LAST_SUBMIT<15000){alert('Even wachten...');return true;}
+  if(now-LAST_SUBMIT<5000){alert('Please wait a moment before submitting again.');return true;}
   LAST_SUBMIT=now;
   return false;
 }
@@ -692,8 +692,21 @@ function sendContact(){
   }
 }
 function submitForm(){
-  if(checkSpam('join'))return;
   var n=document.getElementById('fn').value.trim();
+  var e=document.getElementById('fe').value.trim();
+  var l=document.getElementById('fl').value;
+  var m=(document.getElementById('fm')||{value:''}).value.trim();
+  if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
+  if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');return;}
+  var cc=(document.getElementById('fcc')||{value:''}).value;
+  var tel=(document.getElementById('ftel')||{value:''}).value.trim();
+  var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
+  var testMode = n.toLowerCase() === 'test';
+  if(!tel&&!testMode){alert('Please enter your phone number.');return;}
+  if(checkSpam('join'))return;
+  var btn=document.querySelector('.jsub');btn.textContent='Sending...';btn.disabled=true;
+  // dummy to skip duplicate declarations below
+  var _n=n,_e=e,_l=l,_m=m,_cc=cc,_tel=tel,_phone=phone,_testMode=testMode;
   var e=document.getElementById('fe').value.trim();
   var l=document.getElementById('fl').value;
   var m=(document.getElementById('fm')||{value:''}).value.trim();
