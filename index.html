@@ -451,7 +451,7 @@ var LANG = {
   }
 };
 
-var hist = [], busy = false, selr = null, currentLang = 'en';
+var hist = [], busy = false, selr = null, currentLang = 'en', regProfile = null, postMode = false, postAnswers = [], postQuestion = 0;
 
 // Live counter from Supabase
 var cnt = 0;
@@ -715,7 +715,8 @@ function submitForm(){
       clearCards();
       var wT=document.getElementById('msgs');
       var okT=document.createElement('div');okT.className='msg ai';
-      okT.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong style="color:orange">\uD83E\uDDEA TEST MODE \uD83E\uDDEA</strong><br><br><strong>Welcome, '+safeN2+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br>What happens next:<br>\u2022 Make your 1m\u00b2 panel in your own style<br>\u2022 Help 3 people \u2014 in any way you choose<br>\u2022 Share your panel and inspire others<br><br><em style="opacity:.6;font-size:11px">This was a test \u2014 email sent, nothing saved to database.</em><br><br>Questions? Just ask me anything about the project!</div>';
+      regProfile = {name: n, company: (document.getElementById('fco')||{value:''}).value, country: l, type: regData.type, trade: regData.vak, why: m};
+    okT.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong style="color:orange">\uD83E\uDDEA TEST MODE \uD83E\uDDEA</strong><br><br><strong>Welcome, '+safeN2+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br><strong>One more important step:</strong><br>Introduce yourself to the world! Post on Instagram and/or Facebook.<br><br>In your post:<br>\u2022 Tag <strong>@unitedwoodfloorlayers</strong> as a collaborator<br>\u2022 Tell people who you are<br>\u2022 Share why you joined<br>\u2022 Invite others to join<br><br><em style="opacity:.6;font-size:11px">This was a test \u2014 email sent, nothing saved to database.</em><br><br><div style="display:flex;gap:8px;margin-top:.75rem"><button onclick="startPostFlow()" style="background:var(--wood);border:none;color:#fff;padding:.5rem 1rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif">\uD83D\uDCDD Yes, help me write my post!</button><button onclick="skipPostFlow()" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:.5rem 1rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif">I will do it myself</button></div></div>';
       if(wT){wT.appendChild(okT);wT.scrollTop=99999;}
     },200);
     return;
@@ -729,7 +730,9 @@ function submitForm(){
     clearCards();
     var w=document.getElementById('msgs');
     var ok=document.createElement('div');ok.className='msg ai';
-    ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong>Welcome, '+safeN+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br>What happens next:<br>\u2022 Make your 1m\u00b2 panel in your own style<br>\u2022 Help 3 people \u2014 in any way you choose<br>\u2022 Share your panel and inspire others<br><br>Questions? Just ask me anything about the project!</div>';
+    // Store profile for post generation
+  regProfile = {name: n, company: (document.getElementById('fco')||{value:''}).value, country: l, type: regData.type, trade: regData.vak, why: m};
+  ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong>Welcome, '+safeN+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br><strong>One more important step:</strong><br>Introduce yourself to the world! Post on Instagram and/or Facebook to let people know you have joined this movement.<br><br>In your post:<br>\u2022 Tag <strong>@unitedwoodfloorlayers</strong> as a collaborator<br>\u2022 Tell people who you are and what you do<br>\u2022 Share why you joined this movement<br>\u2022 Invite others to join<br><br><strong>Not sure what to write?</strong> I can help you create the perfect post!<br><br><div style="display:flex;gap:8px;margin-top:.75rem"><button onclick="startPostFlow()" style="background:var(--wood);border:none;color:#fff;padding:.5rem 1rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif">\uD83D\uDCDD Yes, help me write my post!</button><button onclick="skipPostFlow()" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:.5rem 1rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif">I will do it myself</button></div></div>';
     if(w){w.appendChild(ok);w.scrollTop=99999;}
   },200);
 }
@@ -858,6 +861,203 @@ function getTranslatedCard(lang, key, cb){
   });
 }
 
+
+// POST CREATION FLOW
+var POST_QUESTIONS_EN = [
+  'How long have you been working in your trade?',
+  'How did you get started — was it a choice or did it find you?',
+  'What does craftsmanship mean to you personally?',
+  'What is the most memorable project you have ever worked on?',
+  'What makes your work unique or recognizable?',
+  'What do you want people to feel when they see your work?',
+  'Who inspired you in your career — a person, a moment, a place?',
+  'What does Pay It Forward mean to you personally?',
+  'What would you say to a colleague who is hesitating to join this movement?',
+  'How would you describe yourself in one sentence?'
+];
+
+var POST_QUESTIONS_NL = [
+  'Hoe lang werk je al in je vak?',
+  'Hoe ben je ermee begonnen — was het een keuze of vond het jou?',
+  'Wat betekent vakmanschap voor jou persoonlijk?',
+  'Wat was het meest memorabele project dat je ooit hebt gedaan?',
+  'Wat maakt jouw werk uniek of herkenbaar?',
+  'Wat wil je dat mensen voelen als ze jouw werk zien?',
+  'Wie of wat heeft jou geïnspireerd in je carrière?',
+  'Wat betekent Pay It Forward voor jou persoonlijk?',
+  'Wat zou je zeggen tegen een collega die twijfelt om mee te doen?',
+  'Hoe zou jij jezelf omschrijven in één zin?'
+];
+
+var POST_QUESTIONS_ES = [
+  '¿Cuánto tiempo llevas trabajando en tu oficio?',
+  '¿Cómo empezaste — fue una elección o te encontró a ti?',
+  '¿Qué significa el artesanato para ti personalmente?',
+  '¿Cuál es el proyecto más memorable en el que has trabajado?',
+  '¿Qué hace que tu trabajo sea único o reconocible?',
+  '¿Qué quieres que sientan las personas cuando ven tu trabajo?',
+  '¿Quién o qué te ha inspirado en tu carrera?',
+  '¿Qué significa Pay It Forward para ti personalmente?',
+  '¿Qué le dirías a un colega que duda en unirse al movimiento?',
+  '¿Cómo te describirías a ti mismo en una frase?'
+];
+
+var POST_QUESTIONS_FR = [
+  'Depuis combien de temps travaillez-vous dans votre métier?',
+  'Comment avez-vous commencé — était-ce un choix ou vous a-t-il trouvé?',
+  "Que signifie l'artisanat pour vous personnellement?",
+  'Quel est le projet le plus mémorable sur lequel vous avez travaillé?',
+  "Qu'est-ce qui rend votre travail unique ou reconnaissable?",
+  'Que voulez-vous que les gens ressentent en voyant votre travail?',
+  'Qui ou quoi vous a inspiré dans votre carrière?',
+  'Que signifie Pay It Forward pour vous personnellement?',
+  'Que diriez-vous à un collègue qui hésite à rejoindre le mouvement?',
+  'Comment vous décririez-vous en une phrase?'
+];
+
+var POST_QUESTIONS_DE = [
+  'Wie lange arbeiten Sie schon in Ihrem Handwerk?',
+  'Wie haben Sie angefangen — war es eine Wahl oder hat es Sie gefunden?',
+  'Was bedeutet Handwerkskunst für Sie persönlich?',
+  'Was war das unvergesslichste Projekt, an dem Sie je gearbeitet haben?',
+  'Was macht Ihre Arbeit einzigartig oder erkennbar?',
+  'Was sollen die Menschen fühlen, wenn sie Ihre Arbeit sehen?',
+  'Wer oder was hat Sie in Ihrer Karriere inspiriert?',
+  'Was bedeutet Pay It Forward für Sie persönlich?',
+  'Was würden Sie einem Kollegen sagen, der zögert, der Bewegung beizutreten?',
+  'Wie würden Sie sich in einem Satz beschreiben?'
+];
+
+var POST_QUESTIONS_IT = [
+  'Da quanto tempo lavori nel tuo mestiere?',
+  'Come hai iniziato — è stata una scelta o ti ha trovato?',
+  "Cosa significa per te personalmente l'artigianato?",
+  'Qual è il progetto più memorabile su cui hai lavorato?',
+  "Cosa rende il tuo lavoro unico o riconoscibile?",
+  "Cosa vuoi che le persone sentano quando vedono il tuo lavoro?",
+  'Chi o cosa ti ha ispirato nella tua carriera?',
+  "Cosa significa Pay It Forward per te personalmente?",
+  "Cosa diresti a un collega che esita ad unirsi al movimento?",
+  'Come ti descriveresti in una frase?'
+];
+
+function getPostQuestions() {
+  var lang = currentLang || 'en';
+  if(lang === 'nl') return POST_QUESTIONS_NL;
+  if(lang === 'es') return POST_QUESTIONS_ES;
+  if(lang === 'fr') return POST_QUESTIONS_FR;
+  if(lang === 'de') return POST_QUESTIONS_DE;
+  if(lang === 'it') return POST_QUESTIONS_IT;
+  return POST_QUESTIONS_EN;
+}
+
+var POST_QUESTIONS = POST_QUESTIONS_EN; // default
+
+function startPostFlow(){
+  postMode = true;
+  postAnswers = [];
+  postQuestion = 0;
+  // Remove buttons from last message
+  document.querySelectorAll('.bub button').forEach(function(b){ b.style.display='none'; });
+  var announcements = {
+    en: 'Great! I am going to ask you 10 quick questions. Based on your answers — plus what I already know about you — I will create a ready-to-post text for Instagram and Facebook that you can copy with one click.\n\nLet\'s go! \uD83D\uDE80',
+    nl: 'Geweldig! Ik ga je 10 korte vragen stellen. Op basis van je antwoorden — plus wat ik al van je weet — maak ik een kant-en-klare post voor Instagram en Facebook die je met één klik kunt kopiëren.\n\nLaten we beginnen! \uD83D\uDE80',
+    es: '¡Genial! Voy a hacerte 10 preguntas rápidas. Basándome en tus respuestas — más lo que ya sé sobre ti — crearé un texto listo para publicar en Instagram y Facebook.\n\n¡Vamos! \uD83D\uDE80',
+    fr: 'Super ! Je vais vous poser 10 questions rapides. Sur la base de vos réponses — plus ce que je sais déjà sur vous — je créerai un texte prêt à publier sur Instagram et Facebook.\n\nC\'est parti ! \uD83D\uDE80',
+    de: 'Großartig! Ich werde Ihnen 10 kurze Fragen stellen. Auf der Grundlage Ihrer Antworten — plus was ich bereits über Sie weiß — erstelle ich einen fertigen Post für Instagram und Facebook.\n\nLos geht\'s! \uD83D\uDE80',
+    it: 'Ottimo! Ti farò 10 domande rapide. In base alle tue risposte — più quello che so già di te — creerò un testo pronto da pubblicare su Instagram e Facebook.\n\nAndiamo! \uD83D\uDE80'
+  };
+  var announcement = announcements[currentLang||'en'] || announcements['en'];
+  appendMsg('ai', announcement + '\n\n' + q1label + ' 1 of 10:\n' + getPostQuestions()[0]);
+}
+
+function skipPostFlow(){
+  document.querySelectorAll('.bub button').forEach(function(b){ b.style.display='none'; });
+  appendMsg('ai', 'No problem! You can always come back and ask me to help write your post. Just type \"help me write my post\" in the chat. \uD83D\uDC4D\n\nIn the meantime — is there anything else you want to know about the project?');
+}
+
+function handlePostAnswer(msg){
+  postAnswers.push(msg);
+  postQuestion++;
+  if(postQuestion < POST_QUESTIONS.length){
+    var q = getPostQuestions();
+    var qLabels = {en:'Question',nl:'Vraag',es:'Pregunta',fr:'Question',de:'Frage',it:'Domanda'};
+    var qLabel = qLabels[currentLang||'en']||'Question';
+    appendMsg('ai', qLabel + ' ' + (postQuestion+1) + ' of 10:\n' + q[postQuestion]);
+  } else {
+    // All 10 answers collected — generate post
+    postMode = false;
+    appendMsg('ai', 'Perfect! I have everything I need. Generating your post now... \u23F3');
+    generatePost();
+  }
+}
+
+function generatePost(){
+  var profile = regProfile || {name:'Unknown', company:'', country:'', type:'Maker', trade:'', why:''};
+  var flagMap = {
+    'Netherlands':'\uD83C\uDDF3\uD83C\uDDF1','United States':'\uD83C\uDDFA\uD83C\uDDF8',
+    'Belgium':'\uD83C\uDDE7\uD83C\uDDEA','Germany':'\uD83C\uDDE9\uD83C\uDDEA',
+    'Spain':'\uD83C\uDDEA\uD83C\uDDF8','Italy':'\uD83C\uDDEE\uD83C\uDDF9',
+    'France':'\uD83C\uDDEB\uD83C\uDDF7','Portugal':'\uD83C\uDDF5\uD83C\uDDF9',
+    'Canada':'\uD83C\uDDE8\uD83C\uDDE6','Australia':'\uD83C\uDDE6\uD83C\uDDFA',
+    'United Kingdom':'\uD83C\uDDEC\uD83C\uDDE7'
+  };
+  var flag = flagMap[profile.country] || '\uD83C\uDF0D';
+  
+  var prompt = 'You are a social media ghostwriter for craftspeople. Write an Instagram/Facebook post in the style of these examples — personal, emotional, authentic, never corporate.\n\nExamples of the RIGHT tone:\n- \"I am Che Polfliet, Belgian floor layer. My passion lies in the craft...Pay It Forward means helping without expecting anything back.\"\n- \"We are Fino and Susy. We work together, live together, build together...Help three people. They help three more. The world changes slowly — but it changes.\"\n\nIMPORTANT RULES:\n- Start with: ' + flag + ' [name], [country]\n- Personal, warm, human — never formal\n- Connect their craft to something bigger\n- Explain Pay It Forward in their own words\n- End with a call to action to join\n- Sign off with their name\n- Last line: \"\uD83D\uDC49 For more info or to join: @unitedwoodfloorlayers\"\n- Add 5 relevant hashtags on the last line (always include #PayItForward and #UnitedWoodFloorLayers, mix English + their language + trade-specific)\n- MAXIMUM 2100 characters including hashtags\n- Write in the SAME LANGUAGE as their answers\n\nPERSON INFO (already known):\nName: ' + profile.name + '\nCompany: ' + (profile.company||'—') + '\nCountry: ' + profile.country + '\nType: ' + profile.type + '\nTrade: ' + (profile.trade||'—') + '\nWhy they joined: ' + profile.why + '\n\nTHEIR ANSWERS TO 10 QUESTIONS:\n' + POST_QUESTIONS.map(function(q,i){ return (i+1)+'. '+q+'\nAnswer: '+postAnswers[i]; }).join('\n\n') + '\n\nWrite ONLY the post text — nothing else. No intro, no explanation.';
+
+  fetch('/.netlify/functions/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({messages:[{role:'user',content:prompt}]})
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var post = data.reply || 'Something went wrong generating your post.';
+    showGeneratedPost(post);
+  })
+  .catch(function(){
+    appendMsg('ai','Connection error. Please try again.');
+  });
+}
+
+function showGeneratedPost(postText){
+  var w = document.getElementById('msgs');
+  var d = document.createElement('div');
+  d.className = 'msg ai';
+  var escaped = postText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').split('\n').join('<br>');
+  d.innerHTML = '<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7">' +
+    'Here is your post! \uD83C\uDF1F Ready to copy and paste into Instagram and Facebook.<br><br>' +
+    '<div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:1rem;margin:.5rem 0;position:relative">' +
+    '<button onclick="copyPost(this)" style="position:absolute;top:.5rem;right:.5rem;background:var(--wood);border:none;color:#fff;padding:.3rem .75rem;border-radius:6px;font-size:11px;cursor:pointer;font-family:Inter,sans-serif">\uD83D\uDCCB Copy</button>' +
+    '<div class="post-text" style="font-size:12px;line-height:1.7;padding-right:3rem;white-space:pre-wrap">' + escaped + '</div>' +
+    '</div>' +
+    '<em style="font-size:11px;opacity:.6">Add 2-3 photos of your work or workshop for maximum impact!</em><br><br>' +
+    'Not happy with it? Tell me what to change and I will rewrite it for you. \uD83D\uDE0A' +
+    '</div>';
+  w.appendChild(d);
+  w.scrollTop = 99999;
+}
+
+function copyPost(btn){
+  var postDiv = btn.parentElement.querySelector('.post-text');
+  var text = postDiv.innerText || postDiv.textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent = '\u2705 Copied!';
+    setTimeout(function(){ btn.innerHTML = '\uD83D\uDCCB Copy'; }, 2000);
+  }).catch(function(){
+    // Fallback
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '\u2705 Copied!';
+    setTimeout(function(){ btn.innerHTML = '\uD83D\uDCCB Copy'; }, 2000);
+  });
+}
+
 // AI CHAT
 function ask(q){
   clearCards();
@@ -872,6 +1072,16 @@ function send(){
   inp.value='';inp.style.height='auto';
   clearCards();
   appendMsg('me',msg);
+  // Check if in post creation mode
+  if(postMode){
+    handlePostAnswer(msg);
+    return;
+  }
+  // Check if user wants to write post
+  if(regProfile && msg.toLowerCase().indexOf('help me write my post') !== -1){
+    startPostFlow();
+    return;
+  }
   hist.push({role:'user',content:msg});
   busy=true;document.getElementById('sb').disabled=true;
   var tid=appendTyping();
