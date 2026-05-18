@@ -699,7 +699,7 @@ function submitForm(){
   var m=(document.getElementById('fm')||{value:''}).value.trim();
   if(!n||!e||!l||!m){alert('Please fill in all required fields.');var b=document.querySelector('.jsub');if(b){b.textContent="I'm in";b.disabled=false;}return;}
   var testMode = n.toLowerCase() === 'test';
-  if(!selr){alert('Please select how you want to join.');return;}
+  if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');var b2=document.querySelector('.jsub');if(b2){b2.textContent="I'm in";b2.disabled=false;}return;}
   var btn=document.querySelector('.jsub');btn.textContent='Sending...';btn.disabled=true;
   var cc=(document.getElementById('fcc')||{value:''}).value;
   var tel=(document.getElementById('ftel')||{value:''}).value;
