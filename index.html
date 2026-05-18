@@ -968,6 +968,7 @@ function startPostFlow(){
     it: 'Ottimo! Ti farò 10 domande rapide. In base alle tue risposte — più quello che so già di te — creerò un testo pronto da pubblicare su Instagram e Facebook.\n\nAndiamo! \uD83D\uDE80'
   };
   var announcement = announcements[currentLang||'en'] || announcements['en'];
+  var q1label = {en:'Question',nl:'Vraag',es:'Pregunta',fr:'Question',de:'Frage',it:'Domanda'}[currentLang||'en']||'Question';
   appendMsg('ai', announcement + '\n\n' + q1label + ' 1 of 10:\n' + getPostQuestions()[0]);
 }
 
