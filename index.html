@@ -691,6 +691,7 @@ function sendContact(){
   }
 }
 function submitForm(){
+  console.log('submitForm called, selr=', selr);
   var n=document.getElementById('fn').value.trim();
   var e=document.getElementById('fe').value.trim();
   var l=document.getElementById('fl').value;
@@ -699,10 +700,12 @@ function submitForm(){
   var tel=(document.getElementById('ftel')||{value:''}).value.trim();
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
   var testMode = n.toLowerCase() === 'test';
+  console.log('n=',n,'e=',e,'l=',l,'m=',m,'tel=',tel,'selr=',selr,'testMode=',testMode);
   if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
   if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');return;}
   if(!tel&&!testMode){alert('Please enter your phone number.');return;}
   if(checkSpam('join'))return;
+  console.log('All checks passed, sending...');
   var btn=document.querySelector('.jsub');btn.textContent='Sending...';btn.disabled=true;
   var regData={naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
   if(testMode){
