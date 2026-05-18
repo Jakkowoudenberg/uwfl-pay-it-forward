@@ -707,6 +707,7 @@ function submitForm(){
   if(checkSpam('join'))return;
   console.log('All checks passed, sending...');
   var btn=document.querySelector('.jsub');btn.textContent='Sending...';btn.disabled=true;
+  console.log('btn found:', btn, 'jcard:', document.getElementById('jcard'), 'sp-info-body:', document.getElementById('sp-info-body'));
   var regData={naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
   if(testMode){
     var testData=Object.assign({},regData,{naam:'[TEST] '+n});
