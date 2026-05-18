@@ -208,6 +208,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     <button class="sp-tp" id="ql-news" onclick="splashInfo('news')">📰 <span class="ql-lbl">News</span></button>
     <button class="sp-tp" id="ql-suggestions" onclick="splashInfo('suggestions')">💡 <span class="ql-lbl">Suggestions</span></button>
     <button class="sp-tp" id="ql-initiator" onclick="splashInfo('initiator')">🌱 <span class="ql-lbl">The Initiator</span></button>
+    <button class="sp-tp" id="ql-panelidea" onclick="splashInfo('panelidea')">🎨 <span class="ql-lbl">Panel idea</span></button>
     <button class="sp-tp" id="ql-join" onclick="splashInfo('join')">+ <span class="ql-lbl">Join us</span></button>
   </div>
 
@@ -368,7 +369,7 @@ var LANG = {
     placeholder: 'Ask me anything about the project...',
     btn: 'Ask me a question...',
     join: '+ Join us',
-    ql: {project:'What is this?',meedoen:'Why join?',paneel:'The panel','3mensen':'Help 3 people',ketting:'Chain reaction',filosofie:'Philosophy',kunstwerk:'The artwork',deelnemers:'Participants',specs:'Technical drawing',payitforward:'Pay it Forward',contact:'Contact',news:'News',suggestions:'Suggestions',initiator:'The Initiator',join:'Join us'},
+    ql: {project:'What is this?',meedoen:'Why join?',paneel:'The panel','3mensen':'Help 3 people',ketting:'Chain reaction',filosofie:'Philosophy',kunstwerk:'The artwork',deelnemers:'Participants',specs:'Technical drawing',payitforward:'Pay it Forward',contact:'Contact',news:'News',suggestions:'Suggestions',initiator:'The Initiator',panelidea:'Help my panel idea',join:'Join us'},
     cards: {
       project: {title:'What Is This?',body:'<p>United Wood Floor Layers — Pay It Forward is a worldwide collective art project built around craftsmanship, creativity, kindness and human connection.</p><p>People from all over the world create individual wooden panels within a shared frame. Every panel carries its own story, meaning, emotion or message. Some are made by master craftspeople with decades of experience. Others are created by hobbyists, students, schools, families or first-time makers.</p><p>Within each frame, everyone is free to create.</p><div class=\"qcard\">Together, all these unique pieces become one monumental collective artwork — a living reflection of humanity, individuality and connection.</div><p>But this project is about more than wood.</p><p>Everyone who joins this movement agrees to help 3 people without expecting anything in return. Those people are then encouraged to help 3 others, creating a growing ripple of kindness across the world.</p><p>This is not about perfection. It is about participation. About stories. About people. About passing something good forward.</p><p>Some people contribute by making a panel. Others contribute simply by helping people, sharing stories, supporting the movement or inspiring others.</p><p>The final artwork will eventually be gifted back to the world — to one or multiple public locations depending on how the project evolves.</p><p>How large will it become? We honestly don\'t know yet.</p><div class=\"qcard\">And that is part of the beauty.<br>We have the why. The how will find its way.</div>'},
       meedoen: {title:'Why Join?',body:'<p>Because craftsmanship is more than a trade.</p><p>It is a story. A language. A way of seeing the world.</p><p>And together, we tell that story better than alone.</p><p>Some people join by creating a panel. Others join by helping people, sharing stories, supporting the movement or simply becoming part of the ripple.</p><div class=\"qcard\">Every participant brings their own energy. Every contribution carries its own meaning.</div><p>Some contributions will be highly technical. Others simple, raw or deeply personal.</p><p>Together, they form something no single person could ever create alone.</p><p>This project is not about perfection. It is about connection. About creativity. About kindness. About helping others. About leaving something meaningful behind together.</p><p>You do not need to be a master craftsperson to join.</p><p><strong>You simply need:</strong></p><ul style=\"margin:.5rem 0 .75rem 1rem;line-height:1.8\"><li>your story</li><li>your intention</li><li>and the willingness to help 3 people without expecting anything in return</li></ul><p>Whether you create, support, inspire or help others: you become part of the ripple.</p><p style=\"margin-top:.75rem;font-size:12px;color:rgba(255,255,255,.6)\">↓ Click <strong>+ Join Us</strong> to become part of the movement.</p>'},
@@ -381,6 +382,7 @@ var LANG = {
       suggestions: {title:'Suggestions',body:'<p style="margin-bottom:1rem;opacity:.8">Have an idea, feedback or suggestion for the project? We would love to hear it.</p><div class="fld"><label>Your suggestion</label><textarea id="sug-msg" placeholder="Share your idea..." style="height:120px"></textarea></div><div class="fld"><label>Your name <span style="opacity:.5;font-size:11px">(optional)</span></label><input type="text" id="sug-name" placeholder="Your name"></div><div class="fld"><label>Email <span style="opacity:.5;font-size:11px">(optional)</span></label><input type="email" id="sug-email" placeholder="your@email.com"></div><button class="jsub" onclick="sendSuggestion()">Send suggestion</button><p class="jhint">Every idea is welcome. Thank you.</p>'},
       payitforward: {title:'Pay It Forward',body:'<p>The idea behind this movement is simple.</p><div class=\"qcard\">Help 3 people without expecting anything in return.<br><br>Not for attention. Not for status. Not because you have to. But because you choose to.</div><p>The inspiration partly comes from the movie \"Pay It Forward\" — built around one powerful idea: one person can change the world by inspiring others to pass kindness forward.</p><p>The world changes through people. Through small actions. Through kindness passed from one person to another.</p><p><strong>Everything counts.</strong></p><p>Teach someone a skill. Help someone find work. Support a young maker. Visit someone who feels alone. Share your knowledge. Give someone hope. Create opportunities for others. Listen when someone needs to be heard.</p><p>What matters is not the size of the action — but the intention behind it.</p><div class=\"qcard\">This movement is not built by one person. It grows through all the people who choose to pass something good forward.<br><br>One person helps three. Three help nine. Nine help twenty-seven.<br><br>And slowly, something larger than ourselves begins to grow.</div><p>Because one person really can change the world.</p>'},
       contact: {title:'Contact',body:'<div class=\"fld\"><label>Name</label><input type=\"text\" id=\"cnt-naam\" placeholder=\"Your name\"></div><div class=\"fld\"><label>Email</label><input type=\"email\" id=\"cnt-email\" placeholder=\"you@example.com\"></div><div class=\"fld\"><label>Message</label><textarea id=\"cnt-msg\" placeholder=\"Your question or message...\" style=\"height:100px\"></textarea></div><button class=\"jsub\" onclick=\"sendContact()\">Send</button><p class=\"jhint\">We will get back to you as soon as possible.</p>'},
+      panelidea: {title:'Help My Panel Idea',body:'<p>Not sure what to put on your panel? No problem.</p><p>I will ask you <strong>8 short questions</strong> about what you want to express, what mood, what style, what inspires you — and then I will create a detailed <strong>ChatGPT / DALL-E prompt</strong> for you.</p><div class=\"qcard\">What is ChatGPT / DALL-E?<br><br>ChatGPT and DALL-E are free AI tools that can generate images based on a text description. You paste the prompt I create into ChatGPT (chatgpt.com) and within seconds you see a visual concept of your panel idea.<br><br>This is purely for inspiration. Your actual panel can be completely different — better, more personal, more unique.</div><p>No rules. No limits. Geometric, abstract, emotional, out of the box — anything goes.</p><p style=\"font-size:12px;opacity:.6\">After I generate the prompt you can also ask me to refine it, make it wilder, simpler or completely different.</p><button onclick=\"closeSplashInfo();openChat();setTimeout(startPanelIdeaFlow,150);\" style=\"margin-top:1rem;background:var(--wood);border:none;color:#fff;padding:.6rem 1.5rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif\">\uD83C\uDFA8 Let\'s go!</button>'},
       initiator: {title:'The Initiator',body:'<p>My name is Jakko Woudenberg. Also known as Dutch Wood Artist. I am from the Netherlands.</p><p>Master parquet layer. Artist. Father of three children.</p><p>And above all: someone who believes things can be different.</p><p>This is a call to my colleagues all over the world and to everyone who still sees a future built on connection instead of division.</p><div class=\"qcard\">Because if we are honest… look at what the world is becoming.<br><br>People are increasingly divided. Everyone trapped inside their own bubble. Left against right. Black against white. Opinion against opinion.<br><br>We no longer really see each other. Hear each other. Or understand each other.</div><p>And somewhere along the way, we lost connection.</p><p>I believe that is one of the biggest problems of our time. Not a lack of technology. Not a lack of knowledge. But a lack of genuine human connection.</p><p>And I also believe we keep making the same mistakes because we are taught to compete more than collaborate. To take more than give. To protect ourselves instead of helping each other grow.</p><p>But deep down, most people want the same things. We want to be seen. We want to matter. We want our children to grow up safely. We want to contribute something meaningful.</p><p>As a father, I keep asking myself: <strong>What kind of world are we leaving behind for our children?</strong></p><p>I do not want to leave behind more division, anger and disconnection. I want to leave behind something positive. Something meaningful. Something that shows that people from different countries, cultures and backgrounds are still capable of creating something beautiful together.</p><div class=\"qcard\">And strangely enough… I believe parquet layers and craftspeople understand this better than most.<br><br>Because our work is not just technical. A floor is never just a floor.<br><br>It is the place where children take their first steps. Where families gather. Where memories are made. Where life happens.</div><p>Craftsmanship connects people all over the world. Whether someone works in the Netherlands, Portugal, the United States or Japan, makers recognize each other. We speak the same language through what we create.</p><p>That is why this movement began here. Not as a business. Not as an ego project. But as a call for reconnection.</p><p>One person helps three people. Those three help three more. And so on. A growing ripple of kindness, creativity and human connection.</p><p>I do not believe one person alone changes the world. But I do believe one person can start a movement that inspires others to do the same.</p><p>And maybe that is how the world changes: together.</p><div class=\"qcard\">🌍 One for all. All for one.</div>'},
       deelnemers: {title:'Who is participating?',body:'<div id=\"participants-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Loading participants...</div><div id=\"participants-list\"></div>'}
     }
@@ -793,7 +795,7 @@ function applyLang(lang){
   document.getElementById('main-btn').textContent = L.btn || LANG['en'].btn;
   var jb = document.getElementById('join-btn'); if(jb) jb.textContent = L.join || LANG['en'].join;
   var ql = L.ql || LANG['en'].ql;
-  var keys = ['project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','news','suggestions','initiator','join'];
+  var keys = ['project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','news','suggestions','initiator','panelidea','join'];
   for(var i=0;i<keys.length;i++){var el=document.getElementById('ql-'+keys[i]);if(el){var sp=el.querySelector('.ql-lbl');if(sp&&ql[keys[i]])sp.textContent=ql[keys[i]];}}
 
   // If a card is open, reload it in the new language
@@ -876,6 +878,195 @@ function getTranslatedCard(lang, key, cb){
   });
 }
 
+
+
+// PANEL IDEA FLOW
+var PANEL_IDEA_MODE = false;
+var PANEL_ANSWERS = [];
+var PANEL_QUESTION = 0;
+
+var PANEL_QUESTIONS_EN = [
+  'What do you want your panel to express — a feeling, a story, a memory, or something completely different?',
+  'Do you have an image, symbol or shape in your head? Describe it freely — anything goes!',
+  'What mood or atmosphere should it have? Think: dark, light, warm, mysterious, playful, dramatic, peaceful...',
+  'Any colors or contrasts you are drawn to? Or colors you definitely want to avoid?',
+  'Should the design be geometric and structured, organic and flowing — or something completely unexpected and out of the box?',
+  'Any wood species, materials or textures you want to experiment with?',
+  'Should it be realistic, abstract, or somewhere in between? Or something that has never been done before?',
+  'Is there anything — a person, a place, a culture, nature, music, an emotion, a dream — that inspires you right now?'
+];
+
+var PANEL_QUESTIONS_NL = [
+  'Wat wil je uitdrukken met je paneel — een gevoel, een verhaal, een herinnering, of iets totaal anders?',
+  'Heb je een beeld, symbool of vorm in je hoofd? Beschrijf het vrij — alles mag!',
+  'Welke sfeer of stemming moet het uitstralen? Denk aan: donker, licht, warm, mysterieus, speels, dramatisch...',
+  'Welke kleuren of contrasten trekken je aan? Of kleuren die je echt niet wil?',
+  'Moet het geometrisch en strak zijn, organisch en vloeiend — of totaal onverwacht en out of the box?',
+  'Welke houtsoorten, materialen of texturen wil je gebruiken of uitproberen?',
+  'Moet het realistisch, abstract of ergens tussenin zijn? Of iets wat nog nooit eerder is gemaakt?',
+  'Is er iets — een persoon, plek, cultuur, natuur, muziek, emotie, droom — dat je nu inspireert?'
+];
+
+var PANEL_QUESTIONS_ES = [
+  '¿Qué quieres expresar con tu panel — un sentimiento, una historia, un recuerdo, o algo completamente diferente?',
+  '¿Tienes una imagen, símbolo o forma en tu cabeza? Descríbela libremente — ¡todo vale!',
+  '¿Qué ambiente o atmósfera debe tener? Piensa en: oscuro, claro, cálido, misterioso, juguetón, dramático...',
+  '¿Qué colores o contrastes te atraen? ¿O colores que definitivamente no quieres?',
+  '¿Debe ser geométrico y estructurado, orgánico y fluido — o algo completamente inesperado?',
+  '¿Qué especies de madera, materiales o texturas quieres experimentar?',
+  '¿Debe ser realista, abstracto o algo intermedio? ¿O algo que nunca se ha hecho antes?',
+  '¿Hay algo — una persona, lugar, cultura, naturaleza, música, emoción, sueño — que te inspire ahora?'
+];
+
+var PANEL_QUESTIONS_FR = [
+  "Que voulez-vous exprimer avec votre panneau — un sentiment, une histoire, un souvenir ou quelque chose de différent?",
+  'Avez-vous une image, un symbole ou une forme en tête? Décrivez-le librement — tout est permis!',
+  "Quelle ambiance doit-il avoir? Pensez à: sombre, lumineux, chaud, mystérieux, ludique, dramatique...",
+  "Quelles couleurs ou contrastes vous attirent? Ou des couleurs à éviter absolument?",
+  "Doit-il être géométrique et structuré, organique et fluide — ou complètement inattendu?",
+  "Quelles essences de bois, matériaux ou textures voulez-vous expérimenter?",
+  "Doit-il être réaliste, abstrait ou quelque chose entre les deux?",
+  "Y a-t-il quelque chose — une personne, un lieu, une culture, la nature, la musique — qui vous inspire?"
+];
+
+var PANEL_QUESTIONS_DE = [
+  'Was möchten Sie mit Ihrem Panel ausdrücken — ein Gefühl, eine Geschichte, eine Erinnerung?',
+  'Haben Sie ein Bild, Symbol oder eine Form im Kopf? Beschreiben Sie es frei — alles ist erlaubt!',
+  'Welche Stimmung soll es haben? Denken Sie an: dunkel, hell, warm, mysteriös, verspielt, dramatisch...',
+  'Welche Farben oder Kontraste sprechen Sie an? Oder Farben, die Sie definitiv vermeiden möchten?',
+  'Soll es geometrisch und strukturiert, organisch und fließend — oder völlig unerwartet sein?',
+  'Welche Holzarten, Materialien oder Texturen möchten Sie ausprobieren?',
+  'Soll es realistisch, abstrakt oder irgendwo dazwischen sein?',
+  'Gibt es etwas — eine Person, einen Ort, eine Kultur, Natur, Musik, Emotion — das Sie jetzt inspiriert?'
+];
+
+var PANEL_QUESTIONS_IT = [
+  'Cosa vuoi esprimere con il tuo pannello — un sentimento, una storia, un ricordo o qualcosa di diverso?',
+  "Hai un'immagine, un simbolo o una forma in mente? Descrivila liberamente — tutto è permesso!",
+  'Che atmosfera dovrebbe avere? Pensa a: scuro, luminoso, caldo, misterioso, giocoso, drammatico...',
+  'Quali colori o contrasti ti attraggono? O colori che vuoi assolutamente evitare?',
+  'Deve essere geometrico e strutturato, organico e fluente — o qualcosa di completamente inaspettato?',
+  'Quali specie di legno, materiali o texture vuoi sperimentare?',
+  'Deve essere realistico, astratto o qualcosa nel mezzo?',
+  "C'è qualcosa — una persona, un luogo, una cultura, la natura, la musica — che ti ispira ora?"
+];
+
+function getPanelQuestions() {
+  var lang = currentLang || 'en';
+  if(lang === 'nl') return PANEL_QUESTIONS_NL;
+  if(lang === 'es') return PANEL_QUESTIONS_ES;
+  if(lang === 'fr') return PANEL_QUESTIONS_FR;
+  if(lang === 'de') return PANEL_QUESTIONS_DE;
+  if(lang === 'it') return PANEL_QUESTIONS_IT;
+  return PANEL_QUESTIONS_EN;
+}
+
+function startPanelIdeaFlow(){
+  PANEL_IDEA_MODE = true;
+  PANEL_ANSWERS = [];
+  PANEL_QUESTION = 0;
+  document.querySelectorAll('.bub button').forEach(function(b){ b.style.display='none'; });
+  var intros = {
+    en: "Let's bring your panel idea to life! \uD83C\uDFA8\n\nI'm going to ask you 8 questions. Your answers can be as wild, poetic or out of the box as you want.\n\nBased on your answers I'll create a detailed prompt for ChatGPT or DALL-E to visualize your idea!\n\nQuestion 1 of 8:\n",
+    nl: "Laten we jouw panelidee tot leven brengen! \uD83C\uDFA8\n\nIk ga je 8 vragen stellen. Je antwoorden mogen zo wild of out of the box zijn als je wilt.\n\nOp basis van je antwoorden maak ik een prompt voor ChatGPT of DALL-E!\n\nVraag 1 van 8:\n",
+    es: "Vamos a dar vida a tu idea de panel! \uD83C\uDFA8\n\nVoy a hacerte 8 preguntas. Todo vale!\n\nCreare un prompt para ChatGPT o DALL-E!\n\nPregunta 1 de 8:\n",
+    fr: "Donnons vie a votre idee de panneau! \uD83C\uDFA8\n\nJe vais vous poser 8 questions.\n\nJe creerai un prompt pour ChatGPT ou DALL-E!\n\nQuestion 1 sur 8:\n",
+    de: "Lassen Sie uns Ihre Panel-Idee zum Leben erwecken! \uD83C\uDFA8\n\nIch stelle Ihnen 8 Fragen.\n\nIch erstelle einen Prompt fur ChatGPT oder DALL-E!\n\nFrage 1 von 8:\n",
+    it: "Diamo vita alla tua idea di pannello! \uD83C\uDFA8\n\nTi faro 8 domande.\n\nCreero un prompt per ChatGPT o DALL-E!\n\nDomanda 1 di 8:\n"
+  }
+  var lang = currentLang || 'en';
+  var intro = intros[lang] || intros['en'];
+  appendMsg('ai', intro + getPanelQuestions()[0]);
+}
+
+function handlePanelAnswer(msg){
+  PANEL_ANSWERS.push(msg);
+  PANEL_QUESTION++;
+  var q = getPanelQuestions();
+  if(PANEL_QUESTION < q.length){
+    var labels = {en:'Question',nl:'Vraag',es:'Pregunta',fr:'Question',de:'Frage',it:'Domanda'};
+    var label = labels[currentLang||'en']||'Question';
+    appendMsg('ai', label + ' ' + (PANEL_QUESTION+1) + ' of ' + q.length + ':\n' + q[PANEL_QUESTION]);
+  } else {
+    PANEL_IDEA_MODE = false;
+    var generating = {
+      en:'Perfect! I have everything I need. Generating your ChatGPT prompt now... \u23F3',
+      nl:'Perfect! Ik heb alles wat ik nodig heb. Ik genereer nu je ChatGPT prompt... \u23F3',
+      es:'¡Perfecto! Tengo todo lo que necesito. Generando tu prompt de ChatGPT... \u23F3',
+      fr:'Parfait! Tout est prêt. Génération de votre prompt ChatGPT... \u23F3',
+      de:'Perfekt! Ich habe alles was ich brauche. Erstelle Ihren ChatGPT-Prompt... \u23F3',
+      it:'Perfetto! Ho tutto quello che mi serve. Generando il tuo prompt per ChatGPT... \u23F3'
+    };
+    appendMsg('ai', generating[currentLang||'en']||generating['en']);
+    generatePanelPrompt();
+  }
+}
+
+function generatePanelPrompt(){
+  var q = getPanelQuestions();
+  var qaText = q.map(function(question, i){ return 'Q: ' + question + '\nA: ' + PANEL_ANSWERS[i]; }).join('\n\n');
+  
+  var systemPrompt = 'You are a creative AI assistant helping craftspeople visualize their wooden floor panel ideas. Based on the answers below, write a detailed, vivid and inspiring prompt that the user can paste into ChatGPT or DALL-E to generate a visual concept for their 1m² wooden floor panel.\n\nThe prompt should:\n- Start with: "Create a detailed top-down visualization of a 1m² wooden floor panel artwork..."\n- Be specific about patterns, textures, colors, wood species, mood and atmosphere\n- Be creative, poetic and inspiring — not technical or boring\n- Be in ENGLISH regardless of the language of the answers (ChatGPT works best in English)\n- Be 150-250 words\n- End with: "Style: handcrafted wooden artwork, top-down view, ultra detailed, warm lighting"\n\nUser answers:\n' + qaText;
+
+  fetch('/.netlify/functions/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({messages:[{role:'user',content:systemPrompt}]})
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var prompt = data.reply || 'Something went wrong.';
+    showGeneratedPanelPrompt(prompt);
+  })
+  .catch(function(){
+    appendMsg('ai','Connection error. Please try again.');
+  });
+}
+
+function showGeneratedPanelPrompt(promptText){
+  var w = document.getElementById('msgs');
+  var d = document.createElement('div');
+  d.className = 'msg ai';
+  var labels = {
+    en: {title:'Your ChatGPT / DALL-E prompt', copy:'\uD83D\uDCCB Copy', copied:'\u2705 Copied!', tip:'Paste this prompt into ChatGPT (with image generation) or DALL-E and watch your idea come to life! This is just for inspiration \uD83D\uDE0A', more:'Want to refine it? Tell me what to change and I will rewrite it!'},
+    nl: {title:'Jouw ChatGPT / DALL-E prompt', copy:'\uD83D\uDCCB Kopieer', copied:'\u2705 Gekopieerd!', tip:'Plak deze prompt in ChatGPT (met beeldgeneratie) of DALL-E en zie je idee tot leven komen! Puur voor inspiratie \uD83D\uDE0A', more:'Wil je het aanpassen? Vertel me wat je wil veranderen!'},
+    es: {title:'Tu prompt para ChatGPT / DALL-E', copy:'\uD83D\uDCCB Copiar', copied:'\u2705 \u00a1Copiado!', tip:'¡Pega este prompt en ChatGPT o DALL-E y mira cómo tu idea cobra vida! Solo para inspiración \uD83D\uDE0A', more:'¿Quieres refinarlo? ¡Dime qué cambiar!'},
+    fr: {title:'Votre prompt ChatGPT / DALL-E', copy:'\uD83D\uDCCB Copier', copied:'\u2705 Copié!', tip:'Collez ce prompt dans ChatGPT ou DALL-E et regardez votre idée prendre vie! Pour inspiration \uD83D\uDE0A', more:'Voulez-vous le modifier? Dites-moi ce que changer!'},
+    de: {title:'Ihr ChatGPT / DALL-E Prompt', copy:'\uD83D\uDCCB Kopieren', copied:'\u2705 Kopiert!', tip:'Fügen Sie diesen Prompt in ChatGPT oder DALL-E ein und sehen Sie Ihre Idee zum Leben erwachen! Nur zur Inspiration \uD83D\uDE0A', more:'Möchten Sie es verfeinern? Sagen Sie mir was Sie ändern möchten!'},
+    it: {title:'Il tuo prompt per ChatGPT / DALL-E', copy:'\uD83D\uDCCB Copia', copied:'\u2705 Copiato!', tip:'Incolla questo prompt in ChatGPT o DALL-E e guarda la tua idea prendere vita! Solo per ispirazione \uD83D\uDE0A', more:'Vuoi perfezionarlo? Dimmi cosa vuoi cambiare!'}
+  };
+  var L = labels[currentLang||'en'] || labels['en'];
+  var escaped = promptText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  d.innerHTML = '<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7">' +
+    '<strong>' + L.title + ' \uD83C\uDFA8</strong><br><br>' +
+    '<div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:1rem;margin:.5rem 0;position:relative">' +
+    '<button onclick="copyPanelPrompt(this)" style="position:absolute;top:.5rem;right:.5rem;background:var(--wood);border:none;color:#fff;padding:.3rem .75rem;border-radius:6px;font-size:11px;cursor:pointer;font-family:Inter,sans-serif">' + L.copy + '</button>' +
+    '<div class="panel-prompt-text" style="font-size:12px;line-height:1.7;padding-right:3rem;white-space:pre-wrap">' + escaped + '</div>' +
+    '</div>' +
+    '<em style="font-size:11px;opacity:.6">' + L.tip + '</em><br><br>' +
+    L.more +
+    '</div>';
+  w.appendChild(d);
+  w.scrollTop = 99999;
+}
+
+function copyPanelPrompt(btn){
+  var text = btn.parentElement.querySelector('.panel-prompt-text').innerText;
+  var L = {en:'\u2705 Copied!',nl:'\u2705 Gekopieerd!',es:'\u2705 \u00a1Copiado!',fr:'\u2705 Copié!',de:'\u2705 Kopiert!',it:'\u2705 Copiato!'};
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent = L[currentLang||'en']||L['en'];
+    setTimeout(function(){ btn.innerHTML = '\uD83D\uDCCB ' + ({en:'Copy',nl:'Kopieer',es:'Copiar',fr:'Copier',de:'Kopieren',it:'Copia'}[currentLang||'en']||'Copy'); }, 2000);
+  }).catch(function(){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = L[currentLang||'en']||L['en'];
+    setTimeout(function(){ btn.innerHTML = '\uD83D\uDCCB Copy'; }, 2000);
+  });
+}
 
 // POST CREATION FLOW
 var POST_QUESTIONS_EN = [
@@ -1089,6 +1280,10 @@ function send(){
   clearCards();
   appendMsg('me',msg);
   // Check if in post creation mode
+  if(PANEL_IDEA_MODE){
+    handlePanelAnswer(msg);
+    return;
+  }
   if(postMode){
     handlePostAnswer(msg);
     return;
