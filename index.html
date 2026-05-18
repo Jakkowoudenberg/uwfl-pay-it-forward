@@ -674,7 +674,7 @@ function sendSuggestion(){
   if(!m){alert('Please enter your suggestion.');return;}
   var n=(document.getElementById('sug-name')||{value:''}).value.trim();
   var e=(document.getElementById('sug-email')||{value:''}).value.trim();
-  fetch('https://script.google.com/macros/s/AKfycbxp3RB7h1Cg_2eFfenO78dRjuD-l-XTJliibReTWtLopiAz5MfloqVMFDzcS_PgfWI/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Suggestion',naam:n||'Anonymous',email:e,bericht:m})}).catch(function(){});
+  fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Suggestion',naam:n||'Anonymous',email:e,bericht:m})}).catch(function(){});
   var bodyEl=document.getElementById('sp-info-body');
   if(bodyEl)bodyEl.innerHTML='<p style="color:rgba(255,255,255,.9);padding:1rem 0">Thank you! Your suggestion has been received.</p>';
 }
@@ -684,7 +684,7 @@ function sendContact(){
   var e=(document.getElementById('cnt-email')||{value:''}).value.trim();
   var m=(document.getElementById('cnt-msg')||{value:''}).value.trim();
   if(!n||!e||!m){alert('Vul alle velden in.');return;}
-  fetch('https://script.google.com/macros/s/AKfycbxp3RB7h1Cg_2eFfenO78dRjuD-l-XTJliibReTWtLopiAz5MfloqVMFDzcS_PgfWI/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Contact',naam:n,email:e,bericht:m})}).catch(function(){});
+  fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Contact',naam:n,email:e,bericht:m})}).catch(function(){});
   var panel=document.getElementById('sp-info');
   if(panel){
     var body=document.getElementById('sp-info-body');
@@ -703,9 +703,10 @@ function submitForm(){
   var cc=(document.getElementById('fcc')||{value:''}).value;
   var tel=(document.getElementById('ftel')||{value:''}).value;
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
+  if(!tel){alert('Please enter your phone number.');return;}
   var regData = {naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
   // Send to Google Sheets
-  fetch('https://script.google.com/macros/s/AKfycbxp3RB7h1Cg_2eFfenO78dRjuD-l-XTJliibReTWtLopiAz5MfloqVMFDzcS_PgfWI/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(e){console.log(e)});
+  fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(e){console.log(e)});
   // Send to Supabase
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(e){console.log(e)});
   var jc=document.getElementById('jcard');if(jc)jc.remove();
