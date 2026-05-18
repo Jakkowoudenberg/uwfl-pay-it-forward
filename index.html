@@ -710,20 +710,22 @@ function submitForm(){
     fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(){});
     btn.textContent="I'm in";btn.disabled=false;
     var jcT=document.getElementById('jcard');
+    var safeN=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
     if(jcT){
-      jcT.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2rem;margin-bottom:.5rem">🧪</div><p style="font-size:14px;font-weight:600;color:orange;margin-bottom:.5rem">TEST MODE</p><p style="opacity:.8;font-size:12px;color:#fff">Email sent with [TEST] prefix.<br>Nothing saved to database or participant list.</p></div>';
+      jcT.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2rem;margin-bottom:.5rem">\uD83E\uDDEA</div><p style="font-size:14px;font-weight:600;color:orange;margin-bottom:.5rem">TEST MODE</p><p style="opacity:.8;font-size:12px;color:#fff">Email sent with [TEST] prefix.<br>Nothing saved to database or participant list.</p></div>';
     }
     return;
   }
   fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(){});
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(){});
   btn.textContent="I'm in";btn.disabled=false;
+  var safeN=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
   var jc=document.getElementById('jcard');
   if(jc){
-    jc.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2.5rem;margin-bottom:.75rem">🌱</div><p style="font-size:16px;font-weight:600;color:#fff;margin-bottom:.5rem">Welcome, '+n+'!</p><p style="opacity:.8;font-size:13px;color:#fff">You are now part of a worldwide movement.<br><br>Make your panel. Help 3 people. Pass it forward.</p></div>';
+    jc.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2.5rem;margin-bottom:.75rem">\uD83C\uDF31</div><p style="font-size:16px;font-weight:600;color:#fff;margin-bottom:.5rem">Welcome, '+safeN+'!</p><p style="opacity:.8;font-size:13px;color:#fff">You are now part of a worldwide movement.<br><br>Make your panel. Help 3 people. Pass it forward.</p></div>';
   } else {
     var bodyEl=document.getElementById('sp-info-body');
-    if(bodyEl)bodyEl.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2.5rem;margin-bottom:.75rem">🌱</div><p style="font-size:16px;font-weight:600;color:#fff;margin-bottom:.5rem">Welcome, '+n+'!</p><p style="opacity:.8;font-size:13px;color:#fff">You are now part of a worldwide movement.<br><br>Make your panel. Help 3 people. Pass it forward.</p></div>';
+    if(bodyEl)bodyEl.innerHTML='<div style="text-align:center;padding:2rem 1rem"><div style="font-size:2.5rem;margin-bottom:.75rem">\uD83C\uDF31</div><p style="font-size:16px;font-weight:600;color:#fff;margin-bottom:.5rem">Welcome, '+safeN+'!</p><p style="opacity:.8;font-size:13px;color:#fff">You are now part of a worldwide movement.<br><br>Make your panel. Help 3 people. Pass it forward.</p></div>';
   }
 }
 
