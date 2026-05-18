@@ -257,7 +257,6 @@ function checkSpam(name){
   var now=Date.now();
   var hp=document.getElementById('hp-'+name);
   if(hp&&hp.value){console.log('bot');return true;}
-  if(FORM_LOADED[name]&&(now-FORM_LOADED[name])<2000){alert('Te snel. Probeer opnieuw.');return true;}
   if(now-LAST_SUBMIT<5000){alert('Please wait a moment before submitting again.');return true;}
   LAST_SUBMIT=now;
   return false;
