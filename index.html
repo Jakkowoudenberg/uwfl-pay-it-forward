@@ -698,6 +698,7 @@ function submitForm(){
   var l=document.getElementById('fl').value;
   var m=(document.getElementById('fm')||{value:''}).value.trim();
   if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
+  var testMode = n.toLowerCase() === 'test';
   if(!selr){alert('Kies hoe je wil meedoen.');return;}
   var btn=document.querySelector('.jsub');btn.textContent='Versturen...';btn.disabled=true;
   var cc=(document.getElementById('fcc')||{value:''}).value;
@@ -705,6 +706,14 @@ function submitForm(){
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
   if(!tel){alert('Please enter your phone number.');return;}
   var regData = {naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
+  if(testMode){
+    // TEST MODE — send email only, don't save to Supabase or show on site
+    var testData = Object.assign({}, regData, {naam:'[TEST] '+n});
+    fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(e){console.log(e)});
+    var body=document.getElementById('sp-info-body');
+    if(body)body.innerHTML='<div style="background:rgba(255,165,0,.15);border:1px solid rgba(255,165,0,.5);border-radius:8px;padding:1rem;margin-bottom:1rem"><strong style="color:orange">🧪 TEST MODE</strong><br><span style="font-size:12px;opacity:.8">Email sent with [TEST] prefix. Nothing saved to database or participant list.</span></div>';
+    return;
+  }
   // Send to Google Sheets
   fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(e){console.log(e)});
   // Send to Supabase
