@@ -696,46 +696,30 @@ function submitForm(){
   var e=document.getElementById('fe').value.trim();
   var l=document.getElementById('fl').value;
   var m=(document.getElementById('fm')||{value:''}).value.trim();
-  if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
-  if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');return;}
   var cc=(document.getElementById('fcc')||{value:''}).value;
   var tel=(document.getElementById('ftel')||{value:''}).value.trim();
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
   var testMode = n.toLowerCase() === 'test';
+  if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
+  if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');return;}
   if(!tel&&!testMode){alert('Please enter your phone number.');return;}
   if(checkSpam('join'))return;
   var btn=document.querySelector('.jsub');btn.textContent='Sending...';btn.disabled=true;
-  // dummy to skip duplicate declarations below
-  var _n=n,_e=e,_l=l,_m=m,_cc=cc,_tel=tel,_phone=phone,_testMode=testMode;
-  var e=document.getElementById('fe').value.trim();
-  var l=document.getElementById('fl').value;
-  var m=(document.getElementById('fm')||{value:''}).value.trim();
-  if(!n||!e||!l||!m){alert('Please fill in all required fields.');var b=document.querySelector('.jsub');if(b){b.textContent="I'm in";b.disabled=false;}return;}
-  var testMode = n.toLowerCase() === 'test';
-  if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');var b2=document.querySelector('.jsub');if(b2){b2.textContent="I'm in";b2.disabled=false;}return;}
-  var btn=document.querySelector('.jsub');btn.textContent='Sending...';btn.disabled=true;
-  var cc=(document.getElementById('fcc')||{value:''}).value;
-  var tel=(document.getElementById('ftel')||{value:''}).value;
-  var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
-  if(!tel&&!testMode){alert('Please enter your phone number.');btn.textContent='I\'m in';btn.disabled=false;return;}
-  var regData = {naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
+  var regData={naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
   if(testMode){
-    // TEST MODE — send email only, don't save to Supabase or show on site
-    var testData = Object.assign({}, regData, {naam:'[TEST] '+n});
-    fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(e){console.log(e)});
+    var testData=Object.assign({},regData,{naam:'[TEST] '+n});
+    fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(){});
     var body=document.getElementById('sp-info-body');
     if(body)body.innerHTML='<div style="background:rgba(255,165,0,.15);border:1px solid rgba(255,165,0,.5);border-radius:8px;padding:1rem;margin-bottom:1rem"><strong style="color:orange">🧪 TEST MODE</strong><br><span style="font-size:12px;opacity:.8">Email sent with [TEST] prefix. Nothing saved to database or participant list.</span></div>';
     btn.textContent="I'm in";btn.disabled=false;
     return;
   }
-  // Send to Google Sheets
-  fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(e){console.log(e)});
-  // Send to Supabase
-  fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(e){console.log(e)});
+  fetch('https://script.google.com/macros/s/AKfycbyKFURe29UfhKZgzhVGeZWIAWa0Pjm8wmROMtPW_-E2vqBiPMPxDVYwOJIWJ0cSg3zw/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(){});
+  fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(){});
   var jc=document.getElementById('jcard');if(jc)jc.remove();
   var w=document.getElementById('msgs');
   var ok=document.createElement('div');ok.className='msg ai';
-  ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub">Welkom, '+n+'. Jij maakt nu deel uit van een wereldwijde beweging.<br><br>Maak jouw paneel. Help 3 mensen. Geef het door.</div>';
+  ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub">Welcome, '+n+'! You are now part of a worldwide movement.<br><br>Make your panel. Help 3 people. Pass it forward.</div>';
   w.appendChild(ok);w.scrollTop=99999;
 }
 
