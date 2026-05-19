@@ -1,6 +1,8 @@
 {
   "name": "uwfl-pay-it-forward",
   "version": "1.0.0",
-  "description": "United Wood Floor Layers Pay It Forward App",
-  "dependencies": {}
+  "description": "United Wood Floor Layers Pay It Forward",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {}
 }
