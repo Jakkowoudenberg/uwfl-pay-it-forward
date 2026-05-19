@@ -180,6 +180,44 @@ Answer in the same language as the question. Warm, direct, deeply human. Never c
 
 WEB SEARCH: You have access to web search. Before answering questions about current news, events, new participants, media coverage, or anything that may have developed recently about UWFL or United Wood Floor Layers, search the web first. Search for: "United Wood Floor Layers", "UWFL Pay It Forward", "unitedwoodfloorlayers.com". Use what you find to enrich your answer with the latest information.`;
 
+// Simple in-memory rate limiter
+const rateLimits = new Map();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX_CHAT = 10;       // max 10 chat requests per minute per IP
+const RATE_LIMIT_MAX_TRANSLATE = 3;   // max 3 translate requests per minute per IP
+const RATE_LIMIT_MAX_REGISTER = 3;    // max 3 register requests per minute per IP
+
+function checkRateLimit(ip, mode) {
+  const now = Date.now();
+  const key = ip + ':' + mode;
+  const limit = mode === 'chat' ? RATE_LIMIT_MAX_CHAT : 
+                mode === 'translate' ? RATE_LIMIT_MAX_TRANSLATE : 
+                RATE_LIMIT_MAX_REGISTER;
+  
+  if (!rateLimits.has(key)) {
+    rateLimits.set(key, { count: 1, start: now });
+    return false;
+  }
+  
+  const entry = rateLimits.get(key);
+  if (now - entry.start > RATE_LIMIT_WINDOW) {
+    rateLimits.set(key, { count: 1, start: now });
+    return false;
+  }
+  
+  if (entry.count >= limit) return true;
+  entry.count++;
+  return false;
+}
+
+// Clean up old entries every 5 minutes
+setInterval(function() {
+  const now = Date.now();
+  for (const [key, val] of rateLimits.entries()) {
+    if (now - val.start > RATE_LIMIT_WINDOW * 2) rateLimits.delete(key);
+  }
+}, 5 * 60 * 1000);
+
 exports.handler = async function(event) {
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -205,6 +243,17 @@ exports.handler = async function(event) {
 
   try {
     const body = JSON.parse(event.body);
+    const mode = body.mode || 'chat';
+    
+    // Rate limit check
+    const ip = event.headers['x-forwarded-for'] || event.headers['client-ip'] || 'unknown';
+    if (checkRateLimit(ip, mode)) {
+      return {
+        statusCode: 429,
+        headers,
+        body: JSON.stringify({ error: 'Too many requests. Please wait a moment before trying again.' })
+      };
+    }
 
     // REGISTER MODE — save to Supabase
     if (body.mode === 'register') {
