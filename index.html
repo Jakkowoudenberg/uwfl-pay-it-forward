@@ -801,6 +801,10 @@ function callTranslate(content, targetLang, cb){
 
 function applyLang(lang){
   currentLang = lang;
+  var pwaBtn = document.getElementById('pwa-install-btn');
+  if(pwaBtn && pwaBtn.classList.contains('show') && typeof PWA_LABELS !== 'undefined'){
+    pwaBtn.textContent = PWA_LABELS[lang]||PWA_LABELS['en'];
+  }
   var L = LANG[lang] || LANG['en'];
   document.getElementById('sp-sub').textContent = L.sub || LANG['en'].sub;
   document.getElementById('main-btn').textContent = L.btn || LANG['en'].btn;
@@ -1330,11 +1334,23 @@ function rz(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,
 // PWA Install
 var deferredPrompt = null;
 
+var PWA_LABELS = {
+  en:'📲 Download the webapp — No App Store needed',
+  nl:'📲 Download de webapp — Geen App Store nodig',
+  es:'📲 Descarga la webapp — Sin App Store',
+  fr:'📲 Télécharger la webapp — Sans App Store',
+  de:'📲 Web-App herunterladen — Kein App Store nötig',
+  it:'📲 Scarica la webapp — Senza App Store'
+};
+
 window.addEventListener('beforeinstallprompt', function(e){
   e.preventDefault();
   deferredPrompt = e;
   var btn = document.getElementById('pwa-install-btn');
-  if(btn){ btn.classList.add('show'); }
+  if(btn){
+    btn.classList.add('show');
+    btn.textContent = PWA_LABELS[currentLang||'en']||PWA_LABELS['en'];
+  }
 });
 
 window.addEventListener('appinstalled', function(){
