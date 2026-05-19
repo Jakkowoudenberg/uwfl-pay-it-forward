@@ -12,6 +12,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="United Wood Floor Layers — Pay It Forward">
 <meta name="twitter:description" content="A worldwide movement of craftsmen and people. Create a panel. Help 3 people. Pass it forward.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#c49a6c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Pay It Forward">
+<link rel="apple-touch-icon" href="/icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -1314,6 +1320,17 @@ function appendTyping(){var id='ty'+(++tc);var w=document.getElementById('msgs')
 function removeTyping(id){var el=document.getElementById(id);if(el)el.remove();}
 function onkey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
 function rz(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,110)+'px';}
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js').then(function(reg){
+      console.log('SW registered');
+    }).catch(function(err){
+      console.log('SW error:', err);
+    });
+  });
+}
 </script>
 </body>
 </html>
