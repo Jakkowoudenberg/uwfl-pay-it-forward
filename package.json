@@ -1,24 +1,6 @@
 {
-  "name": "Pay It Forward",
-  "short_name": "Pay It Forward",
-  "description": "United Wood Floor Layers — A worldwide movement of craftsmen and people.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0d0a07",
-  "theme_color": "#c49a6c",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+  "name": "uwfl-pay-it-forward",
+  "version": "1.0.0",
+  "description": "United Wood Floor Layers Pay It Forward App",
+  "dependencies": {}
 }
