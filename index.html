@@ -703,8 +703,12 @@ function showCard(topic){
 }
 
 function setExampleStory(){
-  var el = document.getElementById('fm');
-  if(el) el.value = 'My name is [your name], [your trade] from [your country]. I have been working in [your trade] for [X] years. I am joining this movement because [your reason]. I believe in craftsmanship, connection and passing something meaningful forward.';
+  var ex = document.getElementById('fm-example');
+  if(!ex) return;
+  var L = STORY_FIELD[currentLang||'en'] || STORY_FIELD['en'];
+  ex.style.display = ex.style.display === 'none' ? 'block' : 'none';
+  var btn = document.getElementById('fm-example-btn');
+  if(btn) btn.textContent = ex.style.display === 'none' ? L.show : L.hide;
 }
 function selRoute(r){
   selr=r;
@@ -757,6 +761,7 @@ function submitForm(){
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
   var testMode = n.toLowerCase() === 'test';
   if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
+  if(m.indexOf('[your name]') !== -1 || m.indexOf('[your trade]') !== -1 || m.indexOf('[your reason]') !== -1 || m.indexOf('[your country]') !== -1){alert((STORY_FIELD[currentLang||'en']||STORY_FIELD['en']).error);return;}
   if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');return;}
   if(!tel&&!testMode){alert('Please enter your phone number.');return;}
   if(checkSpam('join'))return;
@@ -830,6 +835,7 @@ function callTranslate(content, targetLang, cb){
 
 function applyLang(lang){
   currentLang = lang;
+  updateStoryField(lang);
   var pwaBtn = document.getElementById('pwa-install-btn');
   if(pwaBtn && pwaBtn.classList.contains('show') && typeof PWA_LABELS !== 'undefined'){
     pwaBtn.textContent = PWA_LABELS[lang]||PWA_LABELS['en'];
@@ -1362,6 +1368,22 @@ function rz(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,
 <script>
 // PWA Install
 var deferredPrompt = null;
+
+var STORY_FIELD = {"en": {"label": "Your story", "hint": "This will be shown in the app under your name. Tell us: <strong style="color:rgba(255,255,255,.8)">who you are, your trade, how long you have been doing this, and why you are joining.</strong>", "show": "📝 Show example", "hide": "📝 Hide example", "example": "Example: "My name is Sarah, I am a parquet layer from Belgium. I have been in the trade for 12 years. I joined this movement because I believe in craftsmanship and connection. I want to help pass knowledge and kindness forward to the next generation."", "placeholder": "Write your own story here...", "error": "Please write your own story — replace the example text with your personal information."}, "nl": {"label": "Jouw verhaal", "hint": "Dit wordt in de app getoond onder jouw naam. Vertel ons: <strong style="color:rgba(255,255,255,.8)">wie je bent, je vak, hoe lang je dit al doet, en waarom je meedoet.</strong>", "show": "📝 Toon voorbeeld", "hide": "📝 Verberg voorbeeld", "example": "Voorbeeld: "Mijn naam is Sarah, ik ben parketteur uit België. Ik werk al 12 jaar in het vak. Ik doe mee aan dit initiatief omdat ik geloof in vakmanschap en verbinding. Ik wil kennis en vriendelijkheid doorgeven aan de volgende generatie."", "placeholder": "Schrijf hier jouw eigen verhaal...", "error": "Schrijf alsjeblieft jouw eigen verhaal — vervang de voorbeeldtekst door jouw persoonlijke informatie."}, "es": {"label": "Tu historia", "hint": "Esto se mostrará en la app bajo tu nombre. Cuéntanos: <strong style="color:rgba(255,255,255,.8)">quién eres, tu oficio, cuánto tiempo llevas en esto, y por qué te unes.</strong>", "show": "📝 Mostrar ejemplo", "hide": "📝 Ocultar ejemplo", "example": "Ejemplo: "Me llamo Sarah, soy parquetista de Bélgica. Llevo 12 años en el oficio. Me uno a este movimiento porque creo en la artesanía y la conexión. Quiero ayudar a transmitir conocimiento y amabilidad a la próxima generación."", "placeholder": "Escribe tu propia historia aquí...", "error": "Por favor escribe tu propia historia — reemplaza el texto de ejemplo con tu información personal."}, "fr": {"label": "Votre histoire", "hint": "Ceci sera affiché dans l\"application sous votre nom. Dites-nous: <strong style="color:rgba(255,255,255,.8)">qui vous êtes, votre métier, depuis combien de temps vous le faites, et pourquoi vous rejoignez.</strong>", "show": "📝 Voir exemple", "hide": "📝 Masquer exemple", "example": "Exemple: "Je m\"appelle Sarah, je suis parqueteuse de Belgique. Je travaille dans ce métier depuis 12 ans. Je rejoins ce mouvement parce que je crois en l\"artisanat et la connexion humaine."", "placeholder": "Écrivez votre propre histoire ici...", "error": "Veuillez écrire votre propre histoire — remplacez le texte d"exemple par vos informations personnelles."}, "de": {"label": "Ihre Geschichte", "hint": "Dies wird in der App unter Ihrem Namen angezeigt. Erzählen Sie uns: <strong style="color:rgba(255,255,255,.8)">wer Sie sind, Ihr Beruf, wie lange Sie das schon machen, und warum Sie mitmachen.</strong>", "show": "📝 Beispiel zeigen", "hide": "📝 Beispiel verbergen", "example": "Beispiel: "Mein Name ist Sarah, ich bin Parkettlegerin aus Belgien. Ich arbeite seit 12 Jahren in diesem Beruf. Ich mache bei dieser Bewegung mit, weil ich an Handwerk und Verbindung glaube."", "placeholder": "Schreiben Sie Ihre eigene Geschichte hier...", "error": "Bitte schreiben Sie Ihre eigene Geschichte — ersetzen Sie den Beispieltext durch Ihre persönlichen Informationen."}, "it": {"label": "La tua storia", "hint": "Questo verrà mostrato nell\"app sotto il tuo nome. Raccontaci: <strong style="color:rgba(255,255,255,.8)">chi sei, il tuo mestiere, da quanto tempo lo fai, e perché ti unisci.</strong>", "show": "📝 Mostra esempio", "hide": "📝 Nascondi esempio", "example": "Esempio: "Mi chiamo Sarah, sono una parquettista del Belgio. Lavoro in questo mestiere da 12 anni. Mi unisco a questo movimento perché credo nell\"artigianato e nella connessione umana."", "placeholder": "Scrivi la tua storia qui...", "error": "Scrivi la tua storia personale — sostituisci il testo di esempio con le tue informazioni."}};
+
+function updateStoryField(lang){
+  var L = STORY_FIELD[lang] || STORY_FIELD['en'];
+  var label = document.getElementById('fmlabelid');
+  var hint = document.getElementById('fm-hint');
+  var showBtn = document.getElementById('fm-example-btn');
+  var exampleBox = document.getElementById('fm-example');
+  var textarea = document.getElementById('fm');
+  if(label) label.textContent = L.label;
+  if(hint) hint.innerHTML = L.hint;
+  if(showBtn) showBtn.textContent = L.show;
+  if(exampleBox) exampleBox.textContent = L.example;
+  if(textarea) textarea.placeholder = L.placeholder;
+}
 
 var PWA_LABELS = {
   en:'📲 Download the webapp — No App Store needed',
