@@ -602,20 +602,23 @@ function renderParticipants(data) {
 
   list.innerHTML = html;
 }
-
-function toggleStory(id){
-  var el = document.getElementById(id);
+function toggleStory(btn){
+  var pid = btn.getAttribute('data-pid');
+  var el = document.getElementById(pid);
   if(!el) return;
-  var btn = el.previousElementSibling;
-  var arrow = btn ? btn.querySelector('span:last-child') : null;
+  var arrow = btn.querySelector('span:last-child');
   if(el.style.display === 'none'){
     el.style.display = 'block';
-    if(arrow) arrow.textContent = '▲';
+    if(arrow) arrow.textContent = '\u25B2';
+    btn.style.borderRadius = '0 6px 0 0';
   } else {
     el.style.display = 'none';
-    if(arrow) arrow.textContent = '▼';
+    if(arrow) arrow.textContent = '\u25BC';
+    btn.style.borderRadius = '0 6px 6px 0';
   }
 }
+
+
 
 function splashInfo(topic) {
   var lang = currentLang || 'nl';
