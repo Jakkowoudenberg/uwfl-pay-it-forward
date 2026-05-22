@@ -14,6 +14,7 @@
 <meta name="twitter:description" content="A worldwide movement of craftsmen and people. Create a panel. Help 3 people. Pass it forward.">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#c49a6c">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Pay It Forward">
@@ -551,18 +552,15 @@ function renderParticipants(data) {
   if(!list) return;
   if(loading) loading.style.display = 'none';
 
-  // Count totals
   var total = data.length;
   var countries = {};
   data.forEach(function(p){ if(p.country) countries[p.country] = (countries[p.country]||0)+1; });
   var countryCount = Object.keys(countries).length;
 
-  // Stats
   var html = '<div class="srow"><div class="sbox"><span class="sn">'+total+'</span><span class="sl">Participants</span></div><div class="sbox"><span class="sn">'+countryCount+'</span><span class="sl">Countries</span></div></div>';
 
-  // Categories in order
   var cats = ['Initiator','Maker','Contributor','Participant','Sponsor'];
-  var catIcons = {'Initiator':'🌱','Maker':'🪵','Contributor':'💪','Participant':'🤝','Sponsor':'💰'};
+  var catIcons = {Initiator:'\uD83C\uDF31',Maker:'\uD83E\uDAB5',Contributor:'\uD83D\uDCAA',Participant:'\uD83E\uDD1D',Sponsor:'\uD83D\uDCB0'};
 
   cats.forEach(function(cat) {
     var members = data.filter(function(p){ return p.type === cat; });
@@ -570,7 +568,6 @@ function renderParticipants(data) {
 
     html += '<div style="margin-top:1rem"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--wood);margin-bottom:.5rem">'+catIcons[cat]+' '+cat+'s ('+members.length+')</div>';
 
-    // Group by country alphabetically
     var byCountry = {};
     members.forEach(function(p){
       var c = p.country || 'Unknown';
@@ -579,12 +576,23 @@ function renderParticipants(data) {
     });
 
     Object.keys(byCountry).sort().forEach(function(country){
-      var flag = COUNTRY_FLAGS[country] || '🌍';
+      var flag = COUNTRY_FLAGS[country] || '\uD83C\uDF0D';
       html += '<div style="margin-top:.6rem"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:.3rem">'+flag+' '+country+' ('+byCountry[country].length+')</div>';
-      byCountry[country].forEach(function(p){
-        html += '<div style="font-size:12px;padding:.35rem .5rem;border-left:2px solid var(--dim);margin-left:.25rem;margin-bottom:.2rem;color:rgba(255,255,255,.85)">';
-        html += '<strong>'+p.name+'</strong>';
-        if(p.company) html += ' <span style="opacity:.6">— '+p.company+'</span>';
+      byCountry[country].forEach(function(p, idx){
+        var pid = 'p-'+encodeURIComponent(p.name).replace(/%/g,'_')+'_'+idx;
+        var hasStory = p.message && p.message.trim().length > 0;
+        html += '<div style="margin-left:.25rem;margin-bottom:.3rem">';
+        if(hasStory){
+          html += '<div onclick="toggleStory(this)" data-pid="'+pid+'" style="font-size:12px;padding:.4rem .5rem;border-left:2px solid var(--wood);color:rgba(255,255,255,.9);cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.05);border-radius:0 6px 6px 0">';
+          html += '<span><strong>'+p.name+'</strong>';
+          if(p.company) html += ' <span style="opacity:.6">\u2014 '+p.company+'</span>';
+          html += '</span><span style="opacity:.5;font-size:10px">\u25BC</span></div>';
+          html += '<div id="'+pid+'" style="display:none;font-size:11px;line-height:1.8;padding:.75rem;background:rgba(255,255,255,.06);border-radius:0 0 8px 8px;color:rgba(255,255,255,.8);border-left:2px solid var(--wood);border-top:none">'+p.message+'</div>';
+        } else {
+          html += '<div style="font-size:12px;padding:.35rem .5rem;border-left:2px solid rgba(255,255,255,.15);color:rgba(255,255,255,.75)"><strong>'+p.name+'</strong>';
+          if(p.company) html += ' <span style="opacity:.6">\u2014 '+p.company+'</span>';
+          html += '</div>';
+        }
         html += '</div>';
       });
       html += '</div>';
@@ -593,6 +601,20 @@ function renderParticipants(data) {
   });
 
   list.innerHTML = html;
+}
+
+function toggleStory(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var btn = el.previousElementSibling;
+  var arrow = btn ? btn.querySelector('span:last-child') : null;
+  if(el.style.display === 'none'){
+    el.style.display = 'block';
+    if(arrow) arrow.textContent = '▲';
+  } else {
+    el.style.display = 'none';
+    if(arrow) arrow.textContent = '▼';
+  }
 }
 
 function splashInfo(topic) {
