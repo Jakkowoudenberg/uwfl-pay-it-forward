@@ -258,6 +258,36 @@ exports.handler = async function(event) {
     // REGISTER MODE — save to Supabase
     if (body.mode === 'register') {
       const reg = body.data;
+      
+      // Auto-translate message to English if present
+      let messageInEnglish = reg.bericht || null;
+      if (messageInEnglish && messageInEnglish.trim().length > 0) {
+        try {
+          const translateResp = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': process.env.ANTHROPIC_API_KEY,
+              'anthropic-version': '2023-06-01'
+            },
+            body: JSON.stringify({
+              model: 'claude-haiku-4-5-20251001',
+              max_tokens: 1000,
+              messages: [{
+                role: 'user',
+                content: 'Translate the following text to English. Keep the personal, authentic tone. Return ONLY the translated text, nothing else:\n\n' + messageInEnglish
+              }]
+            })
+          });
+          const translateData = await translateResp.json();
+          if (translateData.content && translateData.content[0]) {
+            messageInEnglish = translateData.content[0].text;
+          }
+        } catch(e) {
+          console.log('Translation failed, saving original:', e.message);
+        }
+      }
+
       const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/registrations`, {
         method: 'POST',
         headers: {
@@ -274,7 +304,7 @@ exports.handler = async function(event) {
           phone: reg.telefoon || null,
           type: reg.type,
           trade: reg.vak || null,
-          message: reg.bericht || null
+          message: messageInEnglish
         })
       });
       return {
