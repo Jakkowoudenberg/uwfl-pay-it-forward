@@ -271,7 +271,7 @@ function checkSpam(name){
   var now=Date.now();
   var hp=document.getElementById('hp-'+name);
   if(hp&&hp.value){console.log('bot');return true;}
-  if(now-LAST_SUBMIT<5000){alert('Please wait a moment before submitting again.');return true;}
+  if(now-LAST_SUBMIT<5000){alert(getJT().alert_wait);return true;}
   LAST_SUBMIT=now;
   return false;
 }
@@ -467,6 +467,197 @@ var LANG = {
     }
   }
 };
+
+var JOIN_TEXTS = {
+  en: {
+    title:'Join Us',
+    maker_title:'Maker', maker_desc:'Anyone can join — professional or not. I make at least 1m² in my workshop and promise to help 3 people.',
+    part_title:'Participant', part_desc:'I don\'t make a panel but I join the movement. I promise to help 3 people and pass it on.',
+    contrib_title:'Contributor', contrib_desc:'I help the project in another way: logistics, communication, photography, video, translation or anything else.',
+    sponsor_title:'Sponsor', sponsor_desc:'I want to support the project as a company or individual. Let\'s talk about the possibilities.',
+    name:'Name', company:'Company', company_opt:'optional', email:'Email',
+    country:'Country', country_select:'Select your country',
+    phone:'Phone number', phone_other:'Other',
+    trade:'Your trade', trade_ph:'e.g. floor layer, carpenter, artist...',
+    story:'Your story',
+    story_hint:'This will be shown in the app under your name. Tell us: <strong style="color:rgba(255,255,255,.8)">who you are, your trade, how long you have been doing this, and why you are joining.</strong>',
+    story_ph:'My name is..., I have been a [trade] for X years. I am joining because...',
+    show_example:'📝 Show example',
+    hide_example:'📝 Hide example',
+    submit:'I\'m in',
+    hint:'No obligations. No cost.',
+    label_bijdrager:'How would you like to help and contribute?',
+    label_sponsor:'Tell us about yourself or your company (optional)',
+    label_default:'Why do you want to join?',
+    alert_fields:'Please fill in all required fields.',
+    alert_example:'Please write your own story — replace the example text with your personal information.',
+    alert_route:'Please select how you want to join (Maker, Participant, Contributor or Sponsor).',
+    alert_phone:'Please enter your phone number.',
+    alert_wait:'Please wait a moment before submitting again.',
+    sending:'Sending...'
+  },
+  nl: {
+    title:'Doe mee',
+    maker_title:'Maker', maker_desc:'Iedereen kan meedoen — professional of niet. Ik maak minimaal 1m² in mijn werkplaats en beloof 3 mensen te helpen.',
+    part_title:'Deelnemer', part_desc:'Ik maak geen paneel maar doe mee aan de beweging. Ik beloof 3 mensen te helpen en het door te geven.',
+    contrib_title:'Bijdrager', contrib_desc:'Ik help het project op een andere manier: logistiek, communicatie, fotografie, video, vertaling of iets anders.',
+    sponsor_title:'Sponsor', sponsor_desc:'Ik wil het project ondersteunen als bedrijf of individu. Laten we praten over de mogelijkheden.',
+    name:'Naam', company:'Bedrijf', company_opt:'optioneel', email:'E-mail',
+    country:'Land', country_select:'Selecteer je land',
+    phone:'Telefoonnummer', phone_other:'Anders',
+    trade:'Je vakgebied', trade_ph:'bijv. parketlegger, timmerman, kunstenaar...',
+    story:'Jouw verhaal',
+    story_hint:'Dit wordt getoond in de app onder jouw naam. Vertel ons: <strong style="color:rgba(255,255,255,.8)">wie je bent, je vak, hoe lang je dit al doet, en waarom je meedoet.</strong>',
+    story_ph:'Mijn naam is..., ik ben al X jaar [vak]. Ik doe mee omdat...',
+    show_example:'📝 Voorbeeld tonen',
+    hide_example:'📝 Voorbeeld verbergen',
+    submit:'Ik doe mee',
+    hint:'Geen verplichtingen. Geen kosten.',
+    label_bijdrager:'Hoe wil je helpen en bijdragen?',
+    label_sponsor:'Vertel ons over jezelf of je bedrijf (optioneel)',
+    label_default:'Waarom wil je meedoen?',
+    alert_fields:'Vul alle verplichte velden in.',
+    alert_example:'Schrijf je eigen verhaal — vervang de voorbeeldtekst door jouw persoonlijke informatie.',
+    alert_route:'Selecteer hoe je wilt meedoen (Maker, Deelnemer, Bijdrager of Sponsor).',
+    alert_phone:'Voer je telefoonnummer in.',
+    alert_wait:'Wacht even voordat je opnieuw indient.',
+    sending:'Bezig...'
+  },
+  es: {
+    title:'Únete',
+    maker_title:'Creador', maker_desc:'Cualquiera puede unirse — profesional o no. Hago al menos 1m² en mi taller y prometo ayudar a 3 personas.',
+    part_title:'Participante', part_desc:'No hago un panel pero me uno al movimiento. Prometo ayudar a 3 personas y pasarlo.',
+    contrib_title:'Colaborador', contrib_desc:'Ayudo al proyecto de otra manera: logística, comunicación, fotografía, video, traducción u otra cosa.',
+    sponsor_title:'Patrocinador', sponsor_desc:'Quiero apoyar el proyecto como empresa o individuo. Hablemos de las posibilidades.',
+    name:'Nombre', company:'Empresa', company_opt:'opcional', email:'Correo electrónico',
+    country:'País', country_select:'Selecciona tu país',
+    phone:'Número de teléfono', phone_other:'Otro',
+    trade:'Tu oficio', trade_ph:'ej. parquestista, carpintero, artista...',
+    story:'Tu historia',
+    story_hint:'Esto se mostrará en la app bajo tu nombre. Cuéntanos: <strong style="color:rgba(255,255,255,.8)">quién eres, tu oficio, cuánto tiempo llevas y por qué te unes.</strong>',
+    story_ph:'Me llamo..., llevo X años como [oficio]. Me uno porque...',
+    show_example:'📝 Mostrar ejemplo',
+    hide_example:'📝 Ocultar ejemplo',
+    submit:'Me apunto',
+    hint:'Sin obligaciones. Sin coste.',
+    label_bijdrager:'¿Cómo te gustaría ayudar y contribuir?',
+    label_sponsor:'Cuéntanos sobre ti o tu empresa (opcional)',
+    label_default:'¿Por qué quieres unirte?',
+    alert_fields:'Por favor rellena todos los campos obligatorios.',
+    alert_example:'Escribe tu propia historia — reemplaza el texto de ejemplo con tu información personal.',
+    alert_route:'Selecciona cómo quieres unirte (Creador, Participante, Colaborador o Patrocinador).',
+    alert_phone:'Por favor introduce tu número de teléfono.',
+    alert_wait:'Por favor espera un momento antes de enviar de nuevo.',
+    sending:'Enviando...'
+  },
+  fr: {
+    title:'Rejoignez-nous',
+    maker_title:'Créateur', maker_desc:'Tout le monde peut rejoindre — professionnel ou non. Je crée au moins 1m² dans mon atelier et promets d\'aider 3 personnes.',
+    part_title:'Participant', part_desc:'Je ne fais pas de panneau mais je rejoins le mouvement. Je promets d\'aider 3 personnes et de passer le message.',
+    contrib_title:'Contributeur', contrib_desc:'J\'aide le projet d\'une autre façon : logistique, communication, photographie, vidéo, traduction ou autre.',
+    sponsor_title:'Sponsor', sponsor_desc:'Je veux soutenir le projet en tant qu\'entreprise ou individu. Parlons des possibilités.',
+    name:'Nom', company:'Entreprise', company_opt:'optionnel', email:'E-mail',
+    country:'Pays', country_select:'Sélectionnez votre pays',
+    phone:'Numéro de téléphone', phone_other:'Autre',
+    trade:'Votre métier', trade_ph:'ex. parqueteur, menuisier, artiste...',
+    story:'Votre histoire',
+    story_hint:'Ceci sera affiché dans l\'app sous votre nom. Dites-nous : <strong style="color:rgba(255,255,255,.8)">qui vous êtes, votre métier, depuis combien de temps et pourquoi vous rejoignez.</strong>',
+    story_ph:'Je m\'appelle..., je suis [métier] depuis X ans. Je rejoins parce que...',
+    show_example:'📝 Afficher l\'exemple',
+    hide_example:'📝 Masquer l\'exemple',
+    submit:'Je suis partant',
+    hint:'Aucune obligation. Aucun coût.',
+    label_bijdrager:'Comment aimeriez-vous aider et contribuer ?',
+    label_sponsor:'Parlez-nous de vous ou de votre entreprise (optionnel)',
+    label_default:'Pourquoi voulez-vous rejoindre ?',
+    alert_fields:'Veuillez remplir tous les champs obligatoires.',
+    alert_example:'Veuillez écrire votre propre histoire — remplacez le texte d\'exemple par vos informations personnelles.',
+    alert_route:'Veuillez sélectionner comment vous souhaitez rejoindre (Créateur, Participant, Contributeur ou Sponsor).',
+    alert_phone:'Veuillez entrer votre numéro de téléphone.',
+    alert_wait:'Veuillez attendre un moment avant de soumettre à nouveau.',
+    sending:'Envoi...'
+  },
+  de: {
+    title:'Mitmachen',
+    maker_title:'Macher', maker_desc:'Jeder kann mitmachen — Profi oder nicht. Ich mache mindestens 1m² in meiner Werkstatt und verspreche, 3 Menschen zu helfen.',
+    part_title:'Teilnehmer', part_desc:'Ich mache kein Panel, aber ich schließe mich der Bewegung an. Ich verspreche, 3 Menschen zu helfen und es weiterzugeben.',
+    contrib_title:'Beitragender', contrib_desc:'Ich helfe dem Projekt auf andere Weise: Logistik, Kommunikation, Fotografie, Video, Übersetzung oder anderes.',
+    sponsor_title:'Sponsor', sponsor_desc:'Ich möchte das Projekt als Unternehmen oder Einzelperson unterstützen. Lassen Sie uns über die Möglichkeiten sprechen.',
+    name:'Name', company:'Unternehmen', company_opt:'optional', email:'E-Mail',
+    country:'Land', country_select:'Wählen Sie Ihr Land',
+    phone:'Telefonnummer', phone_other:'Sonstige',
+    trade:'Ihr Handwerk', trade_ph:'z.B. Bodenleger, Tischler, Künstler...',
+    story:'Ihre Geschichte',
+    story_hint:'Dies wird in der App unter Ihrem Namen angezeigt. Erzählen Sie uns: <strong style="color:rgba(255,255,255,.8)">wer Sie sind, Ihr Handwerk, wie lange Sie das schon machen und warum Sie mitmachen.</strong>',
+    story_ph:'Mein Name ist..., ich bin seit X Jahren [Handwerk]. Ich mache mit, weil...',
+    show_example:'📝 Beispiel anzeigen',
+    hide_example:'📝 Beispiel ausblenden',
+    submit:'Ich bin dabei',
+    hint:'Keine Verpflichtungen. Keine Kosten.',
+    label_bijdrager:'Wie möchten Sie helfen und beitragen?',
+    label_sponsor:'Erzählen Sie uns von sich oder Ihrem Unternehmen (optional)',
+    label_default:'Warum möchten Sie mitmachen?',
+    alert_fields:'Bitte füllen Sie alle Pflichtfelder aus.',
+    alert_example:'Bitte schreiben Sie Ihre eigene Geschichte — ersetzen Sie den Beispieltext durch Ihre persönlichen Informationen.',
+    alert_route:'Bitte wählen Sie, wie Sie mitmachen möchten (Macher, Teilnehmer, Beitragender oder Sponsor).',
+    alert_phone:'Bitte geben Sie Ihre Telefonnummer ein.',
+    alert_wait:'Bitte warten Sie einen Moment, bevor Sie erneut einreichen.',
+    sending:'Sende...'
+  },
+  it: {
+    title:'Unisciti',
+    maker_title:'Creatore', maker_desc:'Chiunque può unirsi — professionista o no. Creo almeno 1m² nel mio laboratorio e prometto di aiutare 3 persone.',
+    part_title:'Partecipante', part_desc:'Non faccio un pannello ma mi unisco al movimento. Prometto di aiutare 3 persone e di passarlo avanti.',
+    contrib_title:'Contributore', contrib_desc:'Aiuto il progetto in un altro modo: logistica, comunicazione, fotografia, video, traduzione o altro.',
+    sponsor_title:'Sponsor', sponsor_desc:'Voglio supportare il progetto come azienda o individuo. Parliamo delle possibilità.',
+    name:'Nome', company:'Azienda', company_opt:'opzionale', email:'E-mail',
+    country:'Paese', country_select:'Seleziona il tuo paese',
+    phone:'Numero di telefono', phone_other:'Altro',
+    trade:'Il tuo mestiere', trade_ph:'es. posatore, falegname, artista...',
+    story:'La tua storia',
+    story_hint:'Verrà mostrato nell\'app sotto il tuo nome. Dicci: <strong style="color:rgba(255,255,255,.8)">chi sei, il tuo mestiere, da quanto tempo lo fai e perché ti unisci.</strong>',
+    story_ph:'Mi chiamo..., faccio il [mestiere] da X anni. Mi unisco perché...',
+    show_example:'📝 Mostra esempio',
+    hide_example:'📝 Nascondi esempio',
+    submit:'Ci sono',
+    hint:'Nessun obbligo. Nessun costo.',
+    label_bijdrager:'Come vorresti aiutare e contribuire?',
+    label_sponsor:'Parlaci di te o della tua azienda (opzionale)',
+    label_default:'Perché vuoi unirti?',
+    alert_fields:'Per favore compila tutti i campi obbligatori.',
+    alert_example:'Per favore scrivi la tua storia — sostituisci il testo di esempio con le tue informazioni personali.',
+    alert_route:'Per favore seleziona come vuoi unirti (Creatore, Partecipante, Contributore o Sponsor).',
+    alert_phone:'Per favore inserisci il tuo numero di telefono.',
+    alert_wait:'Per favore aspetta un momento prima di inviare di nuovo.',
+    sending:'Invio...'
+  }
+};
+function getJT(){ return JOIN_TEXTS[currentLang] || JOIN_TEXTS['en']; }
+
+function buildJoinForm() {
+  var jt = getJT();
+  return '<div class="ctitle" style="font-size:10px;font-weight:600;color:var(--wood);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.9rem">'+jt.title+'</div>'
+  +'<div class="rgrid">'
+  +'<button class="rbtn" id="rm" onclick="selRoute(\'maker\')"><span class="ri">&#x1FAB5;</span><span class="rt">'+jt.maker_title+'</span><span class="rs">'+jt.maker_desc+'</span></button>'
+  +'<button class="rbtn" id="rp" onclick="selRoute(\'part\')"><span class="ri">&#x1F91D;</span><span class="rt">'+jt.part_title+'</span><span class="rs">'+jt.part_desc+'</span></button>'
+  +'<button class="rbtn" id="rb" onclick="selRoute(\'bijdrager\')"><span class="ri">&#x1F4AA;</span><span class="rt">'+jt.contrib_title+'</span><span class="rs">'+jt.contrib_desc+'</span></button>'
+  +'<button class="rbtn" id="rs" onclick="selRoute(\'sponsor\')"><span class="ri">&#x1F4B0;</span><span class="rt">'+jt.sponsor_title+'</span><span class="rs">'+jt.sponsor_desc+'</span></button>'
+  +'</div>'
+  +'<div id="jfields" style="display:none">'
+  +'<div class="fld"><label>'+jt.name+'</label><input type="text" id="fn" placeholder="'+jt.name+'..."></div>'
+  +'<div class="fld"><label>'+jt.company+' <span style="opacity:.5;font-size:11px">('+jt.company_opt+')</span></label><input type="text" id="fco" placeholder="'+jt.company+'..."></div>'
+  +'<div class="fld"><label>'+jt.email+'</label><input type="email" id="fe" placeholder="you@example.com"></div>'
+  +'<div class="fld"><label>'+jt.country+'</label><select id="fl"><option value="">'+jt.country_select+'</option><option>Netherlands</option><option>Belgium</option><option>Germany</option><option>United Kingdom</option><option>United States</option><option>France</option><option>Spain</option><option>Italy</option><option>Australia</option><option>Canada</option><option>Portugal</option><option>Other</option></select></div>'
+  +'<div class="fld"><label>'+jt.phone+'</label><div style="display:flex;gap:6px"><select id="fcc" style="width:120px;flex-shrink:0"><option value="+1">&#x1F1FA;&#x1F1F8; +1</option><option value="+31">&#x1F1F3;&#x1F1F1; +31</option><option value="+32">&#x1F1E7;&#x1F1EA; +32</option><option value="+49">&#x1F1E9;&#x1F1EA; +49</option><option value="+44">&#x1F1EC;&#x1F1E7; +44</option><option value="+33">&#x1F1EB;&#x1F1F7; +33</option><option value="+34">&#x1F1EA;&#x1F1F8; +34</option><option value="+39">&#x1F1EE;&#x1F1F9; +39</option><option value="+61">&#x1F1E6;&#x1F1FA; +61</option><option value="+1CA">&#x1F1E8;&#x1F1E6; +1</option><option value="+351">&#x1F1F5;&#x1F1F9; +351</option><option value="other">'+jt.phone_other+'</option></select><input type="tel" id="ftel" placeholder="..." style="flex:1"></div></div>'
+  +'<div class="fld" id="ftrade" style="display:none"><label>'+jt.trade+'</label><input type="text" id="ftr" placeholder="'+jt.trade_ph+'"></div>'
+  +'<div class="fld"><label id="fmlabelid">'+jt.label_default+'</label>'
+  +'<p style="font-size:10px;color:rgba(255,255,255,.6);margin:.2rem 0 .3rem;line-height:1.6">💡 '+jt.story_hint+'</p>'
+  +'<button type="button" id="fm-example-btn" onclick="setExampleStory()" style="font-size:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:.25rem .6rem;border-radius:5px;cursor:pointer;font-family:Inter,sans-serif;margin-bottom:.4rem">'+jt.show_example+'</button>'
+  +'<textarea id="fm" placeholder="'+jt.story_ph+'"></textarea></div>'
+  +'<button class="jsub" onclick="submitForm()">'+jt.submit+'</button>'
+  +'<p class="jhint">'+jt.hint+'</p>'
+  +'</div>';
+}
 
 var hist = [], busy = false, selr = null, currentLang = 'en', regProfile = null, postMode = false, postAnswers = [], postQuestion = 0;
 
@@ -694,7 +885,7 @@ function showCard(topic){
     d.innerHTML=(function(){var l=currentLang||'nl';var t=DRW_TEXTS[l]||DRW_TEXTS['nl'];var specs={nl:'<span><strong>100 x 100 cm</strong> buitenmaat</span><span><strong>5 cm</strong> eiken lijst — molenwiek met de klok mee</span><span><strong>White oak of European oak</strong> — bij white oak voorkeur voor donkerdere delen</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> dikte</span>',en:'<span><strong>100 x 100 cm</strong> outer size</span><span><strong>5 cm</strong> oak frame — windmill pattern clockwise</span><span><strong>White oak or European oak</strong> — prefer darker grain when using white oak</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> thickness</span>',es:'<span><strong>100 x 100 cm</strong> medida exterior</span><span><strong>5 cm</strong> marco de roble — patrón en sentido horario</span><span><strong>Roble blanco o europeo</strong> — preferir partes más oscuras en roble blanco</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> grosor</span>',fr:'<span><strong>100 x 100 cm</strong> dimension extérieure</span><span><strong>5 cm</strong> cadre en chêne — motif dans le sens horaire</span><span><strong>Chêne blanc ou européen</strong> — privilégier les parties plus foncées pour le chêne blanc</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> épaisseur</span>',de:'<span><strong>100 x 100 cm</strong> Außenmaß</span><span><strong>5 cm</strong> Eichenrahmen — Windmühlenmuster im Uhrzeigersinn</span><span><strong>Weißeiche oder europäische Eiche</strong> — bei Weißeiche dunklere Partien bevorzugen</span><span><strong>90 x 90 cm</strong> Freestyle</span><span><strong>24 mm</strong> Stärke</span>',it:'<span><strong>100 x 100 cm</strong> dimensione esterna</span><span><strong>5 cm</strong> cornice in quercia — motivo in senso orario</span><span><strong>Quercia bianca o europea</strong> — preferire le parti più scure per la quercia bianca</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> spessore</span>'};return '<div class="ctitle">'+t.title+'</div><div style="background:#fff;border-radius:8px;padding:8px;margin-bottom:.75rem"><img src="data:image/svg+xml;base64,'+getSVGBase64(l)+'" style="width:100%;display:block;border-radius:4px;" alt="Bouwtekening"/></div><div class="specs">'+(specs[l]||specs['nl'])+'</div>';})();
   } else if(topic==='join'){
     d.className='jcard';d.id='jcard';setTimeout(function(){initForm('join');},0);
-    d.innerHTML='<div class="ctitle" style="font-size:10px;font-weight:600;color:var(--wood);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.9rem">Join Us</div><div class="rgrid"><button class="rbtn" id="rm" onclick="selRoute(&apos;maker&apos;)"><span class="ri">&#x1FAB5;</span><span class="rt">Maker</span><span class="rs">Anyone can join — professional or not. I make at least 1m² in my workshop and promise to help 3 people.</span></button><button class="rbtn" id="rp" onclick="selRoute(&apos;part&apos;)"><span class="ri">&#x1F91D;</span><span class="rt">Participant</span><span class="rs">I don\'t make a panel but I join the movement. I promise to help 3 people and pass it on.</span></button><button class="rbtn" id="rb" onclick="selRoute(&apos;bijdrager&apos;)"><span class="ri">&#x1F4AA;</span><span class="rt">Contributor</span><span class="rs">I help the project in another way: logistics, communication, photography, video, translation or anything else.</span></button><button class="rbtn" id="rs" onclick="selRoute(&apos;sponsor&apos;)"><span class="ri">&#x1F4B0;</span><span class="rt">Sponsor</span><span class="rs">I want to support the project as a company or individual. Let\'s talk about the possibilities.</span></button></div><div id="jfields"><div class="fld"><label>Name</label><input type="text" id="fn" placeholder="Your name"></div><div class="fld"><label>Company <span style="opacity:.5;font-size:11px">(optional)</span></label><input type="text" id="fco" placeholder="Your company or workshop..."></div><div class="fld"><label>Email</label><input type="email" id="fe" placeholder="you@example.com"></div><div class="fld"><label>Country</label><select id="fl"><option value="">Select your country</option><option>Netherlands</option><option>Belgium</option><option>Germany</option><option>United Kingdom</option><option>United States</option><option>France</option><option>Spain</option><option>Italy</option><option>Australia</option><option>Canada</option><option>Portugal</option><option>Other</option></select></div><div class="fld"><label>Phone number</label><div style="display:flex;gap:6px"><select id="fcc" style="width:120px;flex-shrink:0"><option value="+1">&#x1F1FA;&#x1F1F8; +1</option><option value="+31">&#x1F1F3;&#x1F1F1; +31</option><option value="+32">&#x1F1E7;&#x1F1EA; +32</option><option value="+49">&#x1F1E9;&#x1F1EA; +49</option><option value="+44">&#x1F1EC;&#x1F1E7; +44</option><option value="+33">&#x1F1EB;&#x1F1F7; +33</option><option value="+34">&#x1F1EA;&#x1F1F8; +34</option><option value="+39">&#x1F1EE;&#x1F1F9; +39</option><option value="+61">&#x1F1E6;&#x1F1FA; +61</option><option value="+1CA">&#x1F1E8;&#x1F1E6; +1</option><option value="+351">&#x1F1F5;&#x1F1F9; +351</option><option value="other">Other</option></select><input type="tel" id="ftel" placeholder="Your phone number" style="flex:1"></div></div><div class="fld" id="ftrade" style="display:none"><label>Your trade</label><input type="text" id="ftr" placeholder="e.g. floor layer, carpenter, artist..."></div><div class="fld"><label id="fmlabelid">Your story</label><p style="font-size:10px;color:rgba(255,255,255,.6);margin:.2rem 0 .3rem;line-height:1.6">\uD83D\uDCA1 This will be shown in the app under your name. Tell us: <strong style="color:rgba(255,255,255,.8)">who you are, your trade, how long you have been doing this, and why you are joining.</strong></p><button type="button" onclick="setExampleStory()" style="font-size:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:.25rem .6rem;border-radius:5px;cursor:pointer;font-family:Inter,sans-serif;margin-bottom:.4rem">\uD83D\uDCDD Show example</button><textarea id="fm" placeholder="My name is..., I have been a [trade] for X years. I am joining because..."></textarea></div><button class="jsub" onclick="submitForm()">I\'m in</button><p class="jhint">No obligations. No cost.</p></div>';
+    d.innerHTML=buildJoinForm();
   } else if(cards[topic]){
     d.className='card';
     d.innerHTML='<div class="ctitle">'+cards[topic].title+'</div>'+cards[topic].body;
@@ -719,12 +910,13 @@ function selRoute(r){
   }
   document.getElementById('jfields').style.display='block';
   document.getElementById('ftrade').style.display=r==='maker'?'block':'none';
-  // Update textarea label based on role
+  // Update textarea label based on role (translated)
+  var jt = getJT();
   var fmlabel = document.querySelector('#jfields .fld:last-of-type label');
   if(fmlabel){
-    if(r==='bijdrager') fmlabel.textContent='How would you like to help and contribute?';
-    else if(r==='sponsor') fmlabel.textContent='Tell us about yourself or your company (optional)';
-    else fmlabel.textContent='Why do you want to join?';
+    if(r==='bijdrager') fmlabel.textContent=jt.label_bijdrager;
+    else if(r==='sponsor') fmlabel.textContent=jt.label_sponsor;
+    else fmlabel.textContent=jt.label_default;
   }
   document.getElementById('msgs').scrollTop=99999;
 }
@@ -759,17 +951,18 @@ function submitForm(){
   var tel=(document.getElementById('ftel')||{value:''}).value.trim();
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
   var testMode = n.toLowerCase() === 'test';
-  if(!n||!e||!l||!m){alert('Please fill in all required fields.');return;}
-  if(m.indexOf('[your name]') !== -1 || m.indexOf('[your trade]') !== -1 || m.indexOf('[your reason]') !== -1 || m.indexOf('[your country]') !== -1){alert('Please write your own story — replace the example text with your personal information.');return;}
-  if(!selr){alert('Please select how you want to join (Maker, Participant, Contributor or Sponsor).');return;}
-  if(!tel&&!testMode){alert('Please enter your phone number.');return;}
+  var jt = getJT();
+  if(!n||!e||!l||!m){alert(jt.alert_fields);return;}
+  if(m.indexOf('[your name]') !== -1 || m.indexOf('[your trade]') !== -1 || m.indexOf('[your reason]') !== -1 || m.indexOf('[your country]') !== -1){alert(jt.alert_example);return;}
+  if(!selr){alert(jt.alert_route);return;}
+  if(!tel&&!testMode){alert(jt.alert_phone);return;}
   if(checkSpam('join'))return;
-  var btn=document.querySelector('.jsub');btn.textContent='Sending...';btn.disabled=true;
+  var btn=document.querySelector('.jsub');btn.textContent=jt.sending;btn.disabled=true;
   var regData={naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
   if(testMode){
     var testData=Object.assign({},regData,{naam:'[TEST] '+n});
     fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(){});
-    btn.textContent="I'm in";btn.disabled=false;
+    btn.textContent=jt.submit;btn.disabled=false;
     var safeN2=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
     openChat();
     setTimeout(function(){
@@ -784,7 +977,7 @@ function submitForm(){
   }
   fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(regData)}).catch(function(){});
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:regData})}).catch(function(){});
-  btn.textContent="I'm in";btn.disabled=false;
+  btn.textContent=jt.submit;btn.disabled=false;
   var safeN=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
   openChat();
   setTimeout(function(){
@@ -1438,3 +1631,4 @@ if('serviceWorker' in navigator){
 </script>
 </body>
 </html>
+
