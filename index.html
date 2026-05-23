@@ -47,6 +47,9 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 .btn-p:hover{background:rgba(255,255,255,.15)}
 .btn-g{background:transparent;color:#fff;border:2px solid #fff;border-radius:10px;padding:.75rem 1.5rem;font-family:Inter,sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-g:hover{background:rgba(255,255,255,.15)}
+.btn-share{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.6);border-radius:14px;padding:.65rem 1.2rem;font-size:13px;font-weight:700;color:#fff;cursor:pointer;font-family:Inter,sans-serif;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap}
+.btn-share:hover{background:rgba(255,255,255,.25);border-color:#fff}
+.btn-share svg{flex-shrink:0}
 .sp-stats{display:flex;gap:1.5rem;justify-content:center;margin:1.25rem 0}
 .sp-stat{text-align:center}
 .sp-n{font-size:1.6rem;font-weight:700;color:#e8b87a;display:block;line-height:1;text-shadow:0 1px 6px rgba(0,0,0,.9)}
@@ -198,8 +201,9 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
   </div>
   <div class="sp-sub" id="sp-sub">A worldwide movement of craftsmen and people.</div>
   <div class="planks"><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div></div>
-  <div class="sp-btns">
+  <div class="sp-btns" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
     <button class="btn-p" id="main-btn" onclick="openChat()">Ask me anything...</button>
+    <button class="btn-share" id="share-btn" onclick="shareApp()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="share-btn-label">Share</span></button>
   </div>
   <div class="sp-stats">
     <div class="sp-stat"><span class="sp-n" id="cnt">0</span><span class="sp-l">Participants</span></div>
@@ -840,6 +844,35 @@ function renderParticipants(data) {
 
   list.innerHTML = html;
 }
+
+function shareApp(){
+  var url = 'https://app.unitedwoodfloorlayers.com';
+  var shareLabels = {
+    en:{title:'United Wood Floor Layers',text:'Join the Pay It Forward movement — craftspeople from around the world creating art and helping each other.'},
+    nl:{title:'United Wood Floor Layers',text:'Doe mee aan de Pay It Forward beweging — vaklieden van over de hele wereld die kunst maken en elkaar helpen.'},
+    es:{title:'United Wood Floor Layers',text:'Únete al movimiento Pay It Forward — artesanos de todo el mundo creando arte y ayudándose mutuamente.'},
+    fr:{title:'United Wood Floor Layers',text:'Rejoignez le mouvement Pay It Forward \u2014 des artisans du monde entier cr\u00e9ant de l\'art et s\'entraidant.'},
+    de:{title:'United Wood Floor Layers',text:'Macht mit bei der Pay It Forward Bewegung — Handwerker aus aller Welt schaffen Kunst und helfen sich gegenseitig.'},
+    it:{title:'United Wood Floor Layers',text:'Unisciti al movimento Pay It Forward — artigiani di tutto il mondo che creano arte e si aiutano a vicenda.'}
+  };
+  var L = shareLabels[currentLang] || shareLabels['en'];
+  if(navigator.share){
+    navigator.share({title: L.title, text: L.text, url: url}).catch(function(){});
+  } else {
+    navigator.clipboard.writeText(url).then(function(){
+      var btn = document.getElementById('share-btn-label');
+      if(btn){ btn.textContent = '✓ Copied!'; setTimeout(function(){ btn.textContent = updateShareLabel(); }, 2000); }
+    }).catch(function(){
+      prompt('Copy this link:', url);
+    });
+  }
+}
+
+function updateShareLabel(){
+  var labels = {en:'Share',nl:'Delen',es:'Compartir',fr:'Partager',de:'Teilen',it:'Condividi'};
+  return labels[currentLang] || 'Share';
+}
+
 var STORY_CACHE = {};  // pid+lang -> translated text
 
 function toggleStory(btn){
@@ -1143,6 +1176,8 @@ function applyLang(lang){
   document.getElementById('main-btn').textContent = L.btn || LANG['en'].btn;
   var jb = document.getElementById('join-btn'); if(jb) jb.textContent = L.join || LANG['en'].join;
   var ql = L.ql || LANG['en'].ql;
+  var sb = document.getElementById('share-btn-label');
+  if(sb) sb.textContent = updateShareLabel();
   var keys = ['project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','news','suggestions','initiator','panelidea','join'];
   for(var i=0;i<keys.length;i++){var el=document.getElementById('ql-'+keys[i]);if(el){var sp=el.querySelector('.ql-lbl');if(sp&&ql[keys[i]])sp.textContent=ql[keys[i]];}}
 
