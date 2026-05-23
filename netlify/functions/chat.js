@@ -324,7 +324,7 @@ exports.handler = async function(event) {
           'anthropic-version': '2023-06-01'
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-5',
+          model: 'claude-sonnet-4-5-20251001',
           max_tokens: 4000,
           messages: [{
             role: 'user',
@@ -352,7 +352,7 @@ exports.handler = async function(event) {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
+        model: 'claude-sonnet-4-5-20251001',
         max_tokens: 1000,
         system: SYS,
         messages: messages,
