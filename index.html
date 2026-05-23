@@ -664,6 +664,9 @@ var hist = [], busy = false, selr = null, currentLang = 'en', regProfile = null,
 // Live counter from Supabase
 var cnt = 0;
 document.addEventListener('DOMContentLoaded', function(){
+  // Pre-seed TRANS_CACHE for all languages already hardcoded in LANG
+  // This prevents unnecessary API calls and ensures ql labels always work
+  ['nl','es','fr','de','it'].forEach(function(l){ TRANS_CACHE[l] = true; });
   applyLang('en');
   // Fetch live count
   fetch('/.netlify/functions/participants')
@@ -994,6 +997,7 @@ function submitForm(){
 // LANG
 var TRANS_CACHE = {};    // lang -> {ui done}
 var CARD_CACHE = {};     // lang+key -> translated card
+var CARD_PREFETCH_DONE = {}; // lang -> bool
 var langNames = {nl:'Dutch',es:'Spanish (Spain)',fr:'French',de:'German',it:'Italian'};
 
 function showToast(msg, hide){
@@ -1049,6 +1053,20 @@ function applyLang(lang){
         setTimeout(function(){ splashInfo(activeTopic); }, 100);
       }
     }
+  }
+
+  // Pre-fetch cards in background for this language (if not already done)
+  if(lang !== 'en' && !CARD_PREFETCH_DONE[lang]) {
+    CARD_PREFETCH_DONE[lang] = true;
+    var prefetchKeys = ['project','meedoen','paneel','ketting','filosofie','kunstwerk','payitforward','3mensen','news','initiator','suggestions','panelidea'];
+    var pi = 0;
+    function prefetchNext() {
+      if(pi >= prefetchKeys.length) return;
+      var pk = prefetchKeys[pi++];
+      if(CARD_CACHE[lang+'_'+pk]) { prefetchNext(); return; }
+      getTranslatedCard(lang, pk, function(){ setTimeout(prefetchNext, 300); });
+    }
+    setTimeout(prefetchNext, 800);
   }
 }
 
@@ -1631,4 +1649,5 @@ if('serviceWorker' in navigator){
 </script>
 </body>
 </html>
+
 
