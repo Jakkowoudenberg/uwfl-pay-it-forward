@@ -842,12 +842,22 @@ function splashInfo(topic) {
   // All other cards
   var nlCard = LANG['en'].cards && LANG['en'].cards[topic];
   if(!nlCard) return;
-  if(lang !== 'en' && !CARD_CACHE[lang+'_'+topic]){
-    // Show loading state
+  panel.classList.add('visible');
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  if(lang === 'en'){
+    titleEl.textContent = nlCard.title;
+    bodyEl.innerHTML = nlCard.body;
+    if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
+    if(topic === 'initiator') injectInitiatorPhoto();
+  } else if(CARD_CACHE[lang+'_'+topic]){
+    var cached = CARD_CACHE[lang+'_'+topic];
+    titleEl.textContent = cached.title;
+    bodyEl.innerHTML = cached.body;
+    if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
+    if(topic === 'initiator') injectInitiatorPhoto();
+  } else {
     titleEl.textContent = '...';
     bodyEl.innerHTML = '<div class="card-loading"><span></span><span></span><span></span></div>';
-    panel.classList.add('visible');
-    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
     getTranslatedCard(lang, topic, function(card){
       var c = card || nlCard;
       titleEl.textContent = c.title;
@@ -855,18 +865,6 @@ function splashInfo(topic) {
       if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
       if(topic === 'initiator') injectInitiatorPhoto();
     });
-  } else {
-    titleEl.textContent = nlCard.title;
-    bodyEl.innerHTML = nlCard.body;
-    panel.classList.add('visible');
-    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
-    if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
-    if(topic === 'initiator') injectInitiatorPhoto();
-    if(lang !== 'en'){
-      getTranslatedCard(lang, topic, function(card){
-        if(card){ titleEl.textContent = card.title; bodyEl.innerHTML = card.body; }
-      });
-    }
   }
 }
 
@@ -881,19 +879,31 @@ function showCard(topic){
   clearCards();
   var w=document.getElementById('msgs');
   var d=document.createElement('div');
-  var lang=currentLang||'nl';
-  var cards=LANG[lang]&&LANG[lang].cards?LANG[lang].cards:LANG['en'].cards;
+  var lang=currentLang||'en';
+  var enCard=LANG['en'].cards&&LANG['en'].cards[topic];
   if(topic==='specs'){
     d.className='card';
     d.innerHTML=(function(){var l=currentLang||'nl';var t=DRW_TEXTS[l]||DRW_TEXTS['nl'];var specs={nl:'<span><strong>100 x 100 cm</strong> buitenmaat</span><span><strong>5 cm</strong> eiken lijst — molenwiek met de klok mee</span><span><strong>White oak of European oak</strong> — bij white oak voorkeur voor donkerdere delen</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> dikte</span>',en:'<span><strong>100 x 100 cm</strong> outer size</span><span><strong>5 cm</strong> oak frame — windmill pattern clockwise</span><span><strong>White oak or European oak</strong> — prefer darker grain when using white oak</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> thickness</span>',es:'<span><strong>100 x 100 cm</strong> medida exterior</span><span><strong>5 cm</strong> marco de roble — patrón en sentido horario</span><span><strong>Roble blanco o europeo</strong> — preferir partes más oscuras en roble blanco</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> grosor</span>',fr:'<span><strong>100 x 100 cm</strong> dimension extérieure</span><span><strong>5 cm</strong> cadre en chêne — motif dans le sens horaire</span><span><strong>Chêne blanc ou européen</strong> — privilégier les parties plus foncées pour le chêne blanc</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> épaisseur</span>',de:'<span><strong>100 x 100 cm</strong> Außenmaß</span><span><strong>5 cm</strong> Eichenrahmen — Windmühlenmuster im Uhrzeigersinn</span><span><strong>Weißeiche oder europäische Eiche</strong> — bei Weißeiche dunklere Partien bevorzugen</span><span><strong>90 x 90 cm</strong> Freestyle</span><span><strong>24 mm</strong> Stärke</span>',it:'<span><strong>100 x 100 cm</strong> dimensione esterna</span><span><strong>5 cm</strong> cornice in quercia — motivo in senso orario</span><span><strong>Quercia bianca o europea</strong> — preferire le parti più scure per la quercia bianca</span><span><strong>90 x 90 cm</strong> freestyle</span><span><strong>24 mm</strong> spessore</span>'};return '<div class="ctitle">'+t.title+'</div><div style="background:#fff;border-radius:8px;padding:8px;margin-bottom:.75rem"><img src="data:image/svg+xml;base64,'+getSVGBase64(l)+'" style="width:100%;display:block;border-radius:4px;" alt="Bouwtekening"/></div><div class="specs">'+(specs[l]||specs['nl'])+'</div>';})();
   } else if(topic==='join'){
     d.className='jcard';d.id='jcard';setTimeout(function(){initForm('join');},0);
     d.innerHTML=buildJoinForm();
-  } else if(cards[topic]){
+  } else if(enCard||LANG['en'].cards[topic]){
+    var enC=enCard||LANG['en'].cards[topic];
     d.className='card';
-    d.innerHTML='<div class="ctitle">'+cards[topic].title+'</div>'+cards[topic].body;
+    if(lang==='en'||CARD_CACHE[lang+'_'+topic]){
+      var c=lang==='en'?enC:CARD_CACHE[lang+'_'+topic];
+      d.innerHTML='<div class="ctitle">'+c.title+'</div>'+c.body;
+      w.appendChild(d);w.scrollTop=w.scrollHeight;
+    } else {
+      d.innerHTML='<div class="card-loading"><span></span><span></span><span></span></div>';
+      w.appendChild(d);w.scrollTop=w.scrollHeight;
+      getTranslatedCard(lang, topic, function(card){
+        var c=card||enC;
+        d.innerHTML='<div class="ctitle">'+c.title+'</div>'+c.body;
+        w.scrollTop=w.scrollHeight;
+      });
+    }
   }
-  if(d.className){w.appendChild(d);w.scrollTop=w.scrollHeight;}
 }
 
 function setExampleStory(){
