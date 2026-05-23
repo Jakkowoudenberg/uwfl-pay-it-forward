@@ -887,18 +887,14 @@ function translateStory(text, lang, cb){
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      mode: 'translate',
+      mode: 'translate_text',
       targetLang: target,
-      content: {body: text}
+      text: text
     })
   })
   .then(function(r){ return r.json(); })
   .then(function(data){
-    var txt = (data.translated || '{}').replace(/```json|```/g,'').trim();
-    try {
-      var parsed = JSON.parse(txt);
-      cb(parsed.body || text);
-    } catch(e){ cb(text); }
+    cb(data.translated || text);
   })
   .catch(function(){ cb(text); });
 }
