@@ -867,22 +867,27 @@ function splashInfo(topic) {
     bodyEl.innerHTML = nlCard.body;
     if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
     if(topic === 'initiator') injectInitiatorPhoto();
-  } else if(CARD_CACHE[lang+'_'+topic]){
-    var cached = CARD_CACHE[lang+'_'+topic];
-    titleEl.textContent = cached.title;
-    bodyEl.innerHTML = cached.body;
-    if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
-    if(topic === 'initiator') injectInitiatorPhoto();
   } else {
-    titleEl.textContent = '...';
-    bodyEl.innerHTML = '<div class="card-loading"><span></span><span></span><span></span></div>';
-    getTranslatedCard(lang, topic, function(card){
-      var c = card || nlCard;
-      titleEl.textContent = c.title;
-      bodyEl.innerHTML = c.body;
+    // Use LANG[lang].cards first (hardcoded), then CARD_CACHE (API), then fallback to API call
+    var localCard = LANG[lang] && LANG[lang].cards && LANG[lang].cards[topic];
+    var cachedCard = CARD_CACHE[lang+'_'+topic];
+    var ready = localCard || cachedCard;
+    if(ready){
+      titleEl.textContent = ready.title;
+      bodyEl.innerHTML = ready.body;
       if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
       if(topic === 'initiator') injectInitiatorPhoto();
-    });
+    } else {
+      titleEl.textContent = '...';
+      bodyEl.innerHTML = '<div class="card-loading"><span></span><span></span><span></span></div>';
+      getTranslatedCard(lang, topic, function(card){
+        var c = card || nlCard;
+        titleEl.textContent = c.title;
+        bodyEl.innerHTML = c.body;
+        if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
+        if(topic === 'initiator') injectInitiatorPhoto();
+      });
+    }
   }
 }
 
@@ -908,8 +913,9 @@ function showCard(topic){
   } else if(enCard||LANG['en'].cards[topic]){
     var enC=enCard||LANG['en'].cards[topic];
     d.className='card';
-    if(lang==='en'||CARD_CACHE[lang+'_'+topic]){
-      var c=lang==='en'?enC:CARD_CACHE[lang+'_'+topic];
+    var _local=LANG[lang]&&LANG[lang].cards&&LANG[lang].cards[topic];
+    if(lang==='en'||_local||CARD_CACHE[lang+'_'+topic]){
+      var c=lang==='en'?enC:(_local||CARD_CACHE[lang+'_'+topic]);
       d.innerHTML='<div class="ctitle">'+c.title+'</div>'+c.body;
       w.appendChild(d);w.scrollTop=w.scrollHeight;
     } else {
