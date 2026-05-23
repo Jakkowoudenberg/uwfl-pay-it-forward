@@ -838,6 +838,8 @@ function renderParticipants(data) {
 
   list.innerHTML = html;
 }
+var STORY_CACHE = {};  // pid+lang -> translated text
+
 function toggleStory(btn){
   var pid = btn.getAttribute('data-pid');
   var el = document.getElementById(pid);
@@ -847,11 +849,56 @@ function toggleStory(btn){
     el.style.display = 'block';
     if(arrow) arrow.textContent = '\u25B2';
     btn.style.borderRadius = '0 6px 0 0';
+    // Translate on open if not EN and not yet translated
+    var lang = currentLang || 'en';
+    if(lang !== 'en'){
+      var cacheKey = pid + '_' + lang;
+      if(STORY_CACHE[cacheKey]){
+        el.innerHTML = STORY_CACHE[cacheKey];
+      } else {
+        var original = el.getAttribute('data-original') || el.textContent;
+        if(!el.getAttribute('data-original')) el.setAttribute('data-original', original);
+        if(original && original.trim().length > 10){
+          el.innerHTML = '<em style="opacity:.5;font-size:10px">&#x1F30D; Translating...</em>';
+          translateStory(original, lang, function(translated){
+            if(translated){
+              STORY_CACHE[cacheKey] = translated;
+              el.innerHTML = translated;
+            } else {
+              el.innerHTML = original;
+            }
+          });
+        }
+      }
+    }
   } else {
     el.style.display = 'none';
     if(arrow) arrow.textContent = '\u25BC';
     btn.style.borderRadius = '0 6px 6px 0';
   }
+}
+
+function translateStory(text, lang, cb){
+  var langNames = {nl:'Dutch',es:'Spanish (Spain)',fr:'French',de:'German',it:'Italian'};
+  var target = langNames[lang] || lang;
+  fetch('/.netlify/functions/chat', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      mode: 'translate',
+      targetLang: target,
+      content: {body: text}
+    })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var txt = (data.translated || '{}').replace(/```json|```/g,'').trim();
+    try {
+      var parsed = JSON.parse(txt);
+      cb(parsed.body || text);
+    } catch(e){ cb(text); }
+  })
+  .catch(function(){ cb(text); });
 }
 
 
