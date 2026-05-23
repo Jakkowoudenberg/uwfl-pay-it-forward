@@ -1,4 +1,4 @@
-const CACHE = 'uwfl-pif-v1';
+const CACHE = 'uwfl-pif-v9';
 const ASSETS = [
   '/',
   '/index.html'
