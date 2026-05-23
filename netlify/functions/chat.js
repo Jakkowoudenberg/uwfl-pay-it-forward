@@ -314,6 +314,33 @@ exports.handler = async function(event) {
       };
     }
 
+    // TRANSLATE TEXT MODE — plain text, no JSON
+    if (body.mode === 'translate_text') {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': process.env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01'
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 1000,
+          messages: [{
+            role: 'user',
+            content: 'Translate the following text to ' + body.targetLang + '. Keep the personal, authentic tone. Return ONLY the translated text, nothing else, no explanation:\n\n' + body.text
+          }]
+        })
+      });
+      const data = await response.json();
+      const translated = data.content && data.content[0] ? data.content[0].text : body.text;
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ translated })
+      };
+    }
+
     // TRANSLATE MODE
     if (body.mode === 'translate') {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
