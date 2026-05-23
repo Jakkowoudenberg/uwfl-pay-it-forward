@@ -325,7 +325,7 @@ exports.handler = async function(event) {
         },
         body: JSON.stringify({
           model: 'claude-sonnet-4-5-20251001',
-          max_tokens: 4000,
+          max_tokens: 8000,
           messages: [{
             role: 'user',
             content: 'Translate this JSON from English to ' + body.targetLang + '. Rules: keep ALL HTML tags exactly as-is. Keep "Pay it Forward", "UWFL", "United Wood Floor Layers", "white oak", "European oak", "square edged", "FSC", "PEFC", "NWFA", numbers unchanged. The cards object contains multiple card objects each with title and body — translate all of them. Return ONLY valid JSON, no markdown backticks, no explanation.\n\n' + JSON.stringify(body.content)
@@ -397,3 +397,4 @@ exports.handler = async function(event) {
     };
   }
 };
+
