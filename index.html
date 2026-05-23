@@ -1113,19 +1113,7 @@ function applyLang(lang){
     }
   }
 
-  // Pre-fetch cards in background for this language (if not already done)
-  if(lang !== 'en' && !CARD_PREFETCH_DONE[lang]) {
-    CARD_PREFETCH_DONE[lang] = true;
-    var prefetchKeys = ['project','meedoen','paneel','ketting','filosofie','kunstwerk','payitforward','3mensen','news','initiator','suggestions','panelidea'];
-    var pi = 0;
-    function prefetchNext() {
-      if(pi >= prefetchKeys.length) return;
-      var pk = prefetchKeys[pi++];
-      if(CARD_CACHE[lang+'_'+pk]) { prefetchNext(); return; }
-      getTranslatedCard(lang, pk, function(){ setTimeout(prefetchNext, 300); });
-    }
-    setTimeout(prefetchNext, 800);
-  }
+
 }
 
 function setLang(lang, evtTarget){
@@ -1160,16 +1148,7 @@ function setLang(lang, evtTarget){
     if(toast) toast.classList.remove('show');
     applyLang(lang);
 
-    // Step 2: Pre-fetch cards in background one by one
-    var cardKeys = ['project','meedoen','paneel','ketting','filosofie','kunstwerk','payitforward','3mensen','news','initiator'];
-    var i = 0;
-    function fetchNext() {
-      if(i >= cardKeys.length) return;
-      var k = cardKeys[i++];
-      if(CARD_CACHE[lang+'_'+k]) { fetchNext(); return; }
-      getTranslatedCard(lang, k, function(){ fetchNext(); });
-    }
-    setTimeout(fetchNext, 500);
+
   });
 
 }
@@ -1178,19 +1157,20 @@ function setLang(lang, evtTarget){
 function getTranslatedCard(lang, key, cb){
   if(lang === 'en'){ cb(LANG['en'].cards[key]); return; }
   var cacheKey = lang + '_' + key;
+  // Check hardcoded cards first — always use these, never overwrite with API
+  if(LANG[lang] && LANG[lang].cards && LANG[lang].cards[key]){
+    cb(LANG[lang].cards[key]); return;
+  }
   if(CARD_CACHE[cacheKey]){ cb(CARD_CACHE[cacheKey]); return; }
   var nlCard = LANG['en'].cards[key];
   if(!nlCard){ cb(null); return; }
-  // Special cards — no translation needed
   if(key === 'contact' || key === 'specs'){ cb(nlCard); return; }
-  showToast('🌍 Translating interface...');
+  showToast('🌍 Translating...');
   callTranslate({title: nlCard.title, body: nlCard.body}, langNames[lang]||lang, function(err, tr){
     var _t=document.getElementById('lang-toast');if(_t)_t.classList.remove('show');
     if(err || !tr){ cb(nlCard); return; }
     var card = {title: tr.title||nlCard.title, body: tr.body||nlCard.body};
     CARD_CACHE[cacheKey] = card;
-    if(!LANG[lang].cards) LANG[lang].cards = {};
-    LANG[lang].cards[key] = card;
     cb(card);
   });
 }
