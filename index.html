@@ -50,8 +50,8 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 .btn-p:hover{background:rgba(255,255,255,.15)}
 .btn-g{background:transparent;color:#fff;border:2px solid #fff;border-radius:10px;padding:.75rem 1.5rem;font-family:Inter,sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-g:hover{background:rgba(255,255,255,.15)}
-.btn-share{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.6);border-radius:14px;padding:.65rem 1.2rem;font-size:13px;font-weight:700;color:#fff;cursor:pointer;font-family:Inter,sans-serif;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap}
-.btn-share:hover{background:rgba(255,255,255,.25);border-color:#fff}
+.btn-share{background:transparent;border:2px solid #fff;border-radius:10px;padding:.9rem 1.5rem;font-size:15px;font-weight:700;color:#fff;cursor:pointer;font-family:Inter,sans-serif;display:flex;align-items:center;gap:8px;transition:all .2s;white-space:nowrap}
+.btn-share:hover{background:rgba(255,255,255,.15)}
 .btn-share svg{flex-shrink:0}
 .sp-stats{display:flex;gap:1.5rem;justify-content:center;margin:1.25rem 0}
 .sp-stat{text-align:center}
@@ -206,7 +206,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
   <div class="planks"><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div></div>
   <div class="sp-btns" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
     <button class="btn-p" id="main-btn" onclick="openChat()">Ask me anything...</button>
-    <button class="btn-share" id="share-btn" onclick="shareApp()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="share-btn-label">Share</span></button>
+    <button class="btn-share" id="share-btn" onclick="shareApp()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="share-btn-label">Share UWFL App</span></button>
   </div>
   <div class="sp-stats">
     <div class="sp-stat"><span class="sp-n" id="cnt">0</span><span class="sp-l">Participants</span></div>
@@ -872,8 +872,8 @@ function shareApp(){
 }
 
 function updateShareLabel(){
-  var labels = {en:'Share',nl:'Delen',es:'Compartir',fr:'Partager',de:'Teilen',it:'Condividi'};
-  return labels[currentLang] || 'Share';
+  var labels = {en:'Share UWFL App',nl:'Deel UWFL App',es:'Compartir App UWFL',fr:'Partager l\'App UWFL',de:'UWFL App teilen',it:'Condividi App UWFL'};
+  return labels[currentLang] || 'Share UWFL App';
 }
 
 var STORY_CACHE = {};  // pid+lang -> translated text
