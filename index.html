@@ -106,7 +106,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 .sp-soc:hover{background:rgba(255,255,255,.15)}
 .sp-soc-icon{font-size:20px;line-height:1}
 .sp-soc-lbl{font-size:11px;color:rgba(255,255,255,.8)}
-.pwa-install{display:none;background:transparent;border:2px solid rgba(255,255,255,.4);border-radius:10px;padding:.6rem 1.2rem;color:#fff;font-size:12px;font-family:Inter,sans-serif;cursor:pointer;margin:.5rem auto 0;text-align:center;width:100%;max-width:500px}
+.pwa-install{display:block;background:transparent;border:2px solid rgba(255,255,255,.4);border-radius:10px;padding:.6rem 1.2rem;color:#fff;font-size:12px;font-family:Inter,sans-serif;cursor:pointer;margin:.5rem auto 0;text-align:center;width:100%;max-width:500px}
 .pwa-install:hover{background:rgba(255,255,255,.1)}
 .pwa-install.show{display:block}@media(max-width:480px){.sp-soc-lbl{display:none}.sp-soc{padding:.65rem .4rem;font-size:11px}}
 .sp-logo{margin:1.5rem auto 0;width:140px;height:140px;border-radius:50%;border:2px solid #fff;overflow:hidden;display:block}
@@ -1724,24 +1724,23 @@ window.addEventListener('appinstalled', function(){
 });
 
 function installPWA(){
-  // iOS detection
   var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   if(isIOS){
     var hint = document.getElementById('pwa-ios-hint');
     if(hint){ hint.style.display = hint.style.display === 'none' ? 'block' : 'none'; }
     return;
   }
-  // Android/Desktop Chrome
   if(deferredPrompt){
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(function(result){
       deferredPrompt = null;
-      var btn = document.getElementById('pwa-install-btn');
-      if(btn) btn.classList.remove('show');
     });
+  } else if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){
+    var alreadyLabels = {en:'\u2713 Already installed — find the app on your home screen',nl:'\u2713 Al ge\u00efnstalleerd — zoek de app op je beginscherm',es:'\u2713 Ya instalada — busca la app en tu pantalla de inicio',fr:'\u2713 D\u00e9j\u00e0 install\u00e9e — cherchez l\'app sur votre \u00e9cran d\'accueil',de:'\u2713 Bereits installiert — finde die App auf deinem Startbildschirm',it:'\u2713 Gi\u00e0 installata — trova l\'app nella tua schermata iniziale'};
+    showToast((alreadyLabels[currentLang]||alreadyLabels['en']), 3000);
   } else {
-    // Fallback instruction
-    alert('To install: tap the menu (three dots) in your browser and choose "Add to Home Screen" or "Install app".');
+    var installLabels = {en:'Tap the menu (\u22ee) in your browser and choose \"Add to Home Screen\"',nl:'Tik op het menu (\u22ee) in je browser en kies \"Toevoegen aan beginscherm\"',es:'Toca el men\u00fa (\u22ee) en tu navegador y elige \"A\u00f1adir a pantalla de inicio\"',fr:'Appuyez sur le menu (\u22ee) dans votre navigateur et choisissez \"Ajouter \u00e0 l\'\u00e9cran d\'accueil\"',de:'Tippe auf das Men\u00fc (\u22ee) in deinem Browser und w\u00e4hle \"Zum Startbildschirm hinzuf\u00fcgen\"',it:'Tocca il menu (\u22ee) nel tuo browser e scegli \"Aggiungi alla schermata iniziale\"'};
+    showToast((installLabels[currentLang]||installLabels['en']), 4000);
   }
 }
 
