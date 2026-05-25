@@ -524,6 +524,8 @@ var JOIN_TEXTS = {
     part_title:'Participant', part_desc:'I don\'t make a panel but I join the movement. I promise to help 3 people and pass it on.',
     contrib_title:'Contributor', contrib_desc:'I help the project in another way: logistics, communication, photography, video, translation or anything else.',
     sponsor_title:'Sponsor', sponsor_desc:'I want to support the project as a company or individual. Let\'s talk about the possibilities.',
+    student_title:'Student / Social Stage', student_desc:'I join as a social stage project. I help 3 people and pass it forward — craftsmanship and connection for the next generation.',
+    label_student:'What will your social stage look like? How will you help 3 people?',
     name:'Name', company:'Company', company_opt:'optional', email:'Email',
     country:'Country', country_select:'Select your country',
     phone:'Phone number', phone_other:'Other',
@@ -551,6 +553,8 @@ var JOIN_TEXTS = {
     part_title:'Deelnemer', part_desc:'Ik maak geen paneel maar doe mee aan de beweging. Ik beloof 3 mensen te helpen en het door te geven.',
     contrib_title:'Bijdrager', contrib_desc:'Ik help het project op een andere manier: logistiek, communicatie, fotografie, video, vertaling of iets anders.',
     sponsor_title:'Sponsor', sponsor_desc:'Ik wil het project ondersteunen als bedrijf of individu. Laten we praten over de mogelijkheden.',
+    student_title:'Student / Sociale Stage', student_desc:'Ik doe mee als sociale stage. Ik help 3 mensen en geef het door — vakmanschap en verbinding voor de volgende generatie.',
+    label_student:'Hoe ziet jouw sociale stage eruit? Hoe ga je 3 mensen helpen?',
     name:'Naam', company:'Bedrijf', company_opt:'optioneel', email:'E-mail',
     country:'Land', country_select:'Selecteer je land',
     phone:'Telefoonnummer', phone_other:'Anders',
@@ -578,6 +582,8 @@ var JOIN_TEXTS = {
     part_title:'Participante', part_desc:'No hago un panel pero me uno al movimiento. Prometo ayudar a 3 personas y pasarlo.',
     contrib_title:'Colaborador', contrib_desc:'Ayudo al proyecto de otra manera: logística, comunicación, fotografía, video, traducción u otra cosa.',
     sponsor_title:'Patrocinador', sponsor_desc:'Quiero apoyar el proyecto como empresa o individuo. Hablemos de las posibilidades.',
+    student_title:'Estudiante / Etapa Social', student_desc:'Me uno como proyecto de etapa social. Ayudo a 3 personas y lo paso adelante — artesanato y conexi\u00f3n para la pr\u00f3xima generaci\u00f3n.',
+    label_student:'\u00bfC\u00f3mo ser\u00e1 tu etapa social? \u00bfC\u00f3mo ayudar\u00e1s a 3 personas?',
     name:'Nombre', company:'Empresa', company_opt:'opcional', email:'Correo electrónico',
     country:'País', country_select:'Selecciona tu país',
     phone:'Número de teléfono', phone_other:'Otro',
@@ -605,6 +611,8 @@ var JOIN_TEXTS = {
     part_title:'Participant', part_desc:'Je ne fais pas de panneau mais je rejoins le mouvement. Je promets d\'aider 3 personnes et de passer le message.',
     contrib_title:'Contributeur', contrib_desc:'J\'aide le projet d\'une autre façon : logistique, communication, photographie, vidéo, traduction ou autre.',
     sponsor_title:'Sponsor', sponsor_desc:'Je veux soutenir le projet en tant qu\'entreprise ou individu. Parlons des possibilités.',
+    student_title:'Étudiant / Stage Social', student_desc:'Je participe dans le cadre d\'un stage social. J\'aide 3 personnes et je le transmets — artisanat et connexion pour la prochaine génération.',
+    label_student:'À quoi ressemblera votre stage social ? Comment aiderez-vous 3 personnes ?',
     name:'Nom', company:'Entreprise', company_opt:'optionnel', email:'E-mail',
     country:'Pays', country_select:'Sélectionnez votre pays',
     phone:'Numéro de téléphone', phone_other:'Autre',
@@ -632,6 +640,8 @@ var JOIN_TEXTS = {
     part_title:'Teilnehmer', part_desc:'Ich mache kein Panel, aber ich schließe mich der Bewegung an. Ich verspreche, 3 Menschen zu helfen und es weiterzugeben.',
     contrib_title:'Beitragender', contrib_desc:'Ich helfe dem Projekt auf andere Weise: Logistik, Kommunikation, Fotografie, Video, Übersetzung oder anderes.',
     sponsor_title:'Sponsor', sponsor_desc:'Ich möchte das Projekt als Unternehmen oder Einzelperson unterstützen. Lassen Sie uns über die Möglichkeiten sprechen.',
+    student_title:'Student / Soziales Praktikum', student_desc:'Ich mache als soziales Praktikum mit. Ich helfe 3 Menschen und gebe es weiter — Handwerk und Verbindung für die nächste Generation.',
+    label_student:'Wie sieht dein soziales Praktikum aus? Wie wirst du 3 Menschen helfen?',
     name:'Name', company:'Unternehmen', company_opt:'optional', email:'E-Mail',
     country:'Land', country_select:'Wählen Sie Ihr Land',
     phone:'Telefonnummer', phone_other:'Sonstige',
@@ -659,6 +669,8 @@ var JOIN_TEXTS = {
     part_title:'Partecipante', part_desc:'Non faccio un pannello ma mi unisco al movimento. Prometto di aiutare 3 persone e di passarlo avanti.',
     contrib_title:'Contributore', contrib_desc:'Aiuto il progetto in un altro modo: logistica, comunicazione, fotografia, video, traduzione o altro.',
     sponsor_title:'Sponsor', sponsor_desc:'Voglio supportare il progetto come azienda o individuo. Parliamo delle possibilità.',
+    student_title:'Studente / Stage Sociale', student_desc:'Partecipo come progetto di stage sociale. Aiuto 3 persone e lo passo avanti — artigianato e connessione per la prossima generazione.',
+    label_student:'Come sarà il tuo stage sociale? Come aiuterai 3 persone?',
     name:'Nome', company:'Azienda', company_opt:'opzionale', email:'E-mail',
     country:'Paese', country_select:'Seleziona il tuo paese',
     phone:'Numero di telefono', phone_other:'Altro',
@@ -691,6 +703,7 @@ function buildJoinForm() {
   +'<button class="rbtn" id="rp" onclick="selRoute(\'part\')"><span class="ri">&#x1F91D;</span><span class="rt">'+jt.part_title+'</span><span class="rs">'+jt.part_desc+'</span></button>'
   +'<button class="rbtn" id="rb" onclick="selRoute(\'bijdrager\')"><span class="ri">&#x1F4AA;</span><span class="rt">'+jt.contrib_title+'</span><span class="rs">'+jt.contrib_desc+'</span></button>'
   +'<button class="rbtn" id="rs" onclick="selRoute(\'sponsor\')"><span class="ri">&#x1F4B0;</span><span class="rt">'+jt.sponsor_title+'</span><span class="rs">'+jt.sponsor_desc+'</span></button>'
+  +'<button class="rbtn" id="rst" onclick="selRoute(\'student\')" style="grid-column:1/-1"><span class="ri">&#x1F393;</span><span class="rt">'+jt.student_title+'</span><span class="rs">'+jt.student_desc+'</span></button>'
   +'</div>'
   +'<div id="jfields" style="display:none">'
   +'<div class="fld"><label>'+jt.name+'</label><input type="text" id="fn" placeholder="'+jt.name+'..."></div>'
@@ -1069,6 +1082,7 @@ function selRoute(r){
   if(fmlabel){
     if(r==='bijdrager') fmlabel.textContent=jt.label_bijdrager;
     else if(r==='sponsor') fmlabel.textContent=jt.label_sponsor;
+    else if(r==='student') fmlabel.textContent=jt.label_student;
     else fmlabel.textContent=jt.label_default;
   }
   document.getElementById('msgs').scrollTop=99999;
