@@ -950,7 +950,16 @@ function splashInfo(topic) {
   if(topic === 'join'){
     closeSplashInfo();
     openChat();
-    setTimeout(function(){ showCard('join'); }, 150);
+    // Wait for chat to render before injecting card
+    function tryShowJoin(attempts){
+      var msgs = document.getElementById('msgs');
+      if(msgs && msgs.offsetParent !== null){
+        showCard('join');
+      } else if(attempts > 0){
+        setTimeout(function(){ tryShowJoin(attempts-1); }, 100);
+      }
+    }
+    setTimeout(function(){ tryShowJoin(10); }, 100);
     return;
   }
 
