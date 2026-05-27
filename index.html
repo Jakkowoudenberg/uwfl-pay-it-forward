@@ -46,8 +46,8 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 .flag-btn:hover{transform:scale(1.1)}
 .flag-btn.active{border-color:var(--wood)}
 .sp-btns{display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px;margin:0 auto}
-.btn-p{background:#fff;color:#1a0f05;border:2.5px solid #fff;border-radius:12px;padding:1.1rem 2.2rem;font-family:Inter,sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:all .2s;animation:pulse-glow 2.2s ease-in-out infinite;letter-spacing:.02em}
-.btn-p:hover{background:rgba(255,255,255,.85);color:#1a0f05}
+.btn-p{background:transparent;color:#fff;border:2px solid #fff;border-radius:10px;padding:.9rem 1.5rem;font-family:Inter,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-p:hover{background:rgba(255,255,255,.15)}
 .btn-g{background:transparent;color:#fff;border:2px solid #fff;border-radius:10px;padding:.75rem 1.5rem;font-family:Inter,sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-g:hover{background:rgba(255,255,255,.15)}
 .btn-share{background:transparent;border:2px solid #fff;border-radius:10px;padding:.9rem 1.5rem;font-size:15px;font-weight:700;color:#fff;cursor:pointer;font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;white-space:nowrap}
@@ -205,7 +205,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
   <div class="sp-sub" id="sp-sub">A worldwide movement of craftsmen and people.</div>
   <div class="planks"><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div></div>
   <div class="sp-btns" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-    <button class="btn-p" id="main-btn" onclick="openChat()" style="padding:1.1rem 2.2rem;font-size:17px;border-width:2.5px;border-radius:12px;animation:pulse-glow 2.2s ease-in-out infinite;background:#fff;color:#1a0f05">Ask me anything...</button>
+    <button class="btn-p" id="main-btn" onclick="openChat()" >Ask me anything...</button>
     <button class="btn-share" id="share-btn" onclick="shareApp()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="share-btn-label">Share UWFL App</span></button>
   </div>
   <div class="sp-stats">
@@ -215,7 +215,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
   </div>
   <div class="sp-grid">
     <button class="sp-tp" id="ql-initiator" onclick="splashInfo('initiator')">🌱 <span class="ql-lbl">The Initiator</span></button>
-    <button class="sp-tp" id="ql-join" onclick="splashInfo('join')">+ <span class="ql-lbl">Join us</span></button>
+    <button class="sp-tp" id="ql-join" onclick="splashInfo('join')" style="background:#fff;color:#1a0f05;border-color:#fff;font-size:15px;padding:.9rem 1rem;animation:pulse-glow 2.2s ease-in-out infinite">+ <span class="ql-lbl">Join us</span></button>
     <button class="sp-tp" id="ql-project" onclick="splashInfo('project')">&#x1F4CB; <span class="ql-lbl">What is this?</span></button>
     <button class="sp-tp" id="ql-meedoen" onclick="splashInfo('meedoen')">&#x270B; <span class="ql-lbl">Why join?</span></button>
     <button class="sp-tp" id="ql-paneel" onclick="splashInfo('paneel')">&#x1FAB5; <span class="ql-lbl">The panel</span></button>
