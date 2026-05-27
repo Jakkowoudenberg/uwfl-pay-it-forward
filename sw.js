@@ -1,4 +1,4 @@
-// v10 - no cache, always network
+// v11 - no cache, always network
 self.addEventListener('install', function(e){
   self.skipWaiting();
 });
