@@ -1043,9 +1043,10 @@ function toggleStory(btn){
           translateStory(original, lang, function(translated){
             if(translated){
               STORY_CACHE[cacheKey] = translated;
-              el.innerHTML = photoHtml + translated;
+              var fmt = function(t){ return t.replace(/\n\n/g,'</p><p style="margin:.6rem 0">').replace(/\n/g,'<br>'); };
+              el.innerHTML = photoHtml + fmt(translated);
             } else {
-              el.innerHTML = photoHtml + original;
+              el.innerHTML = photoHtml + fmt(original);
             }
           });
         }
