@@ -1,4 +1,4 @@
-// v12 - unregister all caches
+// v13 - unregister all caches
 self.addEventListener('install', e => { self.skipWaiting(); });
 self.addEventListener('activate', e => {
   e.waitUntil(
