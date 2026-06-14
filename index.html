@@ -276,6 +276,12 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 <script>
 var FORM_LOADED = {};
 var LAST_SUBMIT = 0;
+var TRANS_CACHE = {};
+var CARD_CACHE = {};
+var PARTICIPANTS_CACHE = null;
+var compressedPhotoData = null;
+var selr = null;
+var regProfile = null;
 function initForm(name){FORM_LOADED[name]=Date.now();}
 function checkSpam(name){
   var now=Date.now();
