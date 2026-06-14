@@ -537,6 +537,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Hide example',
     submit:'I\'m in',
     hint:'No obligations. No cost.',
+    photo_drop:'📷 Drag photo here or tap to choose',
     photo_label:'Add a photo (optional)', photo_hint:'Your face makes the movement more personal. Wordt automatisch verkleind.',
     label_bijdrager:'How would you like to help and contribute?',
     label_sponsor:'Tell us about yourself or your company (optional)',
@@ -567,6 +568,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Voorbeeld verbergen',
     submit:'Ik doe mee',
     hint:'Geen verplichtingen. Geen kosten.',
+    photo_drop:'📷 Sleep foto hier of tik om te kiezen',
     photo_label:'Voeg een foto toe (optioneel)', photo_hint:'Jouw gezicht maakt de beweging persoonlijker. Wordt automatisch verkleind.',
     label_bijdrager:'Hoe wil je helpen en bijdragen?',
     label_sponsor:'Vertel ons over jezelf of je bedrijf (optioneel)',
@@ -597,6 +599,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Ocultar ejemplo',
     submit:'Me apunto',
     hint:'Sin obligaciones. Sin coste.',
+    photo_drop:'📷 Arrastra la foto aquí o toca para elegir',
     photo_label:'Añade una foto (opcional)', photo_hint:'Tu cara hace el movimiento más personal. Se comprime automáticamente.',
     label_bijdrager:'¿Cómo te gustaría ayudar y contribuir?',
     label_sponsor:'Cuéntanos sobre ti o tu empresa (opcional)',
@@ -627,6 +630,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Masquer l\'exemple',
     submit:'Je suis partant',
     hint:'Aucune obligation. Aucun coût.',
+    photo_drop:'📷 Glissez la photo ici ou appuyez pour choisir',
     photo_label:'Ajouter une photo (optionnel)', photo_hint:'Votre visage rend le mouvement plus personnel. Compressé automatiquement.',
     label_bijdrager:'Comment aimeriez-vous aider et contribuer ?',
     label_sponsor:'Parlez-nous de vous ou de votre entreprise (optionnel)',
@@ -657,6 +661,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Beispiel ausblenden',
     submit:'Ich bin dabei',
     hint:'Keine Verpflichtungen. Keine Kosten.',
+    photo_drop:'📷 Foto hier hinziehen oder tippen zum Auswählen',
     photo_label:'Foto hinzufügen (optional)', photo_hint:'Dein Gesicht macht die Bewegung persönlicher. Wordt automatisch verkleind.',
     label_bijdrager:'Wie möchten Sie helfen und beitragen?',
     label_sponsor:'Erzählen Sie uns von sich oder Ihrem Unternehmen (optional)',
@@ -726,9 +731,9 @@ function buildJoinForm() {
   +'<p class="jhint">'+jt.hint+'</p>'
   +'<div id="photo-fld" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)">'
   +'<label style="display:block;font-size:11px;color:rgba(255,255,255,.8);margin-bottom:6px">📷 '+jt.photo_label+'</label>'
+  +'<div id="photo-dropzone" onclick="document.getElementById(\"fphoto\").click()" style="border:2px dashed rgba(255,255,255,.3);border-radius:10px;padding:1rem;text-align:center;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px">'+jt.photo_drop+'<input type="file" id="fphoto" accept="image/*" style="display:none" onchange="previewPhoto(this)"></div>'
   +'<div id="photo-preview" style="display:none;margin-bottom:8px"><img id="photo-img" src="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--wood)"/></div>'
-  +'<input type="file" id="fphoto" accept="image/*" onchange="previewPhoto(this)" style="font-size:12px;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:.4rem .6rem;width:100%;box-sizing:border-box;cursor:pointer"/>'
-  +'<p style="font-size:10px;color:rgba(255,255,255,.5);margin-top:4px">'+jt.photo_hint+'</p>'
+  +'<p style="font-size:10px;color:rgba(255,255,255,.4);margin-top:4px">'+jt.photo_hint+'</p>'
   +'</div>'
   +'</div>';
 }
@@ -1158,8 +1163,38 @@ var compressedPhotoData = null;
 
 function previewPhoto(input){
   compressedPhotoData = null;
-  compressAndPreviewPhoto(input, function(data){
-    compressedPhotoData = data;
+  if(input.files && input.files[0]){
+    compressAndPreviewPhoto(input, function(data){
+      compressedPhotoData = data;
+      var dz = document.getElementById('photo-dropzone');
+      if(dz) dz.style.borderColor = 'var(--wood)';
+    });
+  }
+}
+
+function initPhotoDrop(){
+  var dz = document.getElementById('photo-dropzone');
+  if(!dz) return;
+  dz.addEventListener('dragover', function(e){
+    e.preventDefault();
+    dz.style.borderColor = 'var(--wood)';
+    dz.style.background = 'rgba(196,154,108,.1)';
+  });
+  dz.addEventListener('dragleave', function(){
+    if(!compressedPhotoData){
+      dz.style.borderColor = 'rgba(255,255,255,.3)';
+      dz.style.background = '';
+    }
+  });
+  dz.addEventListener('drop', function(e){
+    e.preventDefault();
+    var file = e.dataTransfer.files[0];
+    if(file && file.type.startsWith('image/')){
+      var dt = new DataTransfer();
+      dt.items.add(file);
+      var inp = document.getElementById('fphoto');
+      if(inp){ inp.files = dt.files; previewPhoto(inp); }
+    }
   });
 }
 
