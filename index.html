@@ -537,7 +537,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Hide example',
     submit:'I\'m in',
     hint:'No obligations. No cost.',
-    photo_label:'Add a photo (optional)', photo_hint:'Your face makes the movement more personal. Max 5MB.',
+    photo_label:'Add a photo (optional)', photo_hint:'Your face makes the movement more personal. Wordt automatisch verkleind.',
     label_bijdrager:'How would you like to help and contribute?',
     label_sponsor:'Tell us about yourself or your company (optional)',
     label_default:'Why do you want to join?',
@@ -567,7 +567,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Voorbeeld verbergen',
     submit:'Ik doe mee',
     hint:'Geen verplichtingen. Geen kosten.',
-    photo_label:'Voeg een foto toe (optioneel)', photo_hint:'Jouw gezicht maakt de beweging persoonlijker. Max 5MB.',
+    photo_label:'Voeg een foto toe (optioneel)', photo_hint:'Jouw gezicht maakt de beweging persoonlijker. Wordt automatisch verkleind.',
     label_bijdrager:'Hoe wil je helpen en bijdragen?',
     label_sponsor:'Vertel ons over jezelf of je bedrijf (optioneel)',
     label_default:'Waarom wil je meedoen?',
@@ -597,7 +597,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Ocultar ejemplo',
     submit:'Me apunto',
     hint:'Sin obligaciones. Sin coste.',
-    photo_label:'Añade una foto (opcional)', photo_hint:'Tu cara hace el movimiento más personal. Máx 5MB.',
+    photo_label:'Añade una foto (opcional)', photo_hint:'Tu cara hace el movimiento más personal. Se comprime automáticamente.',
     label_bijdrager:'¿Cómo te gustaría ayudar y contribuir?',
     label_sponsor:'Cuéntanos sobre ti o tu empresa (opcional)',
     label_default:'¿Por qué quieres unirte?',
@@ -627,7 +627,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Masquer l\'exemple',
     submit:'Je suis partant',
     hint:'Aucune obligation. Aucun coût.',
-    photo_label:'Ajouter une photo (optionnel)', photo_hint:'Votre visage rend le mouvement plus personnel. Max 5Mo.',
+    photo_label:'Ajouter une photo (optionnel)', photo_hint:'Votre visage rend le mouvement plus personnel. Compressé automatiquement.',
     label_bijdrager:'Comment aimeriez-vous aider et contribuer ?',
     label_sponsor:'Parlez-nous de vous ou de votre entreprise (optionnel)',
     label_default:'Pourquoi voulez-vous rejoindre ?',
@@ -657,7 +657,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Beispiel ausblenden',
     submit:'Ich bin dabei',
     hint:'Keine Verpflichtungen. Keine Kosten.',
-    photo_label:'Foto hinzufügen (optional)', photo_hint:'Dein Gesicht macht die Bewegung persönlicher. Max 5MB.',
+    photo_label:'Foto hinzufügen (optional)', photo_hint:'Dein Gesicht macht die Bewegung persönlicher. Wordt automatisch verkleind.',
     label_bijdrager:'Wie möchten Sie helfen und beitragen?',
     label_sponsor:'Erzählen Sie uns von sich oder Ihrem Unternehmen (optional)',
     label_default:'Warum möchten Sie mitmachen?',
@@ -687,7 +687,7 @@ var JOIN_TEXTS = {
     hide_example:'📝 Nascondi esempio',
     submit:'Ci sono',
     hint:'Nessun obbligo. Nessun costo.',
-    photo_label:'Aggiungi una foto (opzionale)', photo_hint:'Il tuo volto rende il movimento più personale. Max 5MB.',
+    photo_label:'Aggiungi una foto (opzionale)', photo_hint:'Il tuo volto rende il movimento più personale. Wordt automatisch verkleind.',
     label_bijdrager:'Come vorresti aiutare e contribuire?',
     label_sponsor:'Parlaci di te o della tua azienda (opzionale)',
     label_default:'Perché vuoi unirti?',
@@ -1127,17 +1127,40 @@ function sendContact(){
     if(body)body.innerHTML='<p style="color:rgba(255,255,255,.9)">Thank you '+n+'! We will get back to you as soon as possible.</p>';
   }
 }
-function previewPhoto(input){
-  if(input.files && input.files[0]){
-    var reader = new FileReader();
-    reader.onload = function(e){
-      var img = document.getElementById('photo-img');
+function compressAndPreviewPhoto(input, callback){
+  if(!input.files || !input.files[0]) return;
+  var file = input.files[0];
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var imgEl = new Image();
+    imgEl.onload = function(){
+      var canvas = document.createElement('canvas');
+      var MAX = 1200;
+      var w = imgEl.width, h = imgEl.height;
+      if(w > h){ if(w > MAX){ h = Math.round(h*MAX/w); w = MAX; } }
+      else { if(h > MAX){ w = Math.round(w*MAX/h); h = MAX; } }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(imgEl, 0, 0, w, h);
+      var compressed = canvas.toDataURL('image/jpeg', 0.82);
+      var preview = document.getElementById('photo-img');
       var prev = document.getElementById('photo-preview');
-      if(img){ img.src = e.target.result; }
+      if(preview){ preview.src = compressed; }
       if(prev){ prev.style.display = 'block'; }
+      if(callback) callback(compressed);
     };
-    reader.readAsDataURL(input.files[0]);
-  }
+    imgEl.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// Store compressed photo data
+var compressedPhotoData = null;
+
+function previewPhoto(input){
+  compressedPhotoData = null;
+  compressAndPreviewPhoto(input, function(data){
+    compressedPhotoData = data;
+  });
 }
 
 function submitForm(){
@@ -1182,18 +1205,31 @@ function submitForm(){
     btn.textContent=jt.submit;btn.disabled=false;
   }
   if(photoFile){
-    var reader = new FileReader();
-    reader.onload = function(ev){
+    // Use already-compressed data if available
+    var photoData = compressedPhotoData || null;
+    if(photoData){
       fetch('/.netlify/functions/upload-photo',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({fileName:photoFile.name,fileData:ev.target.result,fileType:photoFile.type,participantEmail:e})
+        body:JSON.stringify({fileName:photoFile.name,fileData:photoData,fileType:'image/jpeg',participantEmail:e})
       })
       .then(function(r){return r.json();})
       .then(function(d){ doSubmit(d.url||null); })
       .catch(function(){ doSubmit(null); });
-    };
-    reader.readAsDataURL(photoFile);
+    } else {
+      var reader2 = new FileReader();
+      reader2.onload = function(ev){
+        fetch('/.netlify/functions/upload-photo',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({fileName:photoFile.name,fileData:ev.target.result,fileType:photoFile.type,participantEmail:e})
+        })
+        .then(function(r){return r.json();})
+        .then(function(d){ doSubmit(d.url||null); })
+        .catch(function(){ doSubmit(null); });
+      };
+      reader2.readAsDataURL(photoFile);
+    }
   } else {
     doSubmit(null);
   }
