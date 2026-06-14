@@ -394,9 +394,60 @@ exports.handler = async function(event) {
           phone: reg.telefoon || null,
           type: reg.type,
           trade: reg.vak || null,
-          message: messageInEnglish
+          message: messageInEnglish,
+          status: 'pending'
         })
       });
+      // Get the new registration ID for approval links
+      let newId = null;
+      if (response.ok) {
+        try {
+          const getResp = await fetch(
+            `${process.env.SUPABASE_URL}/rest/v1/registrations?email=eq.${encodeURIComponent(reg.email)}&order=created_at.desc&limit=1&select=id`,
+            {
+              headers: {
+                'apikey': process.env.SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`
+              }
+            }
+          );
+          const rows = await getResp.json();
+          if (rows && rows[0]) newId = rows[0].id;
+        } catch(e) {}
+
+        // Send approval email via Google Sheets script
+        if (newId) {
+          const approveUrl = `https://app.unitedwoodfloorlayers.com/.netlify/functions/approve?id=${newId}&action=approve`;
+          const rejectUrl = `https://app.unitedwoodfloorlayers.com/.netlify/functions/approve?id=${newId}&action=reject`;
+          const emailBody = `Nieuwe aanmelding UWFL Pay It Forward!
+
+Naam: ${reg.naam}
+Bedrijf: ${reg.bedrijf || '-'}
+Land: ${reg.land}
+Type: ${reg.type}
+Email: ${reg.email}
+
+Verhaal: ${reg.bericht || '-'}
+
+✓ GOEDKEUREN: ${approveUrl}
+✗ AFWIJZEN: ${rejectUrl}`;
+
+          try {
+            await fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec', {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                type: 'ModerateRequest',
+                to: 'unitedwoodfloorlayers@gmail.com',
+                subject: `Nieuwe aanmelding: ${reg.naam} (${reg.land})`,
+                body: emailBody
+              })
+            });
+          } catch(e) {}
+        }
+      }
+
       return {
         statusCode: response.ok ? 200 : 500,
         headers,
