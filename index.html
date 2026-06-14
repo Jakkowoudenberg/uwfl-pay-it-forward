@@ -747,23 +747,15 @@ document.addEventListener('DOMContentLoaded', function(){
   // This prevents unnecessary API calls and ensures ql labels always work
   ['nl','es','fr','de','it'].forEach(function(l){ TRANS_CACHE[l] = true; });
   applyLang('en');
-  // Fetch live count
-  // Hardcoded counter - updated manually when participants change
-  (function(){
-    var data_mock = {length: 39, countries: 8};
-    var target = data_mock.length;
-    var countryCount = data_mock.countries;
-    var i = 0;
-    function tick(){ if(i < target){ i++; document.getElementById('cnt').textContent = i; setTimeout(tick, 40); } }
-    setTimeout(tick, 500);
-    var cc = document.getElementById('cnt-countries');
-    if(cc) cc.textContent = countryCount;
-  })();
-
-  fetch('/.netlify/functions/participants')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
+  // Fetch live count and update counters
+  fetch('/.netlify/functions/participants')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
       if(Array.isArray(data) && data.length > 0){
+        var ctrs = {};
+        data.forEach(function(p){ if(p.country) ctrs[p.country]=true; });
+        document.getElementById('cnt').textContent = data.length;
+        document.getElementById('cnt-countries').textContent = Object.keys(ctrs).length;
         var target = data.length;
         var countries = {};
         data.forEach(function(p){ if(p.country) countries[p.country] = true; });
