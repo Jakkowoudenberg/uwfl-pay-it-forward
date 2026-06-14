@@ -258,6 +258,79 @@ exports.handler = async function(event) {
     // REGISTER MODE — save to Supabase
     if (body.mode === 'register') {
       const reg = body.data;
+
+      // ============================================================
+      // LAAG 1 + 2: SERVER-SIDE SECURITY VALIDATION
+      // ============================================================
+      
+      // Dangerous patterns - HTML, JS, SQL injection
+      const dangerousPatterns = [
+        /<script/i, /<iframe/i, /<img/i, /<svg/i, /<object/i, /<embed/i,
+        /javascript:/i, /onclick=/i, /onerror=/i, /onload=/i, /eval\(/i,
+        /document\./i, /window\./i, /alert\(/i, /confirm\(/i,
+        /DROP\s+TABLE/i, /SELECT\s+\*/i, /INSERT\s+INTO/i, /DELETE\s+FROM/i,
+        /UNION\s+SELECT/i, /--\s*$/m, /;\s*DROP/i, /xp_cmdshell/i,
+        /base64_decode/i, /exec\(/i, /system\(/i, /passthru/i,
+      ];
+      
+      // Suspicious URL patterns
+      const urlPatterns = [
+        /https?:\/\/(?!app\.unitedwoodfloorlayers\.com)/i,
+        /(?:bit\.ly|tinyurl|t\.co|goo\.gl)/i,
+      ];
+      
+      // Bad words (basic list)
+      const badWords = ['porn', 'xxx', 'sex', 'nude', 'naked', 'casino', 'viagra', 'cialis', 'bitcoin', 'crypto', 'nft', 'onlyfans'];
+      
+      const fieldsToCheck = [reg.naam, reg.bedrijf, reg.bericht, reg.email, reg.vak].filter(Boolean);
+      
+      for (const field of fieldsToCheck) {
+        const fieldLower = field.toLowerCase();
+        
+        // Check dangerous patterns
+        for (const pattern of dangerousPatterns) {
+          if (pattern.test(field)) {
+            return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'Invalid content detected' }) };
+          }
+        }
+        
+        // Check URLs (only in message/story field)
+        if (field === reg.bericht) {
+          for (const pattern of urlPatterns) {
+            if (pattern.test(field)) {
+              return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'URLs not allowed in story' }) };
+            }
+          }
+        }
+        
+        // Check bad words
+        for (const word of badWords) {
+          if (fieldLower.includes(word)) {
+            return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'Inappropriate content detected' }) };
+          }
+        }
+      }
+      
+      // Validate required fields
+      if (!reg.naam || reg.naam.trim().length < 2) {
+        return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'Name too short' }) };
+      }
+      if (reg.naam.trim().length > 100) {
+        return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'Name too long' }) };
+      }
+      if (!reg.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(reg.email)) {
+        return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'Invalid email' }) };
+      }
+      if (reg.bericht && reg.bericht.trim().length > 5000) {
+        return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'Story too long' }) };
+      }
+      if (reg.bericht && reg.bericht.trim().length < 10) {
+        return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'Story too short' }) };
+      }
+      
+      // ============================================================
+      // END SECURITY VALIDATION
+      // ============================================================
       
       // Auto-translate message to English if present
       let messageInEnglish = reg.bericht || null;
