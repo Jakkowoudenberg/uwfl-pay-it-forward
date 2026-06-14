@@ -834,7 +834,7 @@ function renderParticipants(data) {
   var PL = partLabels[currentLang] || partLabels['en'];
   var html = '<div class="srow"><div class="sbox"><span class="sn">'+total+'</span><span class="sl">'+PL.p+'</span></div><div class="sbox"><span class="sn">'+countryCount+'</span><span class="sl">'+PL.c+'</span></div></div>';
 
-  var cats = ['Maker','Contributor','Participant','Student','Sponsor','Initiator'];
+  var cats = ['Initiator','Maker','Contributor','Participant','Student','Sponsor'];
   var catIcons = {Initiator:'\uD83C\uDF31',Maker:'\uD83E\uDAB5',Contributor:'\uD83D\uDCAA',Participant:'\uD83E\uDD1D',Student:'\uD83C\uDF93',Sponsor:'\uD83D\uDCB0'};
 
   cats.forEach(function(cat) {
