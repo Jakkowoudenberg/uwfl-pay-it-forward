@@ -5,61 +5,24 @@
 <style>
 body{font-family:Inter,sans-serif;background:#0d0a07;color:#fff;padding:2rem;max-width:500px;margin:0 auto}
 h1{color:#c49a6c;font-size:1.4rem}
-input[type=text]{width:100%;padding:.6rem;margin:.4rem 0 1rem;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:14px;box-sizing:border-box}
 select{width:100%;padding:.6rem;margin:.4rem 0 1rem;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#fff;color:#1a0f05;font-size:14px;box-sizing:border-box}
 button{background:#c49a6c;color:#1a0f05;border:none;padding:.75rem 2rem;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:.5rem}
-#dropzone{border:2px dashed rgba(255,255,255,.3);border-radius:12px;padding:2rem;text-align:center;cursor:pointer;transition:all .2s;margin:.4rem 0 1rem;color:rgba(255,255,255,.6);font-size:14px}
+#dropzone{border:2px dashed rgba(255,255,255,.3);border-radius:12px;padding:2rem;text-align:center;cursor:pointer;transition:all .2s;margin:.4rem 0 1rem;color:rgba(255,255,255,.5);font-size:14px}
 #dropzone.hover{border-color:#c49a6c;background:rgba(196,154,108,.1);color:#c49a6c}
 #dropzone.has-photo{border-color:#c49a6c;border-style:solid}
-#preview{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid #c49a6c;display:none;margin:.5rem auto;display:block}
+#preview{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid #c49a6c;display:none;margin:.5rem auto}
 #status{margin-top:1rem;padding:1rem;border-radius:8px;font-size:13px;display:none}
 label{font-size:12px;color:rgba(255,255,255,.7);display:block;margin-bottom:2px}
+#loading{color:rgba(255,255,255,.5);font-size:13px;margin:.5rem 0}
 </style>
 </head>
 <body>
 <h1>📷 UWFL Photo Upload</h1>
 
 <label>Deelnemer</label>
-<select id="name">
+<div id="loading">⏳ Deelnemers laden...</div>
+<select id="name" style="display:none">
 <option value="">-- Selecteer deelnemer --</option>
-<option>Jakko Woudenberg</option>
-<option>Che Polfliet</option>
-<option>Michael Devriendt</option>
-<option>Jason Vivash</option>
-<option>Viacheslav Oliinykov</option>
-<option>Pietro Carrao</option>
-<option>Dominique Rasenberg</option>
-<option>Eric Jongmans</option>
-<option>Joey Leenders</option>
-<option>Johan Zwartbol</option>
-<option>Marc van der Zande</option>
-<option>Marcel Schipper</option>
-<option>Ramin Jafrieh</option>
-<option>Sebastiaan Vanwestrenen</option>
-<option>York Dhe Nije</option>
-<option>Fino & Susy</option>
-<option>Emilio Manzano</option>
-<option>Javier</option>
-<option>Merex Carmona</option>
-<option>Adam W. Bissey</option>
-<option>Adrian Molitor</option>
-<option>Alex Hamilton</option>
-<option>Allen Rapaport</option>
-<option>Cristian Mocanu</option>
-<option>Daniel Reddy</option>
-<option>Dustin Bolin</option>
-<option>Ethan</option>
-<option>Everette Simmons</option>
-<option>Iulian Tampa</option>
-<option>Jim Kramer</option>
-<option>Joey Wolfe</option>
-<option>Joshua Crossman</option>
-<option>Lenny Hall</option>
-<option>Matthew Szyszka</option>
-<option>Kechmida</option>
-<option>Stephen Diggins</option>
-<option>Sander</option>
-<option>Peter Knegt</option>
 </select>
 
 <label>Foto — sleep hiernaartoe of klik om te kiezen</label>
@@ -75,6 +38,32 @@ label{font-size:12px;color:rgba(255,255,255,.7);display:block;margin-bottom:2px}
 <script>
 var compressed = null;
 
+// Load participants from live API
+fetch('/.netlify/functions/participants')
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var sel = document.getElementById('name');
+    var loading = document.getElementById('loading');
+    
+    // Sort by name
+    data.sort(function(a,b){ return (a.name||'').localeCompare(b.name||''); });
+    
+    data.forEach(function(p){
+      if(!p.name) return;
+      var opt = document.createElement('option');
+      opt.value = p.name;
+      opt.textContent = p.name + (p.company ? ' — ' + p.company : '') + (p.photo_url ? ' ✓' : '');
+      sel.appendChild(opt);
+    });
+    
+    loading.style.display = 'none';
+    sel.style.display = 'block';
+  })
+  .catch(function(e){
+    document.getElementById('loading').textContent = '✗ Kon deelnemers niet laden: ' + e.message;
+  });
+
+// Drag & drop
 var dz = document.getElementById('dropzone');
 dz.addEventListener('dragover', function(e){ e.preventDefault(); dz.classList.add('hover'); });
 dz.addEventListener('dragleave', function(){ dz.classList.remove('hover'); });
@@ -102,7 +91,7 @@ function handleFile(file){
       var prev = document.getElementById('preview');
       prev.src = compressed;
       prev.style.display = 'block';
-      dz.innerHTML = '✓ Foto klaar — ' + file.name + '<br><input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this.files[0])">';
+      dz.innerHTML = '✓ ' + file.name + ' — klaar om te uploaden<input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this.files[0])">';
       dz.classList.add('has-photo');
     };
     imgEl.src = e.target.result;
@@ -130,6 +119,13 @@ function upload(){
     if(d.url){
       status.style.background = 'rgba(100,200,100,.2)';
       status.textContent = '✓ Gelukt! ' + name + ' heeft nu een foto.';
+      // Update option to show checkmark
+      var opts = document.getElementById('name').options;
+      for(var i=0; i<opts.length; i++){
+        if(opts[i].value === name && opts[i].textContent.indexOf('✓') === -1){
+          opts[i].textContent += ' ✓';
+        }
+      }
       compressed = null;
       document.getElementById('preview').style.display = 'none';
       dz.innerHTML = '📷 Sleep foto hier of klik om te kiezen<input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this.files[0])">';
