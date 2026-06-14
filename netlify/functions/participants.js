@@ -11,7 +11,7 @@ exports.handler = async function(event, context) {
 
   try {
     const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/registrations?select=name,company,country,type,message,photo_url&or=(status.eq.approved,status.is.null)&order=country.asc,name.asc`,
+      `${process.env.SUPABASE_URL}/rest/v1/registrations?select=name,company,country,type,message,photo_url&status=eq.approved&order=country.asc,name.asc`,
       {
         headers: {
           'apikey': process.env.SUPABASE_ANON_KEY,
@@ -26,14 +26,14 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(data)
+      body: JSON.stringify(Array.isArray(data) ? data : [])
     };
 
   } catch (err) {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: err.message })
+      body: JSON.stringify([])
     };
   }
 };
