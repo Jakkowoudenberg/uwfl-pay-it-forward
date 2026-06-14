@@ -190,7 +190,8 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 <body>
 
 <!-- SPLASH -->
-<div class="splash-wrap" id="splash">
+<div class="splash-wrap" id="splash" style="position:relative">
+  <button onclick="openAdmin()" style="position:absolute;bottom:12px;left:12px;background:transparent;border:none;color:rgba(255,255,255,.3);font-size:20px;cursor:pointer;padding:.25rem;z-index:10;line-height:1">🔑</button>
   <div class="sp-lbl">United Wood Floor Layers</div>
   <div class="sp-ttl">One world<br>Many people<br><em>One Artfloor</em></div>
   <div style="height:1.2rem"></div>
@@ -244,7 +245,6 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     <a class="sp-soc" href="https://www.instagram.com/unitedwoodfloorlayers" target="_blank"><span class="sp-soc-icon">&#x1F4F8;</span><span>Instagram</span><span class="sp-soc-lbl">@unitedwoodfloorlayers</span></a>
     <a class="sp-soc" href="https://www.facebook.com/share/g/1A7TcWkA3R/" target="_blank"><span class="sp-soc-icon">&#x1F465;</span><span>FB Groep</span><span class="sp-soc-lbl">Facebook groep</span></a>
   </div>
-  <button onclick="openAdmin()" style="background:transparent;border:none;color:rgba(255,255,255,.5);font-size:16px;cursor:pointer;padding:.5rem;font-family:Inter,sans-serif;margin-top:.5rem">🔑</button>
   <button id="pwa-install-btn" class="pwa-install" onclick="installPWA()">📲 Download the webapp — No App Store needed</button>
   
 
