@@ -15,30 +15,33 @@ exports.handler = async function(event, context) {
 
   try {
     const body = JSON.parse(event.body);
-    const { fileName, fileData, fileType, participantEmail } = body;
+    const { fileName, fileData, fileType, participantEmail, participantName } = body;
 
-    if (!fileName || !fileData || !fileType) {
+    if (!fileName || !fileData) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing file data' }) };
     }
+
+    const SUPABASE_URL = process.env.SUPABASE_URL;
+    const SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
 
     // Decode base64 image
     const base64Data = fileData.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
 
     // Create unique filename
-    const ext = fileType.split('/')[1] || 'jpg';
-    const safeName = (participantEmail || 'participant').replace(/[^a-z0-9]/gi, '_').toLowerCase();
-    const uniqueName = `${safeName}_${Date.now()}.${ext}`;
+    const safeName = (participantName || participantEmail || 'participant')
+      .replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    const uniqueName = `${safeName}_${Date.now()}.jpg`;
 
     // Upload to Supabase Storage
     const uploadResponse = await fetch(
-      `${process.env.SUPABASE_URL}/storage/v1/object/participant-photos/${uniqueName}`,
+      `${SUPABASE_URL}/storage/v1/object/participant-photos/${uniqueName}`,
       {
         method: 'POST',
         headers: {
-          'apikey': process.env.SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-          'Content-Type': fileType,
+          'apikey': SERVICE_KEY,
+          'Authorization': `Bearer ${SERVICE_KEY}`,
+          'Content-Type': 'image/jpeg',
           'x-upsert': 'true'
         },
         body: buffer
@@ -50,8 +53,24 @@ exports.handler = async function(event, context) {
       return { statusCode: 500, headers, body: JSON.stringify({ error: 'Upload failed: ' + err }) };
     }
 
-    // Return public URL
-    const publicUrl = `${process.env.SUPABASE_URL}/storage/v1/object/public/participant-photos/${uniqueName}`;
+    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/participant-photos/${uniqueName}`;
+
+    // Update registrations table if participantName provided
+    if (participantName) {
+      await fetch(
+        `${SUPABASE_URL}/rest/v1/registrations?name=eq.${encodeURIComponent(participantName)}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'apikey': SERVICE_KEY,
+            'Authorization': `Bearer ${SERVICE_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ photo_url: publicUrl })
+        }
+      );
+    }
 
     return {
       statusCode: 200,
