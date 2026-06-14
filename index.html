@@ -185,6 +185,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 
 .hp{position:absolute;left:-9999px;opacity:0;pointer-events:none;tab-index:-1}
 </style>
+<script src="https://www.google.com/recaptcha/api.js?render=6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B"></script>
 </head>
 <body>
 
@@ -1114,6 +1115,15 @@ function sendSuggestion(){
   if(!m){alert('Please enter your suggestion.');return;}
   var n=(document.getElementById('sug-name')||{value:''}).value.trim();
   var e=(document.getElementById('sug-email')||{value:''}).value.trim();
+  // LAAG 3: reCAPTCHA v3 token
+  grecaptcha.ready(function(){
+    grecaptcha.execute('6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B', {action: 'register'}).then(function(token){
+      regData.recaptcha_token = token;
+      doSubmit(null);
+    });
+  });
+  return;
+
   fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Suggestion',naam:n||'Anonymous',email:e,bericht:m})}).catch(function(){});
   var bodyEl=document.getElementById('sp-info-body');
   if(bodyEl)bodyEl.innerHTML='<p style="color:rgba(255,255,255,.9);padding:1rem 0">Thank you! Your suggestion has been received.</p>';
