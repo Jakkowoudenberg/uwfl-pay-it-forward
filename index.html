@@ -245,7 +245,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     <a class="sp-soc" href="https://www.facebook.com/share/g/1A7TcWkA3R/" target="_blank"><span class="sp-soc-icon">&#x1F465;</span><span>FB Groep</span><span class="sp-soc-lbl">Facebook groep</span></a>
   </div>
   <button id="pwa-install-btn" class="pwa-install" onclick="installPWA()">📲 Download the webapp — No App Store needed</button>
-  <div id="admin-btn" onclick="openAdmin()" style="position:fixed;bottom:10px;left:10px;width:36px;height:36px;cursor:pointer;z-index:100;opacity:.3"><img src="/dwa-icon.png" style="width:36px;height:36px;border-radius:6px"></div>
+  <div id="admin-btn" onclick="openAdmin()" style="position:fixed;bottom:10px;left:10px;width:52px;height:52px;cursor:pointer;z-index:100;opacity:.4"><img src="/dwa-icon.png" style="width:52px;height:52px;border-radius:8px"></div>
 
   <div id="admin-panel" style="display:none;position:fixed;inset:0;z-index:9999;background:#0d0a07;overflow-y:auto;padding:1.5rem">
     <div style="max-width:500px;margin:0 auto">
@@ -930,7 +930,7 @@ function closeAdmin(){
 
 function checkAdminPw(){
   var pw = document.getElementById('admin-pw').value;
-  if(pw === 'Nwrfh4a1!'){
+  if(pw === 'Nwrfph4a1!'){
     document.getElementById('admin-login').style.display='none';
     document.getElementById('admin-content').style.display='block';
     loadPending();
@@ -943,7 +943,7 @@ function checkAdminPw(){
 function loadPending(){
   var list = document.getElementById('admin-pending-list');
   list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Laden...</p>';
-  fetch('/.netlify/functions/admin-pending',{headers:{'X-Admin-Key':'Nwrfh4a1!'}})
+  fetch('/.netlify/functions/admin-pending',{headers:{'X-Admin-Key':'Nwrfph4a1!'}})
   .then(function(r){return r.json();})
   .then(function(data){
     if(!data.length){
@@ -970,7 +970,7 @@ function loadPending(){
 
 function adminDo(id, action){
   fetch('/.netlify/functions/approve?id='+id+'&action='+action,{
-    headers:{'X-Admin-Key':'Nwrfh4a1!'}
+    headers:{'X-Admin-Key':'Nwrfph4a1!'}
   })
   .then(function(){
     loadPending();
