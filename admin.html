@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UWFL Admin — Photo Upload</title>
+<style>
+body{font-family:Inter,sans-serif;background:#0d0a07;color:#fff;padding:2rem;max-width:500px;margin:0 auto}
+h1{color:#c49a6c;font-size:1.4rem}
+input,select{width:100%;padding:.6rem;margin:.4rem 0 1rem;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:14px;box-sizing:border-box}
+button{background:#c49a6c;color:#1a0f05;border:none;padding:.75rem 2rem;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;width:100%}
+#status{margin-top:1rem;padding:1rem;border-radius:8px;font-size:13px;display:none}
+#preview{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #c49a6c;display:none;margin:.5rem 0}
+</style>
+</head>
+<body>
+<h1>📷 UWFL Photo Upload</h1>
+
+<label>Deelnemer naam (exact zoals in database)</label>
+<select id="name">
+<option value="">-- Selecteer --</option>
+<option>Jakko Woudenberg</option>
+<option>Che Polfliet</option>
+<option>Michael Devriendt</option>
+<option>Jason Vivash</option>
+<option>Viacheslav Oliinykov</option>
+<option>Pietro Carrao</option>
+<option>Dominique Rasenberg</option>
+<option>Eric Jongmans</option>
+<option>Joey Leenders</option>
+<option>Johan Zwartbol</option>
+<option>Marc van der Zande</option>
+<option>Marcel Schipper</option>
+<option>Ramin Jafrieh</option>
+<option>Sebastiaan Vanwestrenen</option>
+<option>York Dhe Nije</option>
+<option>Fino & Susy</option>
+<option>Emilio Manzano</option>
+<option>Javier</option>
+<option>Merex Carmona</option>
+<option>Adam W. Bissey</option>
+<option>Adrian Molitor</option>
+<option>Alex Hamilton</option>
+<option>Allen Rapaport</option>
+<option>Cristian Mocanu</option>
+<option>Daniel Reddy</option>
+<option>Dustin Bolin</option>
+<option>Ethan</option>
+<option>Everette Simmons</option>
+<option>Iulian Tampa</option>
+<option>Jim Kramer</option>
+<option>Joey Wolfe</option>
+<option>Joshua Crossman</option>
+<option>Lenny Hall</option>
+<option>Matthew Szyszka</option>
+<option>Kechmida</option>
+<option>Stephen Diggins</option>
+<option>Sander</option>
+</select>
+
+<label>Foto</label>
+<input type="file" id="photo" accept="image/*" onchange="preview(this)">
+<img id="preview" src="">
+
+<button onclick="upload()">📤 Upload foto</button>
+<div id="status"></div>
+
+<script>
+var compressed = null;
+
+function preview(input){
+  if(!input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var imgEl = new Image();
+    imgEl.onload = function(){
+      var canvas = document.createElement('canvas');
+      var MAX = 800;
+      var w = imgEl.width, h = imgEl.height;
+      if(w > h){ if(w > MAX){ h = Math.round(h*MAX/w); w = MAX; } }
+      else { if(h > MAX){ w = Math.round(w*MAX/h); h = MAX; } }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(imgEl, 0, 0, w, h);
+      compressed = canvas.toDataURL('image/jpeg', 0.85);
+      var prev = document.getElementById('preview');
+      prev.src = compressed;
+      prev.style.display = 'block';
+    };
+    imgEl.src = e.target.result;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function upload(){
+  var name = document.getElementById('name').value;
+  var status = document.getElementById('status');
+  if(!name){ alert('Selecteer een deelnemer'); return; }
+  if(!compressed){ alert('Kies een foto'); return; }
+  
+  status.style.display = 'block';
+  status.style.background = 'rgba(255,255,255,.1)';
+  status.textContent = 'Uploading...';
+
+  fetch('/.netlify/functions/admin-upload', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Key': 'UWFL2024admin'
+    },
+    body: JSON.stringify({ participantName: name, fileData: compressed })
+  })
+  .then(r => r.json())
+  .then(d => {
+    if(d.url){
+      status.style.background = 'rgba(100,200,100,.2)';
+      status.textContent = '✓ Gelukt! ' + name + ' heeft nu een foto.';
+      compressed = null;
+      document.getElementById('photo').value = '';
+      document.getElementById('preview').style.display = 'none';
+    } else {
+      status.style.background = 'rgba(200,100,100,.2)';
+      status.textContent = '✗ Fout: ' + JSON.stringify(d);
+    }
+  })
+  .catch(e => {
+    status.style.background = 'rgba(200,100,100,.2)';
+    status.textContent = '✗ Fout: ' + e.message;
+  });
+}
+</script>
+</body>
+</html>
