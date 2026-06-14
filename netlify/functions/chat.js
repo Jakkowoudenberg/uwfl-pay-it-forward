@@ -415,36 +415,20 @@ exports.handler = async function(event) {
           if (rows && rows[0]) newId = rows[0].id;
         } catch(e) {}
 
-        // Send approval email via Google Sheets script
+        // Add approval links to response so frontend can include in Google Sheets email
         if (newId) {
           const approveUrl = `https://app.unitedwoodfloorlayers.com/.netlify/functions/approve?id=${newId}&action=approve`;
           const rejectUrl = `https://app.unitedwoodfloorlayers.com/.netlify/functions/approve?id=${newId}&action=reject`;
-          const emailBody = `Nieuwe aanmelding UWFL Pay It Forward!
-
-Naam: ${reg.naam}
-Bedrijf: ${reg.bedrijf || '-'}
-Land: ${reg.land}
-Type: ${reg.type}
-Email: ${reg.email}
-
-Verhaal: ${reg.bericht || '-'}
-
-✓ GOEDKEUREN: ${approveUrl}
-✗ AFWIJZEN: ${rejectUrl}`;
-
-          try {
-            await fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec', {
-              method: 'POST',
-              mode: 'no-cors',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                type: 'ModerateRequest',
-                to: 'unitedwoodfloorlayers@gmail.com',
-                subject: `Nieuwe aanmelding: ${reg.naam} (${reg.land})`,
-                body: emailBody
-              })
-            });
-          } catch(e) {}
+          return {
+            statusCode: 200,
+            headers,
+            body: JSON.stringify({ 
+              ok: true, 
+              approveUrl, 
+              rejectUrl,
+              id: newId
+            })
+          };
         }
       }
 
