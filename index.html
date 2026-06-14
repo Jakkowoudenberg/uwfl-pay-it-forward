@@ -1029,18 +1029,23 @@ function toggleStory(btn){
     if(lang !== 'en'){
       var cacheKey = pid + '_' + lang;
       if(STORY_CACHE[cacheKey]){
-        el.innerHTML = STORY_CACHE[cacheKey];
+        var photoDiv2 = el.querySelector('div[style*="margin-bottom:.75rem"]');
+        var cachedPhoto = photoDiv2 ? photoDiv2.outerHTML : '';
+        el.innerHTML = cachedPhoto + STORY_CACHE[cacheKey];
       } else {
-        var original = el.getAttribute('data-original') || el.textContent;
+        // Store only text content, not photo HTML
+        var photoDiv = el.querySelector('div[style*="margin-bottom:.75rem"]');
+        var photoHtml = photoDiv ? photoDiv.outerHTML : '';
+        var original = el.getAttribute('data-original') || el.innerText || el.textContent;
         if(!el.getAttribute('data-original')) el.setAttribute('data-original', original);
         if(original && original.trim().length > 10){
           el.innerHTML = '<em style="opacity:.5;font-size:10px">&#x1F30D; Translating...</em>';
           translateStory(original, lang, function(translated){
             if(translated){
               STORY_CACHE[cacheKey] = translated;
-              el.innerHTML = translated;
+              el.innerHTML = photoHtml + translated;
             } else {
-              el.innerHTML = original;
+              el.innerHTML = photoHtml + original;
             }
           });
         }
