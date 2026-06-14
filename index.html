@@ -1163,6 +1163,19 @@ var compressedPhotoData = null;
 function previewPhoto(input){
   compressedPhotoData = null;
   if(input.files && input.files[0]){
+    // LAAG 1: Validate file type
+    var file = input.files[0];
+    var allowedTypes = ['image/jpeg','image/png','image/webp','image/gif','image/heic','image/heif'];
+    if(allowedTypes.indexOf(file.type) === -1){
+      alert('Only image files are allowed (JPG, PNG, WebP, GIF).');
+      input.value = '';
+      return;
+    }
+    if(file.size > 20 * 1024 * 1024){
+      alert('File too large. Maximum 20MB.');
+      input.value = '';
+      return;
+    }
     compressAndPreviewPhoto(input, function(data){
       compressedPhotoData = data;
       var dz = document.getElementById('photo-dropzone');
@@ -1210,6 +1223,23 @@ function submitForm(){
   if(!n||!e||!l||!m){alert(jt.alert_fields);return;}
   if(m.indexOf('[your name]') !== -1 || m.indexOf('[your trade]') !== -1 || m.indexOf('[your reason]') !== -1 || m.indexOf('[your country]') !== -1){alert(jt.alert_example);return;}
   if(!selr){alert(jt.alert_route);return;}
+  
+  // LAAG 1+2: CLIENT-SIDE SECURITY CHECK
+  var dangerousPatterns = [/<script/i,/<iframe/i,/javascript:/i,/onclick=/i,/eval\(/i,/DROP\s+TABLE/i,/SELECT\s+\*/i,/UNION\s+SELECT/i];
+  var badWords = ['porn','xxx','sex','nude','naked','casino','viagra','bitcoin','crypto','onlyfans'];
+  var fieldsToCheck = [n, m, document.getElementById('fc') ? document.getElementById('fc').value : ''];
+  for(var fi=0; fi<fieldsToCheck.length; fi++){
+    var fv = fieldsToCheck[fi] || '';
+    for(var pi=0; pi<dangerousPatterns.length; pi++){
+      if(dangerousPatterns[pi].test(fv)){ alert('Invalid content detected. Please check your input.'); return; }
+    }
+    var fvl = fv.toLowerCase();
+    for(var bi=0; bi<badWords.length; bi++){
+      if(fvl.indexOf(badWords[bi]) !== -1){ alert('Inappropriate content detected. Please check your input.'); return; }
+    }
+  }
+  // Check for URLs in story
+  if(m && /https?:\/\//.test(m)){ alert('Please do not include URLs in your story.'); return; }
   if(!tel&&!testMode){alert(jt.alert_phone);return;}
   if(checkSpam('join'))return;
   var btn=document.querySelector('.jsub');btn.textContent=jt.sending;btn.disabled=true;
