@@ -1228,112 +1228,66 @@ function submitForm(){
   var cc=(document.getElementById('fcc')||{value:''}).value;
   var tel=(document.getElementById('ftel')||{value:''}).value.trim();
   var phone=cc&&tel?cc.replace('CA','')+' '+tel:tel;
-  var testMode = n.toLowerCase() === 'test';
-  var jt = getJT();
-  if(!n||!e||!l||!m){alert(jt.alert_fields);return;}
-  if(m.indexOf('[your name]') !== -1 || m.indexOf('[your trade]') !== -1 || m.indexOf('[your reason]') !== -1 || m.indexOf('[your country]') !== -1){alert(jt.alert_example);return;}
+  var jt=getJT();
+  if(!n||!e||!l){alert(jt.alert_fields);return;}
   if(!selr){alert(jt.alert_route);return;}
-  
-  // LAAG 1+2: CLIENT-SIDE SECURITY CHECK
-  var dangerousPatterns = [/<script/i,/<iframe/i,/javascript:/i,/onclick=/i,/eval\(/i,/DROP\s+TABLE/i,/SELECT\s+\*/i,/UNION\s+SELECT/i];
-  var badWords = ['porn','xxx','sex','nude','naked','casino','viagra','bitcoin','crypto','onlyfans'];
-  var fieldsToCheck = [n, m, document.getElementById('fc') ? document.getElementById('fc').value : ''];
-  for(var fi=0; fi<fieldsToCheck.length; fi++){
-    var fv = fieldsToCheck[fi] || '';
-    for(var pi=0; pi<dangerousPatterns.length; pi++){
-      if(dangerousPatterns[pi].test(fv)){ alert('Invalid content detected. Please check your input.'); return; }
-    }
-    var fvl = fv.toLowerCase();
-    for(var bi=0; bi<badWords.length; bi++){
-      if(fvl.indexOf(badWords[bi]) !== -1){ alert('Inappropriate content detected. Please check your input.'); return; }
-    }
+
+  // Security check
+  var danger=[/<script/i,/javascript:/i,/onclick=/i,/DROP\s+TABLE/i,/UNION\s+SELECT/i];
+  var badW=['porn','xxx','nude','casino','viagra','bitcoin','onlyfans'];
+  for(var fi=0;fi<[n,m].length;fi++){
+    var fv=[n,m][fi]||'';
+    for(var pi=0;pi<danger.length;pi++){if(danger[pi].test(fv)){alert('Invalid content.');return;}}
+    var fvl=fv.toLowerCase();
+    for(var bi=0;bi<badW.length;bi++){if(fvl.indexOf(badW[bi])!==-1){alert('Inappropriate content.');return;}}
   }
-  // Check for URLs in story
-  if(m && /https?:\/\//.test(m)){ alert('Please do not include URLs in your story.'); return; }
-  if(!tel&&!testMode){alert(jt.alert_phone);return;}
-  if(checkSpam('join'))return;
-  var btn=document.querySelector('.jsub');btn.textContent=jt.sending;btn.disabled=true;
-  var regData={naam:n,email:e,bedrijf:(document.getElementById('fco')||{value:''}).value,land:l,telefoon:phone,type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':selr==='student'?'Student':'Sponsor',vak:(document.getElementById('ftr')||{value:''}).value,bericht:m};
-  if(testMode){
-    var testData=Object.assign({},regData,{naam:'[TEST] '+n});
-    fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(testData)}).catch(function(){});
-    btn.textContent=jt.submit;btn.disabled=false;
-    var safeN2=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    openChat();
-    setTimeout(function(){
-      clearCards();
-      var wT=document.getElementById('msgs');
-      var okT=document.createElement('div');okT.className='msg ai';
-      regProfile = {name: n, company: (document.getElementById('fco')||{value:''}).value, country: l, type: selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor', trade: (document.getElementById('ftr')||{value:''}).value, why: m};
-    okT.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong style="color:orange">\uD83E\uDDEA TEST MODE \uD83E\uDDEA</strong><br><br><strong>Welcome, '+safeN2+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br><div style="background:rgba(196,154,108,.15);border:1px solid rgba(196,154,108,.4);border-radius:8px;padding:.75rem;margin:.5rem 0"><strong>\uD83D\uDCF2 One more important step \u2014 introduce yourself to the world!</strong><br><br>Post on <strong>Instagram</strong> and/or <strong>Facebook</strong> and add <strong>@unitedwoodfloorlayers</strong> as a <strong>collaborator</strong> on your post.<br><br>Share who you are, how long you have been in the trade, why you joined, and invite your colleagues.</div><br><em style="opacity:.6;font-size:11px">This was a test \u2014 email sent, nothing saved to database.</em><br><br><div style="display:flex;gap:8px;margin-top:.75rem"><button onclick="startPostFlow()" style="background:var(--wood);border:none;color:#fff;padding:.5rem 1rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif">\uD83D\uDCDD Yes, help me write my post!</button><button onclick="skipPostFlow()" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:.5rem 1rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif">I will do it myself</button></div></div>';
-      if(wT){wT.appendChild(okT);wT.scrollTop=99999;}
-    },200);
-    return;
+  if(m&&/https?:\/\//.test(m)){alert('No URLs in story please.');return;}
+
+  var btn=document.querySelector('.jsub');
+  if(btn){btn.textContent='...';btn.disabled=true;}
+
+  var regData={
+    naam:n,email:e,land:l,bericht:m,telefoon:phone,
+    bedrijf:(document.getElementById('fco')||{value:''}).value,
+    vak:(document.getElementById('fvak')||{value:''}).value||'',
+    type:selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':selr==='student'?'Student':'Sponsor'
+  };
+
+  function doRegister(){
+    var photoFile=document.getElementById('fphoto')?document.getElementById('fphoto').files[0]:null;
+    if(photoFile&&compressedPhotoData){
+      fetch('/.netlify/functions/upload-photo',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fileName:photoFile.name,fileData:compressedPhotoData,fileType:'image/jpeg',participantEmail:e,participantName:n})})
+      .then(function(r){return r.json();}).then(function(d){saveReg(d.url||null);}).catch(function(){saveReg(null);});
+    } else { saveReg(null); }
   }
-  // Upload photo if selected, then submit
-  var photoFile = document.getElementById('fphoto') ? document.getElementById('fphoto').files[0] : null;
-  function doSubmit(photoUrl){
-    var finalData = Object.assign({}, regData, photoUrl ? {photo_url: photoUrl} : {});
-    // First save to Supabase, get ID, then send to Google Sheets with approve links
-    fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:finalData})})
+
+  function saveReg(photoUrl){
+    var fd=Object.assign({},regData,photoUrl?{photo_url:photoUrl}:{});
+    fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:fd})})
     .then(function(r){return r.json();})
     .then(function(d){
-      var sheetsData = Object.assign({}, finalData, {
-        type_label: 'Nieuwe UWFL aanmelding',
-        goedkeuren: d.approveUrl || '',
-        afwijzen: d.rejectUrl || ''
-      });
-      fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(sheetsData)}).catch(function(){});
-    }).catch(function(){});
-    btn.textContent=jt.submit;btn.disabled=false;
+      fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},fd,{goedkeuren:d.approveUrl||'',afwijzen:d.rejectUrl||''}))}).catch(function(){});
+      if(btn){btn.textContent=jt.submit;btn.disabled=false;}
+      openChat();
+      setTimeout(function(){
+        clearCards();
+        var w=document.getElementById('msgs');
+        var ok=document.createElement('div');ok.className='msg ai';
+        regProfile={name:n,company:(document.getElementById('fco')||{value:''}).value,country:l,type:fd.type};
+        ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong>Welcome, '+n.replace(/</g,'&lt;')+'! \uD83C\uDF31</strong><br><br>Your registration is being reviewed. You will appear in the app shortly. \uD83D\uDC4D</div>';
+        if(w){w.appendChild(ok);w.scrollTop=99999;}
+      },200);
+    }).catch(function(){if(btn){btn.textContent=jt.submit;btn.disabled=false;}});
   }
-  if(photoFile){
-    // Use already-compressed data if available
-    var photoData = compressedPhotoData || null;
-    if(photoData){
-      fetch('/.netlify/functions/upload-photo',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({fileName:photoFile.name,fileData:photoData,fileType:'image/jpeg',participantEmail:e})
-      })
-      .then(function(r){return r.json();})
-      .then(function(d){ doSubmit(d.url||null); })
-      .catch(function(){ doSubmit(null); });
-    } else {
-      var reader2 = new FileReader();
-      reader2.onload = function(ev){
-        fetch('/.netlify/functions/upload-photo',{
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({fileName:photoFile.name,fileData:ev.target.result,fileType:photoFile.type,participantEmail:e})
-        })
-        .then(function(r){return r.json();})
-        .then(function(d){ doSubmit(d.url||null); })
-        .catch(function(){ doSubmit(null); });
-      };
-      reader2.readAsDataURL(photoFile);
-    }
-  } else {
-    doSubmit(null);
-  }
-  var safeN=n.replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  openChat();
-  setTimeout(function(){
-    clearCards();
-    var w=document.getElementById('msgs');
-    var ok=document.createElement('div');ok.className='msg ai';
-    // Store profile for post generation
-  regProfile = {name: n, company: (document.getElementById('fco')||{value:''}).value, country: l, type: selr==='maker'?'Maker':selr==='part'?'Participant':selr==='bijdrager'?'Contributor':'Sponsor', trade: (document.getElementById('ftr')||{value:''}).value, why: m};
-  ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong>Welcome, '+safeN+'! \uD83C\uDF31</strong><br><br>You are now officially part of United Wood Floor Layers \u2014 Pay It Forward.<br><br><div style="background:rgba(196,154,108,.15);border:1px solid rgba(196,154,108,.4);border-radius:8px;padding:.75rem;margin:.5rem 0"><strong>\uD83D\uDCF2 One more important step \u2014 introduce yourself to the world!</strong><br><br>Post on <strong>Instagram</strong> and/or <strong>Facebook</strong> to let people know you have joined this movement.<br><br><strong>Important:</strong> Add <strong>@unitedwoodfloorlayers</strong> as a <strong>collaborator</strong> on your post \u2014 this connects your story to the movement and helps others find it.<br><br>In your post, share:<br>\u2022 Who you are and what you do<br>\u2022 How long you have been in the trade<br>\u2022 Why you joined this movement<br>\u2022 An invitation to your colleagues to join<br><br><em style="font-size:11px;opacity:.6">By tagging @unitedwoodfloorlayers as collaborator, your post appears on our page too \u2014 reaching the entire community.</em></div><br><strong>Not sure what to write?</strong> I can help you create the perfect post in just 10 questions!<br><br><div style="display:flex;gap:8px;margin-top:.75rem"><button onclick="startPostFlow()" style="background:var(--wood);border:none;color:#fff;padding:.5rem 1rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif">\uD83D\uDCDD Yes, help me write my post!</button><button onclick="skipPostFlow()" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:.5rem 1rem;border-radius:8px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif">I will do it myself</button></div></div>';
-    if(w){w.appendChild(ok);w.scrollTop=99999;}
-  },200);
-}
 
-// LANG
-var TRANS_CACHE = {};    // lang -> {ui done}
-var CARD_CACHE = {};     // lang+key -> translated card
-var CARD_PREFETCH_DONE = {}; // lang -> bool
-var langNames = {nl:'Dutch',es:'Spanish (Spain)',fr:'French',de:'German',it:'Italian'};
+  if(typeof grecaptcha!=='undefined'){
+    grecaptcha.ready(function(){
+      grecaptcha.execute('6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B',{action:'register'}).then(function(token){
+        regData.recaptcha_token=token;doRegister();
+      });
+    });
+  } else { doRegister(); }
+}
 
 function showToast(msg, hide){
   var t = document.getElementById('lang-toast');
