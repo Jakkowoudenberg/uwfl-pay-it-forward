@@ -842,6 +842,12 @@ function renderParticipants(data) {
   data.forEach(function(p){ if(p.country) countries[p.country] = (countries[p.country]||0)+1; });
   var countryCount = Object.keys(countries).length;
 
+  // Update splash counters
+  var cntEl = document.getElementById('cnt');
+  var cntCEl = document.getElementById('cnt-countries');
+  if(cntEl) cntEl.textContent = total;
+  if(cntCEl) cntCEl.textContent = countryCount;
+
   var partLabels = {en:{p:'Participants',c:'Countries',cats:{Initiator:'Initiators',Maker:'Makers',Contributor:'Contributors',Participant:'Participants',Student:'Students',Sponsor:'Sponsors'}},nl:{p:'Deelnemers',c:'Landen',cats:{Initiator:'Initiators',Maker:'Makers',Contributor:'Bijdragers',Participant:'Deelnemers',Student:'Studenten',Sponsor:'Sponsors'}},es:{p:'Participantes',c:'Pa\u00edses',cats:{Initiator:'Iniciadores',Maker:'Creadores',Contributor:'Colaboradores',Participant:'Participantes',Student:'Estudiantes',Sponsor:'Patrocinadores'}},fr:{p:'Participants',c:'Pays',cats:{Initiator:'Initiateurs',Maker:'Cr\u00e9ateurs',Contributor:'Contributeurs',Participant:'Participants',Student:'\u00c9tudiants',Sponsor:'Sponsors'}},de:{p:'Teilnehmer',c:'L\u00e4nder',cats:{Initiator:'Initiatoren',Maker:'Macher',Contributor:'Beitragende',Participant:'Teilnehmer',Student:'Studenten',Sponsor:'Sponsoren'}},it:{p:'Partecipanti',c:'Paesi',cats:{Initiator:'Iniziatori',Maker:'Creatori',Contributor:'Contributori',Participant:'Partecipanti',Student:'Studenti',Sponsor:'Sponsor'}}};
   var PL = partLabels[currentLang] || partLabels['en'];
   var html = '<div class="srow"><div class="sbox"><span class="sn">'+total+'</span><span class="sl">'+PL.p+'</span></div><div class="sbox"><span class="sn">'+countryCount+'</span><span class="sl">'+PL.c+'</span></div></div>';
