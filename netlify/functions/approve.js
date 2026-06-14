@@ -8,7 +8,7 @@ exports.handler = async function(event, context) {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
 
   const adminKey = event.headers['x-admin-key'];
-  if (adminKey !== 'Nwrfh4a1!') {
+  if (adminKey !== 'Nwrfph4a1!') {
     return { statusCode: 401, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 
