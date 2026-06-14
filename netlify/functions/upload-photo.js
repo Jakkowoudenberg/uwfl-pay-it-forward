@@ -25,8 +25,25 @@ exports.handler = async function(event, context) {
     const SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
 
     // Decode base64 image
+    // LAAG 1: Validate file type server-side
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!allowedTypes.includes(fileType)) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid file type. Only images allowed.' }) };
+    }
+    
+    // Check base64 magic bytes to verify it's really an image
+    const base64Header = fileData.substring(0, 50);
+    if (!base64Header.startsWith('data:image/')) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid file format.' }) };
+    }
+    
     const base64Data = fileData.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
+    
+    // Check file size (max 10MB after decode)
+    if (buffer.length > 10 * 1024 * 1024) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'File too large.' }) };
+    }
 
     // Create unique filename
     const safeName = (participantName || participantEmail || 'participant')
