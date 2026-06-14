@@ -731,7 +731,7 @@ function buildJoinForm() {
   +'<p class="jhint">'+jt.hint+'</p>'
   +'<div id="photo-fld" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)">'
   +'<label style="display:block;font-size:11px;color:rgba(255,255,255,.8);margin-bottom:6px">📷 '+jt.photo_label+'</label>'
-  +'<div id="photo-dropzone" onclick="document.getElementById(\"fphoto\").click()" style="border:2px dashed rgba(255,255,255,.3);border-radius:10px;padding:1rem;text-align:center;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px">'+jt.photo_drop+'<input type="file" id="fphoto" accept="image/*" style="display:none" onchange="previewPhoto(this)"></div>'
+  +'<input type="file" id="fphoto" accept="image/*" onchange="previewPhoto(this)" style="width:100%;font-size:13px;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:.5rem;cursor:pointer;box-sizing:border-box">'
   +'<div id="photo-preview" style="display:none;margin-bottom:8px"><img id="photo-img" src="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--wood)"/></div>'
   +'<p style="font-size:10px;color:rgba(255,255,255,.4);margin-top:4px">'+jt.photo_hint+'</p>'
   +'</div>'
