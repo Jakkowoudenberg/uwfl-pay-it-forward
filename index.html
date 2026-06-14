@@ -1274,8 +1274,17 @@ function submitForm(){
   var photoFile = document.getElementById('fphoto') ? document.getElementById('fphoto').files[0] : null;
   function doSubmit(photoUrl){
     var finalData = Object.assign({}, regData, photoUrl ? {photo_url: photoUrl} : {});
-    fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(finalData)}).catch(function(){});
-    fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:finalData})}).catch(function(){});
+    // First save to Supabase, get ID, then send to Google Sheets with approve links
+    fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:finalData})})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var sheetsData = Object.assign({}, finalData, {
+        type_label: 'Nieuwe UWFL aanmelding',
+        goedkeuren: d.approveUrl || '',
+        afwijzen: d.rejectUrl || ''
+      });
+      fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(sheetsData)}).catch(function(){});
+    }).catch(function(){});
     btn.textContent=jt.submit;btn.disabled=false;
   }
   if(photoFile){
