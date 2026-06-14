@@ -748,10 +748,22 @@ document.addEventListener('DOMContentLoaded', function(){
   ['nl','es','fr','de','it'].forEach(function(l){ TRANS_CACHE[l] = true; });
   applyLang('en');
   // Fetch live count
-  fetch('/.netlify/functions/participants')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      if(Array.isArray(data)){
+  // Hardcoded counter - updated manually when participants change
+  (function(){
+    var data_mock = {length: 39, countries: 8};
+    var target = data_mock.length;
+    var countryCount = data_mock.countries;
+    var i = 0;
+    function tick(){ if(i < target){ i++; document.getElementById('cnt').textContent = i; setTimeout(tick, 40); } }
+    setTimeout(tick, 500);
+    var cc = document.getElementById('cnt-countries');
+    if(cc) cc.textContent = countryCount;
+  })();
+
+  fetch('/.netlify/functions/participants')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(Array.isArray(data) && data.length > 0){
         var target = data.length;
         var countries = {};
         data.forEach(function(p){ if(p.country) countries[p.country] = true; });
@@ -772,7 +784,7 @@ document.addEventListener('DOMContentLoaded', function(){
     .catch(function(){
       // Fallback to 34
       var j = 0;
-      function tickFallback(){ if(j<34){j++;document.getElementById('cnt').textContent=j;setTimeout(tickFallback,50);} }
+      function tickFallback(){ if(j<39){j++;document.getElementById('cnt').textContent=j;setTimeout(tickFallback,50);} }
       setTimeout(tickFallback,500);
     });
 });
