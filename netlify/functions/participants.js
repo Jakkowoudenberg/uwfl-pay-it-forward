@@ -11,11 +11,11 @@ exports.handler = async function(event, context) {
 
   try {
     const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/registrations?select=name,company,country,type,message,photo_url&order=country.asc,name.asc`,
+      `${process.env.SUPABASE_URL}/rest/v1/registrations?select=name,company,country,type,message,photo_url&status=eq.approved&order=country.asc,name.asc`,
       {
         headers: {
-          'apikey': process.env.SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
+          'apikey': process.env.SUPABASE_SERVICE_KEY,
+          'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
           'Content-Type': 'application/json'
         }
       }
