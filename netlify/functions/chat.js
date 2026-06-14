@@ -331,7 +331,24 @@ exports.handler = async function(event) {
       // ============================================================
       // END SECURITY VALIDATION
       // ============================================================
-      
+
+      // LAAG 3: reCAPTCHA v3 verification
+      if (reg.recaptcha_token) {
+        try {
+          const captchaResp = await fetch(
+            `https://www.google.com/recaptcha/api/siteverify?secret=6Lddlx4tAAAAAEbT07yrQT5RHZvnK0XpZ__Ekmt5&response=${reg.recaptcha_token}`,
+            { method: 'POST' }
+          );
+          const captchaData = await captchaResp.json();
+          if (!captchaData.success || captchaData.score < 0.5) {
+            return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'reCAPTCHA verification failed. Please try again.' }) };
+          }
+        } catch(e) {
+          console.log('reCAPTCHA check failed:', e.message);
+          // Don't block if reCAPTCHA is unavailable
+        }
+      }
+
       // Auto-translate message to English if present
       let messageInEnglish = reg.bericht || null;
       if (messageInEnglish && messageInEnglish.trim().length > 0) {
