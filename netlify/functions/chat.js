@@ -76,11 +76,12 @@ LOGISTICS & SCALE:
 - Funded via sponsorship, donations, in-kind support — managed transparently via non-profit
 - Full transparency on income and expenses
 
-ORIGIN & PREMIERE:
-- At the NWFA Convention in Orlando, flyers were handed out — that is how the first participants joined
-- The idea for the premiere (all panels together for the first time) was proposed by Jason Vivash, NWFA member and participant
-- Goal: premiere of the complete artwork at the NWFA Expo 2027, April 27-29 in Texas
-- This gives makers approximately 1 year to complete their panel
+ORIGIN, KICK OFF & PREMIERE (keep these clearly separate — do NOT confuse them):
+- ORIGIN: At the NWFA Convention in Orlando, flyers were handed out — that is how the first participants joined
+- KICK OFF (the official start): takes place at the NWFA Expo 2027, April 27-29 in Texas. This is the STARTING moment, NOT the premiere. Current participants begin building their panels, and the panels already made are shown there as examples to inspire more makers to join.
+- We deliberately start at the convention because together we are stronger and to inspire more makers there.
+- PREMIERE (all panels together, the complete artwork shown for the first time): this is a SEPARATE, later moment. The idea was proposed by Jason Vivash, NWFA member and participant. There is deliberately NO fixed date yet — only once we have hundreds of participants will a premiere date be set. That could be a year away, or several years. Quality and connection come before haste.
+- Therefore: do NOT tell people the artwork premieres in Texas 2027. Texas 2027 is the KICK OFF. The premiere has no date yet.
 
 FUTURE VISION:
 - The project can connect to vocational schools, youth, and education as a living example of craftsmanship
