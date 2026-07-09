@@ -1,4 +1,4 @@
-const SYS = `You are UNITED WOOD FLOOR LAYERS (UWFL) — the movement speaking in first person plural (we, us, our). Not a person, not a company, not a brand. A global movement of floor layers united around one shared artwork and one shared intention: connecting, passing on, and giving meaning to craftsmanship.
+function buildSys(statsBlock) { return `You are UNITED WOOD FLOOR LAYERS (UWFL) — the movement speaking in first person plural (we, us, our). Not a person, not a company, not a brand. A global movement of floor layers united around one shared artwork and one shared intention: connecting, passing on, and giving meaning to craftsmanship.
 
 When asked about Jakko Woudenberg: acknowledge briefly as initiator and artistic visionary. He started it but does not own it. The project is bigger than any one person. His proven track record and international reputation within the trade give the project credibility — but this is not about him.
 
@@ -132,7 +132,7 @@ Jakko Woudenberg, Che Polfliet, Michael Devriendt, Marcel Schipper, Johan Zwartb
 These are the people who dared to take the first step. Each brings their own story, culture and craftsmanship.
 
 CURRENT STATUS:
-- 33 participants from 8 countries: 13 USA, 10 Netherlands, 3 Spain, 2 Belgium, 1 Germany, 1 Italy, 1 Canada, 1 Portugal
+${statsBlock}
 - Growing movement
 
 POLITICS, RELIGION, CONDUCT & PROTECTION:
@@ -178,7 +178,50 @@ The movement never judges people — but it does protect its values.
 
 Answer in the same language as the question. Warm, direct, deeply human. Never corporate. 2-4 sentences normally, longer when the question deserves depth. End with an open question when appropriate. Speak as a living movement, not a helpdesk.
 
-WEB SEARCH: You have access to web search. Before answering questions about current news, events, new participants, media coverage, or anything that may have developed recently about UWFL or United Wood Floor Layers, search the web first. Search for: "United Wood Floor Layers", "UWFL Pay It Forward", "unitedwoodfloorlayers.com". Use what you find to enrich your answer with the latest information.`;
+WEB SEARCH: You have access to web search. Before answering questions about current news, events, new participants, media coverage, or anything that may have developed recently about UWFL or United Wood Floor Layers, search the web first. Search for: "United Wood Floor Layers", "UWFL Pay It Forward", "unitedwoodfloorlayers.com". Use what you find to enrich your answer with the latest information.`; }
+
+// Live participant stats from Supabase, cached briefly to avoid a query on every chat message
+let statsCache = { text: null, time: 0 };
+const STATS_CACHE_MS = 5 * 60 * 1000; // 5 minutes
+
+async function getStatsBlock() {
+  const now = Date.now();
+  if (statsCache.text && (now - statsCache.time) < STATS_CACHE_MS) {
+    return statsCache.text;
+  }
+  try {
+    const resp = await fetch(
+      `${process.env.SUPABASE_URL}/rest/v1/registrations?status=eq.approved&select=country`,
+      {
+        headers: {
+          'apikey': process.env.SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`
+        }
+      }
+    );
+    const rows = await resp.json();
+    if (!Array.isArray(rows)) throw new Error('unexpected response');
+
+    const counts = {};
+    for (const row of rows) {
+      const c = (row.country || 'Unknown').trim();
+      counts[c] = (counts[c] || 0) + 1;
+    }
+    const total = rows.length;
+    const countryList = Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([country, count]) => `${count} ${country}`)
+      .join(', ');
+    const numCountries = Object.keys(counts).length;
+
+    const text = `- ${total} participants from ${numCountries} countries: ${countryList}`;
+    statsCache = { text, time: now };
+    return text;
+  } catch (e) {
+    console.log('Stats fetch failed, using fallback:', e.message);
+    return statsCache.text || '- A growing international movement of floor layers and participants';
+  }
+}
 
 // Simple in-memory rate limiter
 const rateLimits = new Map();
@@ -495,6 +538,8 @@ exports.handler = async function(event) {
 
     // CHAT MODE
     const { messages } = body;
+    const statsBlock = await getStatsBlock();
+    const SYS = buildSys(statsBlock);
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
