@@ -195,8 +195,8 @@ async function getStatsBlock() {
       `${process.env.SUPABASE_URL}/rest/v1/registrations?status=eq.approved&select=country`,
       {
         headers: {
-          'apikey': process.env.SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`
+          'apikey': process.env.SUPABASE_SERVICE_KEY,
+          'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_KEY}`
         }
       }
     );
@@ -425,8 +425,8 @@ exports.handler = async function(event) {
       const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/registrations`, {
         method: 'POST',
         headers: {
-          'apikey': process.env.SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
+          'apikey': process.env.SUPABASE_SERVICE_KEY,
+          'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
           'Content-Type': 'application/json',
           'Prefer': 'return=minimal'
         },
@@ -450,8 +450,8 @@ exports.handler = async function(event) {
             `${process.env.SUPABASE_URL}/rest/v1/registrations?email=eq.${encodeURIComponent(reg.email)}&order=created_at.desc&limit=1&select=id`,
             {
               headers: {
-                'apikey': process.env.SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`
+                'apikey': process.env.SUPABASE_SERVICE_KEY,
+                'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_KEY}`
               }
             }
           );
