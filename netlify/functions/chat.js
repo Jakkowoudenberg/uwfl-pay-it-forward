@@ -445,6 +445,29 @@ exports.handler = async function(event) {
       // Get the new registration ID for approval links
       let newId = null;
       if (response.ok) {
+        // E-mailmelding via Netlify Forms (geen externe koppeling nodig)
+        try {
+          const formBody = new URLSearchParams({
+            'form-name': 'new-registration',
+            name: reg.naam || '',
+            company: reg.bedrijf || '-',
+            email: reg.email || '',
+            country: reg.land || '',
+            phone: reg.telefoon || '-',
+            type: reg.type || '',
+            trade: reg.vak || '-',
+            message: messageInEnglish || '-'
+          }).toString();
+
+          await fetch('https://app.unitedwoodfloorlayers.com/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formBody
+          });
+        } catch (e) {
+          console.log('Netlify form notification failed (registratie is wel opgeslagen):', e.message);
+        }
+
         try {
           const getResp = await fetch(
             `${process.env.SUPABASE_URL}/rest/v1/registrations?email=eq.${encodeURIComponent(reg.email)}&order=created_at.desc&limit=1&select=id`,
