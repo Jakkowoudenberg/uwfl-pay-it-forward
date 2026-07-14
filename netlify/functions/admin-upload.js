@@ -11,7 +11,7 @@ exports.handler = async function(event, context) {
 
   // Simple admin key check
   const adminKey = event.headers['x-admin-key'];
-  if (adminKey !== 'UWFL2024admin') {
+  if (!process.env.ADMIN_KEY || adminKey !== process.env.ADMIN_KEY) {
     return { statusCode: 401, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 

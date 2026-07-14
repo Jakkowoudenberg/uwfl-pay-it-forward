@@ -946,13 +946,27 @@ function closeAdmin(){
   document.getElementById('admin-panel').style.display='none';
 }
 
+var ADMIN_PW = null;  // alleen in geheugen tijdens sessie, nooit in de broncode
+
 function checkAdminPw(){
   var pw = document.getElementById('admin-pw').value;
-  if(pw === 'Nwrfph4a1!'){
-    document.getElementById('admin-login').style.display='none';
-    document.getElementById('admin-content').style.display='block';
-    loadPending();
-  } else {
+  // Server controleert het wachtwoord; de code bevat geen geheim
+  fetch('/.netlify/functions/admin-pending',{headers:{'X-Admin-Key':pw}})
+  .then(function(r){
+    if(r.status === 200){
+      ADMIN_PW = pw;
+      document.getElementById('admin-login').style.display='none';
+      document.getElementById('admin-content').style.display='block';
+      loadPending();
+    } else {
+      badAdminPw();
+    }
+  })
+  .catch(function(){ badAdminPw(); });
+}
+
+function badAdminPw(){
+  {
     alert('Ongeldig wachtwoord');
     document.getElementById('admin-pw').value='';
   }
@@ -961,7 +975,7 @@ function checkAdminPw(){
 function loadPending(){
   var list = document.getElementById('admin-pending-list');
   list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Laden...</p>';
-  fetch('/.netlify/functions/admin-pending',{headers:{'X-Admin-Key':'Nwrfph4a1!'}})
+  fetch('/.netlify/functions/admin-pending',{headers:{'X-Admin-Key':ADMIN_PW}})
   .then(function(r){return r.json();})
   .then(function(data){
     if(!data.length){
@@ -988,7 +1002,7 @@ function loadPending(){
 
 function adminDo(id, action){
   fetch('/.netlify/functions/approve?id='+id+'&action='+action,{
-    headers:{'X-Admin-Key':'Nwrfph4a1!'}
+    headers:{'X-Admin-Key':ADMIN_PW}
   })
   .then(function(){
     loadPending();
