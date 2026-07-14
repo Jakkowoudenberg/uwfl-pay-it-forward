@@ -194,7 +194,9 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 
 <!-- Verborgen Netlify-formulier: vangt nieuwe aanmeldingen op zodat Netlify een e-mailmelding stuurt.
      Wordt server-side gevuld door netlify/functions/chat.js (register mode). Niet zichtbaar voor bezoekers. -->
-<form name="new-registration" netlify netlify-honeypot="bot-field" hidden>
+<form name="new-registration" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="new-registration" />
+  <input type="text" name="bot-field" />
   <input type="text" name="name" />
   <input type="text" name="company" />
   <input type="email" name="email" />
