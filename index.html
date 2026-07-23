@@ -257,7 +257,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
   <div class="sp-info" id="sp-info">
     <div class="sp-info-title" id="sp-info-title"></div>
     <div id="sp-info-body"></div>
-    <button onclick="closeSplashInfo()" style="margin-top:1rem;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:6px 16px;color:rgba(255,255,255,.7);font-family:Inter,sans-serif;font-size:12px;cursor:pointer;width:100%">&#x2715; Sluiten</button>
+    <button id="sp-info-close" onclick="closeSplashInfo()" style="margin-top:1rem;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:6px 16px;color:rgba(255,255,255,.7);font-family:Inter,sans-serif;font-size:12px;cursor:pointer;width:100%">&#x2715; Close</button>
   </div>
 
   <div class="sp-socials">
@@ -1474,6 +1474,10 @@ function applyLang(lang){
   if(pwaBtn && pwaBtn.classList.contains('show') && typeof PWA_LABELS !== 'undefined'){
     pwaBtn.textContent = PWA_LABELS[lang]||PWA_LABELS['en'];
   }
+  var closeBtn = document.getElementById('sp-info-close');
+  if(closeBtn && typeof CLOSE_LABELS !== 'undefined'){
+    closeBtn.textContent = CLOSE_LABELS[lang] || CLOSE_LABELS['en'];
+  }
   var L = LANG[lang] || LANG['en'];
   document.getElementById('sp-sub').textContent = L.sub || LANG['en'].sub;
   document.getElementById('main-btn').textContent = L.btn || LANG['en'].btn;
@@ -1997,6 +2001,15 @@ function rz(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,
 <script>
 // PWA Install
 var deferredPrompt = null;
+
+var CLOSE_LABELS = {
+  en:'\u2715 Close',
+  nl:'\u2715 Sluiten',
+  es:'\u2715 Cerrar',
+  fr:'\u2715 Fermer',
+  de:'\u2715 Schlie\u00dfen',
+  it:'\u2715 Chiudi'
+};
 
 var PWA_LABELS = {
   en:'📲 Download the webapp — No App Store needed',
