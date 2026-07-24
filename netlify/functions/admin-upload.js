@@ -17,13 +17,31 @@ exports.handler = async function(event, context) {
 
   try {
     const body = JSON.parse(event.body);
-    const { participantName, fileData } = body;
+    const { participantName, fileData, fileType } = body;
+
+    if (!participantName || !fileData) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing data' }) };
+    }
 
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
 
+    // Validate it is really an image (same checks as upload-photo)
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (fileType && !allowedTypes.includes(fileType)) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid file type. Only images allowed.' }) };
+    }
+    if (!fileData.startsWith('data:image/')) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid file format.' }) };
+    }
+
     const base64Data = fileData.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
+
+    // Max 10MB after decode
+    if (buffer.length > 10 * 1024 * 1024) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'File too large.' }) };
+    }
 
     const safeName = participantName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
     const fileName = `${safeName}.jpg`;
