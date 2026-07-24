@@ -72,22 +72,11 @@ exports.handler = async function(event, context) {
 
     const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/participant-photos/${uniqueName}`;
 
-    // Update registrations table if participantName provided
-    if (participantName) {
-      await fetch(
-        `${SUPABASE_URL}/rest/v1/registrations?name=eq.${encodeURIComponent(participantName)}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'apikey': SERVICE_KEY,
-            'Authorization': `Bearer ${SERVICE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify({ photo_url: publicUrl })
-        }
-      );
-    }
+    // Note: the photo URL is returned to the client, which stores it
+    // directly on the registration when it is created. We deliberately do
+    // NOT match on name here -- name matching was fragile (any mismatch
+    // left the photo orphaned) and is unnecessary now the client passes
+    // the URL straight into the registration.
 
     return {
       statusCode: 200,
