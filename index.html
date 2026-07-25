@@ -776,8 +776,7 @@ function buildJoinForm() {
   +'<div class="rgrid">'
   +'<button class="rbtn" id="rm" onclick="selRoute(\'maker\')"><span class="ri">&#x1FAB5;</span><span class="rt">'+jt.maker_title+'</span><span class="rs">'+jt.maker_desc+'</span></button>'
   +'<button class="rbtn" id="rp" onclick="selRoute(\'part\')"><span class="ri">&#x1F91D;</span><span class="rt">'+jt.part_title+'</span><span class="rs">'+jt.part_desc+'</span></button>'
-  +'<button class="rbtn" id="rb" onclick="selRoute(\'bijdrager\')"><span class="ri">&#x1F4AA;</span><span class="rt">'+jt.contrib_title+'</span><span class="rs">'+jt.contrib_desc+'</span></button>'
-  +'<button class="rbtn" id="rs" onclick="selRoute(\'sponsor\')"><span class="ri">&#x1F4B0;</span><span class="rt">'+jt.sponsor_title+'</span><span class="rs">'+jt.sponsor_desc+'</span></button>'
+  +'<button class="rbtn" id="rb" onclick="selRoute(\'bijdrager\')" style="grid-column:1/-1"><span class="ri">&#x1F4AA;</span><span class="rt">'+jt.contrib_title+'</span><span class="rs">'+jt.contrib_desc+'</span></button>'
   +'<button class="rbtn" id="rst" onclick="selRoute(\'student\')" style="grid-column:1/-1"><span class="ri">&#x1F393;</span><span class="rt">'+jt.student_title+'</span><span class="rs">'+jt.student_desc+'</span></button>'
   +'</div>'
   +'<div id="jfields" style="display:none">'
@@ -1247,8 +1246,8 @@ function selRoute(r){
   var pf = document.getElementById('photo-fld');
   if(pf){ pf.style.display = 'block'; setTimeout(initPhotoDrop, 50); }
   selr=r;
-  var ids=['rm','rp','rb','rs'];
-  var vals=['maker','part','bijdrager','sponsor'];
+  var ids=['rm','rp','rb'];
+  var vals=['maker','part','bijdrager'];
   for(var i=0;i<ids.length;i++){
     var el=document.getElementById(ids[i]);
     if(el) el.className=r===vals[i]?'rbtn on':'rbtn';
