@@ -601,7 +601,7 @@ var JOIN_TEXTS = {
     label_bijdrager:'How would you like to help and contribute?',
     label_sponsor:'Tell us about yourself or your company (optional)',
     label_default:'Why do you want to join?',
-    alert_fields:'Please fill in all required fields.',alert_photo:'Please add a photo. A photo is required to join.',
+    alert_fields:'Please fill in all required fields.',alert_photo:'Please add a photo. A photo is required to join.',submit_error:'Something went wrong and your registration was not saved. Please try again.',
     alert_example:'Please write your own story — replace the example text with your personal information.',
     alert_route:'Please select how you want to join (Maker, Participant, Contributor or Sponsor).',
     alert_phone:'Please enter your phone number.',
@@ -633,7 +633,7 @@ var JOIN_TEXTS = {
     label_bijdrager:'Hoe wil je helpen en bijdragen?',
     label_sponsor:'Vertel ons over jezelf of je bedrijf (optioneel)',
     label_default:'Waarom wil je meedoen?',
-    alert_fields:'Vul alle verplichte velden in.',alert_photo:'Voeg een foto toe. Een foto is verplicht om mee te doen.',
+    alert_fields:'Vul alle verplichte velden in.',alert_photo:'Voeg een foto toe. Een foto is verplicht om mee te doen.',submit_error:'Er ging iets mis en je aanmelding is niet opgeslagen. Probeer het opnieuw.',
     alert_example:'Schrijf je eigen verhaal — vervang de voorbeeldtekst door jouw persoonlijke informatie.',
     alert_route:'Selecteer hoe je wilt meedoen (Maker, Deelnemer, Bijdrager of Sponsor).',
     alert_phone:'Voer je telefoonnummer in.',
@@ -665,7 +665,7 @@ var JOIN_TEXTS = {
     label_bijdrager:'¿Cómo te gustaría ayudar y contribuir?',
     label_sponsor:'Cuéntanos sobre ti o tu empresa (opcional)',
     label_default:'¿Por qué quieres unirte?',
-    alert_fields:'Por favor rellena todos los campos obligatorios.',alert_photo:'Añade una foto. Es obligatoria para participar.',
+    alert_fields:'Por favor rellena todos los campos obligatorios.',alert_photo:'Añade una foto. Es obligatoria para participar.',submit_error:'Algo salió mal y tu inscripción no se guardó. Inténtalo de nuevo.',
     alert_example:'Escribe tu propia historia — reemplaza el texto de ejemplo con tu información personal.',
     alert_route:'Selecciona cómo quieres unirte (Creador, Participante, Colaborador o Patrocinador).',
     alert_phone:'Por favor introduce tu número de teléfono.',
@@ -697,7 +697,7 @@ var JOIN_TEXTS = {
     label_bijdrager:'Comment aimeriez-vous aider et contribuer ?',
     label_sponsor:'Parlez-nous de vous ou de votre entreprise (optionnel)',
     label_default:'Pourquoi voulez-vous rejoindre ?',
-    alert_fields:'Veuillez remplir tous les champs obligatoires.',alert_photo:'Ajoutez une photo. Une photo est obligatoire pour participer.',
+    alert_fields:'Veuillez remplir tous les champs obligatoires.',alert_photo:'Ajoutez une photo. Une photo est obligatoire pour participer.',submit_error:'Une erreur est survenue et votre inscription n\'a pas été enregistrée. Veuillez réessayer.',
     alert_example:'Veuillez écrire votre propre histoire — remplacez le texte d\'exemple par vos informations personnelles.',
     alert_route:'Veuillez sélectionner comment vous souhaitez rejoindre (Créateur, Participant, Contributeur ou Sponsor).',
     alert_phone:'Veuillez entrer votre numéro de téléphone.',
@@ -729,7 +729,7 @@ var JOIN_TEXTS = {
     label_bijdrager:'Wie möchten Sie helfen und beitragen?',
     label_sponsor:'Erzählen Sie uns von sich oder Ihrem Unternehmen (optional)',
     label_default:'Warum möchten Sie mitmachen?',
-    alert_fields:'Bitte füllen Sie alle Pflichtfelder aus.',alert_photo:'Bitte füge ein Foto hinzu. Ein Foto ist zur Teilnahme erforderlich.',
+    alert_fields:'Bitte füllen Sie alle Pflichtfelder aus.',alert_photo:'Bitte füge ein Foto hinzu. Ein Foto ist zur Teilnahme erforderlich.',submit_error:'Etwas ist schiefgelaufen und deine Anmeldung wurde nicht gespeichert. Bitte versuche es erneut.',
     alert_example:'Bitte schreiben Sie Ihre eigene Geschichte — ersetzen Sie den Beispieltext durch Ihre persönlichen Informationen.',
     alert_route:'Bitte wählen Sie, wie Sie mitmachen möchten (Macher, Teilnehmer, Beitragender oder Sponsor).',
     alert_phone:'Bitte geben Sie Ihre Telefonnummer ein.',
@@ -760,7 +760,7 @@ var JOIN_TEXTS = {
     label_bijdrager:'Come vorresti aiutare e contribuire?',
     label_sponsor:'Parlaci di te o della tua azienda (opzionale)',
     label_default:'Perché vuoi unirti?',
-    alert_fields:'Per favore compila tutti i campi obbligatori.',alert_photo:'Aggiungi una foto. È obbligatoria per partecipare.',
+    alert_fields:'Per favore compila tutti i campi obbligatori.',alert_photo:'Aggiungi una foto. È obbligatoria per partecipare.',submit_error:'Qualcosa è andato storto e la tua iscrizione non è stata salvata. Riprova.',
     alert_example:'Per favore scrivi la tua storia — sostituisci il testo di esempio con le tue informazioni personali.',
     alert_route:'Per favore seleziona come vuoi unirti (Creatore, Partecipante, Contributore o Sponsor).',
     alert_phone:'Per favore inserisci il tuo numero di telefono.',
@@ -1425,6 +1425,14 @@ function submitForm(){
     fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'register',data:fd})})
     .then(function(r){return r.json();})
     .then(function(d){
+      // Alleen doorgaan als de aanmelding echt is opgeslagen. Anders geen
+      // notificatiemail en geen valse bevestiging -- de bezoeker krijgt een
+      // foutmelding en kan opnieuw proberen.
+      if(!d||!d.ok){
+        if(btn){btn.textContent=jt.submit;btn.disabled=false;}
+        alert(jt.submit_error||'Something went wrong. Please try again.');
+        return;
+      }
       fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},fd,{goedkeuren:d.approveUrl||'',afwijzen:d.rejectUrl||''}))}).catch(function(){});
       if(btn){btn.textContent=jt.submit;btn.disabled=false;}
       openChat();
@@ -1436,7 +1444,7 @@ function submitForm(){
         ok.innerHTML='<div class="av">&#x1FAB5;</div><div class="bub" style="line-height:1.7"><strong>Welcome, '+n.replace(/</g,'&lt;')+'! \uD83C\uDF31</strong><br><br>Your registration is being reviewed. You will appear in the app shortly. \uD83D\uDC4D</div>';
         if(w){w.appendChild(ok);w.scrollTop=99999;}
       },200);
-    }).catch(function(){if(btn){btn.textContent=jt.submit;btn.disabled=false;}});
+    }).catch(function(){if(btn){btn.textContent=jt.submit;btn.disabled=false;}alert(jt.submit_error||'Something went wrong. Please try again.');});
   }
 
   if(typeof grecaptcha!=='undefined'){
