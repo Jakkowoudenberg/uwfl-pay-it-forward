@@ -449,6 +449,7 @@ exports.handler = async function(event) {
       });
       // Get the new registration ID for approval links
       let newId = null;
+      let newNr = null;
       if (response.ok) {
         // E-mailmelding via Netlify Forms (geen externe koppeling nodig)
         try {
@@ -475,7 +476,7 @@ exports.handler = async function(event) {
 
         try {
           const getResp = await fetch(
-            `${process.env.SUPABASE_URL}/rest/v1/registrations?email=eq.${encodeURIComponent(reg.email)}&order=created_at.desc&limit=1&select=id`,
+            `${process.env.SUPABASE_URL}/rest/v1/registrations?email=eq.${encodeURIComponent(reg.email)}&order=created_at.desc&limit=1&select=id,participant_number`,
             {
               headers: {
                 'apikey': process.env.SUPABASE_SERVICE_KEY,
@@ -484,7 +485,7 @@ exports.handler = async function(event) {
             }
           );
           const rows = await getResp.json();
-          if (rows && rows[0]) newId = rows[0].id;
+          if (rows && rows[0]) { newId = rows[0].id; newNr = rows[0].participant_number; }
         } catch(e) {}
 
         // Add approval links to response so frontend can include in Google Sheets email
@@ -498,7 +499,8 @@ exports.handler = async function(event) {
               ok: true, 
               approveUrl, 
               rejectUrl,
-              id: newId
+              id: newId,
+              participant_number: newNr
             })
           };
         }
