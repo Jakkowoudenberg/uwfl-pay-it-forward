@@ -936,6 +936,11 @@ function renderParticipants(data) {
     Object.keys(byCountry).sort().forEach(function(country){
       var flag = COUNTRY_FLAGS[country] || '\uD83C\uDF0D';
       html += '<div style="margin-top:.6rem"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:.3rem">'+flag+' '+country+' ('+byCountry[country].length+')</div>';
+      byCountry[country].sort(function(a,b){
+        var na=(a.participant_number==null)?999999:a.participant_number;
+        var nb=(b.participant_number==null)?999999:b.participant_number;
+        return na-nb;
+      });
       byCountry[country].forEach(function(p, idx){
         var pid = 'p-'+encodeURIComponent(p.name).replace(/%/g,'_')+'_'+idx;
         var hasStory = p.message && p.message.trim().length > 0;
