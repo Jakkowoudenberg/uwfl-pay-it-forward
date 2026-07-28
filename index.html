@@ -238,7 +238,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     <button class="sp-tp" id="ql-kickoff" onclick="splashInfo('kickoff')" style="background:var(--wood);color:#fff;border-color:var(--wood);font-size:15px;padding:.9rem 1rem;animation:pulse-glow 2.2s ease-in-out infinite">&#x1F680; <span class="ql-lbl">Kick Off</span></button>
     <button class="sp-tp" id="ql-deelnemers" onclick="splashInfo('deelnemers')">&#x1F30D; <span class="ql-lbl">Participants</span></button>
     <button class="sp-tp" id="ql-galerij" onclick="splashInfo('galerij')">&#x1F5BC;&#xFE0F; <span class="ql-lbl">Gallery</span></button>
-    <button class="sp-tp" id="ql-upload" onclick="splashInfo('upload')">&#x2B06;&#xFE0F; <span class="ql-lbl">Share panel</span></button>
+    <button class="sp-tp" id="ql-upload" onclick="splashInfo('upload')">&#x2B06;&#xFE0F; <span class="ql-lbl">Upload panel</span></button>
     <button class="sp-tp" id="ql-join" onclick="splashInfo('join')" style="background:#fff;color:#1a0f05;border-color:#fff;font-size:15px;padding:.9rem 1rem;animation:pulse-glow 2.2s ease-in-out infinite">+ <span class="ql-lbl">Join us</span></button>
     <button class="sp-tp" id="ql-project" onclick="splashInfo('project')">&#x1F4CB; <span class="ql-lbl">What is this?</span></button>
     <button class="sp-tp" id="ql-meedoen" onclick="splashInfo('meedoen')">&#x270B; <span class="ql-lbl">Why join?</span></button>
@@ -441,7 +441,7 @@ var LANG = {
     placeholder: 'Stel je vraag... (in elke taal)',
     btn: 'Stel mij een vraag...',
     join: '+ Doe mee',
-    ql: {upload:'Deel paneel',galerij:'Galerie',regels:'Deelnameregels',privacy:'Jouw gegevens',kickoff:'Kick Off',project:'Wat is dit?',meedoen:'Waarom meedoen?',paneel:'Het paneel','3mensen':'Help 3 mensen',ketting:'Kettingreactie',filosofie:'Filosofie',kunstwerk:'Kunstwerk',deelnemers:'Deelnemers',specs:'Bouwtekening',payitforward:'Pay it Forward',contact:'Contact',news:'Nieuws',suggestions:'Suggesties',join:'Doe mee',initiator:'De Initiator',panelidea:'Hulp bij panelidee'},
+    ql: {upload:'Upload paneel',galerij:'Galerie',regels:'Deelnameregels',privacy:'Jouw gegevens',kickoff:'Kick Off',project:'Wat is dit?',meedoen:'Waarom meedoen?',paneel:'Het paneel','3mensen':'Help 3 mensen',ketting:'Kettingreactie',filosofie:'Filosofie',kunstwerk:'Kunstwerk',deelnemers:'Deelnemers',specs:'Bouwtekening',payitforward:'Pay it Forward',contact:'Contact',news:'Nieuws',suggestions:'Suggesties',join:'Doe mee',initiator:'De Initiator',panelidea:'Hulp bij panelidee'},
     cards: {
       upload: {title:'Deel je paneel',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Afgeronde panelen',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Panelen laden...</div><div id=\"gallery-grid\"></div>'},
@@ -469,7 +469,7 @@ var LANG = {
     placeholder: 'Ask me anything about the project...',
     btn: 'Ask me a question...',
     join: '+ Join us',
-    ql: {upload:'Share panel',galerij:'Gallery',regels:'Participation rules',privacy:'Your data',kickoff:'Kick Off',project:'What is this?',meedoen:'Why join?',paneel:'The panel','3mensen':'Help 3 people',ketting:'Chain reaction',filosofie:'Philosophy',kunstwerk:'The artwork',deelnemers:'Participants',specs:'Technical drawing',payitforward:'Pay it Forward',contact:'Contact',news:'News',suggestions:'Suggestions',initiator:'The Initiator',panelidea:'Help my panel idea',join:'Join us'},
+    ql: {upload:'Upload panel',galerij:'Gallery',regels:'Participation rules',privacy:'Your data',kickoff:'Kick Off',project:'What is this?',meedoen:'Why join?',paneel:'The panel','3mensen':'Help 3 people',ketting:'Chain reaction',filosofie:'Philosophy',kunstwerk:'The artwork',deelnemers:'Participants',specs:'Technical drawing',payitforward:'Pay it Forward',contact:'Contact',news:'News',suggestions:'Suggestions',initiator:'The Initiator',panelidea:'Help my panel idea',join:'Join us'},
     cards: {
       upload: {title:'Share your panel',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Completed panels',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Loading panels...</div><div id=\"gallery-grid\"></div>'},
@@ -497,7 +497,7 @@ var LANG = {
     placeholder: 'Pregunta en cualquier idioma...',
     btn: 'Hazme una pregunta...',
     join: '+ \u00danete',
-    ql: {upload:'Compartir',galerij:'Galería',regels:'Reglas de participación',privacy:'Tus datos',kickoff:'Kick Off',project:'\u00bfQu\u00e9 es esto?',meedoen:'\u00bfPor qu\u00e9 unirse?',paneel:'El panel','3mensen':'Ayuda a 3 personas',ketting:'Reacci\u00f3n en cadena',filosofie:'Filosof\u00eda',kunstwerk:'La obra',deelnemers:'Participantes',specs:'Plano t\u00e9cnico',payitforward:'Pay it Forward',contact:'Contacto',join:'\u00danete',news:'Noticias',suggestions:'Sugerencias',initiator:'El Iniciador',panelidea:'Ayuda con mi idea'},
+    ql: {upload:'Subir',galerij:'Galería',regels:'Reglas de participación',privacy:'Tus datos',kickoff:'Kick Off',project:'\u00bfQu\u00e9 es esto?',meedoen:'\u00bfPor qu\u00e9 unirse?',paneel:'El panel','3mensen':'Ayuda a 3 personas',ketting:'Reacci\u00f3n en cadena',filosofie:'Filosof\u00eda',kunstwerk:'La obra',deelnemers:'Participantes',specs:'Plano t\u00e9cnico',payitforward:'Pay it Forward',contact:'Contacto',join:'\u00danete',news:'Noticias',suggestions:'Sugerencias',initiator:'El Iniciador',panelidea:'Ayuda con mi idea'},
     cards: {
       upload: {title:'Comparte tu panel',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Paneles terminados',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Cargando paneles...</div><div id=\"gallery-grid\"></div>'},
@@ -524,7 +524,7 @@ var LANG = {
     sub: 'Un mouvement mondial de cr\u00e9ateurs et de personnes.',
     btn: 'Posez-moi une question...',
     join: '+ Rejoignez-nous',
-    ql: {upload:'Partager',galerij:'Galerie',regels:'Règles de participation',privacy:'Vos données',kickoff:'Kick Off',project:'C\'est quoi?',meedoen:'Pourquoi rejoindre?',paneel:'Le panneau','3mensen':'Aidez 3 personnes',ketting:'R\u00e9action en cha\u00eene',filosofie:'Philosophie',kunstwerk:'L\'oeuvre',deelnemers:'Participants',specs:'Plan technique',payitforward:'Pay it Forward',contact:'Contact',join:'Rejoindre',news:'Actualités',suggestions:'Suggestions',initiator:'L\u2019Initiateur',panelidea:'Aide pour mon panneau'},
+    ql: {upload:'T\u00e9l\u00e9verser',galerij:'Galerie',regels:'Règles de participation',privacy:'Vos données',kickoff:'Kick Off',project:'C\'est quoi?',meedoen:'Pourquoi rejoindre?',paneel:'Le panneau','3mensen':'Aidez 3 personnes',ketting:'R\u00e9action en cha\u00eene',filosofie:'Philosophie',kunstwerk:'L\'oeuvre',deelnemers:'Participants',specs:'Plan technique',payitforward:'Pay it Forward',contact:'Contact',join:'Rejoindre',news:'Actualités',suggestions:'Suggestions',initiator:'L\u2019Initiateur',panelidea:'Aide pour mon panneau'},
     cards: {
       upload: {title:'Partage ton panneau',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Panneaux terminés',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Chargement...</div><div id=\"gallery-grid\"></div>'},
@@ -552,7 +552,7 @@ var LANG = {
     placeholder: 'Frag in jeder Sprache...',
     btn: 'Stell mir eine Frage...',
     join: '+ Mitmachen',
-    ql: {upload:'Teilen',galerij:'Galerie',regels:'Teilnahmeregeln',privacy:'Deine Daten',kickoff:'Kick Off',project:'Was ist das?',meedoen:'Warum mitmachen?',paneel:'Das Panel','3mensen':'3 Menschen helfen',ketting:'Kettenreaktion',filosofie:'Philosophie',kunstwerk:'Das Kunstwerk',deelnemers:'Teilnehmer',specs:'Technische Zeichnung',payitforward:'Pay it Forward',contact:'Kontakt',join:'Mitmachen',news:'Neuigkeiten',suggestions:'Vorschläge',initiator:'Der Initiator',panelidea:'Hilfe bei Paneelidee'},
+    ql: {upload:'Hochladen',galerij:'Galerie',regels:'Teilnahmeregeln',privacy:'Deine Daten',kickoff:'Kick Off',project:'Was ist das?',meedoen:'Warum mitmachen?',paneel:'Das Panel','3mensen':'3 Menschen helfen',ketting:'Kettenreaktion',filosofie:'Philosophie',kunstwerk:'Das Kunstwerk',deelnemers:'Teilnehmer',specs:'Technische Zeichnung',payitforward:'Pay it Forward',contact:'Kontakt',join:'Mitmachen',news:'Neuigkeiten',suggestions:'Vorschläge',initiator:'Der Initiator',panelidea:'Hilfe bei Paneelidee'},
     cards: {
       upload: {title:'Panel teilen',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Fertige Panels',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Panels werden geladen...</div><div id=\"gallery-grid\"></div>'},
@@ -580,7 +580,7 @@ var LANG = {
     placeholder: 'Chiedi in qualsiasi lingua...',
     btn: 'Fammi una domanda...',
     join: '+ Unisciti',
-    ql: {upload:'Condividi',galerij:'Galleria',regels:'Regole di partecipazione',privacy:'I tuoi dati',kickoff:'Kick Off',project:'Cos\'è questo?',meedoen:'Perch\u00e9 unirsi?',paneel:'Il pannello','3mensen':'Aiuta 3 persone',ketting:'Reazione a catena',filosofie:'Filosofia',kunstwerk:'L\'opera',deelnemers:'Partecipanti',specs:'Disegno tecnico',payitforward:'Pay it Forward',contact:'Contatto',join:'Unisciti',news:'Notizie',suggestions:'Suggerimenti',initiator:'L\u2019Iniziatore',panelidea:'Aiuto con idea pannello'},
+    ql: {upload:'Carica',galerij:'Galleria',regels:'Regole di partecipazione',privacy:'I tuoi dati',kickoff:'Kick Off',project:'Cos\'è questo?',meedoen:'Perch\u00e9 unirsi?',paneel:'Il pannello','3mensen':'Aiuta 3 persone',ketting:'Reazione a catena',filosofie:'Filosofia',kunstwerk:'L\'opera',deelnemers:'Partecipanti',specs:'Disegno tecnico',payitforward:'Pay it Forward',contact:'Contatto',join:'Unisciti',news:'Notizie',suggestions:'Suggerimenti',initiator:'L\u2019Iniziatore',panelidea:'Aiuto con idea pannello'},
     cards: {
       upload: {title:'Condividi il pannello',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Pannelli completati',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Caricamento...</div><div id=\"gallery-grid\"></div>'},
