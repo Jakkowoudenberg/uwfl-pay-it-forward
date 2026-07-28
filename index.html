@@ -1064,7 +1064,9 @@ function upVal(id){ var e=document.getElementById(id); return e?e.value.trim():'
 function upSubmit(){
   var t=upT(); var msg=document.getElementById('up-msg2');
   var photos=UP_PHOTOS.filter(function(x){return x;});
-  if(photos.length===0 || !upVal('up-art') || !upVal('up-story')){ msg.style.color='#ff9b9b'; msg.textContent=t.req; return; }
+  if(photos.length===0){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.photos; return; }
+  if(!upVal('up-art')){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.art; return; }
+  if(!upVal('up-story')){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.story; return; }
   msg.style.color='rgba(255,255,255,.7)'; msg.textContent=t.uploading;
   var urls=[]; var done=0; var failed=false;
   function afterUploads(){
