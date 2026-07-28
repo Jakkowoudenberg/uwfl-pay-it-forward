@@ -33,8 +33,14 @@ exports.handler = async function(event, context) {
       return { statusCode: 403, headers, body: JSON.stringify({ ok: false, error: 'not_found' }) };
     }
     const reg = rows[0];
-    if (!reg.email || reg.email.trim().toLowerCase() !== email) {
-      return { statusCode: 403, headers, body: JSON.stringify({ ok: false, error: 'email_mismatch' }) };
+    // Staat er een e-mail op naam? Dan moet die exact kloppen (sterke check).
+    // Staat er geen e-mail (veel vroege aanmeldingen), dan kunnen we niet
+    // verifieren en laten we het door: de goedkeuring (pending -> approved)
+    // door Jakko/Lenny is dan het vangnet tegen misbruik.
+    if (reg.email && reg.email.trim()) {
+      if (reg.email.trim().toLowerCase() !== email) {
+        return { statusCode: 403, headers, body: JSON.stringify({ ok: false, error: 'email_mismatch' }) };
+      }
     }
 
     // ---- 2. Verplichte velden ----
