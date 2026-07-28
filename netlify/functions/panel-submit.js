@@ -78,7 +78,9 @@ exports.handler = async function(event, context) {
       contact_email: (data.contact_email || '').trim() || null,
       contact_website: (data.contact_website || '').trim() || null,
       contact_phone: (data.contact_phone || '').trim() || null,
-      status: 'pending'
+      status: 'pending',
+      submitter_email: email || null,
+      lang: (data.lang || 'en')
     };
 
     const insertResp = await fetch(
