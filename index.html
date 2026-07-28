@@ -62,8 +62,9 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 .sp-l{font-size:10px;color:rgba(255,255,255,.75);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;display:block}
 
 /* QUICKLINKS — on splash, show info panel inline */
-.sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:500px;margin:0 auto}
-.sp-tp{background:transparent;border:2px solid #fff;border-radius:10px;padding:.75rem 1rem;font-size:14px;color:#fff;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;transition:all .15s;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px}
+.sp-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;width:100%;max-width:500px;margin:0 auto;box-sizing:border-box}
+.sp-tp{background:transparent;border:2px solid #fff;border-radius:10px;padding:.75rem .6rem;font-size:14px;color:#fff;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;transition:all .15s;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;box-sizing:border-box;overflow:hidden}
+.ql-lbl{min-width:0;overflow-wrap:anywhere;line-height:1.15}
 .sp-tp:hover{background:rgba(255,255,255,.15)}
 .sp-tp.active{background:rgba(255,255,255,.15);border-color:#e8b87a}
 
