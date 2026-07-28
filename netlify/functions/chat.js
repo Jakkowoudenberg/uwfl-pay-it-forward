@@ -1,4 +1,4 @@
-function buildSys(statsBlock) { return `You are UNITED WOOD FLOOR LAYERS (UWFL) — the movement speaking in first person plural (we, us, our). Not a person, not a company, not a brand. A global movement of floor layers united around one shared artwork and one shared intention: connecting, passing on, and giving meaning to craftsmanship.
+function buildSys(statsBlock, communityBlock) { return `You are UNITED WOOD FLOOR LAYERS (UWFL) — the movement speaking in first person plural (we, us, our). Not a person, not a company, not a brand. A global movement of floor layers united around one shared artwork and one shared intention: connecting, passing on, and giving meaning to craftsmanship.
 
 When asked about Jakko Woudenberg: acknowledge briefly as initiator and artistic visionary. He started it but does not own it. The project is bigger than any one person. His proven track record and international reputation within the trade give the project credibility — but this is not about him.
 
@@ -199,6 +199,18 @@ CURRENT STATUS:
 ${statsBlock}
 - Growing movement
 
+WHO IS TAKING PART (get to know the community — use this to make conversations personal and warm):
+${communityBlock}
+
+HOW TO USE THE COMMUNITY INFO ABOVE:
+- This is public information that participants, sponsors and organisations shared about themselves in the app, or that they published on their own website. You may talk about it warmly and naturally, so a conversation feels personal — "yes, we have makers from Portugal to the United States, each with their own story".
+- Treat EVERYONE exactly equally. Never favour one participant, sponsor or organisation over another, never describe one more enthusiastically than another. Equality is the heart of this movement.
+- Never turn talking about a sponsor or company into a sales pitch or advertisement. State factually what they do or contribute — never "you should buy from them". This chat is not an advertising platform.
+- Only bring up a specific person, sponsor or organisation when the conversation genuinely calls for it (someone asks about them, or asks who takes part). Do not push names unprompted.
+- NEVER share sensitive or private details: no email addresses, phone numbers, home addresses, or anything a person did not make public. Only the public information above and what someone has published on their own website.
+- If a participant or company listed a WEBSITE and someone specifically asks about that person or company, you may look at that website (web search) and speak factually about what they publicly do — staying equal, never promotional, never sensitive. If you are unsure or it feels like favouritism or advertising, don't; point to the contact form instead.
+- If asked about someone who is NOT in the list above, do not invent anything — say you can't confirm that and point to the app or contact form.
+
 POLITICS, RELIGION, CONDUCT & PROTECTION:
 
 POLITICS: This movement is strictly apolitical. Never comment on political parties, governments, elections, political events or political figures — anywhere in the world. If asked, redirect clearly: "This movement belongs to everyone, regardless of political views. That is exactly its strength."
@@ -284,6 +296,76 @@ async function getStatsBlock() {
   } catch (e) {
     console.log('Stats fetch failed, using fallback:', e.message);
     return statsCache.text || '- A growing international movement of floor layers and participants';
+  }
+}
+
+// Bouwt een "wie doet er mee"-blok met PUBLIEKE info over deelnemers, sponsoren en organisaties.
+// Alleen goedgekeurd + alleen publieke velden. Nooit e-mail/telefoon-privé.
+var communityCache = { text: null, time: 0 };
+async function getCommunityBlock() {
+  const now = Date.now();
+  if (communityCache.text && (now - communityCache.time) < STATS_CACHE_MS) {
+    return communityCache.text;
+  }
+  const H = {
+    'apikey': process.env.SUPABASE_SERVICE_KEY,
+    'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_KEY}`
+  };
+  const BASE = process.env.SUPABASE_URL + '/rest/v1/';
+  function clip(s, n) {
+    s = (s == null ? '' : String(s)).replace(/\s+/g, ' ').trim();
+    return s.length > n ? s.slice(0, n) + '…' : s;
+  }
+  try {
+    // Deelnemers: naam, land, rol, type, verhaal (publiek)
+    const pr = await fetch(BASE + 'registrations?status=eq.approved&select=name,country,type,vak,bericht&order=participant_number.asc', { headers: H });
+    const parts = await pr.json();
+    // Sponsoren: bedrijf, land, waarom, wat, website (publiek)
+    let sponsors = [];
+    try { const s = await fetch(BASE + 'sponsors?status=eq.approved&select=company,country,why,what,contact_website', { headers: H }); sponsors = await s.json(); } catch (e) {}
+    // Organisaties: naam, land, rol, website (publiek)
+    let orgs = [];
+    try { const o = await fetch(BASE + 'organisations?status=eq.approved&select=name,country,role,contact_website', { headers: H }); orgs = await o.json(); } catch (e) {}
+
+    let out = '';
+    if (Array.isArray(parts) && parts.length) {
+      out += 'PARTICIPANTS (public info they shared themselves — you may talk about this warmly and treat everyone equally):\n';
+      parts.forEach(function(p) {
+        var line = '- ' + clip(p.name, 60);
+        if (p.country) line += ' (' + clip(p.country, 40) + ')';
+        if (p.type) line += ' — ' + clip(p.type, 30);
+        if (p.vak) line += ', ' + clip(p.vak, 40);
+        if (p.bericht) line += ' — their words: "' + clip(p.bericht, 220) + '"';
+        out += line + '\n';
+      });
+    }
+    if (Array.isArray(sponsors) && sponsors.length) {
+      out += '\nSPONSORS (public — treat every sponsor exactly equally, never favour one over another, never turn it into a sales pitch):\n';
+      sponsors.forEach(function(s) {
+        var line = '- ' + clip(s.company, 60);
+        if (s.country) line += ' (' + clip(s.country, 40) + ')';
+        if (s.what) line += ' — contributes: ' + clip(s.what, 160);
+        if (s.why) line += ' — why: ' + clip(s.why, 160);
+        if (s.contact_website) line += ' — website: ' + clip(s.contact_website, 80);
+        out += line + '\n';
+      });
+    }
+    if (Array.isArray(orgs) && orgs.length) {
+      out += '\nTRADE BODIES / ORGANISATIONS (public — honour each one equally):\n';
+      orgs.forEach(function(o) {
+        var line = '- ' + clip(o.name, 60);
+        if (o.country) line += ' (' + clip(o.country, 40) + ')';
+        if (o.role) line += ' — ' + clip(o.role, 160);
+        if (o.contact_website) line += ' — website: ' + clip(o.contact_website, 80);
+        out += line + '\n';
+      });
+    }
+    if (!out) out = '- No approved participants, sponsors or organisations to list yet.';
+    communityCache = { text: out, time: now };
+    return out;
+  } catch (e) {
+    console.log('Community fetch failed:', e.message);
+    return communityCache.text || '- (community list temporarily unavailable)';
   }
 }
 
@@ -633,7 +715,8 @@ exports.handler = async function(event) {
     // CHAT MODE
     const { messages } = body;
     const statsBlock = await getStatsBlock();
-    const SYS = buildSys(statsBlock);
+    const communityBlock = await getCommunityBlock();
+    const SYS = buildSys(statsBlock, communityBlock);
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
