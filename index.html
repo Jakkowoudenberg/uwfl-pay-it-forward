@@ -284,6 +284,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
       </div>
       <div id="admin-content" style="display:none">
         <div id="admin-pending-list"></div>
+        <div id="admin-panels-section" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1rem"><div style="font-weight:700;color:var(--wood);font-size:13px;margin-bottom:.5rem">🖼️ Wachtende panelen</div><div id="admin-panels-list"></div></div>
       </div>
     </div>
   </div>
@@ -1212,6 +1213,7 @@ function checkAdminPw(){
       document.getElementById('admin-login').style.display='none';
       document.getElementById('admin-content').style.display='block';
       loadPending();
+      loadPendingPanels();
     } else {
       badAdminPw();
     }
@@ -1260,6 +1262,61 @@ function adminDo(id, action){
   })
   .then(function(){
     loadPending();
+  });
+}
+
+function loadPendingPanels(){
+  var list = document.getElementById('admin-panels-list');
+  if(!list) return;
+  list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Laden...</p>';
+  fetch('/.netlify/functions/admin-panels-pending',{headers:{'X-Admin-Key':ADMIN_PW}})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(!data.length){
+      list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Geen wachtende panelen.</p>';
+      return;
+    }
+    var out='';
+    data.forEach(function(p){
+      var maker=((p.first_name||'')+' '+(p.last_name||'')).trim();
+      var photos=p.photos||[];
+      out+='<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:1rem;margin-bottom:.75rem">';
+      out+='<div style="font-weight:700;color:#fff;margin-bottom:.25rem">'+(p.artwork_name||'')+(p.participant_number?' <span style="font-size:11px;color:var(--wood);font-weight:600;letter-spacing:.5px;margin-left:8px">'+fmtNr(p.participant_number)+'</span>':'')+'</div>';
+      out+='<div style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:.5rem">'+maker+(p.company?' · '+p.company:'')+(p.country_made?' · '+p.country_made:'')+'</div>';
+      if(photos.length){
+        out+='<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.5rem">';
+        for(var k=0;k<photos.length;k++){ out+='<img src="'+photos[k]+'" style="width:60px;height:60px;object-fit:cover;border-radius:6px">'; }
+        out+='</div>';
+      }
+      var meta=[];
+      if(p.wood_species) meta.push('Hout: '+p.wood_species);
+      if(p.pattern) meta.push('Patroon: '+p.pattern);
+      if(p.place_made) meta.push('Plaats: '+p.place_made);
+      if(p.production_date) meta.push('Datum: '+p.production_date);
+      if(meta.length) out+='<div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:.4rem">'+meta.join(' · ')+'</div>';
+      if(p.story) out+='<div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:.75rem;line-height:1.5">'+p.story.substring(0,200)+(p.story.length>200?'...':'')+'</div>';
+      var contact=[];
+      if(p.contact_website) contact.push(p.contact_website);
+      if(p.contact_email) contact.push(p.contact_email);
+      if(p.contact_phone) contact.push(p.contact_phone);
+      if(contact.length) out+='<div style="font-size:11px;color:var(--wood);margin-bottom:.6rem">'+contact.join(' · ')+'</div>';
+      out+='<div style="display:flex;gap:.5rem">';
+      out+='<button style="flex:1;background:#2d6a2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="panelDo('+p.id+',\'approve\')">\u2713 Goedkeuren</button>';
+      out+='<button style="flex:1;background:#6a2d2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="panelDo('+p.id+',\'reject\')">\u2717 Afwijzen</button>';
+      out+='</div></div>';
+    });
+    list.innerHTML=out;
+  })
+  .catch(function(){ list.innerHTML='<p style="color:red;font-size:13px">Fout bij laden.</p>'; });
+}
+
+function panelDo(id, action){
+  fetch('/.netlify/functions/panel-approve?id='+id+'&action='+action,{
+    headers:{'X-Admin-Key':ADMIN_PW}
+  })
+  .then(function(){
+    GALLERY_CACHE=null;
+    loadPendingPanels();
   });
 }
 
