@@ -25,7 +25,7 @@ exports.handler = async function(event, context) {
     }
 
     const checkResp = await fetch(
-      `${SUPABASE_URL}/rest/v1/registrations?select=name,company,country,email,participant_number&participant_number=eq.${pnr}`,
+      `${SUPABASE_URL}/rest/v1/registrations?select=name,company,country,email,participant_number,upload_without_email&participant_number=eq.${pnr}`,
       { headers: { 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}` } }
     );
     const rows = await checkResp.json();
@@ -33,12 +33,12 @@ exports.handler = async function(event, context) {
       return { statusCode: 403, headers, body: JSON.stringify({ ok: false, error: 'not_found' }) };
     }
     const reg = rows[0];
-    // Staat er een e-mail op naam? Dan moet die exact kloppen (sterke check).
-    // Staat er geen e-mail (veel vroege aanmeldingen), dan kunnen we niet
-    // verifieren en laten we het door: de goedkeuring (pending -> approved)
-    // door Jakko/Lenny is dan het vangnet tegen misbruik.
-    if (reg.email && reg.email.trim()) {
-      if (reg.email.trim().toLowerCase() !== email) {
+    // E-mail moet exact kloppen. Uitzondering: een vaste groep bestaande
+    // deelnemers zonder e-mail op bestand is eenmalig gemarkeerd
+    // (upload_without_email) en mag uploaden met alleen het nummer. Iedereen
+    // die zich vanaf nu aanmeldt heeft een e-mail en valt hier niet onder.
+    if (!reg.upload_without_email) {
+      if (!reg.email || reg.email.trim().toLowerCase() !== email) {
         return { statusCode: 403, headers, body: JSON.stringify({ ok: false, error: 'email_mismatch' }) };
       }
     }
