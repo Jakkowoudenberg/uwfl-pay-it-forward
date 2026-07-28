@@ -74,7 +74,7 @@ exports.handler = async function(event, context) {
       wood_species: (data.wood_species || '').trim() || null,
       pattern: (data.pattern || '').trim() || null,
       story: story,
-      photos: JSON.stringify(photos),
+      photos: photos,
       contact_email: (data.contact_email || '').trim() || null,
       contact_website: (data.contact_website || '').trim() || null,
       contact_phone: (data.contact_phone || '').trim() || null,
