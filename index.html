@@ -960,7 +960,21 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 // OPEN/CLOSE CHAT
-function openChat(){document.getElementById('chat').classList.add('open');}
+var WELCOME_MSG = {
+  nl: 'Hoi!\n\nFijn dat je hier bent. Even vooraf: ik ben niet zomaar een chatbot \u2014 ik ben de stem van deze beweging, hier om met je te praten over vakmanschap en wat wij samen aan het bouwen zijn. Ik ben wel AI, dus ik kan fouten maken; dubbelcheck belangrijke dingen.\n\nVertel \u2014 waarmee kan ik je helpen?',
+  en: 'Hi!\n\nGlad you\'re here. Just so you know: I\'m not just a chatbot \u2014 I\'m the voice of this movement, here to talk with you about craftsmanship and what we\'re building together. I am AI, though, so I can make mistakes; double-check anything important.\n\nSo \u2014 what can I help you with?',
+  es: '\u00a1Hola!\n\nMe alegra que est\u00e9s aqu\u00ed. Antes de nada: no soy un simple chatbot \u2014 soy la voz de este movimiento, aqu\u00ed para hablar contigo sobre el oficio y lo que estamos construyendo juntos. Eso s\u00ed, soy IA, as\u00ed que puedo equivocarme; comprueba lo importante.\n\nDime \u2014 \u00bfen qu\u00e9 puedo ayudarte?',
+  fr: 'Salut !\n\nContent que tu sois l\u00e0. Juste avant : je ne suis pas un simple chatbot \u2014 je suis la voix de ce mouvement, ici pour parler avec toi du m\u00e9tier et de ce que nous construisons ensemble. Je suis toutefois une IA, donc je peux me tromper ; v\u00e9rifie ce qui est important.\n\nAlors \u2014 comment puis-je t\u2019aider ?',
+  de: 'Hallo!\n\nSch\u00f6n, dass du hier bist. Vorab: Ich bin nicht einfach ein Chatbot \u2014 ich bin die Stimme dieser Bewegung, hier, um mit dir \u00fcber Handwerk zu sprechen und dar\u00fcber, was wir gemeinsam aufbauen. Ich bin allerdings KI, also kann ich Fehler machen; pr\u00fcfe Wichtiges nach.\n\nAlso \u2014 womit kann ich dir helfen?',
+  it: 'Ciao!\n\nSono contento che tu sia qui. Prima di tutto: non sono un semplice chatbot \u2014 sono la voce di questo movimento, qui per parlare con te del mestiere e di ci\u00f2 che stiamo costruendo insieme. Sono per\u00f2 un\'IA, quindi posso sbagliare; verifica le cose importanti.\n\nAllora \u2014 come posso aiutarti?'
+};
+function openChat(){
+  document.getElementById('chat').classList.add('open');
+  var w=document.getElementById('msgs');
+  if(w && !w.querySelector('.msg')){
+    appendMsg('ai', WELCOME_MSG[currentLang] || WELCOME_MSG['en']);
+  }
+}
 function closeChat(){document.getElementById('chat').classList.remove('open');}
 // --- Betrouwbare app-hoogte op mobiel (visualViewport = echte bruikbare hoogte, excl. systeembalken en toetsenbord) ---
 function setAppHeight(){
