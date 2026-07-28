@@ -239,6 +239,8 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     <button class="sp-tp" id="ql-deelnemers" onclick="splashInfo('deelnemers')">&#x1F30D; <span class="ql-lbl">Participants</span></button>
     <button class="sp-tp" id="ql-galerij" onclick="splashInfo('galerij')">&#x1F5BC;&#xFE0F; <span class="ql-lbl">Gallery</span></button>
     <button class="sp-tp" id="ql-upload" onclick="splashInfo('upload')">&#x2B06;&#xFE0F; <span class="ql-lbl">Upload panel</span></button>
+    <button class="sp-tp" id="ql-sponsors" onclick="splashInfo('sponsors')">&#x1F91D; <span class="ql-lbl">Sponsors</span></button>
+    <button class="sp-tp" id="ql-sponsorform" onclick="splashInfo('sponsorform')">&#x2795; <span class="ql-lbl">Become sponsor</span></button>
     <button class="sp-tp" id="ql-join" onclick="splashInfo('join')" style="background:#fff;color:#1a0f05;border-color:#fff;font-size:15px;padding:.9rem 1rem;animation:pulse-glow 2.2s ease-in-out infinite">+ <span class="ql-lbl">Join us</span></button>
     <button class="sp-tp" id="ql-project" onclick="splashInfo('project')">&#x1F4CB; <span class="ql-lbl">What is this?</span></button>
     <button class="sp-tp" id="ql-meedoen" onclick="splashInfo('meedoen')">&#x270B; <span class="ql-lbl">Why join?</span></button>
@@ -285,6 +287,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
       <div id="admin-content" style="display:none">
         <div id="admin-pending-list"></div>
         <div id="admin-panels-section" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1rem"><div style="font-weight:700;color:var(--wood);font-size:13px;margin-bottom:.5rem">🖼️ Pending panels</div><div id="admin-panels-list"></div></div>
+        <div id="admin-sponsors-section" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1rem"><div style="font-weight:700;color:var(--wood);font-size:13px;margin-bottom:.5rem">🤝 Pending sponsors</div><div id="admin-sponsors-list"></div></div>
       </div>
     </div>
   </div>
@@ -441,8 +444,10 @@ var LANG = {
     placeholder: 'Stel je vraag... (in elke taal)',
     btn: 'Stel mij een vraag...',
     join: '+ Doe mee',
-    ql: {upload:'Upload paneel',galerij:'Galerie',regels:'Deelnameregels',privacy:'Jouw gegevens',kickoff:'Kick Off',project:'Wat is dit?',meedoen:'Waarom meedoen?',paneel:'Het paneel','3mensen':'Help 3 mensen',ketting:'Kettingreactie',filosofie:'Filosofie',kunstwerk:'Kunstwerk',deelnemers:'Deelnemers',specs:'Bouwtekening',payitforward:'Pay it Forward',contact:'Contact',news:'Nieuws',suggestions:'Suggesties',join:'Doe mee',initiator:'De Initiator',panelidea:'Hulp bij panelidee'},
+    ql: {sponsors:'Sponsoren',sponsorform:'Word sponsor',upload:'Upload paneel',galerij:'Galerie',regels:'Deelnameregels',privacy:'Jouw gegevens',kickoff:'Kick Off',project:'Wat is dit?',meedoen:'Waarom meedoen?',paneel:'Het paneel','3mensen':'Help 3 mensen',ketting:'Kettingreactie',filosofie:'Filosofie',kunstwerk:'Kunstwerk',deelnemers:'Deelnemers',specs:'Bouwtekening',payitforward:'Pay it Forward',contact:'Contact',news:'Nieuws',suggestions:'Suggesties',join:'Doe mee',initiator:'De Initiator',panelidea:'Hulp bij panelidee'},
     cards: {
+      sponsors: {title:'Mede mogelijk gemaakt door',body:'<div id=\"sponsors-body\"></div>'},
+      sponsorform: {title:'Word sponsor',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Deel je paneel',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Afgeronde panelen',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Panelen laden...</div><div id=\"gallery-grid\"></div>'},
       regels: {title:'Deelnameregels',body:'<p style="opacity:.85">Dit is een beweging van verbinding. Een paar dingen houden haar heel — waar je ook vandaan komt.</p><div class="qcard" style="border-left:3px solid rgba(255,100,100,.4)"><strong>1. Maak om te verbinden, niet om te verdelen.</strong><br><br><ul style="margin:.4rem 0 .6rem 1rem;line-height:1.85"><li>politieke campagnes, partijen of leuzen</li><li>religieuze bekering of het aanvallen van een geloof</li><li>haat of neerhalen op grond van afkomst, huidskleur, geloof, geslacht, seksuele geaardheid of wie iemand is</li><li>symbolen of boodschappen die bedoeld zijn om te verdelen in plaats van te verbinden</li></ul>Alles wat je maakt mag persoonlijk zijn, gedurfd en vol betekenis. Je cultuur, je afkomst en je verhaal zijn juist wél welkom — dat is iets anders dan een agenda. Twijfel je? Vraag het ons voordat je begint.</div><p><strong>2. Iedereen hoort erbij.</strong><br>Meester of beginner, hobbyist of student, school of familie. Uit elk land, elke cultuur, elke achtergrond. Er zijn hier geen winnaars of verliezers, geen “juiste” stijl. Binnen het gedeelde kader is iedereen vrij om te maken.</p><p><strong>3. Breng je eigen wereld mee.</strong><br>Je taal, je cultuur, je verhaal, je afkomst — laat ze zien in je werk. Dit kunstwerk wordt rijker naarmate meer werelden erin samenkomen. Jouw achtergrond is geen bijzaak; het is precies wat je bijdraagt.</p><p><strong>4. Geef door.</strong><br>Wie meedoet, belooft drie mensen te helpen — zonder er iets voor terug te verwachten. Zij helpen op hun beurt weer drie anderen. Zo groeit de kettingreactie, van hand tot hand, over grenzen heen.</p><p><strong>5. Deel je vak.</strong><br>Help elkaar met wat je weet en kunt. Deel je kennis, je technieken, je fouten en je vondsten met andere makers. Niemand hoeft het alleen uit te zoeken — de beweging groeit als het vakmanschap van hand tot hand gaat.</p><p><strong>6. Respecteer elkaars werk en verhaal.</strong><br>Elk paneel draagt een eigen betekenis, emotie of verhaal. Je hoeft het niet mooi te vinden. Je respecteert het wel. Zo behandelen we elkaar ook buiten het hout.</p><p><strong>7. Zorg voor wat je gebruikt.</strong><br>Behandel je materiaal met respect. Gebruik waar mogelijk restanten, hergebruikt hout of hout uit verantwoorde bron — wat “verantwoord” betekent, ken jij in jouw deel van de wereld het beste. Wat we maken, hoeft de aarde niet meer te kosten dan nodig.</p><p><strong>8. Je paneel wordt deel van het geheel.</strong><br>Wat je maakt, draag je over aan het project, zodat het onderdeel kan worden van één collectief kunstwerk dat uiteindelijk aan de wereld wordt teruggegeven. Je blijft altijd de maker — je naam en je verhaal blijven bij je werk horen.</p><div class="qcard"><em>Doe je mee, dan doe je hieraan mee. Waar je ook staat op deze wereld.</em></div>'},
@@ -469,8 +474,10 @@ var LANG = {
     placeholder: 'Ask me anything about the project...',
     btn: 'Ask me a question...',
     join: '+ Join us',
-    ql: {upload:'Upload panel',galerij:'Gallery',regels:'Participation rules',privacy:'Your data',kickoff:'Kick Off',project:'What is this?',meedoen:'Why join?',paneel:'The panel','3mensen':'Help 3 people',ketting:'Chain reaction',filosofie:'Philosophy',kunstwerk:'The artwork',deelnemers:'Participants',specs:'Technical drawing',payitforward:'Pay it Forward',contact:'Contact',news:'News',suggestions:'Suggestions',initiator:'The Initiator',panelidea:'Help my panel idea',join:'Join us'},
+    ql: {sponsors:'Sponsors',sponsorform:'Become sponsor',upload:'Upload panel',galerij:'Gallery',regels:'Participation rules',privacy:'Your data',kickoff:'Kick Off',project:'What is this?',meedoen:'Why join?',paneel:'The panel','3mensen':'Help 3 people',ketting:'Chain reaction',filosofie:'Philosophy',kunstwerk:'The artwork',deelnemers:'Participants',specs:'Technical drawing',payitforward:'Pay it Forward',contact:'Contact',news:'News',suggestions:'Suggestions',initiator:'The Initiator',panelidea:'Help my panel idea',join:'Join us'},
     cards: {
+      sponsors: {title:'Made possible by',body:'<div id=\"sponsors-body\"></div>'},
+      sponsorform: {title:'Become a sponsor',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Share your panel',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Completed panels',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Loading panels...</div><div id=\"gallery-grid\"></div>'},
       regels: {title:'Participation rules',body:'<p style="opacity:.85">This is a movement of connection. A few things keep it whole — wherever you come from.</p><div class="qcard" style="border-left:3px solid rgba(255,100,100,.4)"><strong>1. Create to connect, not to divide.</strong><br><br><ul style="margin:.4rem 0 .6rem 1rem;line-height:1.85"><li>political campaigns, parties or slogans</li><li>religious conversion or attacks on a faith</li><li>hate or putting people down for their origin, colour, faith, gender, sexuality or who they are</li><li>symbols or messages meant to divide rather than connect</li></ul>Everything you make can be personal, bold and full of meaning. Your culture, your roots and your story are genuinely welcome — that is something different from an agenda. Unsure? Ask us before you begin.</div><p><strong>2. Everyone belongs.</strong><br>Master or beginner, hobbyist or student, school or family. From every country, every culture, every background. There are no winners or losers here, no “correct” style. Within the shared frame, everyone is free to create.</p><p><strong>3. Bring your own world.</strong><br>Your language, your culture, your story, your roots — let them show in your work. This artwork grows richer as more worlds come together in it. Your background is not a side note; it is exactly what you contribute.</p><p><strong>4. Pay it forward.</strong><br>Everyone who joins promises to help three people — expecting nothing in return. They in turn help three others. That is how the ripple grows, from hand to hand, across borders.</p><p><strong>5. Share your craft.</strong><br>Help one another with what you know and can do. Share your knowledge, your techniques, your mistakes and your discoveries with other makers. No one has to figure it out alone — the movement grows as craftsmanship passes from hand to hand.</p><p><strong>6. Respect each other’s work and story.</strong><br>Every panel carries its own meaning, emotion or story. You do not have to like it. You do respect it. That is how we treat each other beyond the wood too.</p><p><strong>7. Care for what you use.</strong><br>Treat your material with respect. Where you can, use offcuts, reclaimed wood or wood from a responsible source — what “responsible” means, you know best in your part of the world. What we make need not cost the earth more than necessary.</p><p><strong>8. Your panel becomes part of the whole.</strong><br>What you make, you hand over to the project, so it can become part of one collective artwork that will one day be given back to the world. You always remain the maker — your name and your story stay with your work.</p><div class="qcard"><em>Join in, and this is what you join. Wherever you stand in this world.</em></div>'},
@@ -497,8 +504,10 @@ var LANG = {
     placeholder: 'Pregunta en cualquier idioma...',
     btn: 'Hazme una pregunta...',
     join: '+ \u00danete',
-    ql: {upload:'Subir',galerij:'Galería',regels:'Reglas de participación',privacy:'Tus datos',kickoff:'Kick Off',project:'\u00bfQu\u00e9 es esto?',meedoen:'\u00bfPor qu\u00e9 unirse?',paneel:'El panel','3mensen':'Ayuda a 3 personas',ketting:'Reacci\u00f3n en cadena',filosofie:'Filosof\u00eda',kunstwerk:'La obra',deelnemers:'Participantes',specs:'Plano t\u00e9cnico',payitforward:'Pay it Forward',contact:'Contacto',join:'\u00danete',news:'Noticias',suggestions:'Sugerencias',initiator:'El Iniciador',panelidea:'Ayuda con mi idea'},
+    ql: {sponsors:'Patrocinadores',sponsorform:'Ser patrocinador',upload:'Subir',galerij:'Galería',regels:'Reglas de participación',privacy:'Tus datos',kickoff:'Kick Off',project:'\u00bfQu\u00e9 es esto?',meedoen:'\u00bfPor qu\u00e9 unirse?',paneel:'El panel','3mensen':'Ayuda a 3 personas',ketting:'Reacci\u00f3n en cadena',filosofie:'Filosof\u00eda',kunstwerk:'La obra',deelnemers:'Participantes',specs:'Plano t\u00e9cnico',payitforward:'Pay it Forward',contact:'Contacto',join:'\u00danete',news:'Noticias',suggestions:'Sugerencias',initiator:'El Iniciador',panelidea:'Ayuda con mi idea'},
     cards: {
+      sponsors: {title:'Posible gracias a',body:'<div id=\"sponsors-body\"></div>'},
+      sponsorform: {title:'Házte patrocinador',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Comparte tu panel',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Paneles terminados',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Cargando paneles...</div><div id=\"gallery-grid\"></div>'},
       regels: {title:'Reglas de participación',body:'<p style="opacity:.85">Este es un movimiento de conexión. Unas pocas cosas lo mantienen entero — vengas de donde vengas.</p><div class="qcard" style="border-left:3px solid rgba(255,100,100,.4)"><strong>1. Crea para conectar, no para dividir.</strong><br><br><ul style="margin:.4rem 0 .6rem 1rem;line-height:1.85"><li>campañas, partidos o lemas políticos</li><li>proselitismo religioso o ataques a una fe</li><li>odio o menosprecio por origen, color, credo, género, sexualidad o por quién es alguien</li><li>símbolos o mensajes destinados a dividir en lugar de conectar</li></ul>Todo lo que hagas puede ser personal, valiente y lleno de significado. Tu cultura, tus raíces y tu historia sí son bienvenidas — eso es algo distinto de una agenda. ¿Tienes dudas? Pregúntanos antes de empezar.</div><p><strong>2. Todos pertenecen.</strong><br>Maestro o principiante, aficionado o estudiante, escuela o familia. De cada país, cada cultura, cada origen. Aquí no hay ganadores ni perdedores, ni un estilo “correcto”. Dentro del marco compartido, cada uno es libre de crear.</p><p><strong>3. Trae tu propio mundo.</strong><br>Tu idioma, tu cultura, tu historia, tus raíces — muéstralos en tu obra. Esta obra se enriquece cuanto más mundos se reúnen en ella. Tu origen no es un detalle; es justamente lo que aportas.</p><p><strong>4. Devuélvelo al mundo.</strong><br>Quien participa promete ayudar a tres personas — sin esperar nada a cambio. Ellas, a su vez, ayudan a otras tres. Así crece la onda, de mano en mano, más allá de las fronteras.</p><p><strong>5. Comparte tu oficio.</strong><br>Ayudaos mutuamente con lo que sabéis y sabéis hacer. Comparte tus conocimientos, tus técnicas, tus errores y tus hallazgos con otros creadores. Nadie tiene que resolverlo solo — el movimiento crece cuando el oficio pasa de mano en mano.</p><p><strong>6. Respeta el trabajo y la historia de los demás.</strong><br>Cada panel lleva su propio significado, emoción o historia. No tienes que gustar de él. Sí lo respetas. Así nos tratamos también más allá de la madera.</p><p><strong>7. Cuida lo que usas.</strong><br>Trata tu material con respeto. Cuando puedas, usa recortes, madera recuperada o madera de origen responsable — lo que significa “responsable” lo sabes mejor tú en tu parte del mundo. Lo que hacemos no tiene por qué costarle a la Tierra más de lo necesario.</p><p><strong>8. Tu panel pasa a ser parte del todo.</strong><br>Lo que haces lo cedes al proyecto, para que pueda formar parte de una obra colectiva que algún día se devolverá al mundo. Siempre sigues siendo el autor — tu nombre y tu historia permanecen con tu obra.</p><div class="qcard"><em>Si participas, esto es a lo que te sumas. Estés donde estés en este mundo.</em></div>'},
@@ -524,8 +533,10 @@ var LANG = {
     sub: 'Un mouvement mondial de cr\u00e9ateurs et de personnes.',
     btn: 'Posez-moi une question...',
     join: '+ Rejoignez-nous',
-    ql: {upload:'T\u00e9l\u00e9verser',galerij:'Galerie',regels:'Règles de participation',privacy:'Vos données',kickoff:'Kick Off',project:'C\'est quoi?',meedoen:'Pourquoi rejoindre?',paneel:'Le panneau','3mensen':'Aidez 3 personnes',ketting:'R\u00e9action en cha\u00eene',filosofie:'Philosophie',kunstwerk:'L\'oeuvre',deelnemers:'Participants',specs:'Plan technique',payitforward:'Pay it Forward',contact:'Contact',join:'Rejoindre',news:'Actualités',suggestions:'Suggestions',initiator:'L\u2019Initiateur',panelidea:'Aide pour mon panneau'},
+    ql: {sponsors:'Sponsors',sponsorform:'Devenir sponsor',upload:'T\u00e9l\u00e9verser',galerij:'Galerie',regels:'Règles de participation',privacy:'Vos données',kickoff:'Kick Off',project:'C\'est quoi?',meedoen:'Pourquoi rejoindre?',paneel:'Le panneau','3mensen':'Aidez 3 personnes',ketting:'R\u00e9action en cha\u00eene',filosofie:'Philosophie',kunstwerk:'L\'oeuvre',deelnemers:'Participants',specs:'Plan technique',payitforward:'Pay it Forward',contact:'Contact',join:'Rejoindre',news:'Actualités',suggestions:'Suggestions',initiator:'L\u2019Initiateur',panelidea:'Aide pour mon panneau'},
     cards: {
+      sponsors: {title:'Rendu possible par',body:'<div id=\"sponsors-body\"></div>'},
+      sponsorform: {title:'Devenir sponsor',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Partage ton panneau',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Panneaux terminés',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Chargement...</div><div id=\"gallery-grid\"></div>'},
       regels: {title:'Règles de participation',body:'<p style="opacity:.85">Ceci est un mouvement de connexion. Quelques principes le gardent entier — d’où que tu viennes.</p><div class="qcard" style="border-left:3px solid rgba(255,100,100,.4)"><strong>1. Crée pour relier, pas pour diviser.</strong><br><br><ul style="margin:.4rem 0 .6rem 1rem;line-height:1.85"><li>campagnes, partis ou slogans politiques</li><li>prosélytisme religieux ou attaques contre une croyance</li><li>haine ou rabaissement selon l’origine, la couleur, la croyance, le genre, la sexualité ou l’identité</li><li>symboles ou messages destinés à diviser plutôt qu’à relier</li></ul>Tout ce que tu crées peut être personnel, audacieux et porteur de sens. Ta culture, tes racines et ton histoire sont, elles, les bienvenues — c’est autre chose qu’un agenda. Un doute ? Demande-nous avant de commencer.</div><p><strong>2. Chacun a sa place.</strong><br>Maître ou débutant, amateur ou étudiant, école ou famille. De chaque pays, chaque culture, chaque origine. Ici, pas de gagnants ni de perdants, pas de style « correct ». Dans le cadre partagé, chacun est libre de créer.</p><p><strong>3. Apporte ton propre monde.</strong><br>Ta langue, ta culture, ton histoire, tes racines — laisse-les paraître dans ton œuvre. Cette œuvre s’enrichit à mesure que davantage de mondes s’y rencontrent. Ton origine n’est pas un détail ; c’est précisément ta contribution.</p><p><strong>4. Transmets à ton tour.</strong><br>Celui qui participe s’engage à aider trois personnes — sans rien attendre en retour. Elles aident à leur tour trois autres. Ainsi grandit la vague, de main en main, par-delà les frontières.</p><p><strong>5. Partage ton métier.</strong><br>Aidez-vous les uns les autres avec ce que vous savez et savez faire. Partage tes connaissances, tes techniques, tes erreurs et tes découvertes avec les autres créateurs. Personne n’a à s’en sortir seul — le mouvement grandit lorsque le savoir-faire passe de main en main.</p><p><strong>6. Respecte le travail et l’histoire des autres.</strong><br>Chaque panneau porte son propre sens, sa propre émotion, sa propre histoire. Tu n’es pas obligé de l’aimer. Tu le respectes. C’est ainsi que nous nous traitons aussi au-delà du bois.</p><p><strong>7. Prends soin de ce que tu utilises.</strong><br>Traite ton matériau avec respect. Quand tu le peux, utilise des chutes, du bois de récupération ou du bois d’origine responsable — ce que « responsable » veut dire, tu le sais mieux que quiconque dans ta partie du monde. Ce que nous créons ne doit pas coûter à la Terre plus que nécessaire.</p><p><strong>8. Ton panneau devient partie du tout.</strong><br>Ce que tu crées, tu le confies au projet, afin qu’il devienne partie d’une œuvre collective qui sera un jour rendue au monde. Tu restes toujours l’auteur — ton nom et ton histoire restent liés à ton œuvre.</p><div class="qcard"><em>Participe, et voilà ce que tu rejoins. Où que tu sois dans ce monde.</em></div>'},
@@ -552,8 +563,10 @@ var LANG = {
     placeholder: 'Frag in jeder Sprache...',
     btn: 'Stell mir eine Frage...',
     join: '+ Mitmachen',
-    ql: {upload:'Hochladen',galerij:'Galerie',regels:'Teilnahmeregeln',privacy:'Deine Daten',kickoff:'Kick Off',project:'Was ist das?',meedoen:'Warum mitmachen?',paneel:'Das Panel','3mensen':'3 Menschen helfen',ketting:'Kettenreaktion',filosofie:'Philosophie',kunstwerk:'Das Kunstwerk',deelnemers:'Teilnehmer',specs:'Technische Zeichnung',payitforward:'Pay it Forward',contact:'Kontakt',join:'Mitmachen',news:'Neuigkeiten',suggestions:'Vorschläge',initiator:'Der Initiator',panelidea:'Hilfe bei Paneelidee'},
+    ql: {sponsors:'Sponsoren',sponsorform:'Sponsor werden',upload:'Hochladen',galerij:'Galerie',regels:'Teilnahmeregeln',privacy:'Deine Daten',kickoff:'Kick Off',project:'Was ist das?',meedoen:'Warum mitmachen?',paneel:'Das Panel','3mensen':'3 Menschen helfen',ketting:'Kettenreaktion',filosofie:'Philosophie',kunstwerk:'Das Kunstwerk',deelnemers:'Teilnehmer',specs:'Technische Zeichnung',payitforward:'Pay it Forward',contact:'Kontakt',join:'Mitmachen',news:'Neuigkeiten',suggestions:'Vorschläge',initiator:'Der Initiator',panelidea:'Hilfe bei Paneelidee'},
     cards: {
+      sponsors: {title:'Ermöglicht durch',body:'<div id=\"sponsors-body\"></div>'},
+      sponsorform: {title:'Sponsor werden',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Panel teilen',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Fertige Panels',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Panels werden geladen...</div><div id=\"gallery-grid\"></div>'},
       regels: {title:'Teilnahmeregeln',body:'<p style="opacity:.85">Dies ist eine Bewegung der Verbindung. Ein paar Dinge halten sie ganz — woher du auch kommst.</p><div class="qcard" style="border-left:3px solid rgba(255,100,100,.4)"><strong>1. Erschaffe, um zu verbinden, nicht um zu spalten.</strong><br><br><ul style="margin:.4rem 0 .6rem 1rem;line-height:1.85"><li>politische Kampagnen, Parteien oder Parolen</li><li>religiöse Bekehrung oder Angriffe auf einen Glauben</li><li>Hass oder Herabsetzung wegen Herkunft, Hautfarbe, Glaube, Geschlecht, Sexualität oder wer jemand ist</li><li>Symbole oder Botschaften, die spalten statt verbinden sollen</li></ul>Alles, was du machst, darf persönlich sein, mutig und voller Bedeutung. Deine Kultur, deine Wurzeln und deine Geschichte sind ausdrücklich willkommen — das ist etwas anderes als eine Agenda. Unsicher? Frag uns, bevor du beginnst.</div><p><strong>2. Alle gehören dazu.</strong><br>Meister oder Anfänger, Hobbyist oder Student, Schule oder Familie. Aus jedem Land, jeder Kultur, jedem Hintergrund. Hier gibt es keine Gewinner oder Verlierer, keinen „richtigen“ Stil. Innerhalb des gemeinsamen Rahmens ist jeder frei zu gestalten.</p><p><strong>3. Bring deine eigene Welt mit.</strong><br>Deine Sprache, deine Kultur, deine Geschichte, deine Wurzeln — lass sie in deinem Werk sichtbar werden. Dieses Kunstwerk wird reicher, je mehr Welten in ihm zusammenkommen. Dein Hintergrund ist keine Nebensache; er ist genau das, was du beiträgst.</p><p><strong>4. Gib es weiter.</strong><br>Wer mitmacht, verspricht, drei Menschen zu helfen — ohne etwas dafür zu erwarten. Sie helfen wiederum drei anderen. So wächst die Welle, von Hand zu Hand, über Grenzen hinweg.</p><p><strong>5. Teile dein Handwerk.</strong><br>Helft einander mit dem, was ihr wisst und könnt. Teile dein Wissen, deine Techniken, deine Fehler und deine Entdeckungen mit anderen Machern. Niemand muss es allein herausfinden — die Bewegung wächst, wenn das Handwerk von Hand zu Hand geht.</p><p><strong>6. Achte das Werk und die Geschichte der anderen.</strong><br>Jedes Panel trägt seine eigene Bedeutung, Emotion oder Geschichte. Du musst es nicht mögen. Aber du achtest es. So gehen wir auch jenseits des Holzes miteinander um.</p><p><strong>7. Sorge für das, was du verwendest.</strong><br>Behandle dein Material mit Respekt. Nutze wo möglich Reste, wiederverwendetes Holz oder Holz aus verantwortungsvoller Quelle — was „verantwortungsvoll“ bedeutet, weißt du in deinem Teil der Welt am besten. Was wir schaffen, muss die Erde nicht mehr kosten als nötig.</p><p><strong>8. Dein Panel wird Teil des Ganzen.</strong><br>Was du machst, übergibst du dem Projekt, damit es Teil eines gemeinsamen Kunstwerks werden kann, das eines Tages der Welt zurückgegeben wird. Du bleibst immer der Macher — dein Name und deine Geschichte bleiben mit deinem Werk verbunden.</p><div class="qcard"><em>Machst du mit, dann machst du hierbei mit. Wo auch immer du auf dieser Welt stehst.</em></div>'},
@@ -580,8 +593,10 @@ var LANG = {
     placeholder: 'Chiedi in qualsiasi lingua...',
     btn: 'Fammi una domanda...',
     join: '+ Unisciti',
-    ql: {upload:'Carica',galerij:'Galleria',regels:'Regole di partecipazione',privacy:'I tuoi dati',kickoff:'Kick Off',project:'Cos\'è questo?',meedoen:'Perch\u00e9 unirsi?',paneel:'Il pannello','3mensen':'Aiuta 3 persone',ketting:'Reazione a catena',filosofie:'Filosofia',kunstwerk:'L\'opera',deelnemers:'Partecipanti',specs:'Disegno tecnico',payitforward:'Pay it Forward',contact:'Contatto',join:'Unisciti',news:'Notizie',suggestions:'Suggerimenti',initiator:'L\u2019Iniziatore',panelidea:'Aiuto con idea pannello'},
+    ql: {sponsors:'Sponsor',sponsorform:'Diventa sponsor',upload:'Carica',galerij:'Galleria',regels:'Regole di partecipazione',privacy:'I tuoi dati',kickoff:'Kick Off',project:'Cos\'è questo?',meedoen:'Perch\u00e9 unirsi?',paneel:'Il pannello','3mensen':'Aiuta 3 persone',ketting:'Reazione a catena',filosofie:'Filosofia',kunstwerk:'L\'opera',deelnemers:'Partecipanti',specs:'Disegno tecnico',payitforward:'Pay it Forward',contact:'Contatto',join:'Unisciti',news:'Notizie',suggestions:'Suggerimenti',initiator:'L\u2019Iniziatore',panelidea:'Aiuto con idea pannello'},
     cards: {
+      sponsors: {title:'Reso possibile da',body:'<div id=\"sponsors-body\"></div>'},
+      sponsorform: {title:'Diventa sponsor',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Condividi il pannello',body:'<div id=\"upload-body\"></div>'},
       galerij: {title:'Pannelli completati',body:'<div id=\"gal-loading\" style=\"text-align:center;padding:1rem;opacity:.6\">Caricamento...</div><div id=\"gallery-grid\"></div>'},
       regels: {title:'Regole di partecipazione',body:'<p style="opacity:.85">È un movimento di connessione. Poche cose lo tengono intero — da qualunque parte tu venga.</p><div class="qcard" style="border-left:3px solid rgba(255,100,100,.4)"><strong>1. Crea per unire, non per dividere.</strong><br><br><ul style="margin:.4rem 0 .6rem 1rem;line-height:1.85"><li>campagne, partiti o slogan politici</li><li>proselitismo religioso o attacchi a una fede</li><li>odio o umiliazione per origine, colore, fede, genere, sessualità o per chi si è</li><li>simboli o messaggi pensati per dividere anziché unire</li></ul>Tutto ciò che crei può essere personale, audace e pieno di significato. La tua cultura, le tue radici e la tua storia sono invece benvenute — è un’altra cosa rispetto a un’agenda. Hai dubbi? Chiedici prima di iniziare.</div><p><strong>2. Ci si sta tutti.</strong><br>Maestro o principiante, hobbista o studente, scuola o famiglia. Da ogni paese, ogni cultura, ogni provenienza. Qui non ci sono vincitori né vinti, né uno stile “giusto”. Dentro la cornice condivisa, ognuno è libero di creare.</p><p><strong>3. Porta il tuo mondo.</strong><br>La tua lingua, la tua cultura, la tua storia, le tue radici — falle emergere nella tua opera. Quest’opera si arricchisce quanto più mondi vi si incontrano. La tua provenienza non è un dettaglio; è proprio ciò che porti.</p><p><strong>4. Passa il dono.</strong><br>Chi partecipa promette di aiutare tre persone — senza aspettarsi nulla in cambio. Esse a loro volta ne aiutano altre tre. Così cresce l’onda, di mano in mano, oltre i confini.</p><p><strong>5. Condividi il tuo mestiere.</strong><br>Aiutatevi a vicenda con ciò che sapete e sapete fare. Condividi le tue conoscenze, le tue tecniche, i tuoi errori e le tue scoperte con gli altri creatori. Nessuno deve cavarsela da solo — il movimento cresce quando il mestiere passa di mano in mano.</p><p><strong>6. Rispetta il lavoro e la storia degli altri.</strong><br>Ogni pannello porta un proprio significato, un’emozione o una storia. Non devi per forza apprezzarlo. Ma lo rispetti. È così che ci trattiamo anche oltre il legno.</p><p><strong>7. Abbi cura di ciò che usi.</strong><br>Tratta il tuo materiale con rispetto. Quando puoi, usa ritagli, legno di recupero o legno di provenienza responsabile — cosa significhi “responsabile” lo sai meglio tu nella tua parte di mondo. Ciò che creiamo non deve costare alla Terra più del necessario.</p><p><strong>8. Il tuo pannello diventa parte del tutto.</strong><br>Ciò che crei lo affidi al progetto, perché possa diventare parte di un’opera collettiva che un giorno sarà restituita al mondo. Resti sempre l’autore — il tuo nome e la tua storia restano legati alla tua opera.</p><div class="qcard"><em>Se partecipi, è a questo che aderisci. Ovunque tu sia in questo mondo.</em></div>'},
@@ -1096,6 +1111,130 @@ function upSubmit(){
   });
 }
 
+
+// ============ SPONSOREN ============
+var SPONSORS_CACHE = null;
+function spIntro(){
+  var L={
+   nl:{head:'Mede mogelijk gemaakt door',p1:'Geen enkele sponsor staat hier boven een ander. Geen goud, geen zilver, geen grootste logo. Wie geeft \u2014 geld, materiaal, tijd, kennis \u2014 staat zij aan zij, gelijk, net als de makers.',p2:'Dit gaat niet om \u00e9\u00e9n merk. Het gaat om een hele branche die zichzelf optilt, samen. Elk bedrijf hier geeft iets terug aan het vak dat hen groot heeft gemaakt. Dat is Pay It Forward \u2014 geen slogan aan de muur, maar een belofte die je waarmaakt.',p3:'Hoe je dit op je eigen kanalen inzet, bepaal je zelf \u2014 wees er trots op. Laat alleen de Pay It Forward-gedachte leidend zijn, niet het verkoopverhaal.',p4:'De volgorde wisselt elke keer dat je de app opent, zodat niemand ooit de eerste is.',why:'Waarom',what:'Draagt bij',none:'Er zijn nog geen sponsoren om te tonen.'},
+   en:{head:'Made possible by',p1:'No sponsor stands above another here. No gold, no silver, no biggest logo. Whoever gives \u2014 money, materials, time, knowledge \u2014 stands side by side, equal, just like the makers.',p2:'This isn\u2019t about one brand. It\u2019s about a whole trade lifting itself, together. Every company here gives something back to the craft that raised them. That\u2019s Pay It Forward \u2014 not a slogan on a wall, but a promise kept.',p3:'How you share this on your own channels is up to you \u2014 be proud of it. Just let the Pay It Forward idea lead, not the sales pitch.',p4:'The order shuffles every time you open the app, so no one is ever first.',why:'Why',what:'Contributes',none:'There are no sponsors to show yet.'},
+   es:{head:'Posible gracias a',p1:'Ning\u00fan patrocinador est\u00e1 por encima de otro. Sin oro, sin plata, sin el logo m\u00e1s grande. Quien aporta \u2014 dinero, materiales, tiempo, conocimiento \u2014 est\u00e1 al lado de los dem\u00e1s, en igualdad, igual que los creadores.',p2:'No se trata de una marca. Se trata de todo un oficio que se eleva, juntos. Cada empresa aqu\u00ed devuelve algo al oficio que la hizo crecer. Eso es Pay It Forward: no un eslogan en la pared, sino una promesa cumplida.',p3:'C\u00f3mo lo compartas en tus propios canales depende de ti \u2014 s\u00e9 orgulloso. Solo deja que la idea Pay It Forward lidere, no el discurso de venta.',p4:'El orden se baraja cada vez que abres la app, para que nadie sea nunca el primero.',why:'Por qu\u00e9',what:'Aporta',none:'A\u00fan no hay patrocinadores para mostrar.'},
+   fr:{head:'Rendu possible par',p1:'Aucun sponsor n\u2019est au-dessus d\u2019un autre ici. Pas d\u2019or, pas d\u2019argent, pas de plus grand logo. Celui qui donne \u2014 argent, mat\u00e9riaux, temps, savoir \u2014 est c\u00f4te \u00e0 c\u00f4te, \u00e9gal, comme les cr\u00e9ateurs.',p2:'Il ne s\u2019agit pas d\u2019une marque. Il s\u2019agit de tout un m\u00e9tier qui s\u2019\u00e9l\u00e8ve, ensemble. Chaque entreprise ici rend quelque chose au m\u00e9tier qui l\u2019a fait grandir. C\u2019est Pay It Forward : pas un slogan sur un mur, mais une promesse tenue.',p3:'La fa\u00e7on dont tu le partages sur tes propres canaux d\u00e9pend de toi \u2014 sois-en fier. Laisse simplement l\u2019id\u00e9e Pay It Forward guider, pas l\u2019argumentaire de vente.',p4:'L\u2019ordre change \u00e0 chaque ouverture de l\u2019application, pour que personne ne soit jamais le premier.',why:'Pourquoi',what:'Contribue',none:'Aucun sponsor \u00e0 afficher pour le moment.'},
+   de:{head:'Erm\u00f6glicht durch',p1:'Kein Sponsor steht hier \u00fcber einem anderen. Kein Gold, kein Silber, kein gr\u00f6\u00dftes Logo. Wer gibt \u2014 Geld, Material, Zeit, Wissen \u2014 steht Seite an Seite, gleich, genau wie die Macher.',p2:'Es geht nicht um eine Marke. Es geht um ein ganzes Handwerk, das sich gemeinsam hebt. Jedes Unternehmen hier gibt etwas an das Handwerk zur\u00fcck, das es gro\u00df gemacht hat. Das ist Pay It Forward \u2014 kein Slogan an der Wand, sondern ein gehaltenes Versprechen.',p3:'Wie du das auf deinen eigenen Kan\u00e4len teilst, entscheidest du selbst \u2014 sei stolz darauf. Lass nur die Pay-It-Forward-Idee f\u00fchren, nicht den Verkaufstext.',p4:'Die Reihenfolge wird bei jedem \u00d6ffnen der App neu gemischt, damit niemand jemals der Erste ist.',why:'Warum',what:'Tr\u00e4gt bei',none:'Es gibt noch keine Sponsoren zum Anzeigen.'},
+   it:{head:'Reso possibile da',p1:'Nessuno sponsor sta sopra un altro qui. Niente oro, niente argento, nessun logo pi\u00f9 grande. Chi d\u00e0 \u2014 denaro, materiali, tempo, conoscenza \u2014 sta fianco a fianco, alla pari, proprio come i creatori.',p2:'Non si tratta di un marchio. Si tratta di un intero mestiere che si solleva, insieme. Ogni azienda qui restituisce qualcosa al mestiere che l\u2019ha fatta crescere. Questo \u00e8 Pay It Forward: non uno slogan sul muro, ma una promessa mantenuta.',p3:'Come lo condividi sui tuoi canali dipende da te \u2014 siine orgoglioso. Lascia solo che sia l\u2019idea Pay It Forward a guidare, non la pubblicit\u00e0.',p4:'L\u2019ordine cambia ogni volta che apri l\u2019app, cos\u00ec nessuno \u00e8 mai il primo.',why:'Perch\u00e9',what:'Contribuisce',none:'Non ci sono ancora sponsor da mostrare.'}
+  };
+  return L[currentLang]||L['en'];
+}
+function loadSponsors(){
+  var host=document.getElementById('sponsors-body'); if(!host) return;
+  if(SPONSORS_CACHE){ renderSponsors(); return; }
+  host.innerHTML='<div style="text-align:center;padding:1rem;opacity:.6">...</div>';
+  fetch('/.netlify/functions/sponsors').then(function(r){return r.json();}).then(function(data){
+    SPONSORS_CACHE=Array.isArray(data)?data:[];
+    renderSponsors();
+  }).catch(function(){ host.innerHTML='<div style="opacity:.6;text-align:center;padding:1rem">...</div>'; });
+}
+function escSp(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function shuffleArr(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function renderSponsors(){
+  var host=document.getElementById('sponsors-body'); var t=spIntro();
+  var intro='<div style="margin-bottom:1rem">'
+    +'<p style="color:rgba(255,255,255,.8);font-size:13px;line-height:1.65;margin:0 0 .6rem">'+t.p1+'</p>'
+    +'<p style="color:rgba(255,255,255,.8);font-size:13px;line-height:1.65;margin:0 0 .6rem">'+t.p2+'</p>'
+    +'<p style="color:rgba(255,255,255,.8);font-size:13px;line-height:1.65;margin:0 0 .6rem">'+t.p3+'</p>'
+    +'<p style="color:#e8c17a;font-size:12.5px;line-height:1.6;margin:0">'+t.p4+'</p></div>';
+  var data=(SPONSORS_CACHE||[]).slice();
+  if(!data.length){ host.innerHTML=intro+'<div style="opacity:.6;text-align:center;padding:1rem;font-size:13px">'+t.none+'</div>'; return; }
+  shuffleArr(data);
+  var cards='<div style="display:flex;flex-direction:column;gap:10px">';
+  data.forEach(function(s){
+    var contact='';
+    if(s.contact_website) contact+='<a href="'+escSp(s.contact_website)+'" target="_blank" rel="noopener" style="color:#e8c17a;text-decoration:none;margin-right:10px"><span style="opacity:.8">\u2b21</span> website</a>';
+    if(s.contact_email) contact+='<a href="mailto:'+escSp(s.contact_email)+'" style="color:#e8c17a;text-decoration:none;margin-right:10px">\u2709 '+escSp(s.contact_email)+'</a>';
+    if(s.contact_phone) contact+='<span style="color:#e8c17a">\u260e '+escSp(s.contact_phone)+'</span>';
+    var logo=s.logo_url?'<div style="width:46px;height:46px;border-radius:8px;background:#fff center/contain no-repeat;background-image:url(\''+escSp(s.logo_url)+'\');flex-shrink:0"></div>':'<div style="width:46px;height:46px;border-radius:8px;background:rgba(255,255,255,.1);flex-shrink:0"></div>';
+    cards+='<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.8rem .9rem">'
+      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'+logo
+      +'<div><div style="color:#fff;font-weight:600;font-size:14px">'+escSp(s.company)+'</div>'
+      +(s.country?'<div style="color:rgba(255,255,255,.55);font-size:11.5px">'+escSp(s.country)+'</div>':'')+'</div></div>'
+      +'<div style="color:rgba(255,255,255,.82);font-size:12px;line-height:1.55;margin-bottom:6px"><span style="color:rgba(255,255,255,.45)">'+t.why+':</span> '+escSp(s.why)+'</div>'
+      +'<div style="color:rgba(255,255,255,.82);font-size:12px;line-height:1.55'+(contact?';margin-bottom:8px':'')+'"><span style="color:rgba(255,255,255,.45)">'+t.what+':</span> '+escSp(s.what)+'</div>'
+      +(contact?'<div style="font-size:11.5px">'+contact+'</div>':'')
+      +'</div>';
+  });
+  cards+='</div>';
+  host.innerHTML=intro+cards;
+}
+
+
+// ============ SPONSOR AANMELDEN ============
+var SP_LOGO = null;
+function spfT(){
+  var L={
+   nl:{title:'Word sponsor',guideHead:'De enige richtlijn',guide:'Vertel wat je bijdraagt aan de beweging en de branche \u2014 niet waarom mensen jouw product moeten kopen.',company:'Bedrijfsnaam',country:'Land',logo:'Logo',logohint:'(verplicht)',addlogo:'Logo uploaden',why:'Waarom draag je bij?',what:'Wat draag je bij? (geld, materiaal, diensten, kennis)',web:'Website',email:'E-mail',tel:'Telefoon',pub:'Website, e-mail en telefoon worden publiek getoond op je kaart.',submit:'Aanmelden',req:'Vul bedrijfsnaam, logo, waarom en wat in.',thanks:'Bedankt! Je aanmelding is ontvangen en wordt bekeken. Zodra die is goedgekeurd, verschijn je bij de sponsoren.',sending:'Bezig...',uploading:'Logo uploaden...'},
+   en:{title:'Become a sponsor',guideHead:'The one guideline',guide:'Tell us what you contribute to the movement and the trade \u2014 not why people should buy your product.',company:'Company name',country:'Country',logo:'Logo',logohint:'(required)',addlogo:'Upload logo',why:'Why do you contribute?',what:'What do you contribute? (money, materials, services, knowledge)',web:'Website',email:'Email',tel:'Phone',pub:'Website, email and phone are shown publicly on your card.',submit:'Submit',req:'Please fill in company name, logo, why and what.',thanks:'Thank you! Your submission has been received and is being reviewed. Once approved, you will appear among the sponsors.',sending:'Working...',uploading:'Uploading logo...'},
+   es:{title:'H\u00e1zte patrocinador',guideHead:'La \u00fanica pauta',guide:'Cu\u00e9ntanos qu\u00e9 aportas al movimiento y al oficio, no por qu\u00e9 deber\u00edan comprar tu producto.',company:'Nombre de la empresa',country:'Pa\u00eds',logo:'Logo',logohint:'(obligatorio)',addlogo:'Subir logo',why:'\u00bfPor qu\u00e9 aportas?',what:'\u00bfQu\u00e9 aportas? (dinero, materiales, servicios, conocimiento)',web:'Sitio web',email:'Correo',tel:'Tel\u00e9fono',pub:'El sitio web, el correo y el tel\u00e9fono se muestran p\u00fablicamente en tu tarjeta.',submit:'Enviar',req:'Completa nombre, logo, por qu\u00e9 y qu\u00e9.',thanks:'\u00a1Gracias! Tu solicitud se ha recibido y est\u00e1 en revisi\u00f3n. Una vez aprobada, aparecer\u00e1s entre los patrocinadores.',sending:'Procesando...',uploading:'Subiendo logo...'},
+   fr:{title:'Devenir sponsor',guideHead:'La seule r\u00e8gle',guide:'Dis-nous ce que tu apportes au mouvement et au m\u00e9tier \u2014 pas pourquoi on devrait acheter ton produit.',company:'Nom de l\u2019entreprise',country:'Pays',logo:'Logo',logohint:'(obligatoire)',addlogo:'T\u00e9l\u00e9verser le logo',why:'Pourquoi contribues-tu ?',what:'Que contribues-tu ? (argent, mat\u00e9riaux, services, savoir)',web:'Site web',email:'E-mail',tel:'T\u00e9l\u00e9phone',pub:'Le site web, l\u2019e-mail et le t\u00e9l\u00e9phone sont affich\u00e9s publiquement sur ta carte.',submit:'Envoyer',req:'Remplis le nom, le logo, le pourquoi et le quoi.',thanks:'Merci ! Ta demande a \u00e9t\u00e9 re\u00e7ue et est en cours d\u2019examen. Une fois valid\u00e9e, tu appara\u00eetras parmi les sponsors.',sending:'En cours...',uploading:'Envoi du logo...'},
+   de:{title:'Sponsor werden',guideHead:'Die eine Richtlinie',guide:'Erz\u00e4hl uns, was du zur Bewegung und zum Handwerk beitr\u00e4gst \u2014 nicht warum man dein Produkt kaufen soll.',company:'Firmenname',country:'Land',logo:'Logo',logohint:'(erforderlich)',addlogo:'Logo hochladen',why:'Warum tr\u00e4gst du bei?',what:'Was tr\u00e4gst du bei? (Geld, Material, Dienste, Wissen)',web:'Webseite',email:'E-Mail',tel:'Telefon',pub:'Webseite, E-Mail und Telefon werden \u00f6ffentlich auf deiner Karte gezeigt.',submit:'Absenden',req:'Bitte Firmenname, Logo, Warum und Was ausf\u00fcllen.',thanks:'Danke! Deine Anmeldung ist eingegangen und wird gepr\u00fcft. Nach der Freigabe erscheinst du bei den Sponsoren.',sending:'Wird verarbeitet...',uploading:'Logo wird hochgeladen...'},
+   it:{title:'Diventa sponsor',guideHead:'L\u2019unica linea guida',guide:'Raccontaci cosa contribuisci al movimento e al mestiere, non perch\u00e9 dovrebbero comprare il tuo prodotto.',company:'Nome azienda',country:'Paese',logo:'Logo',logohint:'(obbligatorio)',addlogo:'Carica logo',why:'Perch\u00e9 contribuisci?',what:'Cosa contribuisci? (denaro, materiali, servizi, conoscenza)',web:'Sito web',email:'Email',tel:'Telefono',pub:'Sito web, email e telefono sono mostrati pubblicamente sulla tua scheda.',submit:'Invia',req:'Compila nome, logo, perch\u00e9 e cosa.',thanks:'Grazie! La tua richiesta \u00e8 stata ricevuta ed \u00e8 in revisione. Una volta approvata, apparirai tra gli sponsor.',sending:'In corso...',uploading:'Caricamento logo...'}
+  };
+  return L[currentLang]||L['en'];
+}
+function initSponsorForm(){
+  SP_LOGO=null;
+  var t=spfT(); var host=document.getElementById('sponsorform-body'); if(!host) return;
+  host.innerHTML=''
+   +'<div style="background:rgba(230,193,122,.08);border:1px solid rgba(230,193,122,.25);border-radius:8px;padding:.6rem .7rem;margin-bottom:14px">'
+   +'<div style="color:#e8c17a;font-size:12px;font-weight:600;margin-bottom:2px">'+t.guideHead+'</div>'
+   +'<div style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5">'+t.guide+'</div></div>'
+   +'<div class="fld"><label>'+t.company+' *</label><input type="text" id="sp-company"></div>'
+   +'<div class="fld"><label>'+t.country+'</label><input type="text" id="sp-country"></div>'
+   +'<div class="fld"><label>'+t.logo+' * <span style="opacity:.5">'+t.logohint+'</span></label>'
+   +'<div id="sp-logo-thumb" style="margin-bottom:.4rem"></div>'
+   +'<label class="jsub" style="display:inline-block;text-align:center;cursor:pointer;width:auto;padding:.5rem 1rem">'+t.addlogo
+   +'<input type="file" accept="image/*" style="display:none" onchange="spAddLogo(this)"></label></div>'
+   +'<div class="fld"><label>'+t.why+' *</label><textarea id="sp-why" style="height:70px"></textarea></div>'
+   +'<div class="fld"><label>'+t.what+' *</label><textarea id="sp-what" style="height:70px"></textarea></div>'
+   +'<div class="fld"><label>'+t.web+'</label><input type="text" id="sp-web" placeholder="https://"></div>'
+   +'<div class="fld"><label>'+t.email+'</label><input type="email" id="sp-email"></div>'
+   +'<div class="fld"><label>'+t.tel+'</label><input type="text" id="sp-tel"></div>'
+   +'<div style="font-size:11px;color:#e8c17a;margin-bottom:.6rem">\u26A0\uFE0F '+t.pub+'</div>'
+   +'<button class="jsub" onclick="spSubmit()">'+t.submit+'</button>'
+   +'<div id="sp-msg" style="font-size:12px;margin-top:.5rem"></div>';
+}
+function spAddLogo(input){
+  compressAndPreviewPhoto(input, function(dataUrl){
+    SP_LOGO=dataUrl;
+    var box=document.getElementById('sp-logo-thumb');
+    box.innerHTML='<div style="position:relative;width:70px;height:70px;border-radius:8px;overflow:hidden;background:#fff"><img src="'+dataUrl+'" style="width:100%;height:100%;object-fit:contain"><span onclick="spDelLogo()" style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,.7);color:#fff;border-radius:50%;width:18px;height:18px;line-height:18px;text-align:center;font-size:12px;cursor:pointer">\u2715</span></div>';
+    input.value='';
+  });
+}
+function spDelLogo(){ SP_LOGO=null; var b=document.getElementById('sp-logo-thumb'); if(b) b.innerHTML=''; }
+function spv(id){ var e=document.getElementById(id); return e?e.value.trim():''; }
+function spSubmit(){
+  var t=spfT(); var msg=document.getElementById('sp-msg');
+  if(!spv('sp-company')){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.company; return; }
+  if(!SP_LOGO){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.logo; return; }
+  if(!spv('sp-why')){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.why; return; }
+  if(!spv('sp-what')){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.what; return; }
+  msg.style.color='rgba(255,255,255,.7)'; msg.textContent=t.uploading;
+  fetch('/.netlify/functions/sponsor-logo',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fileData:SP_LOGO,fileType:'image/jpeg'})})
+  .then(function(r){return r.json();}).then(function(d){
+    if(!d.url){ msg.style.color='#ff9b9b'; msg.textContent=t.req; return; }
+    msg.textContent=t.sending;
+    fetch('/.netlify/functions/sponsor-submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      company:spv('sp-company'),country:spv('sp-country'),logo_url:d.url,
+      why:spv('sp-why'),what:spv('sp-what'),
+      contact_website:spv('sp-web'),contact_email:spv('sp-email'),contact_phone:spv('sp-tel'),
+      submitter_email:spv('sp-email'),lang:currentLang||'en'
+    })}).then(function(r){return r.json();}).then(function(d2){
+      if(d2.ok){ document.getElementById('sponsorform-body').innerHTML='<div style="text-align:center;padding:2rem 1rem;color:#8fe08f;font-size:15px;line-height:1.6">\u2705<br>'+t.thanks+'</div>'; SPONSORS_CACHE=null; }
+      else { msg.style.color='#ff9b9b'; msg.textContent=t.req; }
+    }).catch(function(){ msg.style.color='#ff9b9b'; msg.textContent=t.req; });
+  }).catch(function(){ msg.style.color='#ff9b9b'; msg.textContent=t.req; });
+}
+
 function loadParticipants() {
   var list = document.getElementById('participants-list');
   var loading = document.getElementById('participants-loading');
@@ -1214,6 +1353,7 @@ function checkAdminPw(){
       document.getElementById('admin-content').style.display='block';
       loadPending();
       loadPendingPanels();
+      loadPendingSponsors();
     } else {
       badAdminPw();
     }
@@ -1317,6 +1457,50 @@ function panelDo(id, action){
   .then(function(){
     GALLERY_CACHE=null;
     loadPendingPanels();
+  });
+}
+
+function loadPendingSponsors(){
+  var list = document.getElementById('admin-sponsors-list');
+  if(!list) return;
+  list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Loading...</p>';
+  fetch('/.netlify/functions/admin-sponsors-pending',{headers:{'X-Admin-Key':ADMIN_PW}})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(!data.length){
+      list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">No pending sponsors.</p>';
+      return;
+    }
+    var out='';
+    data.forEach(function(s){
+      out+='<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:1rem;margin-bottom:.75rem">';
+      out+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:.4rem">';
+      if(s.logo_url) out+='<div style="width:40px;height:40px;border-radius:8px;background:#fff center/contain no-repeat;background-image:url(\''+s.logo_url+'\')"></div>';
+      out+='<div><div style="font-weight:700;color:#fff">'+(s.company||'')+'</div>'+(s.country?'<div style="font-size:11px;color:rgba(255,255,255,.6)">'+s.country+'</div>':'')+'</div></div>';
+      if(s.why) out+='<div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-bottom:.35rem;line-height:1.5"><span style="opacity:.7">Why:</span> '+s.why+'</div>';
+      if(s.what) out+='<div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-bottom:.5rem;line-height:1.5"><span style="opacity:.7">Contributes:</span> '+s.what+'</div>';
+      var contact=[];
+      if(s.contact_website) contact.push(s.contact_website);
+      if(s.contact_email) contact.push(s.contact_email);
+      if(s.contact_phone) contact.push(s.contact_phone);
+      if(contact.length) out+='<div style="font-size:11px;color:var(--wood);margin-bottom:.6rem">'+contact.join(' · ')+'</div>';
+      out+='<div style="display:flex;gap:.5rem">';
+      out+='<button style="flex:1;background:#2d6a2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="sponsorDo('+s.id+',\'approve\')">\u2713 Approve</button>';
+      out+='<button style="flex:1;background:#6a2d2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="sponsorDo('+s.id+',\'reject\')">\u2717 Reject</button>';
+      out+='</div></div>';
+    });
+    list.innerHTML=out;
+  })
+  .catch(function(){ list.innerHTML='<p style="color:red;font-size:13px">Error loading.</p>'; });
+}
+
+function sponsorDo(id, action){
+  fetch('/.netlify/functions/sponsor-approve?id='+id+'&action='+action,{
+    headers:{'X-Admin-Key':ADMIN_PW}
+  })
+  .then(function(){
+    SPONSORS_CACHE=null;
+    loadPendingSponsors();
   });
 }
 
@@ -1461,6 +1645,8 @@ function splashInfo(topic) {
     if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
     if(topic === 'galerij') setTimeout(loadGallery, 100);
     if(topic === 'upload') setTimeout(initUpload, 100);
+    if(topic === 'sponsors') setTimeout(loadSponsors, 100);
+    if(topic === 'sponsorform') setTimeout(initSponsorForm, 100);
     if(topic === 'initiator') injectInitiatorPhoto();
   } else {
     // Use LANG[lang].cards first (hardcoded), then CARD_CACHE (API), then fallback to API call
@@ -1473,6 +1659,8 @@ function splashInfo(topic) {
       if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
     if(topic === 'galerij') setTimeout(loadGallery, 100);
     if(topic === 'upload') setTimeout(initUpload, 100);
+    if(topic === 'sponsors') setTimeout(loadSponsors, 100);
+    if(topic === 'sponsorform') setTimeout(initSponsorForm, 100);
       if(topic === 'initiator') injectInitiatorPhoto();
     } else {
       titleEl.textContent = '...';
@@ -1484,6 +1672,8 @@ function splashInfo(topic) {
         if(topic === 'deelnemers') setTimeout(loadParticipants, 100);
     if(topic === 'galerij') setTimeout(loadGallery, 100);
     if(topic === 'upload') setTimeout(initUpload, 100);
+    if(topic === 'sponsors') setTimeout(loadSponsors, 100);
+    if(topic === 'sponsorform') setTimeout(initSponsorForm, 100);
         if(topic === 'initiator') injectInitiatorPhoto();
       });
     }
@@ -1798,7 +1988,7 @@ function applyLang(lang){
   var ql = L.ql || LANG['en'].ql;
   var sb = document.getElementById('share-btn-label');
   if(sb) sb.textContent = updateShareLabel();
-  var keys = ['kickoff','project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','news','suggestions','initiator','panelidea','join','privacy','regels','galerij','upload'];
+  var keys = ['kickoff','project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','news','suggestions','initiator','panelidea','join','privacy','regels','galerij','upload','sponsors','sponsorform'];
   for(var i=0;i<keys.length;i++){var el=document.getElementById('ql-'+keys[i]);if(el){var sp=el.querySelector('.ql-lbl');if(sp&&ql[keys[i]])sp.textContent=ql[keys[i]];}}
 
   // If a card is open, reload it in the new language
