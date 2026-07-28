@@ -1500,8 +1500,23 @@ function isoToFlag(iso){
 }
 // Volledige naam->vlag lookup (korte lijst + wereldlijst)
 var COUNTRY_FLAG_MAP = {};
-SHORT_COUNTRIES.concat(WORLD_COUNTRIES).forEach(function(c){ COUNTRY_FLAG_MAP[c[0]] = isoToFlag(c[1]); });
+var COUNTRY_CODE_MAP = {};
+SHORT_COUNTRIES.concat(WORLD_COUNTRIES).forEach(function(c){ COUNTRY_FLAG_MAP[c[0]] = isoToFlag(c[1]); COUNTRY_CODE_MAP[c[0]] = c[1]; });
 function flagFor(country){ return COUNTRY_FLAG_MAP[country] || '\uD83C\uDF0D'; }
+// Echte vlag-AFBEELDING (werkt overal, ook op Windows waar emoji-vlaggen als landcode tonen).
+// Gebruikt flagcdn.com (gratis, betrouwbaar). Valt terug op de emoji als de code onbekend is.
+function flagImg(country, h){
+  var code = COUNTRY_CODE_MAP[country];
+  var px = h || 18;
+  if(!code) return '<span style="font-size:'+px+'px;line-height:1">'+flagFor(country)+'</span>';
+  var lc = code.toLowerCase();
+  var w = Math.round(px*4/3);
+  // flagcdn.com met vaste breedte wNN (retina: 2x). Valt terug op de emoji als het plaatje niet laadt.
+  return '<img src="https://flagcdn.com/w80/'+lc+'.png" '
+    + 'width="'+w+'" height="'+px+'" alt="'+country+'" loading="lazy" '
+    + 'style="display:inline-block;border-radius:3px;object-fit:cover;vertical-align:middle;box-shadow:0 0 0 1px rgba(255,255,255,.12)" '
+    + 'onerror="this.onerror=null;this.outerHTML=\'<span style=&quot;font-size:'+px+'px&quot;>'+flagFor(country)+'</span>\'">';
+}
 
 // Vul de tweede (wereld-)dropdown en toon/verberg op basis van "Other"
 function onCountryChange(){
@@ -1564,7 +1579,7 @@ function loadCountries(){
     out+='<div style="display:flex;flex-direction:column;gap:6px">';
     names.forEach(function(c){
       out+='<div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:8px;padding:.5rem .7rem">'
-        +'<span style="font-size:22px;line-height:1">'+flagFor(c)+'</span>'
+        +flagImg(c,22)
         +'<span style="flex:1;font-size:13px;color:#fff">'+c+'</span>'
         +'<span style="font-size:11px;opacity:.55">'+counts[c]+'</span></div>';
     });
@@ -1636,7 +1651,7 @@ function renderParticipants(data) {
     });
 
     Object.keys(byCountry).sort().forEach(function(country){
-      var flag = flagFor(country);
+      var flag = flagImg(country,13);
       html += '<div style="margin-top:.6rem"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:.3rem">'+flag+' '+country+' ('+byCountry[country].length+')</div>';
       byCountry[country].sort(function(a,b){
         var na=(a.participant_number==null)?999999:a.participant_number;
