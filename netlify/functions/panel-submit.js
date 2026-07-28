@@ -101,6 +101,31 @@ exports.handler = async function(event, context) {
     }
 
     const saved = await insertResp.json();
+
+    // Bevestigingsmails via het Google Apps Script (net als bij de aanmelding).
+    // type:'panel' laat het script de paneel-mails sturen (naar UWFL en de
+    // maker) i.p.v. de aanmeld-mails. Mail is niet kritiek: faalt dit, dan
+    // is het paneel toch opgeslagen.
+    try {
+      await fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'panel',
+          naam: ((row.first_name || '') + ' ' + (row.last_name || '')).trim(),
+          email: email,
+          lang: (data.lang || 'en'),
+          participant_number: pnr,
+          artwork_name: row.artwork_name,
+          company: row.company || '',
+          country: row.country_made || '',
+          place: row.place_made || '',
+          wood: row.wood_species || '',
+          pattern: row.pattern || ''
+        })
+      });
+    } catch (e) { /* mail niet kritiek */ }
+
     return { statusCode: 200, headers, body: JSON.stringify({ ok: true, id: saved[0] && saved[0].id }) };
 
   } catch (err) {

@@ -1077,7 +1077,7 @@ function upSubmit(){
       first_name:upVal('up-fn'),last_name:upVal('up-ln'),company:upVal('up-comp'),
       nationality:upVal('up-nat'),country_made:upVal('up-cmade'),
       artwork_name:upVal('up-art'),place_made:upVal('up-place'),production_date:upVal('up-date'),
-      wood_species:upVal('up-wood'),pattern:upVal('up-pat'),story:upVal('up-story'),
+      wood_species:upVal('up-wood'),pattern:upVal('up-pat'),story:upVal('up-story'),lang:currentLang||'en',
       photos:urls,contact_website:upVal('up-web'),contact_email:upVal('up-cemail'),contact_phone:upVal('up-cphone')
     })}).then(function(r){return r.json();}).then(function(d){
       if(d.ok){ document.getElementById('upload-body').innerHTML='<div style="text-align:center;padding:2rem 1rem;color:#8fe08f;font-size:15px;line-height:1.6">\u2705<br>'+t.thanks+'</div>'; GALLERY_CACHE=null; }
