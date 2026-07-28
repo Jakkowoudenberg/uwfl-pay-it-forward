@@ -241,6 +241,8 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     <button class="sp-tp" id="ql-upload" onclick="splashInfo('upload')">&#x2B06;&#xFE0F; <span class="ql-lbl">Upload panel</span></button>
     <button class="sp-tp" id="ql-sponsors" onclick="splashInfo('sponsors')">&#x1F91D; <span class="ql-lbl">Sponsors</span></button>
     <button class="sp-tp" id="ql-sponsorform" onclick="splashInfo('sponsorform')">&#x2795; <span class="ql-lbl">Become sponsor</span></button>
+    <button class="sp-tp" id="ql-orgs" onclick="splashInfo('orgs')">&#x1F3DB;&#xFE0F; <span class="ql-lbl">Trade bodies</span></button>
+    <button class="sp-tp" id="ql-orgform" onclick="splashInfo('orgform')">&#x2795; <span class="ql-lbl">Add organisation</span></button>
     <button class="sp-tp" id="ql-join" onclick="splashInfo('join')" style="background:#fff;color:#1a0f05;border-color:#fff;font-size:15px;padding:.9rem 1rem;animation:pulse-glow 2.2s ease-in-out infinite">+ <span class="ql-lbl">Join us</span></button>
     <button class="sp-tp" id="ql-project" onclick="splashInfo('project')">&#x1F4CB; <span class="ql-lbl">What is this?</span></button>
     <button class="sp-tp" id="ql-meedoen" onclick="splashInfo('meedoen')">&#x270B; <span class="ql-lbl">Why join?</span></button>
@@ -288,6 +290,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
         <div id="admin-pending-list"></div>
         <div id="admin-panels-section" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1rem"><div style="font-weight:700;color:var(--wood);font-size:13px;margin-bottom:.5rem">🖼️ Pending panels</div><div id="admin-panels-list"></div></div>
         <div id="admin-sponsors-section" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1rem"><div style="font-weight:700;color:var(--wood);font-size:13px;margin-bottom:.5rem">🤝 Pending sponsors</div><div id="admin-sponsors-list"></div></div>
+        <div id="admin-orgs-section" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1rem"><div style="font-weight:700;color:var(--wood);font-size:13px;margin-bottom:.5rem">🏛️ Pending organisations</div><div id="admin-orgs-list"></div></div>
       </div>
     </div>
   </div>
@@ -444,8 +447,10 @@ var LANG = {
     placeholder: 'Stel je vraag... (in elke taal)',
     btn: 'Stel mij een vraag...',
     join: '+ Doe mee',
-    ql: {sponsors:'Sponsoren',sponsorform:'Word sponsor',upload:'Upload paneel',galerij:'Galerie',regels:'Deelnameregels',privacy:'Jouw gegevens',kickoff:'Kick Off',project:'Wat is dit?',meedoen:'Waarom meedoen?',paneel:'Het paneel','3mensen':'Help 3 mensen',ketting:'Kettingreactie',filosofie:'Filosofie',kunstwerk:'Kunstwerk',deelnemers:'Deelnemers',specs:'Bouwtekening',payitforward:'Pay it Forward',contact:'Contact',news:'Nieuws',suggestions:'Suggesties',join:'Doe mee',initiator:'De Initiator',panelidea:'Hulp bij panelidee'},
+    ql: {orgs:'Branche',orgform:'Organisatie aanmelden',sponsors:'Sponsoren',sponsorform:'Word sponsor',upload:'Upload paneel',galerij:'Galerie',regels:'Deelnameregels',privacy:'Jouw gegevens',kickoff:'Kick Off',project:'Wat is dit?',meedoen:'Waarom meedoen?',paneel:'Het paneel','3mensen':'Help 3 mensen',ketting:'Kettingreactie',filosofie:'Filosofie',kunstwerk:'Kunstwerk',deelnemers:'Deelnemers',specs:'Bouwtekening',payitforward:'Pay it Forward',contact:'Contact',news:'Nieuws',suggestions:'Suggesties',join:'Doe mee',initiator:'De Initiator',panelidea:'Hulp bij panelidee'},
     cards: {
+      orgs: {title:'Gedragen door de branche',body:'<div id=\"orgs-body\"></div>'},
+      orgform: {title:'Meld je organisatie aan',body:'<div id=\"orgform-body\"></div>'},
       sponsors: {title:'Mede mogelijk gemaakt door',body:'<div id=\"sponsors-body\"></div>'},
       sponsorform: {title:'Word sponsor',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Deel je paneel',body:'<div id=\"upload-body\"></div>'},
@@ -474,8 +479,10 @@ var LANG = {
     placeholder: 'Ask me anything about the project...',
     btn: 'Ask me a question...',
     join: '+ Join us',
-    ql: {sponsors:'Sponsors',sponsorform:'Become sponsor',upload:'Upload panel',galerij:'Gallery',regels:'Participation rules',privacy:'Your data',kickoff:'Kick Off',project:'What is this?',meedoen:'Why join?',paneel:'The panel','3mensen':'Help 3 people',ketting:'Chain reaction',filosofie:'Philosophy',kunstwerk:'The artwork',deelnemers:'Participants',specs:'Technical drawing',payitforward:'Pay it Forward',contact:'Contact',news:'News',suggestions:'Suggestions',initiator:'The Initiator',panelidea:'Help my panel idea',join:'Join us'},
+    ql: {orgs:'Trade bodies',orgform:'Add organisation',sponsors:'Sponsors',sponsorform:'Become sponsor',upload:'Upload panel',galerij:'Gallery',regels:'Participation rules',privacy:'Your data',kickoff:'Kick Off',project:'What is this?',meedoen:'Why join?',paneel:'The panel','3mensen':'Help 3 people',ketting:'Chain reaction',filosofie:'Philosophy',kunstwerk:'The artwork',deelnemers:'Participants',specs:'Technical drawing',payitforward:'Pay it Forward',contact:'Contact',news:'News',suggestions:'Suggestions',initiator:'The Initiator',panelidea:'Help my panel idea',join:'Join us'},
     cards: {
+      orgs: {title:'Supported by the trade',body:'<div id=\"orgs-body\"></div>'},
+      orgform: {title:'Submit your organisation',body:'<div id=\"orgform-body\"></div>'},
       sponsors: {title:'Made possible by',body:'<div id=\"sponsors-body\"></div>'},
       sponsorform: {title:'Become a sponsor',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Share your panel',body:'<div id=\"upload-body\"></div>'},
@@ -504,8 +511,10 @@ var LANG = {
     placeholder: 'Pregunta en cualquier idioma...',
     btn: 'Hazme una pregunta...',
     join: '+ \u00danete',
-    ql: {sponsors:'Patrocinadores',sponsorform:'Ser patrocinador',upload:'Subir',galerij:'Galería',regels:'Reglas de participación',privacy:'Tus datos',kickoff:'Kick Off',project:'\u00bfQu\u00e9 es esto?',meedoen:'\u00bfPor qu\u00e9 unirse?',paneel:'El panel','3mensen':'Ayuda a 3 personas',ketting:'Reacci\u00f3n en cadena',filosofie:'Filosof\u00eda',kunstwerk:'La obra',deelnemers:'Participantes',specs:'Plano t\u00e9cnico',payitforward:'Pay it Forward',contact:'Contacto',join:'\u00danete',news:'Noticias',suggestions:'Sugerencias',initiator:'El Iniciador',panelidea:'Ayuda con mi idea'},
+    ql: {orgs:'Sector',orgform:'Añadir organización',sponsors:'Patrocinadores',sponsorform:'Ser patrocinador',upload:'Subir',galerij:'Galería',regels:'Reglas de participación',privacy:'Tus datos',kickoff:'Kick Off',project:'\u00bfQu\u00e9 es esto?',meedoen:'\u00bfPor qu\u00e9 unirse?',paneel:'El panel','3mensen':'Ayuda a 3 personas',ketting:'Reacci\u00f3n en cadena',filosofie:'Filosof\u00eda',kunstwerk:'La obra',deelnemers:'Participantes',specs:'Plano t\u00e9cnico',payitforward:'Pay it Forward',contact:'Contacto',join:'\u00danete',news:'Noticias',suggestions:'Sugerencias',initiator:'El Iniciador',panelidea:'Ayuda con mi idea'},
     cards: {
+      orgs: {title:'Respaldado por el oficio',body:'<div id=\"orgs-body\"></div>'},
+      orgform: {title:'Envía tu organización',body:'<div id=\"orgform-body\"></div>'},
       sponsors: {title:'Posible gracias a',body:'<div id=\"sponsors-body\"></div>'},
       sponsorform: {title:'Házte patrocinador',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Comparte tu panel',body:'<div id=\"upload-body\"></div>'},
@@ -533,8 +542,10 @@ var LANG = {
     sub: 'Un mouvement mondial de cr\u00e9ateurs et de personnes.',
     btn: 'Posez-moi une question...',
     join: '+ Rejoignez-nous',
-    ql: {sponsors:'Sponsors',sponsorform:'Devenir sponsor',upload:'T\u00e9l\u00e9verser',galerij:'Galerie',regels:'Règles de participation',privacy:'Vos données',kickoff:'Kick Off',project:'C\'est quoi?',meedoen:'Pourquoi rejoindre?',paneel:'Le panneau','3mensen':'Aidez 3 personnes',ketting:'R\u00e9action en cha\u00eene',filosofie:'Philosophie',kunstwerk:'L\'oeuvre',deelnemers:'Participants',specs:'Plan technique',payitforward:'Pay it Forward',contact:'Contact',join:'Rejoindre',news:'Actualités',suggestions:'Suggestions',initiator:'L\u2019Initiateur',panelidea:'Aide pour mon panneau'},
+    ql: {orgs:'Métier',orgform:'Ajouter organisation',sponsors:'Sponsors',sponsorform:'Devenir sponsor',upload:'T\u00e9l\u00e9verser',galerij:'Galerie',regels:'Règles de participation',privacy:'Vos données',kickoff:'Kick Off',project:'C\'est quoi?',meedoen:'Pourquoi rejoindre?',paneel:'Le panneau','3mensen':'Aidez 3 personnes',ketting:'R\u00e9action en cha\u00eene',filosofie:'Philosophie',kunstwerk:'L\'oeuvre',deelnemers:'Participants',specs:'Plan technique',payitforward:'Pay it Forward',contact:'Contact',join:'Rejoindre',news:'Actualités',suggestions:'Suggestions',initiator:'L\u2019Initiateur',panelidea:'Aide pour mon panneau'},
     cards: {
+      orgs: {title:'Soutenu par le métier',body:'<div id=\"orgs-body\"></div>'},
+      orgform: {title:'Soumets ton organisation',body:'<div id=\"orgform-body\"></div>'},
       sponsors: {title:'Rendu possible par',body:'<div id=\"sponsors-body\"></div>'},
       sponsorform: {title:'Devenir sponsor',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Partage ton panneau',body:'<div id=\"upload-body\"></div>'},
@@ -563,8 +574,10 @@ var LANG = {
     placeholder: 'Frag in jeder Sprache...',
     btn: 'Stell mir eine Frage...',
     join: '+ Mitmachen',
-    ql: {sponsors:'Sponsoren',sponsorform:'Sponsor werden',upload:'Hochladen',galerij:'Galerie',regels:'Teilnahmeregeln',privacy:'Deine Daten',kickoff:'Kick Off',project:'Was ist das?',meedoen:'Warum mitmachen?',paneel:'Das Panel','3mensen':'3 Menschen helfen',ketting:'Kettenreaktion',filosofie:'Philosophie',kunstwerk:'Das Kunstwerk',deelnemers:'Teilnehmer',specs:'Technische Zeichnung',payitforward:'Pay it Forward',contact:'Kontakt',join:'Mitmachen',news:'Neuigkeiten',suggestions:'Vorschläge',initiator:'Der Initiator',panelidea:'Hilfe bei Paneelidee'},
+    ql: {orgs:'Handwerk',orgform:'Organisation',sponsors:'Sponsoren',sponsorform:'Sponsor werden',upload:'Hochladen',galerij:'Galerie',regels:'Teilnahmeregeln',privacy:'Deine Daten',kickoff:'Kick Off',project:'Was ist das?',meedoen:'Warum mitmachen?',paneel:'Das Panel','3mensen':'3 Menschen helfen',ketting:'Kettenreaktion',filosofie:'Philosophie',kunstwerk:'Das Kunstwerk',deelnemers:'Teilnehmer',specs:'Technische Zeichnung',payitforward:'Pay it Forward',contact:'Kontakt',join:'Mitmachen',news:'Neuigkeiten',suggestions:'Vorschläge',initiator:'Der Initiator',panelidea:'Hilfe bei Paneelidee'},
     cards: {
+      orgs: {title:'Getragen vom Handwerk',body:'<div id=\"orgs-body\"></div>'},
+      orgform: {title:'Organisation einreichen',body:'<div id=\"orgform-body\"></div>'},
       sponsors: {title:'Ermöglicht durch',body:'<div id=\"sponsors-body\"></div>'},
       sponsorform: {title:'Sponsor werden',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Panel teilen',body:'<div id=\"upload-body\"></div>'},
@@ -593,8 +606,10 @@ var LANG = {
     placeholder: 'Chiedi in qualsiasi lingua...',
     btn: 'Fammi una domanda...',
     join: '+ Unisciti',
-    ql: {sponsors:'Sponsor',sponsorform:'Diventa sponsor',upload:'Carica',galerij:'Galleria',regels:'Regole di partecipazione',privacy:'I tuoi dati',kickoff:'Kick Off',project:'Cos\'è questo?',meedoen:'Perch\u00e9 unirsi?',paneel:'Il pannello','3mensen':'Aiuta 3 persone',ketting:'Reazione a catena',filosofie:'Filosofia',kunstwerk:'L\'opera',deelnemers:'Partecipanti',specs:'Disegno tecnico',payitforward:'Pay it Forward',contact:'Contatto',join:'Unisciti',news:'Notizie',suggestions:'Suggerimenti',initiator:'L\u2019Iniziatore',panelidea:'Aiuto con idea pannello'},
+    ql: {orgs:'Mestiere',orgform:'Aggiungi org.',sponsors:'Sponsor',sponsorform:'Diventa sponsor',upload:'Carica',galerij:'Galleria',regels:'Regole di partecipazione',privacy:'I tuoi dati',kickoff:'Kick Off',project:'Cos\'è questo?',meedoen:'Perch\u00e9 unirsi?',paneel:'Il pannello','3mensen':'Aiuta 3 persone',ketting:'Reazione a catena',filosofie:'Filosofia',kunstwerk:'L\'opera',deelnemers:'Partecipanti',specs:'Disegno tecnico',payitforward:'Pay it Forward',contact:'Contatto',join:'Unisciti',news:'Notizie',suggestions:'Suggerimenti',initiator:'L\u2019Iniziatore',panelidea:'Aiuto con idea pannello'},
     cards: {
+      orgs: {title:'Sostenuto dal mestiere',body:'<div id=\"orgs-body\"></div>'},
+      orgform: {title:'Invia la tua organizzazione',body:'<div id=\"orgform-body\"></div>'},
       sponsors: {title:'Reso possibile da',body:'<div id=\"sponsors-body\"></div>'},
       sponsorform: {title:'Diventa sponsor',body:'<div id=\"sponsorform-body\"></div>'},
       upload: {title:'Condividi il pannello',body:'<div id=\"upload-body\"></div>'},
@@ -1235,6 +1250,120 @@ function spSubmit(){
   }).catch(function(){ msg.style.color='#ff9b9b'; msg.textContent=t.req; });
 }
 
+
+// ============ BRANCHEORGANISATIES ============
+var ORGS_CACHE = null;
+function orgIntro(){
+  var L={
+   nl:{head:'Gedragen door de branche',p1:'Sommige van deze organisaties overspannen het hele vak \u2014 makers, fabrikanten, groothandels, winkels, iedereen die het vak in beweging houdt. Andere staan dichter bij \u00e9\u00e9n beroep daarbinnen, bewaken de kennis en geven die door. Elk draagt dit vak op zijn eigen manier.',p2:'United Wood Floor Layers staat op de schouders van de gildes en verenigingen die dit vak levend houden. Wij sponsoren hen niet, en zij sponsoren ons niet. We eren hier simpelweg het werk dat ze al voor ons allemaal doen.',p3:'De volgorde wisselt elke keer dat je de app opent \u2014 want ook hier staat niemand boven een ander.',role:'Rol in het vak',none:'Er zijn nog geen organisaties om te tonen.'},
+   en:{head:'Supported by the trade',p1:'Some of these organisations span the whole trade \u2014 makers, manufacturers, suppliers, shops, everyone who keeps the craft moving. Others stand closer to one profession within it, guarding its knowledge and passing it on. Each holds this trade up in its own way.',p2:'United Wood Floor Layers stands on the shoulders of the guilds and associations that keep this trade alive. We don\u2019t sponsor them, and they don\u2019t sponsor us. We simply honour, here, the work they already do for all of us.',p3:'The order shuffles every time you open the app \u2014 because here, too, no one stands above another.',role:'Role in the trade',none:'There are no organisations to show yet.'},
+   es:{head:'Respaldado por el oficio',p1:'Algunas de estas organizaciones abarcan todo el oficio \u2014 creadores, fabricantes, distribuidores, tiendas, todos los que mantienen el oficio en marcha. Otras est\u00e1n m\u00e1s cerca de una sola profesi\u00f3n dentro de \u00e9l, guardando su conocimiento y transmiti\u00e9ndolo. Cada una sostiene este oficio a su manera.',p2:'United Wood Floor Layers se apoya en los gremios y asociaciones que mantienen vivo este oficio. No los patrocinamos, ni ellos a nosotros. Simplemente honramos aqu\u00ed el trabajo que ya hacen por todos nosotros.',p3:'El orden se baraja cada vez que abres la app \u2014 porque tambi\u00e9n aqu\u00ed nadie est\u00e1 por encima de otro.',role:'Papel en el oficio',none:'A\u00fan no hay organizaciones para mostrar.'},
+   fr:{head:'Soutenu par le m\u00e9tier',p1:'Certaines de ces organisations couvrent tout le m\u00e9tier \u2014 cr\u00e9ateurs, fabricants, distributeurs, magasins, tous ceux qui font vivre le m\u00e9tier. D\u2019autres sont plus proches d\u2019une seule profession en son sein, gardant son savoir et le transmettant. Chacune soutient ce m\u00e9tier \u00e0 sa mani\u00e8re.',p2:'United Wood Floor Layers s\u2019appuie sur les guildes et associations qui maintiennent ce m\u00e9tier en vie. Nous ne les parrainons pas, et ils ne nous parrainent pas. Nous honorons simplement ici le travail qu\u2019ils font d\u00e9j\u00e0 pour nous tous.',p3:'L\u2019ordre change \u00e0 chaque ouverture de l\u2019application \u2014 car ici aussi, personne n\u2019est au-dessus d\u2019un autre.',role:'R\u00f4le dans le m\u00e9tier',none:'Aucune organisation \u00e0 afficher pour le moment.'},
+   de:{head:'Getragen vom Handwerk',p1:'Einige dieser Organisationen umspannen das ganze Handwerk \u2014 Macher, Hersteller, Gro\u00dfh\u00e4ndler, Gesch\u00e4fte, alle, die das Handwerk in Bewegung halten. Andere stehen einem einzelnen Beruf darin n\u00e4her, bewahren sein Wissen und geben es weiter. Jede tr\u00e4gt dieses Handwerk auf ihre eigene Weise.',p2:'United Wood Floor Layers steht auf den Schultern der Gilden und Verb\u00e4nde, die dieses Handwerk am Leben halten. Wir sponsern sie nicht, und sie sponsern uns nicht. Wir ehren hier einfach die Arbeit, die sie bereits f\u00fcr uns alle tun.',p3:'Die Reihenfolge wird bei jedem \u00d6ffnen der App neu gemischt \u2014 denn auch hier steht niemand \u00fcber einem anderen.',role:'Rolle im Handwerk',none:'Es gibt noch keine Organisationen zum Anzeigen.'},
+   it:{head:'Sostenuto dal mestiere',p1:'Alcune di queste organizzazioni abbracciano tutto il mestiere \u2014 creatori, produttori, grossisti, negozi, tutti coloro che tengono in movimento il mestiere. Altre sono pi\u00f9 vicine a una sola professione al suo interno, custodendone il sapere e tramandandolo. Ognuna sostiene questo mestiere a modo suo.',p2:'United Wood Floor Layers si regge sulle spalle delle gilde e associazioni che tengono vivo questo mestiere. Non le sponsorizziamo, e loro non sponsorizzano noi. Qui onoriamo semplicemente il lavoro che gi\u00e0 fanno per tutti noi.',p3:'L\u2019ordine cambia ogni volta che apri l\u2019app \u2014 perch\u00e9 anche qui nessuno sta sopra un altro.',role:'Ruolo nel mestiere',none:'Non ci sono ancora organizzazioni da mostrare.'}
+  };
+  return L[currentLang]||L['en'];
+}
+function loadOrgs(){
+  var host=document.getElementById('orgs-body'); if(!host) return;
+  if(ORGS_CACHE){ renderOrgs(); return; }
+  host.innerHTML='<div style="text-align:center;padding:1rem;opacity:.6">...</div>';
+  fetch('/.netlify/functions/organisations').then(function(r){return r.json();}).then(function(data){
+    ORGS_CACHE=Array.isArray(data)?data:[]; renderOrgs();
+  }).catch(function(){ host.innerHTML='<div style="opacity:.6;text-align:center;padding:1rem">...</div>'; });
+}
+function escOrg(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderOrgs(){
+  var host=document.getElementById('orgs-body'); var t=orgIntro();
+  var intro='<div style="margin-bottom:1rem">'
+    +'<p style="color:rgba(255,255,255,.8);font-size:13px;line-height:1.65;margin:0 0 .6rem">'+t.p1+'</p>'
+    +'<p style="color:rgba(255,255,255,.8);font-size:13px;line-height:1.65;margin:0 0 .6rem">'+t.p2+'</p>'
+    +'<p style="color:#e8c17a;font-size:12.5px;line-height:1.6;margin:0">'+t.p3+'</p></div>';
+  var data=(ORGS_CACHE||[]).slice();
+  if(!data.length){ host.innerHTML=intro+'<div style="opacity:.6;text-align:center;padding:1rem;font-size:13px">'+t.none+'</div>'; return; }
+  for(var i=data.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var tmp=data[i]; data[i]=data[j]; data[j]=tmp; }
+  var cards='<div style="display:flex;flex-direction:column;gap:10px">';
+  data.forEach(function(o){
+    var contact='';
+    if(o.contact_website) contact+='<a href="'+escOrg(o.contact_website)+'" target="_blank" rel="noopener" style="color:#e8c17a;text-decoration:none;margin-right:10px">\u2b21 website</a>';
+    if(o.contact_email) contact+='<a href="mailto:'+escOrg(o.contact_email)+'" style="color:#e8c17a;text-decoration:none;margin-right:10px">\u2709 '+escOrg(o.contact_email)+'</a>';
+    if(o.contact_phone) contact+='<span style="color:#e8c17a">\u260e '+escOrg(o.contact_phone)+'</span>';
+    var logo=o.logo_url?'<div style="width:46px;height:46px;border-radius:8px;background:#fff center/contain no-repeat;background-image:url(\''+escOrg(o.logo_url)+'\');flex-shrink:0"></div>':'<div style="width:46px;height:46px;border-radius:8px;background:rgba(255,255,255,.1);flex-shrink:0"></div>';
+    cards+='<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.8rem .9rem">'
+      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'+logo
+      +'<div><div style="color:#fff;font-weight:600;font-size:14px">'+escOrg(o.name)+'</div>'
+      +(o.country?'<div style="color:rgba(255,255,255,.55);font-size:11.5px">'+escOrg(o.country)+'</div>':'')+'</div></div>'
+      +'<div style="color:rgba(255,255,255,.82);font-size:12px;line-height:1.55'+(contact?';margin-bottom:8px':'')+'">'+escOrg(o.role)+'</div>'
+      +(contact?'<div style="font-size:11.5px">'+contact+'</div>':'')
+      +'</div>';
+  });
+  cards+='</div>';
+  host.innerHTML=intro+cards;
+}
+
+
+// ============ ORGANISATIE AANMELDEN ============
+var ORG_LOGO = null;
+function orgfT(){
+  var L={
+   nl:{title:'Meld je organisatie aan',intro:'Draagt jouw organisatie het vak? Meld je aan en vertel in je eigen woorden wie jullie zijn en wat jullie voor de branche betekenen.',name:'Naam van de organisatie',country:'Land',logo:'Logo',logohint:'(verplicht)',addlogo:'Logo uploaden',role:'Wat betekenen jullie voor de branche? (jullie rol in het vak)',web:'Website',email:'E-mail',tel:'Telefoon',pub:'Website, e-mail en telefoon worden publiek getoond op jullie kaart.',submit:'Aanmelden',thanks:'Bedankt. Jullie aanmelding is ontvangen en wordt bekeken. Zodra die is goedgekeurd, verschijnen jullie bij de organisaties die het vak dragen.',sending:'Bezig...',uploading:'Logo uploaden...'},
+   en:{title:'Submit your organisation',intro:'Does your organisation carry the trade? Sign up and tell us, in your own words, who you are and what you mean to the trade.',name:'Name of the organisation',country:'Country',logo:'Logo',logohint:'(required)',addlogo:'Upload logo',role:'What do you mean to the trade? (your role in the craft)',web:'Website',email:'Email',tel:'Phone',pub:'Website, email and phone are shown publicly on your card.',submit:'Submit',thanks:'Thank you. Your submission has been received and is being reviewed. Once approved, you will appear among the organisations that carry the trade.',sending:'Working...',uploading:'Uploading logo...'},
+   es:{title:'Env\u00eda tu organizaci\u00f3n',intro:'\u00bfTu organizaci\u00f3n sostiene el oficio? Reg\u00edstrate y cu\u00e9ntanos, con tus propias palabras, qui\u00e9nes sois y qu\u00e9 signific\u00e1is para el oficio.',name:'Nombre de la organizaci\u00f3n',country:'Pa\u00eds',logo:'Logo',logohint:'(obligatorio)',addlogo:'Subir logo',role:'\u00bfQu\u00e9 signific\u00e1is para el oficio? (vuestro papel en el oficio)',web:'Sitio web',email:'Correo',tel:'Tel\u00e9fono',pub:'El sitio web, el correo y el tel\u00e9fono se muestran p\u00fablicamente en vuestra tarjeta.',submit:'Enviar',thanks:'Gracias. Vuestra solicitud se ha recibido y est\u00e1 en revisi\u00f3n. Una vez aprobada, aparecer\u00e9is entre las organizaciones que sostienen el oficio.',sending:'Procesando...',uploading:'Subiendo logo...'},
+   fr:{title:'Soumets ton organisation',intro:'Ton organisation soutient-elle le m\u00e9tier ? Inscris-toi et dis-nous, avec tes propres mots, qui vous \u00eates et ce que vous repr\u00e9sentez pour le m\u00e9tier.',name:'Nom de l\u2019organisation',country:'Pays',logo:'Logo',logohint:'(obligatoire)',addlogo:'T\u00e9l\u00e9verser le logo',role:'Que repr\u00e9sentez-vous pour le m\u00e9tier ? (votre r\u00f4le dans le m\u00e9tier)',web:'Site web',email:'E-mail',tel:'T\u00e9l\u00e9phone',pub:'Le site web, l\u2019e-mail et le t\u00e9l\u00e9phone sont affich\u00e9s publiquement sur votre carte.',submit:'Envoyer',thanks:'Merci. Votre demande a \u00e9t\u00e9 re\u00e7ue et est en cours d\u2019examen. Une fois valid\u00e9e, vous appara\u00eetrez parmi les organisations qui soutiennent le m\u00e9tier.',sending:'En cours...',uploading:'Envoi du logo...'},
+   de:{title:'Reiche deine Organisation ein',intro:'Tr\u00e4gt deine Organisation das Handwerk? Melde dich an und erz\u00e4hl uns in deinen eigenen Worten, wer ihr seid und was ihr f\u00fcr das Handwerk bedeutet.',name:'Name der Organisation',country:'Land',logo:'Logo',logohint:'(erforderlich)',addlogo:'Logo hochladen',role:'Was bedeutet ihr f\u00fcr das Handwerk? (eure Rolle im Handwerk)',web:'Webseite',email:'E-Mail',tel:'Telefon',pub:'Webseite, E-Mail und Telefon werden \u00f6ffentlich auf eurer Karte gezeigt.',submit:'Absenden',thanks:'Danke. Eure Anmeldung ist eingegangen und wird gepr\u00fcft. Nach der Freigabe erscheint ihr bei den Organisationen, die das Handwerk tragen.',sending:'Wird verarbeitet...',uploading:'Logo wird hochgeladen...'},
+   it:{title:'Invia la tua organizzazione',intro:'La tua organizzazione sostiene il mestiere? Iscriviti e raccontaci, con parole tue, chi siete e cosa rappresentate per il mestiere.',name:'Nome dell\u2019organizzazione',country:'Paese',logo:'Logo',logohint:'(obbligatorio)',addlogo:'Carica logo',role:'Cosa rappresentate per il mestiere? (il vostro ruolo nel mestiere)',web:'Sito web',email:'Email',tel:'Telefono',pub:'Sito web, email e telefono sono mostrati pubblicamente sulla vostra scheda.',submit:'Invia',thanks:'Grazie. La vostra richiesta \u00e8 stata ricevuta ed \u00e8 in revisione. Una volta approvata, apparirete tra le organizzazioni che sostengono il mestiere.',sending:'In corso...',uploading:'Caricamento logo...'}
+  };
+  return L[currentLang]||L['en'];
+}
+function initOrgForm(){
+  ORG_LOGO=null;
+  var t=orgfT(); var host=document.getElementById('orgform-body'); if(!host) return;
+  host.innerHTML=''
+   +'<div style="color:rgba(255,255,255,.7);font-size:12.5px;line-height:1.6;margin-bottom:14px">'+t.intro+'</div>'
+   +'<div class="fld"><label>'+t.name+' *</label><input type="text" id="org-name"></div>'
+   +'<div class="fld"><label>'+t.country+'</label><input type="text" id="org-country"></div>'
+   +'<div class="fld"><label>'+t.logo+' * <span style="opacity:.5">'+t.logohint+'</span></label>'
+   +'<div id="org-logo-thumb" style="margin-bottom:.4rem"></div>'
+   +'<label class="jsub" style="display:inline-block;text-align:center;cursor:pointer;width:auto;padding:.5rem 1rem">'+t.addlogo
+   +'<input type="file" accept="image/*" style="display:none" onchange="orgAddLogo(this)"></label></div>'
+   +'<div class="fld"><label>'+t.role+' *</label><textarea id="org-role" style="height:90px"></textarea></div>'
+   +'<div class="fld"><label>'+t.web+'</label><input type="text" id="org-web" placeholder="https://"></div>'
+   +'<div class="fld"><label>'+t.email+'</label><input type="email" id="org-email"></div>'
+   +'<div class="fld"><label>'+t.tel+'</label><input type="text" id="org-tel"></div>'
+   +'<div style="font-size:11px;color:#e8c17a;margin-bottom:.6rem">\u26A0\uFE0F '+t.pub+'</div>'
+   +'<button class="jsub" onclick="orgSubmit()">'+t.submit+'</button>'
+   +'<div id="org-msg" style="font-size:12px;margin-top:.5rem"></div>';
+}
+function orgAddLogo(input){
+  compressAndPreviewPhoto(input, function(dataUrl){
+    ORG_LOGO=dataUrl;
+    document.getElementById('org-logo-thumb').innerHTML='<div style="position:relative;width:70px;height:70px;border-radius:8px;overflow:hidden;background:#fff"><img src="'+dataUrl+'" style="width:100%;height:100%;object-fit:contain"><span onclick="orgDelLogo()" style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,.7);color:#fff;border-radius:50%;width:18px;height:18px;line-height:18px;text-align:center;font-size:12px;cursor:pointer">\u2715</span></div>';
+    input.value='';
+  });
+}
+function orgDelLogo(){ ORG_LOGO=null; var b=document.getElementById('org-logo-thumb'); if(b) b.innerHTML=''; }
+function orgv(id){ var e=document.getElementById(id); return e?e.value.trim():''; }
+function orgSubmit(){
+  var t=orgfT(); var msg=document.getElementById('org-msg');
+  if(!orgv('org-name')){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.name; return; }
+  if(!ORG_LOGO){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.logo; return; }
+  if(!orgv('org-role')){ msg.style.color='#ff9b9b'; msg.textContent='\u26A0\uFE0F '+t.role; return; }
+  msg.style.color='rgba(255,255,255,.7)'; msg.textContent=t.uploading;
+  fetch('/.netlify/functions/org-logo',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fileData:ORG_LOGO,fileType:'image/jpeg'})})
+  .then(function(r){return r.json();}).then(function(d){
+    if(!d.url){ msg.style.color='#ff9b9b'; msg.textContent='...'; return; }
+    msg.textContent=t.sending;
+    fetch('/.netlify/functions/org-submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      name:orgv('org-name'),country:orgv('org-country'),logo_url:d.url,role:orgv('org-role'),
+      contact_website:orgv('org-web'),contact_email:orgv('org-email'),contact_phone:orgv('org-tel'),
+      submitter_email:orgv('org-email'),lang:currentLang||'en'
+    })}).then(function(r){return r.json();}).then(function(d2){
+      if(d2.ok){ document.getElementById('orgform-body').innerHTML='<div style="text-align:center;padding:2rem 1rem;color:#8fe08f;font-size:15px;line-height:1.6">\u2705<br>'+t.thanks+'</div>'; ORGS_CACHE=null; }
+      else { msg.style.color='#ff9b9b'; msg.textContent='...'; }
+    }).catch(function(){ msg.style.color='#ff9b9b'; msg.textContent='...'; });
+  }).catch(function(){ msg.style.color='#ff9b9b'; msg.textContent='...'; });
+}
+
 function loadParticipants() {
   var list = document.getElementById('participants-list');
   var loading = document.getElementById('participants-loading');
@@ -1354,6 +1483,7 @@ function checkAdminPw(){
       loadPending();
       loadPendingPanels();
       loadPendingSponsors();
+      loadPendingOrgs();
     } else {
       badAdminPw();
     }
@@ -1504,6 +1634,49 @@ function sponsorDo(id, action){
   });
 }
 
+function loadPendingOrgs(){
+  var list = document.getElementById('admin-orgs-list');
+  if(!list) return;
+  list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Loading...</p>';
+  fetch('/.netlify/functions/admin-orgs-pending',{headers:{'X-Admin-Key':ADMIN_PW}})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(!data.length){
+      list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">No pending organisations.</p>';
+      return;
+    }
+    var out='';
+    data.forEach(function(o){
+      out+='<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:1rem;margin-bottom:.75rem">';
+      out+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:.4rem">';
+      if(o.logo_url) out+='<div style="width:40px;height:40px;border-radius:8px;background:#fff center/contain no-repeat;background-image:url(\''+o.logo_url+'\')"></div>';
+      out+='<div><div style="font-weight:700;color:#fff">'+(o.name||'')+'</div>'+(o.country?'<div style="font-size:11px;color:rgba(255,255,255,.6)">'+o.country+'</div>':'')+'</div></div>';
+      if(o.role) out+='<div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-bottom:.5rem;line-height:1.5">'+o.role+'</div>';
+      var contact=[];
+      if(o.contact_website) contact.push(o.contact_website);
+      if(o.contact_email) contact.push(o.contact_email);
+      if(o.contact_phone) contact.push(o.contact_phone);
+      if(contact.length) out+='<div style="font-size:11px;color:var(--wood);margin-bottom:.6rem">'+contact.join(' · ')+'</div>';
+      out+='<div style="display:flex;gap:.5rem">';
+      out+='<button style="flex:1;background:#2d6a2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="orgDo('+o.id+',\'approve\')">\u2713 Approve</button>';
+      out+='<button style="flex:1;background:#6a2d2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="orgDo('+o.id+',\'reject\')">\u2717 Reject</button>';
+      out+='</div></div>';
+    });
+    list.innerHTML=out;
+  })
+  .catch(function(){ list.innerHTML='<p style="color:red;font-size:13px">Error loading.</p>'; });
+}
+
+function orgDo(id, action){
+  fetch('/.netlify/functions/org-approve?id='+id+'&action='+action,{
+    headers:{'X-Admin-Key':ADMIN_PW}
+  })
+  .then(function(){
+    ORGS_CACHE=null;
+    loadPendingOrgs();
+  });
+}
+
 function shareApp(){
   var url = 'https://app.unitedwoodfloorlayers.com';
   var shareLabels = {
@@ -1647,6 +1820,8 @@ function splashInfo(topic) {
     if(topic === 'upload') setTimeout(initUpload, 100);
     if(topic === 'sponsors') setTimeout(loadSponsors, 100);
     if(topic === 'sponsorform') setTimeout(initSponsorForm, 100);
+    if(topic === 'orgs') setTimeout(loadOrgs, 100);
+    if(topic === 'orgform') setTimeout(initOrgForm, 100);
     if(topic === 'initiator') injectInitiatorPhoto();
   } else {
     // Use LANG[lang].cards first (hardcoded), then CARD_CACHE (API), then fallback to API call
@@ -1661,6 +1836,8 @@ function splashInfo(topic) {
     if(topic === 'upload') setTimeout(initUpload, 100);
     if(topic === 'sponsors') setTimeout(loadSponsors, 100);
     if(topic === 'sponsorform') setTimeout(initSponsorForm, 100);
+    if(topic === 'orgs') setTimeout(loadOrgs, 100);
+    if(topic === 'orgform') setTimeout(initOrgForm, 100);
       if(topic === 'initiator') injectInitiatorPhoto();
     } else {
       titleEl.textContent = '...';
@@ -1674,6 +1851,8 @@ function splashInfo(topic) {
     if(topic === 'upload') setTimeout(initUpload, 100);
     if(topic === 'sponsors') setTimeout(loadSponsors, 100);
     if(topic === 'sponsorform') setTimeout(initSponsorForm, 100);
+    if(topic === 'orgs') setTimeout(loadOrgs, 100);
+    if(topic === 'orgform') setTimeout(initOrgForm, 100);
         if(topic === 'initiator') injectInitiatorPhoto();
       });
     }
@@ -1988,7 +2167,7 @@ function applyLang(lang){
   var ql = L.ql || LANG['en'].ql;
   var sb = document.getElementById('share-btn-label');
   if(sb) sb.textContent = updateShareLabel();
-  var keys = ['kickoff','project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','news','suggestions','initiator','panelidea','join','privacy','regels','galerij','upload','sponsors','sponsorform'];
+  var keys = ['kickoff','project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','news','suggestions','initiator','panelidea','join','privacy','regels','galerij','upload','sponsors','sponsorform','orgs','orgform'];
   for(var i=0;i<keys.length;i++){var el=document.getElementById('ql-'+keys[i]);if(el){var sp=el.querySelector('.ql-lbl');if(sp&&ql[keys[i]])sp.textContent=ql[keys[i]];}}
 
   // If a card is open, reload it in the new language
