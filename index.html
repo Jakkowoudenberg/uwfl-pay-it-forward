@@ -276,15 +276,15 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
     <div style="max-width:500px;margin:0 auto">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
         <h2 style="color:#c49a6c;font-size:1.2rem;margin:0">⚙️ Admin</h2>
-        <button onclick="closeAdmin()" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;padding:.4rem .8rem;border-radius:6px;cursor:pointer;font-family:Inter,sans-serif">✕ Sluiten</button>
+        <button onclick="closeAdmin()" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;padding:.4rem .8rem;border-radius:6px;cursor:pointer;font-family:Inter,sans-serif">✕ Close</button>
       </div>
       <div id="admin-login" style="text-align:center;padding:2rem 0">
-        <input type="password" id="admin-pw" placeholder="Wachtwoord" style="width:100%;padding:.75rem;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:16px;box-sizing:border-box;font-family:Inter,sans-serif;margin-bottom:.75rem">
+        <input type="password" id="admin-pw" placeholder="Password" style="width:100%;padding:.75rem;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:16px;box-sizing:border-box;font-family:Inter,sans-serif;margin-bottom:.75rem">
         <button onclick="checkAdminPw()" style="width:100%;background:#c49a6c;color:#1a0f05;border:none;padding:.75rem;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">Inloggen</button>
       </div>
       <div id="admin-content" style="display:none">
         <div id="admin-pending-list"></div>
-        <div id="admin-panels-section" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1rem"><div style="font-weight:700;color:var(--wood);font-size:13px;margin-bottom:.5rem">🖼️ Wachtende panelen</div><div id="admin-panels-list"></div></div>
+        <div id="admin-panels-section" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1rem"><div style="font-weight:700;color:var(--wood);font-size:13px;margin-bottom:.5rem">🖼️ Pending panels</div><div id="admin-panels-list"></div></div>
       </div>
     </div>
   </div>
@@ -1223,19 +1223,19 @@ function checkAdminPw(){
 
 function badAdminPw(){
   {
-    alert('Ongeldig wachtwoord');
+    alert('Invalid password');
     document.getElementById('admin-pw').value='';
   }
 }
 
 function loadPending(){
   var list = document.getElementById('admin-pending-list');
-  list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Laden...</p>';
+  list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Loading...</p>';
   fetch('/.netlify/functions/admin-pending',{headers:{'X-Admin-Key':ADMIN_PW}})
   .then(function(r){return r.json();})
   .then(function(data){
     if(!data.length){
-      list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Geen wachtende aanmeldingen.</p>';
+      list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">No pending registrations.</p>';
       return;
     }
     var out='';
@@ -1246,13 +1246,13 @@ function loadPending(){
       out+='<div style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:.5rem">'+(p.company?p.company+' — ':'')+p.country+' · '+p.type+'</div>';
       if(p.message) out+='<div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:.75rem;line-height:1.5">'+p.message.substring(0,150)+(p.message.length>150?'...':'')+'</div>';
       out+='<div style="display:flex;gap:.5rem">';
-      out+='<button style="flex:1;background:#2d6a2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="adminDo('+pid+',\'approve\')">\u2713 Goedkeuren</button>';
-      out+='<button style="flex:1;background:#6a2d2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="adminDo('+pid+',\'reject\')">\u2717 Afwijzen</button>';
+      out+='<button style="flex:1;background:#2d6a2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="adminDo('+pid+',\'approve\')">\u2713 Approve</button>';
+      out+='<button style="flex:1;background:#6a2d2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="adminDo('+pid+',\'reject\')">\u2717 Reject</button>';
       out+='</div></div>';
     });
     list.innerHTML=out;
   })
-  .catch(function(){ list.innerHTML='<p style="color:red;font-size:13px">Fout bij laden.</p>'; });
+  .catch(function(){ list.innerHTML='<p style="color:red;font-size:13px">Error loading.</p>'; });
 }
 
 
@@ -1268,12 +1268,12 @@ function adminDo(id, action){
 function loadPendingPanels(){
   var list = document.getElementById('admin-panels-list');
   if(!list) return;
-  list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Laden...</p>';
+  list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Loading...</p>';
   fetch('/.netlify/functions/admin-panels-pending',{headers:{'X-Admin-Key':ADMIN_PW}})
   .then(function(r){return r.json();})
   .then(function(data){
     if(!data.length){
-      list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">Geen wachtende panelen.</p>';
+      list.innerHTML='<p style="color:rgba(255,255,255,.6);font-size:13px">No pending panels.</p>';
       return;
     }
     var out='';
@@ -1289,10 +1289,10 @@ function loadPendingPanels(){
         out+='</div>';
       }
       var meta=[];
-      if(p.wood_species) meta.push('Hout: '+p.wood_species);
-      if(p.pattern) meta.push('Patroon: '+p.pattern);
-      if(p.place_made) meta.push('Plaats: '+p.place_made);
-      if(p.production_date) meta.push('Datum: '+p.production_date);
+      if(p.wood_species) meta.push('Wood: '+p.wood_species);
+      if(p.pattern) meta.push('Pattern: '+p.pattern);
+      if(p.place_made) meta.push('Place: '+p.place_made);
+      if(p.production_date) meta.push('Date: '+p.production_date);
       if(meta.length) out+='<div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:.4rem">'+meta.join(' · ')+'</div>';
       if(p.story) out+='<div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:.75rem;line-height:1.5">'+p.story.substring(0,200)+(p.story.length>200?'...':'')+'</div>';
       var contact=[];
@@ -1301,13 +1301,13 @@ function loadPendingPanels(){
       if(p.contact_phone) contact.push(p.contact_phone);
       if(contact.length) out+='<div style="font-size:11px;color:var(--wood);margin-bottom:.6rem">'+contact.join(' · ')+'</div>';
       out+='<div style="display:flex;gap:.5rem">';
-      out+='<button style="flex:1;background:#2d6a2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="panelDo('+p.id+',\'approve\')">\u2713 Goedkeuren</button>';
-      out+='<button style="flex:1;background:#6a2d2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="panelDo('+p.id+',\'reject\')">\u2717 Afwijzen</button>';
+      out+='<button style="flex:1;background:#2d6a2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="panelDo('+p.id+',\'approve\')">\u2713 Approve</button>';
+      out+='<button style="flex:1;background:#6a2d2d;color:#fff;border:none;padding:.5rem;border-radius:6px;font-size:13px;cursor:pointer" onclick="panelDo('+p.id+',\'reject\')">\u2717 Reject</button>';
       out+='</div></div>';
     });
     list.innerHTML=out;
   })
-  .catch(function(){ list.innerHTML='<p style="color:red;font-size:13px">Fout bij laden.</p>'; });
+  .catch(function(){ list.innerHTML='<p style="color:red;font-size:13px">Error loading.</p>'; });
 }
 
 function panelDo(id, action){
