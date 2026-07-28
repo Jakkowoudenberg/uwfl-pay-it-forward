@@ -76,6 +76,7 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 .sp-info p:last-child{margin-bottom:0}
 .sp-info strong{color:var(--tx);font-weight:500}
 .sp-info img{width:100%;display:block;border-radius:6px;margin-bottom:.75rem}
+.flagimg{width:auto!important;height:auto!important;display:inline-block!important;margin:0 4px 0 0!important;border-radius:3px!important}
 .lang-status{position:fixed;top:0;left:0;right:0;background:rgba(196,154,108,.95);color:#fff;text-align:center;font-size:12px;font-family:Inter,sans-serif;padding:.4rem 1rem;z-index:9999;transform:translateY(-100%);transition:transform .3s;display:flex;align-items:center;justify-content:center;gap:.5rem}
 .lang-status.show{transform:translateY(0)}
 .lang-status-dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:#fff;opacity:.4;animation:cardpulse 1.2s ease-in-out infinite;margin:0 2px}
@@ -1525,10 +1526,10 @@ function flagImg(country, h){
   if(!code) return '<span style="font-size:'+px+'px;line-height:1">'+flagFor(country)+'</span>';
   var lc = code.toLowerCase();
   var w = Math.round(px*4/3);
-  // flagcdn.com met vaste breedte wNN (retina: 2x). Valt terug op de emoji als het plaatje niet laadt.
-  return '<img src="https://flagcdn.com/w80/'+lc+'.png" '
-    + 'width="'+w+'" height="'+px+'" alt="'+country+'" loading="lazy" '
-    + 'style="display:inline-block;border-radius:3px;object-fit:cover;vertical-align:middle;box-shadow:0 0 0 1px rgba(255,255,255,.12)" '
+  // flagcdn.com met vaste breedte wNN (retina: 2x). class flagimg voorkomt dat de globale img{width:100%} 'm uitrekt.
+  return '<img src="https://flagcdn.com/w80/'+lc+'.png" class="flagimg" '
+    + 'alt="'+country+'" loading="lazy" '
+    + 'style="width:'+w+'px !important;height:'+px+'px !important;display:inline-block;border-radius:3px;object-fit:cover;vertical-align:middle;margin:0 4px 0 0 !important;box-shadow:0 0 0 1px rgba(255,255,255,.12)" '
     + 'onerror="this.onerror=null;this.outerHTML=\'<span style=&quot;font-size:'+px+'px&quot;>'+flagFor(country)+'</span>\'">';
 }
 
