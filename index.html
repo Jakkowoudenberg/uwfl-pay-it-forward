@@ -2254,16 +2254,12 @@ function sendSuggestion(){
   if(!m){alert('Please enter your suggestion.');return;}
   var n=(document.getElementById('sug-name')||{value:''}).value.trim();
   var e=(document.getElementById('sug-email')||{value:''}).value.trim();
-  // LAAG 3: reCAPTCHA v3 token
+  // LAAG 3: reCAPTCHA v3 token, dan de suggestie versturen als type 'Suggestion'
   grecaptcha.ready(function(){
-    grecaptcha.execute('6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B', {action: 'register'}).then(function(token){
-      regData.recaptcha_token = token;
-      doSubmit(null);
+    grecaptcha.execute('6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B', {action: 'suggestion'}).then(function(token){
+      fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Suggestion',naam:n||'Anonymous',email:e,bericht:m,recaptcha_token:token})}).catch(function(){});
     });
   });
-  return;
-
-  fetch('https://script.google.com/macros/s/AKfycbzWD7r75jPpEdAwyTjHHyGYB_WGApbLribkRIXhdchkjRF48W7TeeStunHldq1ybtKG/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'Suggestion',naam:n||'Anonymous',email:e,bericht:m})}).catch(function(){});
   var bodyEl=document.getElementById('sp-info-body');
   if(bodyEl)bodyEl.innerHTML='<p style="color:rgba(255,255,255,.9);padding:1rem 0">Thank you! Your suggestion has been received.</p>';
 }
