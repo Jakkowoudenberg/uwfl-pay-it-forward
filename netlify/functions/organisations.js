@@ -4,7 +4,7 @@ exports.handler = async function(event, context) {
   try {
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
-    const select = ['id','name','country','logo_url','role','contact_website','contact_email','contact_phone'].join(',');
+    const select = ['id','name','country','logo_url','role','lang','contact_website','contact_email','contact_phone'].join(',');
     const resp = await fetch(`${SUPABASE_URL}/rest/v1/organisations?select=${select}&status=eq.approved`,
       { headers: { 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}` } });
     if (!resp.ok) { const err = await resp.text(); return { statusCode: 500, headers, body: JSON.stringify({ error: err }) }; }
