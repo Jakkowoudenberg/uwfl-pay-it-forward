@@ -1454,7 +1454,7 @@ function renderOrgs(){
     cards+='<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.8rem .9rem">'
       +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'+logo
       +'<div><div style="color:#fff;font-weight:600;font-size:14px">'+escOrg(o.name)+'</div>'
-      +(o.country?'<div style="color:rgba(255,255,255,.55);font-size:11.5px">'+escOrg(o.country)+'</div>':'')+'</div></div>'
+      +(o.country?'<div style="color:rgba(255,255,255,.55);font-size:11.5px">'+flagImg(o.country,12)+escOrg(o.country)+'</div>':'')+'</div></div>'
       +'<div style="color:rgba(255,255,255,.82);font-size:12px;line-height:1.55'+(contact?';margin-bottom:8px':'')+'">'+escOrg(o.role).replace(/\n/g,'<br>')+'</div>'
       +(contact?'<div style="font-size:11.5px">'+contact+'</div>':'')
       +'</div>';
