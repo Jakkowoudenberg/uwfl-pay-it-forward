@@ -1334,13 +1334,31 @@ function renderSponsors(){
       +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'+logo
       +'<div><div style="color:#fff;font-weight:600;font-size:14px">'+escSp(s.company)+'</div>'
       +(s.country?'<div style="color:rgba(255,255,255,.55);font-size:11.5px">'+escSp(s.country)+'</div>':'')+'</div></div>'
-      +'<div style="color:rgba(255,255,255,.82);font-size:12px;line-height:1.55;margin-bottom:6px"><span style="color:rgba(255,255,255,.45)">'+t.why+':</span> '+escSp(s.why)+'</div>'
-      +'<div style="color:rgba(255,255,255,.82);font-size:12px;line-height:1.55'+(contact?';margin-bottom:8px':'')+'"><span style="color:rgba(255,255,255,.45)">'+t.what+':</span> '+escSp(s.what)+'</div>'
+      +'<div style="color:rgba(255,255,255,.82);font-size:12px;line-height:1.55;margin-bottom:6px"><span style="color:rgba(255,255,255,.45)">'+t.why+':</span> <span id="sp-why-'+s.id+'">'+escSp(s.why)+'</span></div>'
+      +'<div style="color:rgba(255,255,255,.82);font-size:12px;line-height:1.55'+(contact?';margin-bottom:8px':'')+'"><span style="color:rgba(255,255,255,.45)">'+t.what+':</span> <span id="sp-what-'+s.id+'">'+escSp(s.what)+'</span></div>'
       +(contact?'<div style="font-size:11.5px">'+contact+'</div>':'')
       +'</div>';
   });
   cards+='</div>';
   host.innerHTML=intro+cards;
+  // Vertaal elke sponsortekst (why/what) naar de taal van de bezoeker
+  // met cache, net als de organisatie- en deelnemersteksten.
+  data.forEach(function(s){
+    var src=s.lang||'nl';
+    if(src===currentLang) return;
+    ['why','what'].forEach(function(field){
+      var val=s[field]; if(!val) return;
+      var el=document.getElementById('sp-'+field+'-'+s.id);
+      if(!el) return;
+      var key=s.id+'|'+field+'|'+currentLang;
+      if(SP_TXT_CACHE[key]){ el.innerHTML=escSp(SP_TXT_CACHE[key]).replace(/\n/g,'<br>'); return; }
+      translateStory(val, currentLang, function(tr){
+        SP_TXT_CACHE[key]=tr;
+        var e2=document.getElementById('sp-'+field+'-'+s.id);
+        if(e2) e2.innerHTML=escSp(tr).replace(/\n/g,'<br>');
+      });
+    });
+  });
 }
 
 
@@ -2029,6 +2047,7 @@ function updateShareLabel(){
 
 var STORY_CACHE = {};  // pid+lang -> translated text
 var ORG_ROLE_CACHE = {};  // orgid+lang -> translated organisation text
+var SP_TXT_CACHE = {};  // sponsorid+field+lang -> translated sponsor text
 
 function toggleStory(btn){
   var pid = btn.getAttribute('data-pid');

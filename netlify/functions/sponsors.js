@@ -4,7 +4,7 @@ exports.handler = async function(event, context) {
   try {
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
-    const select = ['id','company','country','logo_url','why','what','contact_website','contact_email','contact_phone'].join(',');
+    const select = ['id','company','country','logo_url','why','what','lang','contact_website','contact_email','contact_phone'].join(',');
     // Geen vaste volgorde nodig: de app shuffelt zelf bij het openen.
     const resp = await fetch(`${SUPABASE_URL}/rest/v1/sponsors?select=${select}&status=eq.approved`,
       { headers: { 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}` } });
