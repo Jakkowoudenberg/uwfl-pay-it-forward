@@ -1329,7 +1329,7 @@ function renderSponsors(){
     if(s.contact_website) contact+='<a href="'+escSp(s.contact_website)+'" target="_blank" rel="noopener" style="color:#e8c17a;text-decoration:none;margin-right:10px"><span style="opacity:.8">\u2b21</span> website</a>';
     if(s.contact_email) contact+='<a href="mailto:'+escSp(s.contact_email)+'" style="color:#e8c17a;text-decoration:none;margin-right:10px">\u2709 '+escSp(s.contact_email)+'</a>';
     if(s.contact_phone) contact+='<span style="color:#e8c17a">\u260e '+escSp(s.contact_phone)+'</span>';
-    var logo=s.logo_url?'<div style="width:46px;height:46px;border-radius:8px;background:#fff center/contain no-repeat;background-image:url(\''+escSp(s.logo_url)+'\');flex-shrink:0"></div>':'<div style="width:46px;height:46px;border-radius:8px;background:rgba(255,255,255,.1);flex-shrink:0"></div>';
+    var logo=s.logo_url?'<div style="width:52px;height:52px;border-radius:8px;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:contain;background-origin:content-box;background-clip:padding-box;padding:5px;border:1px solid rgba(255,255,255,.18);box-sizing:border-box;background-image:url(\''+escSp(s.logo_url)+'\');flex-shrink:0"></div>':'<div style="width:52px;height:52px;border-radius:8px;background:rgba(255,255,255,.1);flex-shrink:0"></div>';
     cards+='<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.8rem .9rem">'
       +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'+logo
       +'<div><div style="color:#fff;font-weight:600;font-size:14px">'+escSp(s.company)+'</div>'
@@ -1468,7 +1468,7 @@ function renderOrgs(){
     if(o.contact_website) contact+='<a href="'+escOrg(o.contact_website)+'" target="_blank" rel="noopener" style="color:#e8c17a;text-decoration:none;margin-right:10px">\u2b21 website</a>';
     if(o.contact_email) contact+='<a href="mailto:'+escOrg(o.contact_email)+'" style="color:#e8c17a;text-decoration:none;margin-right:10px">\u2709 '+escOrg(o.contact_email)+'</a>';
     if(o.contact_phone) contact+='<span style="color:#e8c17a">\u260e '+escOrg(o.contact_phone)+'</span>';
-    var logo=o.logo_url?'<div style="width:46px;height:46px;border-radius:8px;background:#fff center/contain no-repeat;background-image:url(\''+escOrg(o.logo_url)+'\');flex-shrink:0"></div>':'<div style="width:46px;height:46px;border-radius:8px;background:rgba(255,255,255,.1);flex-shrink:0"></div>';
+    var logo=o.logo_url?'<div style="width:52px;height:52px;border-radius:8px;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:contain;background-origin:content-box;background-clip:padding-box;padding:5px;border:1px solid rgba(255,255,255,.18);box-sizing:border-box;background-image:url(\''+escOrg(o.logo_url)+'\');flex-shrink:0"></div>':'<div style="width:52px;height:52px;border-radius:8px;background:rgba(255,255,255,.1);flex-shrink:0"></div>';
     cards+='<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.8rem .9rem">'
       +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'+logo
       +'<div><div style="color:#fff;font-weight:600;font-size:14px">'+escOrg(o.name)+'</div>'
@@ -1945,7 +1945,7 @@ function loadPendingSponsors(){
     data.forEach(function(s){
       out+='<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:1rem;margin-bottom:.75rem">';
       out+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:.4rem">';
-      if(s.logo_url) out+='<div style="width:40px;height:40px;border-radius:8px;background:#fff center/contain no-repeat;background-image:url(\''+s.logo_url+'\')"></div>';
+      if(s.logo_url) out+='<div style="width:48px;height:48px;border-radius:8px;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:contain;background-origin:content-box;background-clip:padding-box;padding:4px;border:1px solid rgba(255,255,255,.18);box-sizing:border-box;background-image:url(\''+s.logo_url+'\')"></div>';
       out+='<div><div style="font-weight:700;color:#fff">'+(s.company||'')+'</div>'+(s.country?'<div style="font-size:11px;color:rgba(255,255,255,.6)">'+s.country+'</div>':'')+'</div></div>';
       if(s.why) out+='<div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-bottom:.35rem;line-height:1.5"><span style="opacity:.7">Why:</span> '+s.why+'</div>';
       if(s.what) out+='<div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-bottom:.5rem;line-height:1.5"><span style="opacity:.7">Contributes:</span> '+s.what+'</div>';
@@ -1989,7 +1989,7 @@ function loadPendingOrgs(){
     data.forEach(function(o){
       out+='<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:1rem;margin-bottom:.75rem">';
       out+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:.4rem">';
-      if(o.logo_url) out+='<div style="width:40px;height:40px;border-radius:8px;background:#fff center/contain no-repeat;background-image:url(\''+o.logo_url+'\')"></div>';
+      if(o.logo_url) out+='<div style="width:48px;height:48px;border-radius:8px;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:contain;background-origin:content-box;background-clip:padding-box;padding:4px;border:1px solid rgba(255,255,255,.18);box-sizing:border-box;background-image:url(\''+o.logo_url+'\')"></div>';
       out+='<div><div style="font-weight:700;color:#fff">'+(o.name||'')+'</div>'+(o.country?'<div style="font-size:11px;color:rgba(255,255,255,.6)">'+o.country+'</div>':'')+'</div></div>';
       if(o.role) out+='<div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-bottom:.5rem;line-height:1.5">'+o.role+'</div>';
       var contact=[];
