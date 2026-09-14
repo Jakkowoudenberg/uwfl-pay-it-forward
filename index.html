@@ -63,7 +63,10 @@ body{min-height:100vh;background-image:url("data:image/jpeg;base64,/9j/4AAQSkZJR
 
 /* QUICKLINKS — on splash, show info panel inline */
 .sp-grid{display:grid;grid-template-columns:1fr;gap:8px;width:100%;max-width:500px;margin:0 auto;box-sizing:border-box}
-.sp-gh{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fff4d6;margin:18px 2px 4px;display:flex;align-items:center;gap:10px;text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.85)}
+.sp-gh{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fff4d6;margin:18px 2px 4px;display:flex;align-items:center;gap:10px;text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.85);cursor:pointer;user-select:none}
+.sp-gh::before{content:"\203A";display:inline-block;transition:transform .2s ease;font-size:15px;line-height:1;flex-shrink:0}
+.sp-gh.open::before{transform:rotate(90deg)}
+.sp-group{display:grid;gap:8px}
 .sp-gh:first-child{margin-top:2px}
 .sp-gh::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.22)}
 .sp-tp{background:rgba(15,10,6,.42);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:14px 14px;font-size:14px;color:#fff;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;transition:all .15s;text-align:left;display:flex;align-items:center;justify-content:flex-start;gap:11px;min-width:0;box-sizing:border-box;overflow:hidden}
@@ -242,7 +245,8 @@ body{background-image:none!important;background-color:#000!important}
     <div class="sp-stat"><span class="sp-n" id="cnt-orgs">0</span><span class="sp-l">Organisations</span></div>
   </div>
   <div class="sp-grid">
-    <div class="sp-gh" id="grp-over">About the movement</div>
+    <div class="sp-gh" id="grp-over" onclick="toggleGrp('over')">About the movement</div>
+    <div class="sp-group" id="grpbody-over" style="display:none">
     <button class="sp-tp" id="main-btn" onclick="openChat()" >Ask me anything...</button>
     <button class="sp-tp" id="ql-kickoff" onclick="splashInfo('kickoff')">&#x1F680; <span class="ql-lbl">Kick Off</span></button>
     <button class="sp-tp" id="ql-project" onclick="splashInfo('project')">&#x1F4CB; <span class="ql-lbl">What is this?</span></button>
@@ -250,7 +254,9 @@ body{background-image:none!important;background-color:#000!important}
     <button class="sp-tp" id="ql-meedoen" onclick="splashInfo('meedoen')">&#x270B; <span class="ql-lbl">Why join?</span></button>
     <button class="sp-tp" id="ql-filosofie" onclick="splashInfo('filosofie')">&#x1F4AD; <span class="ql-lbl">Philosophy</span></button>
     <button class="sp-tp" id="ql-kunstwerk" onclick="splashInfo('kunstwerk')">&#x1F3DB; <span class="ql-lbl">The artwork</span></button>
-    <div class="sp-gh" id="grp-doen">Take part</div>
+    </div>
+    <div class="sp-gh" id="grp-doen" onclick="toggleGrp('doen')">Take part</div>
+    <div class="sp-group" id="grpbody-doen" style="display:none">
     <button class="sp-tp" id="ql-join" onclick="splashInfo('join')">+ <span class="ql-lbl">Join us</span></button>
     <button class="sp-tp" id="ql-upload" onclick="splashInfo('upload')">&#x2B06;&#xFE0F; <span class="ql-lbl">Upload panel</span></button>
     <button class="sp-tp" id="ql-paneel" onclick="splashInfo('paneel')">&#x1FAB5; <span class="ql-lbl">The panel</span></button>
@@ -259,7 +265,9 @@ body{background-image:none!important;background-color:#000!important}
     <button class="sp-tp" id="ql-regels" onclick="splashInfo('regels')">&#x1F91D; <span class="ql-lbl">Participation rules</span></button>
     <button class="sp-tp" id="ql-3mensen" onclick="splashInfo('3mensen')">&#x1F91D; <span class="ql-lbl">Help 3 people</span></button>
     <button class="sp-tp" id="ql-ketting" onclick="splashInfo('ketting')">&#x221E; <span class="ql-lbl">Chain reaction</span></button>
-    <div class="sp-gh" id="grp-comm">Community & partners</div>
+    </div>
+    <div class="sp-gh" id="grp-comm" onclick="toggleGrp('comm')">Community & partners</div>
+    <div class="sp-group" id="grpbody-comm" style="display:none">
     <button class="sp-tp" id="ql-deelnemers" onclick="splashInfo('deelnemers')">&#x1F30D; <span class="ql-lbl">Participants</span></button>
     <button class="sp-tp" id="ql-landen" onclick="splashInfo('landen')">&#x1F6A9; <span class="ql-lbl">Participating countries</span></button>
     <button class="sp-tp" id="ql-galerij" onclick="splashInfo('galerij')">&#x1F5BC;&#xFE0F; <span class="ql-lbl">Gallery</span></button>
@@ -268,7 +276,9 @@ body{background-image:none!important;background-color:#000!important}
     <button class="sp-tp" id="ql-expo" onclick="splashInfo('expo')">&#x1F3C6; <span class="ql-lbl">NWFA Expo 2027</span></button>
     <button class="sp-tp" id="ql-sponsorform" onclick="splashInfo('sponsorform')"><span style="color:#fff;font-weight:700">+</span> <span class="ql-lbl">Become sponsor</span></button>
     <button class="sp-tp" id="ql-orgform" onclick="splashInfo('orgform')"><span style="color:#fff;font-weight:700">+</span> <span class="ql-lbl">Add organisation</span></button>
-    <div class="sp-gh" id="grp-conn">Stay connected</div>
+    </div>
+    <div class="sp-gh" id="grp-conn" onclick="toggleGrp('conn')">Stay connected</div>
+    <div class="sp-group" id="grpbody-conn" style="display:none">
     <button class="sp-tp" id="ql-share" onclick="splashInfo('share')">&#x1F4E3; <span class="ql-lbl">Share your journey</span></button>
     <button class="sp-tp" id="share-btn" onclick="shareApp()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="share-btn-label">Share UWFL App</span></button>
     <button class="sp-tp" id="ql-news" onclick="splashInfo('news')">📰 <span class="ql-lbl">News</span></button>
@@ -276,6 +286,7 @@ body{background-image:none!important;background-color:#000!important}
     <button class="sp-tp" id="ql-suggestions" onclick="splashInfo('suggestions')">💡 <span class="ql-lbl">Suggestions</span></button>
     <button class="sp-tp" id="ql-contact" onclick="splashInfo('contact')">&#x2709; <span class="ql-lbl">Contact</span></button>
     <button class="sp-tp" id="ql-privacy" onclick="splashInfo('privacy')">&#x1F512; <span class="ql-lbl">Your data</span></button>
+    </div>
   </div>
 
   <!-- INFO PANEL — appears on splash, no chat -->
@@ -2535,6 +2546,13 @@ function applyLang(lang){
     de:{over:'\u00dcber die Bewegung',doen:'Mitmachen',comm:'Gemeinschaft & Partner',conn:'In Verbindung bleiben'},
     it:{over:'Sul movimento',doen:'Partecipa',comm:'Comunit\u00e0 e partner',conn:'Resta in contatto'}
   };
+window.toggleGrp = function(k){
+  var b=document.getElementById('grpbody-'+k), hd=document.getElementById('grp-'+k);
+  if(!b) return;
+  var isOpen = b.style.display !== 'none';
+  b.style.display = isOpen ? 'none' : 'grid';
+  if(hd) hd.classList.toggle('open', !isOpen);
+};
   var _g = GRP[lang] || GRP['en'];
   ['over','doen','comm','conn'].forEach(function(k){ var e=document.getElementById('grp-'+k); if(e) e.textContent=_g[k]; });
   var keys = ['kickoff','project','meedoen','paneel','3mensen','ketting','filosofie','kunstwerk','deelnemers','specs','payitforward','contact','news','suggestions','initiator','panelidea','join','privacy','regels','galerij','upload','sponsors','sponsorform','orgs','orgform','expo','share','landen','press'];
