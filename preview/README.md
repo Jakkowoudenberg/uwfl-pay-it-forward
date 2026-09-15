@@ -4,7 +4,9 @@ This is a separate, interactive design preview requested by Jakko on 15 Septembe
 
 ## Included
 
-- A new homepage using the existing UWFL logo, existing generational illustration and the existing slogan.
+- A compact homepage using the existing UWFL logo, generational illustration and project introduction, with five clear entrances: makers, sponsors, organisations, visitors and media.
+- Persistent audience navigation, including a bottom bar on mobile; a participant hub brings together the drawing, submission, guidelines, ideas and delivery information.
+- The complete information index is grouped into expandable sections with a topic search. Original article content is preserved.
 - A four-step participant registration preview, including local photo selection, required-field validation, review and a clearly labelled simulated confirmation.
 - A sponsor introduction, an initial private-contact preview and the existing separate sponsor/organisation profile concept.
 - Public participant browsing, country filtering, sponsor and organisation cards, and the panel gallery. These use only the existing public read endpoints and do not create a second participant database.
@@ -43,3 +45,9 @@ The generic headline/diagram copy and the sponsor introduction are design propos
 - Sponsor enquiry with sample content and simulated confirmation.
 
 This folder can be served by any static web server. It needs no package installation or build step.
+
+## Navigation revision after feedback
+
+Jakko found the first design too long and hard to navigate. The homepage now introduces the project immediately and offers five audience entrances. Sponsors and organisations have separate pages; media gets prominent press-contact and gallery actions. A compact footer and expandable related topics replace long menus and the horizontally scrolling article navigation. These are preview-only interface changes, not backend changes.
+
+The navigation revision passed JavaScript syntax, translation coverage and 60 offline route/language render checks. Its browser layout review and preview upload are still pending: this session cannot reach the Netlify/GitHub APIs, elevated network access was rejected, and local file browsing was blocked. The published review URL therefore still shows the prior design. Complete the mobile/desktop browser review before presenting this revision as ready.

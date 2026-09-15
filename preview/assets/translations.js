@@ -148,3 +148,327 @@ copy:['Kopiëren','Copy','Kopieren','Copier','Copiar','Copia'],
 copied:['Gekopieerd','Copied','Kopiert','Copié','Copiado','Copiato'],
 copyError:['Kopiëren lukt hier niet. Selecteer de tekst en kopieer hem zelf.','Copy is unavailable here. Select and copy the text manually.','Kopieren ist hier nicht möglich. Markiere und kopiere den Text manuell.','Copie indisponible ici. Sélectionnez et copiez le texte.','No se puede copiar aquí. Selecciona y copia el texto manualmente.','Copia non disponibile qui. Seleziona e copia il testo.']
 };
+
+/* Clear entrances and task navigation; original project text is preserved. */
+Object.assign(window.UWFL_UI, {
+  "audMakers": [
+    "Makers",
+    "Makers",
+    "Mitmachen",
+    "Créateurs",
+    "Creadores",
+    "Creatori"
+  ],
+  "audSponsors": [
+    "Sponsors",
+    "Sponsors",
+    "Sponsoren",
+    "Sponsors",
+    "Patrocinio",
+    "Sponsor"
+  ],
+  "audOrganisations": [
+    "Organisaties",
+    "Organisations",
+    "Organisationen",
+    "Organisations",
+    "Entidades",
+    "Enti"
+  ],
+  "audVisitors": [
+    "Bezoekers",
+    "Visitors",
+    "Besucher",
+    "Visiteurs",
+    "Visitantes",
+    "Visitatori"
+  ],
+  "audMedia": [
+    "Media",
+    "Media",
+    "Medien",
+    "Médias",
+    "Medios",
+    "Media"
+  ],
+  "audMakersText": [
+    "Een paneel maken en meedoen.",
+    "Make a panel and take part.",
+    "Ein Paneel gestalten und mitmachen.",
+    "Créer un panneau et participer.",
+    "Crear un panel y participar.",
+    "Creare un pannello e partecipare."
+  ],
+  "audSponsorsText": [
+    "Het project ondersteunen.",
+    "Support the project.",
+    "Das Projekt unterstützen.",
+    "Soutenir le projet.",
+    "Apoyar el proyecto.",
+    "Sostenere il progetto."
+  ],
+  "audOrganisationsText": [
+    "Aansluiten met jouw organisatie.",
+    "Get your organisation involved.",
+    "Als Organisation mitwirken.",
+    "Participer avec votre organisation.",
+    "Participar con tu entidad.",
+    "Partecipare con il tuo ente."
+  ],
+  "audVisitorsText": [
+    "Ontdek het project en de mensen.",
+    "Discover the project and its people.",
+    "Projekt und Menschen entdecken.",
+    "Découvrir le projet et les personnes.",
+    "Descubrir el proyecto y su gente.",
+    "Scoprire il progetto e le persone."
+  ],
+  "audMediaText": [
+    "Het verhaal, beeld en perscontact.",
+    "The story, images and press contact.",
+    "Geschichte, Bilder und Pressekontakt.",
+    "Le récit, les images et le contact presse.",
+    "La historia, imágenes y contacto de prensa.",
+    "La storia, le immagini e il contatto stampa."
+  ],
+  "audienceNav": [
+    "Voor wie",
+    "Find your way",
+    "Dein Einstieg",
+    "Votre parcours",
+    "Tu camino",
+    "Il tuo percorso"
+  ],
+  "chooseEntrance": [
+    "Waar kom je voor?",
+    "What brings you here?",
+    "Was führt dich hierher?",
+    "Que recherchez-vous ?",
+    "¿Qué te trae por aquí?",
+    "Cosa ti porta qui?"
+  ],
+  "alreadyTakingPart": [
+    "Doe je al mee?",
+    "Already taking part?",
+    "Schon dabei?",
+    "Vous participez déjà ?",
+    "¿Ya participas?",
+    "Partecipi già?"
+  ],
+  "submitPanel": [
+    "Paneel insturen",
+    "Submit a panel",
+    "Paneel einreichen",
+    "Envoyer un panneau",
+    "Enviar un panel",
+    "Invia un pannello"
+  ],
+  "participantOverview": [
+    "Alles voor deelnemers",
+    "Participant overview",
+    "Alles für Teilnehmende",
+    "Espace participants",
+    "Todo para participantes",
+    "Area partecipanti"
+  ],
+  "panelHubIntro": [
+    "Bouwtekening, planning en je paneel insturen. Alles wat je tijdens het maken nodig hebt.",
+    "The drawing, the schedule and submitting your panel. Everything you need while making.",
+    "Bauzeichnung, Planung und dein Paneel einreichen. Alles, was du beim Gestalten brauchst.",
+    "Le plan, le calendrier et l’envoi de votre panneau. Tout pour vous accompagner.",
+    "El plano, las fechas y el envío de tu panel. Todo lo que necesitas mientras creas.",
+    "Il disegno, le date e l’invio del pannello. Tutto ciò che serve mentre crei."
+  ],
+  "drawingHelp": [
+    "Afmetingen, opbouw en download.",
+    "Dimensions, construction and download.",
+    "Maße, Aufbau und Download.",
+    "Dimensions, construction et téléchargement.",
+    "Medidas, construcción y descarga.",
+    "Dimensioni, costruzione e download."
+  ],
+  "uploadHelp": [
+    "Foto’s en verhaal van je paneel toevoegen.",
+    "Add your panel’s photos and story.",
+    "Fotos und Geschichte deines Paneels ergänzen.",
+    "Ajouter les photos et l’histoire du panneau.",
+    "Añadir fotos e historia de tu panel.",
+    "Aggiungere foto e storia del pannello."
+  ],
+  "planningHelp": [
+    "Wanneer en waar lever je aan?",
+    "When and where to deliver?",
+    "Wann und wo abgeben?",
+    "Quand et où livrer ?",
+    "¿Cuándo y dónde entregar?",
+    "Quando e dove consegnare?"
+  ],
+  "rulesHelp": [
+    "De afspraken voor jouw paneel.",
+    "The guidelines for your panel.",
+    "Die Regeln für dein Paneel.",
+    "Les règles pour votre panneau.",
+    "Las normas para tu panel.",
+    "Le regole per il tuo pannello."
+  ],
+  "ideaHelp": [
+    "Hulp om jouw verhaal vorm te geven.",
+    "Help shaping your story.",
+    "Hilfe, deiner Geschichte Form zu geben.",
+    "De l’aide pour donner forme à votre histoire.",
+    "Ayuda para dar forma a tu historia.",
+    "Aiuto per dare forma alla tua storia."
+  ],
+  "galleryHelp": [
+    "Bekijk het werk van andere makers.",
+    "Explore work by other makers.",
+    "Werke anderer entdecken.",
+    "Découvrir les œuvres des autres.",
+    "Ver las obras de otros creadores.",
+    "Scoprire le opere degli altri."
+  ],
+  "signUp": [
+    "Aanmelden",
+    "Sign up",
+    "Anmelden",
+    "S’inscrire",
+    "Inscribirse",
+    "Iscriviti"
+  ],
+  "start": [
+    "Start",
+    "Home",
+    "Start",
+    "Accueil",
+    "Inicio",
+    "Inizio"
+  ],
+  "location": [
+    "Je bent hier",
+    "You are here",
+    "Du bist hier",
+    "Vous êtes ici",
+    "Estás aquí",
+    "Sei qui"
+  ],
+  "aboutUWFL": [
+    "Over UWFL",
+    "About UWFL",
+    "Über UWFL",
+    "À propos d’UWFL",
+    "Sobre UWFL",
+    "Informazioni su UWFL"
+  ],
+  "makingPanel": [
+    "Meedoen & een paneel maken",
+    "Taking part & making a panel",
+    "Mitmachen & ein Paneel gestalten",
+    "Participer et créer un panneau",
+    "Participar y crear un panel",
+    "Partecipare e creare un pannello"
+  ],
+  "peoplePanels": [
+    "Mensen, panelen & partners",
+    "People, panels & partners",
+    "Menschen, Paneele & Partner",
+    "Personnes, panneaux et partenaires",
+    "Personas, paneles y colaboradores",
+    "Persone, pannelli e partner"
+  ],
+  "newsContact": [
+    "Nieuws, media & contact",
+    "News, media & contact",
+    "Neuigkeiten, Medien & Kontakt",
+    "Actualités, médias et contact",
+    "Noticias, medios y contacto",
+    "Notizie, media e contatti"
+  ],
+  "moreInfo": [
+    "Meer informatie",
+    "More information",
+    "Weitere Informationen",
+    "Plus d’informations",
+    "Más información",
+    "Altre informazioni"
+  ],
+  "relatedTopics": [
+    "Andere onderwerpen in dit onderdeel",
+    "More topics in this section",
+    "Weitere Themen in diesem Bereich",
+    "Autres sujets dans cette rubrique",
+    "Otros temas de esta sección",
+    "Altri argomenti di questa sezione"
+  ],
+  "infoHelp": [
+    "Zoek een onderwerp of open een onderdeel.",
+    "Search for a topic or open a section.",
+    "Suche ein Thema oder öffne einen Bereich.",
+    "Recherchez un sujet ou ouvrez une rubrique.",
+    "Busca un tema o abre una sección.",
+    "Cerca un argomento o apri una sezione."
+  ],
+  "searchTopics": [
+    "Zoek een onderwerp",
+    "Find a topic",
+    "Thema suchen",
+    "Rechercher un sujet",
+    "Buscar un tema",
+    "Cerca un argomento"
+  ],
+  "searchExample": [
+    "Bijvoorbeeld: bouwtekening, pers, regels",
+    "For example: drawing, press, rules",
+    "Zum Beispiel: Bauzeichnung, Presse, Regeln",
+    "Par exemple : plan, presse, règles",
+    "Por ejemplo: plano, prensa, normas",
+    "Per esempio: disegno, stampa, regole"
+  ],
+  "noTopics": [
+    "Geen onderwerp gevonden. Probeer een ander woord of neem contact op.",
+    "No topic found. Try another word or contact us.",
+    "Kein Thema gefunden. Probiere ein anderes Wort oder kontaktiere uns.",
+    "Aucun sujet trouvé. Essayez un autre mot ou contactez-nous.",
+    "No se encontró ningún tema. Prueba otra palabra o contacta con nosotros.",
+    "Nessun argomento trovato. Prova un’altra parola o contattaci."
+  ],
+  "waysToSupport": [
+    "Zo kun je bijdragen",
+    "Ways to contribute",
+    "So kannst du beitragen",
+    "Comment contribuer",
+    "Formas de contribuir",
+    "Come contribuire"
+  ],
+  "organisationIntro": [
+    "Voor scholen, verenigingen en brancheorganisaties die de beweging willen helpen groeien.",
+    "For schools, associations and trade organisations that want to help the movement grow.",
+    "Für Schulen, Vereine und Branchenverbände, die die Bewegung unterstützen möchten.",
+    "Pour les écoles, associations et organisations professionnelles qui souhaitent faire grandir le mouvement.",
+    "Para escuelas, asociaciones y entidades del sector que quieran ayudar a crecer al movimiento.",
+    "Per scuole, associazioni e organizzazioni di settore che vogliono far crescere il movimento."
+  ],
+  "organisationRegisterHelp": [
+    "Maak jouw organisatie zichtbaar in de beweging.",
+    "Give your organisation a place in the movement.",
+    "Deine Organisation in der Bewegung sichtbar machen.",
+    "Donnez une place à votre organisation dans le mouvement.",
+    "Dale a tu entidad un lugar en el movimiento.",
+    "Dai al tuo ente un posto nel movimento."
+  ],
+  "organisationContactHelp": [
+    "Eerst bespreken hoe jullie kunnen meedoen.",
+    "First discuss how you can take part.",
+    "Zuerst besprechen, wie ihr mitwirken könnt.",
+    "Discutons d’abord de votre participation.",
+    "Hablemos primero de cómo podéis participar.",
+    "Parliamo prima di come potete partecipare."
+  ],
+  "pressContact": [
+    "Perscontact",
+    "Press contact",
+    "Pressekontakt",
+    "Contact presse",
+    "Contacto de prensa",
+    "Contatto stampa"
+  ]
+});
