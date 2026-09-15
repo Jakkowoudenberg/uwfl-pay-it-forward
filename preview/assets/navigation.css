@@ -150,7 +150,7 @@
  .support-actions{gap:19px;margin-bottom:21px}.support-options>summary{font-size:.89rem;padding:13px 16px}.support-options>div{padding-inline:16px}.support-options .contributions{grid-template-columns:1fr}.support-principle{font-size:.82rem;line-height:1.65}
  .support-list-heading{margin-top:27px}.support-list-heading h2{font-size:1.3rem}.partner-card{padding:22px}
  .work-aside{margin-bottom:22px}.work-aside>h2{display:none}.stepper{margin-top:0}.form-panel{padding:21px 18px}.form-panel h2{font-size:1.5rem}.form-intro{margin-bottom:17px}
- .audience-nav{padding-inline:5px}.audience-nav a{font-size:.65rem}
+ .audience-nav{padding-inline:5px;grid-template-columns:.95fr .95fr 1.3fr .9fr .9fr}.audience-nav a{font-size:.65rem;overflow-wrap:normal;white-space:nowrap}
 }
 @media(max-width:370px){
  .shell,.audience-page{width:calc(100% - 28px)}.brand-name{font-size:1rem}.brand-name small{font-size:.4rem}.brand img{width:31px;height:31px}.brand{gap:6px}
