@@ -53,7 +53,7 @@ var DRW_TEXTS = {
 };
 function makeSVG(lang) {
   var t = DRW_TEXTS[lang] || DRW_TEXTS['nl'];
-  var ml = t.molenwiek.split('\\n');
+  var ml = t.molenwiek.split('\n');
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 680" style="background:#fff;font-family:Inter,Arial,sans-serif">' +
     '<text x="250" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#111">'+t.title+'</text>' +
     '<text x="250" y="68" text-anchor="middle" font-size="15" font-weight="600" fill="#333">'+t.topprofile+'</text>' +

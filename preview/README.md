@@ -21,7 +21,7 @@ The separate Netlify draft preview is not password protected; its URL is an unin
 
 ## Preserved content
 
-`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. The reader changes markup presentation and internal navigation, not the underlying project texts. New interface copy is in `assets/translations.js`.
+`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. The reader changes markup presentation and internal navigation, not the underlying project texts. The drawing label parser is corrected to split actual newlines; the existing double-escaped split displayed undefined labels. Dimensions and label text are unchanged. New interface copy is in `assets/translations.js`.
 
 The generic headline/diagram copy and the sponsor introduction are design proposals. Preserve the movement's inclusivity, the promise to help three people, equal recognition of sponsors and the artwork's eventual donation. Sponsors are not divided into payment tiers.
 
