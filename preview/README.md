@@ -2,18 +2,26 @@
 
 This is a separate, interactive design preview requested by Jakko on 15 September 2026. The production `index.html`, Netlify functions and configuration are unchanged. Do not replace the live app with this folder until the design has been reviewed and production integration is completed.
 
+The confirmed requirements in [REQUIREMENTS.md](REQUIREMENTS.md) govern this
+revision: Jakko's approval before publication, mandatory participant photos and
+partner logos, shuffled public profiles, and a visible place for the initiator
+and his reason for starting UWFL.
+
 ## Included
 
-- A compact homepage using the existing UWFL logo, generational illustration and project introduction, with five clear entrances: makers, sponsors, organisations, visitors and media.
+- A homepage with five clear entrances: makers, sponsors, organisations, visitors and media. Jakko's portrait, credited to Cora Deutecom, an exact quote from his original story and a link to that story introduce the initiator.
+- Separate visitor, help-without-a-panel and about pages. Each participant role can enter registration directly, while changing role remains possible.
 - Persistent audience navigation, including a bottom bar on mobile; a participant hub brings together the drawing, submission, guidelines, ideas and delivery information.
-- The complete information index is grouped into expandable sections with a topic search. Original article content is preserved.
+- The information index searches complete article text as well as titles and common synonyms, with result snippets and links to frequently needed topics.
 - A four-step participant registration preview, including local photo selection, required-field validation, review and a clearly labelled simulated confirmation.
-- A sponsor introduction, an initial private-contact preview and the existing separate sponsor/organisation profile concept.
-- Public participant browsing, country filtering, sponsor and organisation cards, and the panel gallery. These use only the existing public read endpoints and do not create a second participant database.
+- Sponsors see four practical ways to help and three steps to discuss a contribution. Organisations get their own school/group route. Private enquiries have separate drafts from public profiles.
+- Public participants, sponsors, organisations and panels use the existing approved-only read endpoints. Every list is shuffled once per page visit, then remains stable during reading, filtering and navigation. Cards and logo areas receive equal presentation; there are no contribution tiers.
 - An upload-flow preview with explicitly labelled sample details and local-only photographs.
 - The existing project information in six languages and the existing technical drawing, with SVG download and print support.
 - An eight-question panel-idea helper that composes a prompt locally. This preview does not call the existing AI chat service.
 - Mobile navigation, accessible input labels, keyboard focus styles, responsive layouts and reduced-motion support.
+- Required participant photos and partner logos, matching 5 MB image limits, and clear moderation explanations before and after simulated submissions. An approved participant's panel still needs its own approval.
+- A working press kit with the logo, Jakko's portrait, credits and project information in six languages. The portrait is explicitly identified as Jakko with The Nightwatch in Wood, a separate artwork.
 
 ## Preview isolation
 
@@ -23,7 +31,7 @@ The separate Netlify draft preview is not password protected; its URL is an unin
 
 ## Preserved content
 
-`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. The reader changes markup presentation and internal navigation, not the underlying project texts. The drawing label parser is corrected to split actual newlines; the existing double-escaped split displayed undefined labels. Dimensions and label text are unchanged. New interface copy is in `assets/translations.js`.
+`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. That file and the original project stories remain unchanged. The reader adjusts markup and internal navigation. The privacy page has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. New interface copy is in `assets/translations.js` and `assets/experience.js`.
 
 The generic headline/diagram copy and the sponsor introduction are design proposals. Preserve the movement's inclusivity, the promise to help three people, equal recognition of sponsors and the artwork's eventual donation. Sponsors are not divided into payment tiers.
 
@@ -33,7 +41,7 @@ The generic headline/diagram copy and the sponsor introduction are design propos
 2. Map country codes, participant roles, photo uploads and form fields explicitly to the current schema. Do not change or migrate production records as a side effect of the visual redesign.
 3. Implement the initial sponsor enquiry as a private contact message, separate from any public sponsor profile. Confirm delivery handling before enabling it.
 4. Integrate the existing AI assistant into the new interface, then test its real error and loading states.
-5. Verify the real submission and moderation flows in a suitable test environment. An end-to-end preview flow is not evidence that production persistence works.
+5. Enforce required images and moderation on the server, including later uploads and public-profile changes. Verify submission, Jakko's approval and subsequent public visibility in a suitable test environment. Preview tests are not evidence that production persistence or current admin access has been verified. Existing approved records are not automatically hidden, changed or deleted.
 6. Reconcile the current project dates/content and image credits before release. Keep the current app available until Jakko approves the replacement.
 
 ## Validation performed
@@ -44,10 +52,14 @@ The generic headline/diagram copy and the sponsor introduction are design propos
 - Participant route with example details, back navigation, missing-photo feedback, local test image, review and simulated completion.
 - Sponsor enquiry with sample content and simulated confirmation.
 
+The 16 September revision additionally passes 186 offline route/language renders, six full-content search checks, required-photo checks for all four participant roles, both partner-logo flows, the panel upload flow, private-enquiry isolation and visit-stable shuffle checks. Mocked server-function tests verify the four public queries request approved records. All preview network writes are blocked by the test harness; simulated submissions do not append public cards.
+
+Run `JSDOM_PATH=/path/to/jsdom node scripts/check-preview.cjs` from the repository root. The optional QA dependency is kept outside the repository and is not needed to serve the preview. Regenerate the nine-file press archive with `node scripts/build-preview-press.cjs`; this uses Node and Python's standard ZIP library.
+
 This folder can be served by any static web server. It needs no package installation or build step.
 
 ## Navigation revision after feedback
 
 Jakko found the first design too long and hard to navigate. The homepage now introduces the project immediately and offers five audience entrances. Sponsors and organisations have separate pages; media gets prominent press-contact and gallery actions. A compact footer and expandable related topics replace long menus and the horizontally scrolling article navigation. These are preview-only interface changes, not backend changes.
 
-The navigation revision passed JavaScript syntax, translation coverage and 60 offline route/language render checks. The deployed draft was reviewed at 320px, 390px, 768px and a 1363px desktop viewport. All five audience entrances, the participant overview, the drawing breadcrumb and information search were exercised in the browser. The mobile bar gives longer organisation labels extra space. The homepage fits in the desktop viewport; the five entrances are visible immediately in the 390px phone check. Public totals load from the existing read endpoint, without hardcoded fallback counts. The production deployment remains unchanged.
+The draft has been reviewed at 320px, 390px, 768px and a desktop viewport. The five audience routes remain available in a fixed mobile bar, with extra room for long organisation labels. Public totals load from the existing read endpoint, without hardcoded fallback counts. The homepage prioritises the project explanation and entrances, followed by the initiator on mobile. The press ZIP has been downloaded and checked against its source archive. The production deployment remains unchanged.
