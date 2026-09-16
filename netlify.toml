@@ -1,6 +1,32 @@
 [[redirects]]
   from = "https://unitedwoodfloorlayers.netlify.app/*"
-  to = "https://app.unitedwoodfloorlayers.com/:splat"
+  to = "https://unitedwoodfloorlayers.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.unitedwoodfloorlayers.com/*"
+  to = "https://unitedwoodfloorlayers.com/:splat"
+  status = 301
+  force = true
+
+# Move app entry pages while keeping API calls and service-worker updates
+# available to people who still have an older app tab or installation open.
+[[redirects]]
+  from = "https://app.unitedwoodfloorlayers.com/"
+  to = "https://unitedwoodfloorlayers.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://app.unitedwoodfloorlayers.com/index.html"
+  to = "https://unitedwoodfloorlayers.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://app.unitedwoodfloorlayers.com/admin.html"
+  to = "https://unitedwoodfloorlayers.com/admin.html"
   status = 301
   force = true
 
