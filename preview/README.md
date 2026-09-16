@@ -24,10 +24,13 @@ and his reason for starting UWFL.
 - Mobile navigation, accessible input labels, keyboard focus styles, responsive layouts and reduced-motion support.
 - Required participant photos and partner logos, matching 5 MB image limits, and clear moderation explanations before and after simulated submissions. An approved participant's panel still needs its own approval.
 - A working press kit with the logo, Jakko's portrait, credits and project information in six languages. The portrait is explicitly identified as Jakko with The Nightwatch in Wood, a separate artwork.
+- A key icon in the footer opens `admin.html`. It reuses the current app's server-side password check and four review queues. The separate `admin.html?demo=1` uses fictional records only.
 
 ## Preview isolation
 
-All form submissions are deliberately simulated. No form performs a POST, PUT, PATCH or DELETE. The app’s only external data access is GET to the public participants, sponsors, organisations and panels endpoints. The separate mail-review page reads a local JSON file containing fictional examples. There is no service-worker registration, admin UI, credential or serverless function in this folder. `noindex,nofollow` is applied in HTML, response headers and `robots.txt`.
+Public registration, upload and contact submissions remain simulated. The public app only reads the existing approved participant, sponsor, organisation and panel endpoints. The separate mail-review page reads a local JSON file containing fictional examples. No password or serverless function is deployed in this folder. `noindex,nofollow` is applied in HTML, response headers and `robots.txt`.
+
+The authenticated management page is the explicit exception requested by the user: after signing in with the current password, approvals and rejections affect the **current production records** through the existing protected endpoints. This is stated in the interface. Public preview forms do not create review entries. No private endpoint is called before sign-in, and the demo never calls the production API. Nothing has been approved or rejected during development.
 
 The separate Netlify draft preview is not password protected; its URL is an unindexed review link. Deployment uses `draft: true` and verifies that the published production deployment remains unchanged. The responsive QA page is `_qa.html`; it is separate from the app navigation.
 
@@ -43,18 +46,18 @@ The generic headline/diagram copy and the sponsor introduction are design propos
 2. Map country codes, participant roles, photo uploads and form fields explicitly to the current schema. Do not change or migrate production records as a side effect of the visual redesign.
 3. Implement the initial sponsor enquiry as a private contact message, separate from any public sponsor profile. Confirm delivery handling before enabling it.
 4. Integrate the existing AI assistant into the new interface, then test its real error and loading states.
-5. Enforce required images and moderation on the server, including later uploads and public-profile changes. Verify submission, approval by an authorised UWFL reviewer and subsequent public visibility in a suitable test environment. Preview tests are not evidence that production persistence or current admin access has been verified. Existing approved records are not automatically hidden, changed or deleted.
+5. Enforce required images and moderation on the server, including later uploads and public-profile changes. Verify submission, approval by an authorised UWFL reviewer and subsequent public visibility in a suitable test environment. The new management client uses the existing protected review endpoints; offline tests do not verify a real login, database mutation or mail delivery. Existing approved records are not automatically hidden, changed or deleted.
 6. Reconcile the current project dates/content and image credits before release. Keep the current app available until Jakko approves the replacement.
 
 ## Validation performed
 
 - JavaScript syntax and coverage of all new UI labels across six languages.
-- Production source unchanged; preview files contain no API credentials or mutation requests.
+- Production source unchanged; preview files contain no API credentials. Public forms stay simulated; only explicitly authenticated management decisions can send mutation requests.
 - Desktop, tablet and narrow/mobile viewport checks using the actual draft app.
 - Participant route with example details, back navigation, missing-photo feedback, local test image, review and simulated completion.
 - Sponsor enquiry with sample content and simulated confirmation.
 
-The 16 September revision additionally passes 234 offline route/language renders, seven full-content search checks, required-photo checks for all four participant roles, three partner-logo flows, the panel upload flow, private-enquiry isolation and visit-stable shuffle checks. Mocked server-function tests verify the four public queries request approved records. All preview network writes are blocked by the test harness; simulated submissions do not append public cards.
+The 16 September revision additionally passes 234 offline route/language renders, seven full-content search checks, required-photo checks for all four participant roles, three partner-logo flows, the panel upload flow, private-enquiry isolation and visit-stable shuffle checks. Mocked server-function tests verify the four public queries request approved records. Public-app writes are blocked by its test harness; simulated submissions do not append public cards. Management has its own entirely mocked tests in `scripts/check-admin.cjs`.
 
 Run `JSDOM_PATH=/path/to/jsdom node scripts/check-preview.cjs` from the repository root. The optional QA dependency is kept outside the repository and is not needed to serve the preview. Regenerate the nine-file press archive with `node scripts/build-preview-press.cjs`; this uses Node and Python's standard ZIP library.
 
@@ -161,3 +164,62 @@ credit and photo credits remain unchanged. The automatic regional email still
 follows panel approval, and all public submissions still require review.
 This copy revision does not change permissions, create accounts or activate the
 production mail integration.
+
+## Management with the existing password
+
+The footer key opens a dedicated login and four queues: registrations (all
+personal roles), panels, sponsors and organisations. Counts, search, expandable
+full submissions, photos/logos, stories and craft details help reviewers assess
+an entry. All interface labels are available in six languages. The password is
+checked by the existing `ADMIN_KEY` server validation; it is never embedded in
+assets, placed in a URL or saved in local/session storage. It remains in memory
+only and is cleared with private records on logout, authorization failure or
+page departure. No accounts or permissions have been changed.
+
+Approval uses the existing protected decision endpoint. Rejection requires an
+explicit confirmation because the current server **permanently deletes** that
+submission. A queue read before the decision catches already-reviewed entries;
+another read afterwards checks that the entry left the pending list. Buttons
+are disabled during processing and uncertain outcomes are not automatically
+retried. These client checks do not provide an atomic server-side lock against
+two reviewers acting at exactly the same time.
+
+Important limits of the existing backend:
+
+- The registration review endpoint does not return `photo_url`. The interface
+  states that the participant photo is unavailable in this view; it does not
+  claim that the person submitted no photo. Extending the private endpoint and
+  enforcing image requirements remain production handover work. Legacy review
+  behavior is retained, without altering existing records automatically.
+- New `why`, `meaning`, `materials` and shipping-country fields are shown when
+  returned, but the current panel endpoint still returns the legacy fields.
+  Their storage/review integration remains in `scripts/panels/HANDOVER.md`.
+- Existing handlers do not consistently check upstream database response
+  status. Some upstream failures can become an empty queue or `{ok:true}`.
+  A subsequent queue read improves client verification but cannot rule out
+  such hidden server failures. Server status validation and atomic/idempotent
+  decisions belong in the production integration, before full replacement.
+- Panel approval invokes the current app's existing Google Apps Script email
+  process. It does **not** activate the newly prepared regional mail formatter,
+  and the response does not verify delivery. See `scripts/mail/HANDOVER.md`.
+- Media currently has no dedicated backend review queue. The public preview's
+  media-profile form is still a simulation.
+
+`admin.html?demo=1` lets the design and decisions be reviewed with visibly
+fictional in-memory submissions; it never authenticates against, reads from,
+writes to or sends mail through production. Its panel image is an illustration,
+not a real submission. Reloading the demo restores its examples.
+
+Run `JSDOM_PATH=/path/to/jsdom node scripts/check-admin.cjs`. Tests cover six
+languages, login failures, safe rendering, approval/rejection, cancellation,
+duplicate clicks, stale reviews, failed and unconfirmed requests, logout during
+an outstanding request, page departure, invalid IDs and zero demo networking.
+Production handlers are tested only with fake configuration and mocked fetches.
+No real password, pending records, database changes or emails are used.
+
+Browser review of the management revision: desktop login and demo, 320px NL/DE
+management without horizontal overflow, and the footer key opening login at
+390px. Demo approval, reject cancellation and confirmed rejection were exercised.
+The existing production login endpoint returned 401 without a key and exposed
+the expected CORS headers; no real password was used to log in. The draft deploy
+was checked to leave the published production deployment unchanged.

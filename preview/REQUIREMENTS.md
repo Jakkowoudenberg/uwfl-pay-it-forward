@@ -59,6 +59,11 @@ uitgevoerd of getest.
 - De ontwerpformulieren blijven duidelijk als simulatie aangeduid zolang de
   productie-integratie niet is voltooid.
 - De bestaande live app wordt pas vervangen na beoordeling en akkoord van Jakko.
+- Op verzoek komt er een sleuteltje naar beheer, met dezelfde servercontrole
+  en hetzelfde wachtwoord als de huidige app. Deze afzonderlijke beheerpagina
+  kan na inloggen echte bestaande inzendingen goedkeuren of afwijzen; dit staat
+  duidelijk in beeld. De openbare ontwerpformulieren blijven simulaties.
+  Een aparte beheerdemo gebruikt uitsluitend fictieve gegevens en verstuurt niets.
 
 ## De bedoeling direct zichtbaar
 

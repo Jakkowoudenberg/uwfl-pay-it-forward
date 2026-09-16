@@ -4,7 +4,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const {JSDOM}=require(process.env.JSDOM_PATH||'jsdom');
 const root=path.resolve(__dirname,'../preview');
-const code=['content.js','translations.js','experience.js','purpose.js','community.js','shipping-policy.js','regional.js','panel-story.js','app.js'].map(n=>fs.readFileSync(path.join(root,'assets',n),'utf8'));
+const code=['content.js','translations.js','admin-copy.js','experience.js','purpose.js','community.js','shipping-policy.js','regional.js','panel-story.js','app.js'].map(n=>fs.readFileSync(path.join(root,'assets',n),'utf8'));
 const fixtures={
  participants:[1,2,3,4].map((n)=>({name:`Fictieve Testdeelnemer ${n}`,company:'QA voorbeeld',country:n%2?'NL':'US',type:['Maker','Contributor','Participant','Initiator'][n-1],message:'Fictief verhaal uitsluitend voor de offline test.',photo_url:'https://example.invalid/photo.jpg',participant_number:n})),
  sponsors:[1,2,3].map(n=>({company:`Fictieve Testsponsor ${n}`,country:'Nederland',logo_url:'https://example.invalid/logo.jpg',why:'Test',what:'Test'})),
