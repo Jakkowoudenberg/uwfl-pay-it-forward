@@ -11,7 +11,8 @@ United Wood Floor Layers — "Pay It Forward" is a worldwide collective art proj
 Wood floor layers and others each make a wooden panel within a shared frame, and
 promise to help three people, who then pass it forward.
 
-- **Live app:** app.unitedwoodfloorlayers.com
+- **Live app:** unitedwoodfloorlayers.com (primary). The former app address and
+  www redirect visitors to this address; old app API calls remain available.
 - **Repository:** Jakkowoudenberg/uwfl-pay-it-forward
 - **Hosting:** Netlify. The site redeploys automatically when `main` changes.
 - **Initiator:** Jakko Woudenberg (Dutch Wood Artist®), Netherlands

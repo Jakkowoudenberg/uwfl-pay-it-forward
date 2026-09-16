@@ -15,7 +15,7 @@ for(const file of ['index.html','admin.html']){
  if(file==='index.html'){
   html=html.replace('<meta name="robots" content="noindex,nofollow">','<meta name="robots" content="index,follow">');
   html=html.replace('UWFL — Pay It Forward · Design preview','United Woodfloor Layers — Pay It Forward');
-  html=html.replace('</head>',`  <link rel="canonical" href="https://app.unitedwoodfloorlayers.com/">\n  <link rel="manifest" href="/manifest.json">\n  <meta property="og:title" content="United Woodfloor Layers — Pay It Forward">\n  <meta property="og:description" content="Make together. Share craftsmanship. Help three people. A worldwide movement through the art of wood flooring.">\n  <meta property="og:image" content="https://app.unitedwoodfloorlayers.com/og-uwfl-2026.jpg">\n  <meta property="og:type" content="website">\n  <meta property="og:url" content="https://app.unitedwoodfloorlayers.com/">\n  <style>#preview-note{display:none}.registration-number{font-size:1.35rem;margin:1.5rem 0}form[aria-busy=true]{opacity:.8}</style>\n</head>`);
+  html=html.replace('</head>',`  <link rel="canonical" href="https://unitedwoodfloorlayers.com/">\n  <link rel="manifest" href="/manifest.json">\n  <meta property="og:title" content="United Woodfloor Layers — Pay It Forward">\n  <meta property="og:description" content="Make together. Share craftsmanship. Help three people. A worldwide movement through the art of wood flooring.">\n  <meta property="og:image" content="https://unitedwoodfloorlayers.com/og-uwfl-2026.jpg">\n  <meta property="og:type" content="website">\n  <meta property="og:url" content="https://unitedwoodfloorlayers.com/">\n  <style>#preview-note{display:none}.registration-number{font-size:1.35rem;margin:1.5rem 0}form[aria-busy=true]{opacity:.8}</style>\n</head>`);
  }
  fs.writeFileSync(path.join(out,file),html);
 }
@@ -25,8 +25,8 @@ fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify(manifest,null,2))
 for(const file of ['icon-192.png','icon-192-maskable.png','icon-512.png','icon-512-maskable.png','og-uwfl-2026.jpg'])fs.copyFileSync(path.join(root,file),path.join(out,file));
 // Existing installed apps replace their old service worker and discard stale HTML.
 fs.writeFileSync(path.join(out,'sw.js'),`self.addEventListener('install',()=>self.skipWaiting());\nself.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>/uwfl|pay.?it.?forward/i.test(k)).map(k=>caches.delete(k)))).then(()=>self.clients.claim()).then(()=>self.registration.unregister())));\n`);
-fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\nDisallow: /admin.html\nDisallow: /.netlify/\nSitemap: https://app.unitedwoodfloorlayers.com/sitemap.xml\n');
-fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://app.unitedwoodfloorlayers.com/</loc></url></urlset>');
+fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\nDisallow: /admin.html\nDisallow: /.netlify/\nSitemap: https://unitedwoodfloorlayers.com/sitemap.xml\n');
+fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://unitedwoodfloorlayers.com/</loc></url></urlset>');
 fs.writeFileSync(path.join(out,'_headers'),`/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
