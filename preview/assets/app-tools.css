@@ -1,0 +1,22 @@
+.app-quick-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.app-quick-actions .button{gap:9px;min-height:46px;padding:11px 16px;font-size:.875rem;background:#fff;color:var(--ink);border-color:#b8c1ba}
+.app-quick-actions .button:hover{background:var(--wash)}
+.app-quick-actions .button span{min-width:0;overflow-wrap:anywhere}
+.footer-app-tools{padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+.footer-app-tools .app-quick-actions{margin-top:0}
+.app-tools-dialog{color-scheme:only light;background:#fff;color:var(--ink);width:min(460px,calc(100% - 32px));max-height:calc(100dvh - 40px);overflow:auto;margin:auto;padding:28px;border:1px solid var(--line);border-radius:10px;box-shadow:0 20px 80px #17211f26}
+.app-tools-dialog::backdrop{background:#17211f66}
+.app-tools-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:18px}
+.app-tools-dialog h2{font-size:1.6rem;line-height:1.3}
+.app-tools-close{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;margin:-7px -8px 0 0;border:0;background:#fff;color:var(--ink);font-size:1.5rem}
+.app-tools-dialog p,.app-tools-dialog li{font-size:.95rem;line-height:1.65}
+.app-tools-dialog ol{padding-left:22px;margin:20px 0}
+.app-tools-dialog li+li{margin-top:10px}
+.app-tools-dialog .app-tools-hint{font-size:.83rem;color:var(--muted);margin-top:18px}
+.app-tools-copy{margin-top:22px}
+.app-tools-copy label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:6px}
+.app-tools-copy input{width:100%;padding:10px;border:1px solid var(--line);background:#f3f5f2;color:var(--ink);font-size:16px;min-width:0}
+.app-tools-copy .button{width:100%;margin-top:10px;gap:9px}
+.app-tools-copy [role=status]{margin-top:10px;font-size:.83rem}
+.app-tools-live-link{margin-top:18px}
+@media(max-width:540px){.app-quick-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.app-quick-actions .button{font-size:.82rem;padding:11px 10px;gap:7px;line-height:1.4}.app-tools-dialog{padding:22px}.app-tools-dialog h2{font-size:1.4rem}}
