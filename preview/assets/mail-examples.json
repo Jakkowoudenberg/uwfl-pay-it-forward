@@ -1,0 +1,338 @@
+{
+  "nl": {
+    "eu": {
+      "waiting": {
+        "subject": "Je paneel is goedgekeurd voor UWFL",
+        "text": "Hallo Voorbeeld / Example,\n\nJe paneel is goedgekeurd voor UWFL Pay It Forward. Dank je voor jouw bijdrage!\n\nPaneel: Voorbeeldpaneel / Example panel\nDeelnemersnummer: DEMO\nRegio: Europese Unie (EU)\n\nEU-panelen worden voorlopig verzameld via T&G Wood International. Transport naar de Amerikaanse Expo is nog niet geregeld. Een mogelijk Europees toonmoment in 2027 is in voorbereiding: om EU-panelen te tonen, het project bekend te maken en nieuwe deelnemers en partners te betrekken.\n\nWacht nog met verzenden. Je ontvangt afzonderlijk de persoonlijke aanleverinstructies zodra Jakko de bestemming en verzending voor jouw paneel heeft bevestigd.\n\nDeelname blijft wereldwijd mogelijk. Goedkeuring van je paneel geeft nog geen toestemming om te verzenden of een gegarandeerde plek op een Expo.\n\nHet project heeft een open einde. Waar en wanneer alle panelen samenkomen, de verdere reis en het moment van schenken staan nog niet vast.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "nl",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Persoonlijke aanleverinstructies voor jouw UWFL-paneel",
+        "text": "Hallo Voorbeeld / Example,\n\nJe paneel is goedgekeurd voor UWFL Pay It Forward. Dank je voor jouw bijdrage!\n\nPaneel: Voorbeeldpaneel / Example panel\nDeelnemersnummer: DEMO\nRegio: Europese Unie (EU)\n\nEU-panelen worden voorlopig verzameld via T&G Wood International. Transport naar de Amerikaanse Expo is nog niet geregeld. Een mogelijk Europees toonmoment in 2027 is in voorbereiding: om EU-panelen te tonen, het project bekend te maken en nieuwe deelnemers en partners te betrekken.\n\nDe onderstaande aanlevering voor inzameling is voor jouw paneel bevestigd. Dit is geen selectie voor de Amerikaanse Expo.\n\nBestemming: Europese Unie (EU)\n[Voorbeeld: privéadres wordt uitsluitend in de persoonlijke mail ingevuld]\n\nPersoonlijke instructies:\n[Voorbeeld: persoonlijk bevestigde afspraken voor verpakking en aanlevering]\n\nVerandert het land waar je paneel zich bevindt, of is iets onduidelijk? Neem eerst contact op via de app voordat je verzendt.\n\nHet project heeft een open einde. Waar en wanneer alle panelen samenkomen, de verdere reis en het moment van schenken staan nog niet vast.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "nl",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": true
+      }
+    },
+    "americas": {
+      "waiting": {
+        "subject": "Je paneel is goedgekeurd voor UWFL",
+        "text": "Hallo Voorbeeld / Example,\n\nJe paneel is goedgekeurd voor UWFL Pay It Forward. Dank je voor jouw bijdrage!\n\nPaneel: Voorbeeldpaneel / Example panel\nDeelnemersnummer: DEMO\nRegio: Amerika’s, inclusief Canada\n\nDe aanleverroute voor de NWFA Expo geldt voorlopig voor panelen uit de Amerika’s, inclusief Canada. Een selectie goedgekeurde panelen kan in de NWFA-stand worden getoond om het project bekend te maken en anderen te laten aansluiten.\n\nWacht nog met verzenden. Je ontvangt afzonderlijk de persoonlijke aanleverinstructies zodra Jakko de bestemming en verzending voor jouw paneel heeft bevestigd.\n\nDeelname blijft wereldwijd mogelijk. Goedkeuring van je paneel geeft nog geen toestemming om te verzenden of een gegarandeerde plek op een Expo.\n\nHet project heeft een open einde. Waar en wanneer alle panelen samenkomen, de verdere reis en het moment van schenken staan nog niet vast.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "nl",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Persoonlijke aanleverinstructies voor jouw UWFL-paneel",
+        "text": "Hallo Voorbeeld / Example,\n\nJe paneel is goedgekeurd voor UWFL Pay It Forward. Dank je voor jouw bijdrage!\n\nPaneel: Voorbeeldpaneel / Example panel\nDeelnemersnummer: DEMO\nRegio: Amerika’s, inclusief Canada\n\nDe aanleverroute voor de NWFA Expo geldt voorlopig voor panelen uit de Amerika’s, inclusief Canada. Een selectie goedgekeurde panelen kan in de NWFA-stand worden getoond om het project bekend te maken en anderen te laten aansluiten.\n\nJouw paneel is geselecteerd voor de NWFA Expo. De onderstaande aanlevering is voor jouw paneel bevestigd.\n\nBestemming: Amerika’s, inclusief Canada\n[Voorbeeld: privéadres wordt uitsluitend in de persoonlijke mail ingevuld]\n\nPersoonlijke instructies:\n[Voorbeeld: persoonlijk bevestigde afspraken voor verpakking en aanlevering]\n\nVerandert het land waar je paneel zich bevindt, of is iets onduidelijk? Neem eerst contact op via de app voordat je verzendt.\n\nHet project heeft een open einde. Waar en wanneer alle panelen samenkomen, de verdere reis en het moment van schenken staan nog niet vast.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "nl",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": true
+      }
+    },
+    "other": {
+      "waiting": {
+        "subject": "Je paneel is goedgekeurd voor UWFL",
+        "text": "Hallo Voorbeeld / Example,\n\nJe paneel is goedgekeurd voor UWFL Pay It Forward. Dank je voor jouw bijdrage!\n\nPaneel: Voorbeeldpaneel / Example panel\nDeelnemersnummer: DEMO\nRegio: Overige landen en regio’s\n\nOok vanuit andere landen kun je meedoen. Verzameling, vervoer en mogelijke lokale toonmomenten stemmen we per regio af. Wacht op persoonlijke instructies; er is nog geen algemene aanleverroute voor deze landen.\n\nWacht nog met verzenden. Je ontvangt afzonderlijk de persoonlijke aanleverinstructies zodra Jakko de bestemming en verzending voor jouw paneel heeft bevestigd.\n\nDeelname blijft wereldwijd mogelijk. Goedkeuring van je paneel geeft nog geen toestemming om te verzenden of een gegarandeerde plek op een Expo.\n\nHet project heeft een open einde. Waar en wanneer alle panelen samenkomen, de verdere reis en het moment van schenken staan nog niet vast.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "nl",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Je paneel is goedgekeurd voor UWFL",
+        "text": "Hallo Voorbeeld / Example,\n\nJe paneel is goedgekeurd voor UWFL Pay It Forward. Dank je voor jouw bijdrage!\n\nPaneel: Voorbeeldpaneel / Example panel\nDeelnemersnummer: DEMO\nRegio: Overige landen en regio’s\n\nOok vanuit andere landen kun je meedoen. Verzameling, vervoer en mogelijke lokale toonmomenten stemmen we per regio af. Wacht op persoonlijke instructies; er is nog geen algemene aanleverroute voor deze landen.\n\nWacht nog met verzenden. Je ontvangt afzonderlijk de persoonlijke aanleverinstructies zodra Jakko de bestemming en verzending voor jouw paneel heeft bevestigd.\n\nDeelname blijft wereldwijd mogelijk. Goedkeuring van je paneel geeft nog geen toestemming om te verzenden of een gegarandeerde plek op een Expo.\n\nHet project heeft een open einde. Waar en wanneer alle panelen samenkomen, de verdere reis en het moment van schenken staan nog niet vast.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "nl",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      }
+    }
+  },
+  "en": {
+    "eu": {
+      "waiting": {
+        "subject": "Your panel is approved for UWFL",
+        "text": "Hello Voorbeeld / Example,\n\nYour panel is approved for UWFL Pay It Forward. Thank you for your contribution!\n\nPanel: Voorbeeldpaneel / Example panel\nParticipant number: DEMO\nRegion: European Union (EU)\n\nEU panels are currently being collected through T&G Wood International. Transport to the US Expo has not been arranged. A possible European presentation in 2027 is in preparation: to show EU panels, introduce the project and involve new participants and partners.\n\nPlease wait before shipping. You will receive separate personal delivery instructions once Jakko has confirmed the destination and shipment for your panel.\n\nParticipation remains open worldwide. Panel approval does not yet authorise shipment or guarantee a place at an Expo.\n\nThe project is open-ended. The place and date for bringing all panels together, the onward journey and the eventual donation are still to be decided.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "en",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Personal delivery instructions for your UWFL panel",
+        "text": "Hello Voorbeeld / Example,\n\nYour panel is approved for UWFL Pay It Forward. Thank you for your contribution!\n\nPanel: Voorbeeldpaneel / Example panel\nParticipant number: DEMO\nRegion: European Union (EU)\n\nEU panels are currently being collected through T&G Wood International. Transport to the US Expo has not been arranged. A possible European presentation in 2027 is in preparation: to show EU panels, introduce the project and involve new participants and partners.\n\nThe delivery below has been confirmed for collection of your panel. This is not selection for the US Expo.\n\nDestination: European Union (EU)\n[Example: the private address is inserted only in the personal email]\n\nPersonal instructions:\n[Example: personally confirmed packing and delivery arrangements]\n\nIf the country where your panel is located changes, or anything is unclear, contact us through the app before shipping.\n\nThe project is open-ended. The place and date for bringing all panels together, the onward journey and the eventual donation are still to be decided.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "en",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": true
+      }
+    },
+    "americas": {
+      "waiting": {
+        "subject": "Your panel is approved for UWFL",
+        "text": "Hello Voorbeeld / Example,\n\nYour panel is approved for UWFL Pay It Forward. Thank you for your contribution!\n\nPanel: Voorbeeldpaneel / Example panel\nParticipant number: DEMO\nRegion: The Americas, including Canada\n\nFor now, the NWFA Expo delivery route applies to panels from the Americas, including Canada. A selection of approved panels can be shown in the NWFA booth to introduce the project and invite others to join.\n\nPlease wait before shipping. You will receive separate personal delivery instructions once Jakko has confirmed the destination and shipment for your panel.\n\nParticipation remains open worldwide. Panel approval does not yet authorise shipment or guarantee a place at an Expo.\n\nThe project is open-ended. The place and date for bringing all panels together, the onward journey and the eventual donation are still to be decided.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "en",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Personal delivery instructions for your UWFL panel",
+        "text": "Hello Voorbeeld / Example,\n\nYour panel is approved for UWFL Pay It Forward. Thank you for your contribution!\n\nPanel: Voorbeeldpaneel / Example panel\nParticipant number: DEMO\nRegion: The Americas, including Canada\n\nFor now, the NWFA Expo delivery route applies to panels from the Americas, including Canada. A selection of approved panels can be shown in the NWFA booth to introduce the project and invite others to join.\n\nYour panel has been selected for the NWFA Expo. The delivery below has been confirmed for your panel.\n\nDestination: The Americas, including Canada\n[Example: the private address is inserted only in the personal email]\n\nPersonal instructions:\n[Example: personally confirmed packing and delivery arrangements]\n\nIf the country where your panel is located changes, or anything is unclear, contact us through the app before shipping.\n\nThe project is open-ended. The place and date for bringing all panels together, the onward journey and the eventual donation are still to be decided.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "en",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": true
+      }
+    },
+    "other": {
+      "waiting": {
+        "subject": "Your panel is approved for UWFL",
+        "text": "Hello Voorbeeld / Example,\n\nYour panel is approved for UWFL Pay It Forward. Thank you for your contribution!\n\nPanel: Voorbeeldpaneel / Example panel\nParticipant number: DEMO\nRegion: Other countries and regions\n\nYou can also take part from other countries. Collection, transport and possible local presentations will be agreed region by region. Wait for personal instructions; there is no general delivery route for these countries yet.\n\nPlease wait before shipping. You will receive separate personal delivery instructions once Jakko has confirmed the destination and shipment for your panel.\n\nParticipation remains open worldwide. Panel approval does not yet authorise shipment or guarantee a place at an Expo.\n\nThe project is open-ended. The place and date for bringing all panels together, the onward journey and the eventual donation are still to be decided.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "en",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Your panel is approved for UWFL",
+        "text": "Hello Voorbeeld / Example,\n\nYour panel is approved for UWFL Pay It Forward. Thank you for your contribution!\n\nPanel: Voorbeeldpaneel / Example panel\nParticipant number: DEMO\nRegion: Other countries and regions\n\nYou can also take part from other countries. Collection, transport and possible local presentations will be agreed region by region. Wait for personal instructions; there is no general delivery route for these countries yet.\n\nPlease wait before shipping. You will receive separate personal delivery instructions once Jakko has confirmed the destination and shipment for your panel.\n\nParticipation remains open worldwide. Panel approval does not yet authorise shipment or guarantee a place at an Expo.\n\nThe project is open-ended. The place and date for bringing all panels together, the onward journey and the eventual donation are still to be decided.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "en",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      }
+    }
+  },
+  "de": {
+    "eu": {
+      "waiting": {
+        "subject": "Dein Paneel ist für UWFL freigegeben",
+        "text": "Hallo Voorbeeld / Example,\n\nDein Paneel ist für UWFL Pay It Forward freigegeben. Danke für deinen Beitrag!\n\nPaneel: Voorbeeldpaneel / Example panel\nTeilnehmernummer: DEMO\nRegion: Europäische Union (EU)\n\nEU-Paneele werden zunächst über T&G Wood International gesammelt. Der Transport zur Expo in den USA ist noch nicht organisiert. Eine mögliche europäische Präsentation im Jahr 2027 wird vorbereitet, um EU-Paneele zu zeigen und neue Teilnehmende und Partner zu gewinnen.\n\nWarte bitte noch mit dem Versand. Du erhältst gesonderte persönliche Lieferhinweise, sobald Jakko Ziel und Versand für dein Paneel bestätigt hat.\n\nDie Teilnahme bleibt weltweit möglich. Die Paneelfreigabe erlaubt noch keinen Versand und garantiert keinen Platz auf einer Expo.\n\nDas Projekt hat ein offenes Ende. Ort und Zeitpunkt des weltweiten Zusammenführens, die weitere Reise und die spätere Schenkung stehen noch nicht fest.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "de",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Persönliche Lieferhinweise für dein UWFL-Paneel",
+        "text": "Hallo Voorbeeld / Example,\n\nDein Paneel ist für UWFL Pay It Forward freigegeben. Danke für deinen Beitrag!\n\nPaneel: Voorbeeldpaneel / Example panel\nTeilnehmernummer: DEMO\nRegion: Europäische Union (EU)\n\nEU-Paneele werden zunächst über T&G Wood International gesammelt. Der Transport zur Expo in den USA ist noch nicht organisiert. Eine mögliche europäische Präsentation im Jahr 2027 wird vorbereitet, um EU-Paneele zu zeigen und neue Teilnehmende und Partner zu gewinnen.\n\nDie folgende Anlieferung zur Sammlung wurde für dein Paneel bestätigt. Dies ist keine Auswahl für die Expo in den USA.\n\nZiel: Europäische Union (EU)\n[Beispiel: Die private Adresse wird nur in die persönliche E-Mail eingefügt]\n\nPersönliche Hinweise:\n[Beispiel: persönlich bestätigte Verpackungs- und Liefervereinbarungen]\n\nÄndert sich das Land, in dem dein Paneel liegt, oder ist etwas unklar? Kontaktiere uns vor dem Versand über die App.\n\nDas Projekt hat ein offenes Ende. Ort und Zeitpunkt des weltweiten Zusammenführens, die weitere Reise und die spätere Schenkung stehen noch nicht fest.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "de",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": true
+      }
+    },
+    "americas": {
+      "waiting": {
+        "subject": "Dein Paneel ist für UWFL freigegeben",
+        "text": "Hallo Voorbeeld / Example,\n\nDein Paneel ist für UWFL Pay It Forward freigegeben. Danke für deinen Beitrag!\n\nPaneel: Voorbeeldpaneel / Example panel\nTeilnehmernummer: DEMO\nRegion: Amerika, einschließlich Kanada\n\nDer Lieferweg zur NWFA Expo gilt vorerst für Paneele aus Nord-, Mittel- und Südamerika einschließlich Kanada. Eine Auswahl freigegebener Paneele kann am NWFA-Stand das Projekt vorstellen und weitere Menschen zum Mitmachen einladen.\n\nWarte bitte noch mit dem Versand. Du erhältst gesonderte persönliche Lieferhinweise, sobald Jakko Ziel und Versand für dein Paneel bestätigt hat.\n\nDie Teilnahme bleibt weltweit möglich. Die Paneelfreigabe erlaubt noch keinen Versand und garantiert keinen Platz auf einer Expo.\n\nDas Projekt hat ein offenes Ende. Ort und Zeitpunkt des weltweiten Zusammenführens, die weitere Reise und die spätere Schenkung stehen noch nicht fest.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "de",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Persönliche Lieferhinweise für dein UWFL-Paneel",
+        "text": "Hallo Voorbeeld / Example,\n\nDein Paneel ist für UWFL Pay It Forward freigegeben. Danke für deinen Beitrag!\n\nPaneel: Voorbeeldpaneel / Example panel\nTeilnehmernummer: DEMO\nRegion: Amerika, einschließlich Kanada\n\nDer Lieferweg zur NWFA Expo gilt vorerst für Paneele aus Nord-, Mittel- und Südamerika einschließlich Kanada. Eine Auswahl freigegebener Paneele kann am NWFA-Stand das Projekt vorstellen und weitere Menschen zum Mitmachen einladen.\n\nDein Paneel wurde für die NWFA Expo ausgewählt. Die folgende Lieferung wurde für dein Paneel bestätigt.\n\nZiel: Amerika, einschließlich Kanada\n[Beispiel: Die private Adresse wird nur in die persönliche E-Mail eingefügt]\n\nPersönliche Hinweise:\n[Beispiel: persönlich bestätigte Verpackungs- und Liefervereinbarungen]\n\nÄndert sich das Land, in dem dein Paneel liegt, oder ist etwas unklar? Kontaktiere uns vor dem Versand über die App.\n\nDas Projekt hat ein offenes Ende. Ort und Zeitpunkt des weltweiten Zusammenführens, die weitere Reise und die spätere Schenkung stehen noch nicht fest.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "de",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": true
+      }
+    },
+    "other": {
+      "waiting": {
+        "subject": "Dein Paneel ist für UWFL freigegeben",
+        "text": "Hallo Voorbeeld / Example,\n\nDein Paneel ist für UWFL Pay It Forward freigegeben. Danke für deinen Beitrag!\n\nPaneel: Voorbeeldpaneel / Example panel\nTeilnehmernummer: DEMO\nRegion: Andere Länder und Regionen\n\nAuch aus anderen Ländern kannst du teilnehmen. Sammlung, Transport und mögliche lokale Präsentationen stimmen wir je Region ab. Warte auf persönliche Hinweise; für diese Länder gibt es noch keinen allgemeinen Lieferweg.\n\nWarte bitte noch mit dem Versand. Du erhältst gesonderte persönliche Lieferhinweise, sobald Jakko Ziel und Versand für dein Paneel bestätigt hat.\n\nDie Teilnahme bleibt weltweit möglich. Die Paneelfreigabe erlaubt noch keinen Versand und garantiert keinen Platz auf einer Expo.\n\nDas Projekt hat ein offenes Ende. Ort und Zeitpunkt des weltweiten Zusammenführens, die weitere Reise und die spätere Schenkung stehen noch nicht fest.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "de",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Dein Paneel ist für UWFL freigegeben",
+        "text": "Hallo Voorbeeld / Example,\n\nDein Paneel ist für UWFL Pay It Forward freigegeben. Danke für deinen Beitrag!\n\nPaneel: Voorbeeldpaneel / Example panel\nTeilnehmernummer: DEMO\nRegion: Andere Länder und Regionen\n\nAuch aus anderen Ländern kannst du teilnehmen. Sammlung, Transport und mögliche lokale Präsentationen stimmen wir je Region ab. Warte auf persönliche Hinweise; für diese Länder gibt es noch keinen allgemeinen Lieferweg.\n\nWarte bitte noch mit dem Versand. Du erhältst gesonderte persönliche Lieferhinweise, sobald Jakko Ziel und Versand für dein Paneel bestätigt hat.\n\nDie Teilnahme bleibt weltweit möglich. Die Paneelfreigabe erlaubt noch keinen Versand und garantiert keinen Platz auf einer Expo.\n\nDas Projekt hat ein offenes Ende. Ort und Zeitpunkt des weltweiten Zusammenführens, die weitere Reise und die spätere Schenkung stehen noch nicht fest.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "de",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      }
+    }
+  },
+  "fr": {
+    "eu": {
+      "waiting": {
+        "subject": "Votre panneau est approuvé pour UWFL",
+        "text": "Bonjour Voorbeeld / Example,\n\nVotre panneau est approuvé pour UWFL Pay It Forward. Merci pour votre contribution !\n\nPanneau: Voorbeeldpaneel / Example panel\nNuméro de participant: DEMO\nRégion: Union européenne (UE)\n\nLes panneaux de l’UE sont actuellement collectés par T&G Wood International. Le transport vers l’Expo américaine n’est pas organisé. Une éventuelle présentation européenne en 2027 est en préparation pour montrer ces panneaux et mobiliser de nouveaux participants et partenaires.\n\nAttendez encore avant d’expédier. Vous recevrez séparément les consignes personnelles lorsque Jakko aura confirmé la destination et l’envoi de votre panneau.\n\nLa participation reste ouverte au monde entier. La validation d’un panneau n’autorise pas encore son expédition et ne garantit pas une place à une Expo.\n\nLe projet reste ouvert dans le temps. Le lieu et la date de réunion de tous les panneaux, la suite du voyage et le don final restent à déterminer.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "fr",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Consignes personnelles de livraison de votre panneau UWFL",
+        "text": "Bonjour Voorbeeld / Example,\n\nVotre panneau est approuvé pour UWFL Pay It Forward. Merci pour votre contribution !\n\nPanneau: Voorbeeldpaneel / Example panel\nNuméro de participant: DEMO\nRégion: Union européenne (UE)\n\nLes panneaux de l’UE sont actuellement collectés par T&G Wood International. Le transport vers l’Expo américaine n’est pas organisé. Une éventuelle présentation européenne en 2027 est en préparation pour montrer ces panneaux et mobiliser de nouveaux participants et partenaires.\n\nLa livraison ci-dessous est confirmée pour la collecte de votre panneau. Il ne s’agit pas d’une sélection pour l’Expo américaine.\n\nDestination: Union européenne (UE)\n[Exemple : l’adresse privée est insérée uniquement dans l’e-mail personnel]\n\nConsignes personnelles:\n[Exemple : consignes d’emballage et de livraison confirmées personnellement]\n\nSi le pays où se trouve votre panneau change ou si un point est incertain, contactez-nous via l’application avant l’expédition.\n\nLe projet reste ouvert dans le temps. Le lieu et la date de réunion de tous les panneaux, la suite du voyage et le don final restent à déterminer.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "fr",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": true
+      }
+    },
+    "americas": {
+      "waiting": {
+        "subject": "Votre panneau est approuvé pour UWFL",
+        "text": "Bonjour Voorbeeld / Example,\n\nVotre panneau est approuvé pour UWFL Pay It Forward. Merci pour votre contribution !\n\nPanneau: Voorbeeldpaneel / Example panel\nNuméro de participant: DEMO\nRégion: Amériques, Canada compris\n\nPour le moment, l’acheminement vers la NWFA Expo concerne les panneaux des Amériques, Canada compris. Une sélection de panneaux validés pourra être présentée sur le stand NWFA pour faire connaître le projet et inviter à y participer.\n\nAttendez encore avant d’expédier. Vous recevrez séparément les consignes personnelles lorsque Jakko aura confirmé la destination et l’envoi de votre panneau.\n\nLa participation reste ouverte au monde entier. La validation d’un panneau n’autorise pas encore son expédition et ne garantit pas une place à une Expo.\n\nLe projet reste ouvert dans le temps. Le lieu et la date de réunion de tous les panneaux, la suite du voyage et le don final restent à déterminer.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "fr",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Consignes personnelles de livraison de votre panneau UWFL",
+        "text": "Bonjour Voorbeeld / Example,\n\nVotre panneau est approuvé pour UWFL Pay It Forward. Merci pour votre contribution !\n\nPanneau: Voorbeeldpaneel / Example panel\nNuméro de participant: DEMO\nRégion: Amériques, Canada compris\n\nPour le moment, l’acheminement vers la NWFA Expo concerne les panneaux des Amériques, Canada compris. Une sélection de panneaux validés pourra être présentée sur le stand NWFA pour faire connaître le projet et inviter à y participer.\n\nVotre panneau a été sélectionné pour la NWFA Expo. La livraison ci-dessous est confirmée pour votre panneau.\n\nDestination: Amériques, Canada compris\n[Exemple : l’adresse privée est insérée uniquement dans l’e-mail personnel]\n\nConsignes personnelles:\n[Exemple : consignes d’emballage et de livraison confirmées personnellement]\n\nSi le pays où se trouve votre panneau change ou si un point est incertain, contactez-nous via l’application avant l’expédition.\n\nLe projet reste ouvert dans le temps. Le lieu et la date de réunion de tous les panneaux, la suite du voyage et le don final restent à déterminer.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "fr",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": true
+      }
+    },
+    "other": {
+      "waiting": {
+        "subject": "Votre panneau est approuvé pour UWFL",
+        "text": "Bonjour Voorbeeld / Example,\n\nVotre panneau est approuvé pour UWFL Pay It Forward. Merci pour votre contribution !\n\nPanneau: Voorbeeldpaneel / Example panel\nNuméro de participant: DEMO\nRégion: Autres pays et régions\n\nVous pouvez aussi participer depuis d’autres pays. La collecte, le transport et les éventuelles présentations locales seront convenus par région. Attendez vos consignes personnelles ; aucun acheminement général n’est encore prévu pour ces pays.\n\nAttendez encore avant d’expédier. Vous recevrez séparément les consignes personnelles lorsque Jakko aura confirmé la destination et l’envoi de votre panneau.\n\nLa participation reste ouverte au monde entier. La validation d’un panneau n’autorise pas encore son expédition et ne garantit pas une place à une Expo.\n\nLe projet reste ouvert dans le temps. Le lieu et la date de réunion de tous les panneaux, la suite du voyage et le don final restent à déterminer.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "fr",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Votre panneau est approuvé pour UWFL",
+        "text": "Bonjour Voorbeeld / Example,\n\nVotre panneau est approuvé pour UWFL Pay It Forward. Merci pour votre contribution !\n\nPanneau: Voorbeeldpaneel / Example panel\nNuméro de participant: DEMO\nRégion: Autres pays et régions\n\nVous pouvez aussi participer depuis d’autres pays. La collecte, le transport et les éventuelles présentations locales seront convenus par région. Attendez vos consignes personnelles ; aucun acheminement général n’est encore prévu pour ces pays.\n\nAttendez encore avant d’expédier. Vous recevrez séparément les consignes personnelles lorsque Jakko aura confirmé la destination et l’envoi de votre panneau.\n\nLa participation reste ouverte au monde entier. La validation d’un panneau n’autorise pas encore son expédition et ne garantit pas une place à une Expo.\n\nLe projet reste ouvert dans le temps. Le lieu et la date de réunion de tous les panneaux, la suite du voyage et le don final restent à déterminer.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "fr",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      }
+    }
+  },
+  "es": {
+    "eu": {
+      "waiting": {
+        "subject": "Tu panel está aprobado para UWFL",
+        "text": "Hola Voorbeeld / Example,\n\nTu panel está aprobado para UWFL Pay It Forward. ¡Gracias por tu contribución!\n\nPanel: Voorbeeldpaneel / Example panel\nNúmero de participante: DEMO\nRegión: Unión Europea (UE)\n\nLos paneles de la UE se recogen por ahora a través de T&G Wood International. El transporte a la Expo estadounidense no está organizado. Se prepara una posible presentación europea en 2027 para mostrar estos paneles y atraer nuevos participantes y colaboradores.\n\nEspera antes de enviar. Recibirás por separado las instrucciones personales cuando Jakko confirme el destino y el envío de tu panel.\n\nLa participación sigue abierta a todo el mundo. La aprobación del panel todavía no autoriza el envío ni garantiza una plaza en una Expo.\n\nEl proyecto tiene un final abierto. El lugar y la fecha para reunir todos los paneles, el viaje posterior y la donación final están por decidir.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "es",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Instrucciones personales de entrega de tu panel UWFL",
+        "text": "Hola Voorbeeld / Example,\n\nTu panel está aprobado para UWFL Pay It Forward. ¡Gracias por tu contribución!\n\nPanel: Voorbeeldpaneel / Example panel\nNúmero de participante: DEMO\nRegión: Unión Europea (UE)\n\nLos paneles de la UE se recogen por ahora a través de T&G Wood International. El transporte a la Expo estadounidense no está organizado. Se prepara una posible presentación europea en 2027 para mostrar estos paneles y atraer nuevos participantes y colaboradores.\n\nLa entrega siguiente está confirmada para la recogida de tu panel. Esto no es una selección para la Expo estadounidense.\n\nDestino: Unión Europea (UE)\n[Ejemplo: la dirección privada se incluye solo en el correo personal]\n\nInstrucciones personales:\n[Ejemplo: acuerdos de embalaje y entrega confirmados personalmente]\n\nSi cambia el país donde se encuentra tu panel o tienes alguna duda, contacta mediante la app antes de enviarlo.\n\nEl proyecto tiene un final abierto. El lugar y la fecha para reunir todos los paneles, el viaje posterior y la donación final están por decidir.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "es",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": true
+      }
+    },
+    "americas": {
+      "waiting": {
+        "subject": "Tu panel está aprobado para UWFL",
+        "text": "Hola Voorbeeld / Example,\n\nTu panel está aprobado para UWFL Pay It Forward. ¡Gracias por tu contribución!\n\nPanel: Voorbeeldpaneel / Example panel\nNúmero de participante: DEMO\nRegión: Américas, incluido Canadá\n\nPor ahora, la ruta de entrega a la NWFA Expo corresponde a paneles de las Américas, incluido Canadá. Una selección de paneles aprobados podrá mostrarse en el stand de la NWFA para dar a conocer el proyecto e invitar a otros a participar.\n\nEspera antes de enviar. Recibirás por separado las instrucciones personales cuando Jakko confirme el destino y el envío de tu panel.\n\nLa participación sigue abierta a todo el mundo. La aprobación del panel todavía no autoriza el envío ni garantiza una plaza en una Expo.\n\nEl proyecto tiene un final abierto. El lugar y la fecha para reunir todos los paneles, el viaje posterior y la donación final están por decidir.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "es",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Instrucciones personales de entrega de tu panel UWFL",
+        "text": "Hola Voorbeeld / Example,\n\nTu panel está aprobado para UWFL Pay It Forward. ¡Gracias por tu contribución!\n\nPanel: Voorbeeldpaneel / Example panel\nNúmero de participante: DEMO\nRegión: Américas, incluido Canadá\n\nPor ahora, la ruta de entrega a la NWFA Expo corresponde a paneles de las Américas, incluido Canadá. Una selección de paneles aprobados podrá mostrarse en el stand de la NWFA para dar a conocer el proyecto e invitar a otros a participar.\n\nTu panel ha sido seleccionado para la NWFA Expo. La entrega siguiente está confirmada para tu panel.\n\nDestino: Américas, incluido Canadá\n[Ejemplo: la dirección privada se incluye solo en el correo personal]\n\nInstrucciones personales:\n[Ejemplo: acuerdos de embalaje y entrega confirmados personalmente]\n\nSi cambia el país donde se encuentra tu panel o tienes alguna duda, contacta mediante la app antes de enviarlo.\n\nEl proyecto tiene un final abierto. El lugar y la fecha para reunir todos los paneles, el viaje posterior y la donación final están por decidir.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "es",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": true
+      }
+    },
+    "other": {
+      "waiting": {
+        "subject": "Tu panel está aprobado para UWFL",
+        "text": "Hola Voorbeeld / Example,\n\nTu panel está aprobado para UWFL Pay It Forward. ¡Gracias por tu contribución!\n\nPanel: Voorbeeldpaneel / Example panel\nNúmero de participante: DEMO\nRegión: Otros países y regiones\n\nTambién puedes participar desde otros países. La recogida, el transporte y las posibles presentaciones locales se acordarán por región. Espera tus instrucciones personales; aún no existe una ruta general de entrega para estos países.\n\nEspera antes de enviar. Recibirás por separado las instrucciones personales cuando Jakko confirme el destino y el envío de tu panel.\n\nLa participación sigue abierta a todo el mundo. La aprobación del panel todavía no autoriza el envío ni garantiza una plaza en una Expo.\n\nEl proyecto tiene un final abierto. El lugar y la fecha para reunir todos los paneles, el viaje posterior y la donación final están por decidir.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "es",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Tu panel está aprobado para UWFL",
+        "text": "Hola Voorbeeld / Example,\n\nTu panel está aprobado para UWFL Pay It Forward. ¡Gracias por tu contribución!\n\nPanel: Voorbeeldpaneel / Example panel\nNúmero de participante: DEMO\nRegión: Otros países y regiones\n\nTambién puedes participar desde otros países. La recogida, el transporte y las posibles presentaciones locales se acordarán por región. Espera tus instrucciones personales; aún no existe una ruta general de entrega para estos países.\n\nEspera antes de enviar. Recibirás por separado las instrucciones personales cuando Jakko confirme el destino y el envío de tu panel.\n\nLa participación sigue abierta a todo el mundo. La aprobación del panel todavía no autoriza el envío ni garantiza una plaza en una Expo.\n\nEl proyecto tiene un final abierto. El lugar y la fecha para reunir todos los paneles, el viaje posterior y la donación final están por decidir.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "es",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      }
+    }
+  },
+  "it": {
+    "eu": {
+      "waiting": {
+        "subject": "Il tuo pannello è approvato per UWFL",
+        "text": "Ciao Voorbeeld / Example,\n\nIl tuo pannello è approvato per UWFL Pay It Forward. Grazie per il tuo contributo!\n\nPannello: Voorbeeldpaneel / Example panel\nNumero di partecipante: DEMO\nRegione: Unione europea (UE)\n\nI pannelli dell’UE vengono per ora raccolti tramite T&G Wood International. Il trasporto all’Expo negli Stati Uniti non è organizzato. Una possibile presentazione europea nel 2027 è in preparazione per mostrare questi pannelli e coinvolgere nuovi partecipanti e partner.\n\nAttendi ancora prima di spedire. Riceverai separatamente le istruzioni personali quando Jakko avrà confermato destinazione e spedizione del tuo pannello.\n\nLa partecipazione rimane aperta in tutto il mondo. L’approvazione del pannello non autorizza ancora la spedizione né garantisce un posto a un’Expo.\n\nIl progetto ha una durata aperta. Luogo e data per riunire tutti i pannelli, il viaggio successivo e la donazione finale sono ancora da definire.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "it",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Istruzioni personali di consegna del tuo pannello UWFL",
+        "text": "Ciao Voorbeeld / Example,\n\nIl tuo pannello è approvato per UWFL Pay It Forward. Grazie per il tuo contributo!\n\nPannello: Voorbeeldpaneel / Example panel\nNumero di partecipante: DEMO\nRegione: Unione europea (UE)\n\nI pannelli dell’UE vengono per ora raccolti tramite T&G Wood International. Il trasporto all’Expo negli Stati Uniti non è organizzato. Una possibile presentazione europea nel 2027 è in preparazione per mostrare questi pannelli e coinvolgere nuovi partecipanti e partner.\n\nLa consegna seguente è confermata per la raccolta del tuo pannello. Non è una selezione per l’Expo negli Stati Uniti.\n\nDestinazione: Unione europea (UE)\n[Esempio: l’indirizzo privato è inserito solo nell’e-mail personale]\n\nIstruzioni personali:\n[Esempio: accordi di imballaggio e consegna confermati personalmente]\n\nSe cambia il paese in cui si trova il pannello o qualcosa non è chiaro, contattaci tramite l’app prima di spedire.\n\nIl progetto ha una durata aperta. Luogo e data per riunire tutti i pannelli, il viaggio successivo e la donazione finale sono ancora da definire.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "it",
+        "region": "eu",
+        "origin": "NL",
+        "readyToShip": true
+      }
+    },
+    "americas": {
+      "waiting": {
+        "subject": "Il tuo pannello è approvato per UWFL",
+        "text": "Ciao Voorbeeld / Example,\n\nIl tuo pannello è approvato per UWFL Pay It Forward. Grazie per il tuo contributo!\n\nPannello: Voorbeeldpaneel / Example panel\nNumero di partecipante: DEMO\nRegione: Americhe, Canada compreso\n\nPer ora il percorso di consegna alla NWFA Expo riguarda i pannelli delle Americhe, Canada compreso. Una selezione di pannelli approvati potrà essere esposta nello stand NWFA per presentare il progetto e invitare altri a partecipare.\n\nAttendi ancora prima di spedire. Riceverai separatamente le istruzioni personali quando Jakko avrà confermato destinazione e spedizione del tuo pannello.\n\nLa partecipazione rimane aperta in tutto il mondo. L’approvazione del pannello non autorizza ancora la spedizione né garantisce un posto a un’Expo.\n\nIl progetto ha una durata aperta. Luogo e data per riunire tutti i pannelli, il viaggio successivo e la donazione finale sono ancora da definire.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "it",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Istruzioni personali di consegna del tuo pannello UWFL",
+        "text": "Ciao Voorbeeld / Example,\n\nIl tuo pannello è approvato per UWFL Pay It Forward. Grazie per il tuo contributo!\n\nPannello: Voorbeeldpaneel / Example panel\nNumero di partecipante: DEMO\nRegione: Americhe, Canada compreso\n\nPer ora il percorso di consegna alla NWFA Expo riguarda i pannelli delle Americhe, Canada compreso. Una selezione di pannelli approvati potrà essere esposta nello stand NWFA per presentare il progetto e invitare altri a partecipare.\n\nIl tuo pannello è stato selezionato per la NWFA Expo. La consegna seguente è confermata per il tuo pannello.\n\nDestinazione: Americhe, Canada compreso\n[Esempio: l’indirizzo privato è inserito solo nell’e-mail personale]\n\nIstruzioni personali:\n[Esempio: accordi di imballaggio e consegna confermati personalmente]\n\nSe cambia il paese in cui si trova il pannello o qualcosa non è chiaro, contattaci tramite l’app prima di spedire.\n\nIl progetto ha una durata aperta. Luogo e data per riunire tutti i pannelli, il viaggio successivo e la donazione finale sono ancora da definire.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "it",
+        "region": "americas",
+        "origin": "CA",
+        "readyToShip": true
+      }
+    },
+    "other": {
+      "waiting": {
+        "subject": "Il tuo pannello è approvato per UWFL",
+        "text": "Ciao Voorbeeld / Example,\n\nIl tuo pannello è approvato per UWFL Pay It Forward. Grazie per il tuo contributo!\n\nPannello: Voorbeeldpaneel / Example panel\nNumero di partecipante: DEMO\nRegione: Altri paesi e regioni\n\nPuoi partecipare anche da altri paesi. Raccolta, trasporto ed eventuali presentazioni locali saranno concordati per regione. Attendi le istruzioni personali: per questi paesi non esiste ancora un percorso generale di consegna.\n\nAttendi ancora prima di spedire. Riceverai separatamente le istruzioni personali quando Jakko avrà confermato destinazione e spedizione del tuo pannello.\n\nLa partecipazione rimane aperta in tutto il mondo. L’approvazione del pannello non autorizza ancora la spedizione né garantisce un posto a un’Expo.\n\nIl progetto ha una durata aperta. Luogo e data per riunire tutti i pannelli, il viaggio successivo e la donazione finale sono ancora da definire.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "it",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      },
+      "confirmed": {
+        "subject": "Il tuo pannello è approvato per UWFL",
+        "text": "Ciao Voorbeeld / Example,\n\nIl tuo pannello è approvato per UWFL Pay It Forward. Grazie per il tuo contributo!\n\nPannello: Voorbeeldpaneel / Example panel\nNumero di partecipante: DEMO\nRegione: Altri paesi e regioni\n\nPuoi partecipare anche da altri paesi. Raccolta, trasporto ed eventuali presentazioni locali saranno concordati per regione. Attendi le istruzioni personali: per questi paesi non esiste ancora un percorso generale di consegna.\n\nAttendi ancora prima di spedire. Riceverai separatamente le istruzioni personali quando Jakko avrà confermato destinazione e spedizione del tuo pannello.\n\nLa partecipazione rimane aperta in tutto il mondo. L’approvazione del pannello non autorizza ancora la spedizione né garantisce un posto a un’Expo.\n\nIl progetto ha una durata aperta. Luogo e data per riunire tutti i pannelli, il viaggio successivo e la donazione finale sono ancora da definire.\n\nUWFL Pay It Forward\nhttps://app.unitedwoodfloorlayers.com/#contact",
+        "lang": "it",
+        "region": "other",
+        "origin": "JP",
+        "readyToShip": false
+      }
+    }
+  }
+}

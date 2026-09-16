@@ -131,3 +131,43 @@ verwijzen naar de initiatiefnemer.
 Dit is nog steeds een ontwerpversie: de verplichte afbeeldingen en moderatie
 moeten bij de latere productie-integratie ook op de server en in het beheer
 worden gecontroleerd. De bestaande live app en haar gegevens zijn niet gewijzigd.
+
+
+## Groei per werelddeel en gezamenlijk samenbrengen
+
+- Elk werelddeel kan groeien met eigen lokale partners, inzameling en
+  toonmomenten. Die laten de panelen zien en betrekken nieuwe makers, sponsors,
+  organisaties en andere bijdragers. Het blijft één wereldwijd UWFL-project.
+- Het gezamenlijke doel is uiteindelijk alle panelen uit de hele wereld
+  fysiek samen te brengen tot één kunstwerk. Plaats en tijd zijn nog open.
+- Ook de verdere reis, uiteindelijke schenking en duur van het project hebben
+  nog geen vaste planning. De gezamenlijke paneelafspraken en het helpen van
+  drie mensen blijven overal gelden.
+- De NWFA-stand biedt ruimte voor een kickoff en presentatie. Het huidige
+  aanlevertraject geldt voor geselecteerde panelen uit de Amerika’s, Canada
+  inbegrepen. De bestaande Texas-planning 27–29 april 2027 blijft de werkdatum.
+- EU-panelen worden voorlopig verzameld via T&G Wood International. Transport
+  naar de Amerikaanse Expo is niet geregeld. Een mogelijk Europees toonmoment
+  in 2027 is in voorbereiding voor EU-panelen, om nieuwe mensen te betrekken.
+- Voor overige landen worden aanlevering en lokale mogelijkheden afzonderlijk
+  afgestemd. Er is geen automatische verwijzing naar een EU-inzameladres.
+- Aanmelden en goedgekeurd meedoen aan UWFL staan los van selectie voor één Expo.
+  Expo-deadlines zijn geen sluitingsdatum voor het hele project.
+
+## Privé verzendgegevens en mails per locatie
+
+- Verzendadressen, contactgegevens en persoonlijke aanleverafspraken staan
+  uitsluitend in persoonlijke mails, nooit in de openbare app of downloads.
+- Het huidige land waaruit het paneel wordt verzonden bepaalt de route,
+  samen met de bestemming die Jakko voor dat paneel bevestigt. Nationaliteit
+  of een oude registratieplaats mogen geen verkeerde verzendmail veroorzaken.
+- Alleen paneelgoedkeuring is geen verzendtoestemming. Eerst moeten bestemming
+  en verzending zijn bevestigd; voor Expo-aanlevering ook de selectie.
+- Bij ontbrekende of onbekende afspraken krijgt iemand een statusbericht en
+  wacht die op persoonlijke instructies. Er worden geen adressen gegokt.
+- EU-inzameling, Amerika’s/Expo en overige landen krijgen passende berichten
+  in de gekozen taal. Jakko moet de bedoelde route en instructies kunnen
+  controleren voordat echte verzending wordt vrijgegeven.
+- De nieuwe mailteksten en regioselectie worden eerst offline en met fictieve
+  voorbeelden beoordeeld. De bestaande externe mailverzending wordt pas bij
+  de latere productie-integratie aangesloten en getest.

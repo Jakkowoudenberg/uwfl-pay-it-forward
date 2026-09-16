@@ -27,13 +27,13 @@ and his reason for starting UWFL.
 
 ## Preview isolation
 
-All form submissions are deliberately simulated. No form performs a POST, PUT, PATCH or DELETE. The only network data access is GET to the public participants, sponsors, organisations and panels endpoints. There is no service-worker registration, admin UI, credential or serverless function in this folder. `noindex,nofollow` is applied in HTML, response headers and `robots.txt`.
+All form submissions are deliberately simulated. No form performs a POST, PUT, PATCH or DELETE. The app’s only external data access is GET to the public participants, sponsors, organisations and panels endpoints. The separate mail-review page reads a local JSON file containing fictional examples. There is no service-worker registration, admin UI, credential or serverless function in this folder. `noindex,nofollow` is applied in HTML, response headers and `robots.txt`.
 
 The separate Netlify draft preview is not password protected; its URL is an unindexed review link. Deployment uses `draft: true` and verifies that the published production deployment remains unchanged. The responsive QA page is `_qa.html`; it is separate from the app navigation.
 
 ## Preserved content
 
-`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. That file and the original project stories remain unchanged. The reader adjusts markup and internal navigation. The privacy page has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. Interface copy is in `assets/translations.js`, `assets/experience.js` and `assets/purpose.js`.
+`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. The original project stories and drawing remain unchanged. The outdated Expo, kickoff and news bodies are removed from this public source file; `assets/regional.js` supplies their current regional wording. This removal also keeps shipping addresses and contacts out of the public bundle. The reader adjusts markup and internal navigation. The privacy page has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. Interface copy is in `assets/translations.js`, `assets/experience.js`, `assets/purpose.js`, `assets/community.js` and `assets/regional.js`.
 
 The generic headline/diagram copy and the sponsor introduction are design proposals. Preserve the movement's inclusivity, the promise to help three people, equal recognition of sponsors and the artwork's eventual donation. Sponsors are not divided into payment tiers.
 
@@ -87,3 +87,48 @@ Makers are counted only when the existing registration type says Maker, case-ins
 There is no separate approved public media endpoint or structured media category in the current reads. The media tile therefore shows a dash and explains that media are not yet counted separately. It opens an explanatory empty state and a media-profile registration simulation, requiring a logo and Jakko's approval. Private press enquiries remain separate from that draft. Production integration must add an explicit media category/public read and reviewed submission handling before enabling this flow; no existing organisation is guessed to be a media partner from its name or free text.
 
 Failed reads remain unknown rather than becoming zero. The overview warns if results are partial, and available categories still work. Regression checks cover country aliases, combined totals, group/country links, stable order through filters, partial reads and media-draft isolation, in addition to the existing approval, image and no-write checks.
+
+## Regional growth and private delivery instructions
+
+Jakko clarified that each continent can grow through its own local partners,
+collection and presentations. A shared aim is to bring all panels together
+physically from around the world, then continue the journey and eventually
+make a donation. There is no fixed project end date or confirmed place/date
+for that global gathering.
+
+The homepage and visitor journey now explain four phases. The Expo/delivery
+page starts with three expandable regional routes, separates project approval
+from Expo selection, and keeps addresses/contact details out of every public
+asset. EU panels are collected through T&G; a possible European presentation
+in 2027 is in preparation to show EU panels and attract more people. There is
+no confirmed EU-to-US Expo transport. Other countries require individual
+arrangements. Expo deadlines are confined to the Americas Expo route.
+
+The existing, externally verified Texas dates (27–29 April 2027) are retained.
+Jakko mentioned 2026 once while supplying screenshots of the 2027 planning;
+the 2027 date was stated explicitly as the working assumption during this
+revision. Do not invent a separate completed 2026 kickoff.
+
+The upload simulation asks which country the panel will actually ship from.
+It shows the regional arrangements, keeps that choice on review, and never
+turns approval into permission to ship. The shared policy recognises ISO codes
+and names in the six languages. EU means the 27 EU countries; other European
+countries follow the individual-arrangements route.
+
+Mail concepts can be reviewed at `_mail-review.html` with fictional examples.
+They are generated from the pure server-side preparation module in
+`scripts/mail/approval-mail.cjs`; it sends nothing. Private destinations can
+only appear in a generated delivery message after a trusted, panel-specific
+admin decision confirms the current origin and correct destination. Americas
+Expo delivery additionally requires Expo selection. Unknown routes, missing
+shipping origin, pending panels or mismatched decisions never reveal addresses.
+
+The external Google Apps Script currently sends production mail. Its source
+and deployed templates are not present here. This revision does not claim to
+have changed or tested real delivery. The concrete integration requirements
+are recorded in `scripts/mail/HANDOVER.md` for activation after review.
+
+Regenerate with `node scripts/build-preview-press.cjs` and
+`node scripts/build-preview-mail.cjs`. Run `node scripts/check-regional.cjs`
+for offline country, mail and public-address checks. The existing UI checks
+also cover the updated articles, four-stage journey and shipping-country field.

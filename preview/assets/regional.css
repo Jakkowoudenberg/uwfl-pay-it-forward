@@ -1,0 +1,52 @@
+/* Regional arrangements are readable before the detailed Expo schedule. */
+.artwork-journey{grid-template-columns:repeat(4,minmax(0,1fr))}
+.journey-open-end{font-size:.88rem;color:var(--muted);line-height:1.7;margin-top:22px;max-width:920px}
+.journey-footer{display:flex;gap:20px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.journey-footer .text-link{font-size:.85rem;margin-top:16px}
+.logistics-page h2{font-size:1.65rem;line-height:1.3;letter-spacing:-.03em}
+.logistics-page p{line-height:1.75;color:var(--muted)}
+.regional-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:16px;margin-top:22px}
+.region-card{border:1px solid var(--line);border-radius:8px;background:var(--wash);min-width:0}
+.region-card summary{padding:21px 20px;align-items:flex-start;min-height:126px}
+.region-card summary strong{display:block;font-family:var(--display);font-size:1.12rem;line-height:1.4}
+.region-card summary small{display:block;font-size:.76rem;font-weight:500;color:var(--muted);line-height:1.6;margin-top:8px}
+.region-card>div{padding:0 20px 22px;font-size:.92rem}
+.region-card .text-link{font-size:.85rem;margin-top:18px}
+.private-delivery{display:flex;align-items:flex-start;gap:19px;margin-top:30px;padding:26px;background:#edf2e9;border-radius:8px;border:1px solid #d8e1d1}
+.private-delivery>.task-icon{flex-shrink:0;background:transparent}
+.private-delivery p{margin-top:13px;max-width:940px;font-size:.96rem}
+.delivery-principle{font-weight:550;color:#3d5940!important}
+.regional-expo,.regional-growth{margin-top:36px;padding-top:30px;border-top:1px solid var(--line)}
+.regional-expo>h2{margin-top:10px}.regional-expo>.expo-date{margin-top:9px;font-size:.92rem}
+.regional-expo>p:not(.expo-date),.regional-growth>p{max-width:990px;margin-top:18px;font-size:.96rem}
+.status-label{font-size:.7rem;line-height:1.5;letter-spacing:.06em;color:#466040;font-weight:650;text-transform:uppercase}
+.expo-schedule{margin-top:20px;border:1px solid var(--line);border-radius:8px}
+.expo-schedule>summary{padding:18px 20px;font-size:.92rem}
+.expo-schedule>div{padding:0 20px 20px;font-size:.92rem}
+.expo-schedule ul{padding-left:22px;margin:18px 0;line-height:1.7}.expo-schedule li+li{margin-top:12px}
+.regional-growth .journey-section{border:0;padding-top:0;margin-top:24px}
+.regional-growth .journey-heading,.regional-growth .journey-open-end,.regional-growth .journey-footer .text-link{display:none}
+.packing-note{margin-top:26px;border-top:1px solid var(--line)}
+.packing-note>div{padding-right:20px}.packing-note .text-link{margin-top:15px}
+.logistics-updated{font-size:.75rem;margin-top:25px}
+.regional-notice{padding:20px;border:1px solid var(--line);border-radius:8px;background:var(--wash);margin-bottom:24px}
+.regional-notice>strong{font-family:var(--display);font-size:1.05rem;line-height:1.4}
+.regional-notice>p{font-size:.91rem;line-height:1.75;margin-top:11px;color:var(--muted)}
+.regional-notice>.text-link{font-size:.85rem;margin-top:16px}
+.shipping-advice{padding:16px 18px;background:var(--wash);border-left:3px solid #899e7e;margin-top:20px;font-size:.86rem;line-height:1.7}
+.shipping-advice strong{font-size:.89rem}.shipping-advice p{margin-top:9px;color:var(--muted)}
+@media(max-width:1000px){.artwork-journey{grid-template-columns:repeat(2,minmax(0,1fr))}.region-card summary{padding:18px 16px}.region-card summary strong{font-size:1.02rem}}
+@media(max-width:700px){
+ .artwork-journey{grid-template-columns:1fr}
+ .logistics-page h2{font-size:1.3rem;line-height:1.4}
+ .regional-cards{grid-template-columns:1fr;gap:10px;margin-top:16px}
+ .region-card summary{min-height:0;padding:16px 18px}.region-card summary strong{font-size:1.05rem}.region-card summary small{font-size:.78rem;margin-top:5px}
+ .region-card>div{padding-inline:18px;font-size:.92rem}
+ .private-delivery{padding:21px 18px;margin-top:23px;gap:9px}.private-delivery>.task-icon{display:none}
+ .private-delivery p{font-size:.92rem;line-height:1.75;margin-top:13px}
+ .regional-expo,.regional-growth{margin-top:27px;padding-top:25px}
+ .regional-expo>p:not(.expo-date),.regional-growth>p{font-size:.93rem;margin-top:16px}
+ .expo-schedule>summary{font-size:.88rem;padding:16px}.expo-schedule>div{padding:0 16px 18px;font-size:.9rem}
+ .journey-footer{display:block}.journey-footer .text-link{margin-top:15px}
+ .regional-notice{padding:18px}.regional-notice>p{font-size:.91rem}
+}
