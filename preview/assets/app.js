@@ -18,7 +18,7 @@ function urlSafe(value){try{const u=new URL(value);return u.protocol==='https:'?
 function imageUrl(value){return urlSafe(value);}
 const button=(label,href,cls='')=>`<a class="button ${cls}" href="${href}">${label}${icon('arrow',18)}</a>`;
 const link=(label,href)=>`<a class="text-link" href="${href}">${label}${icon('arrow',18)}</a>`;
-const brand=()=>`<a class="brand" href="#home" aria-label="UWFL — Pay It Forward"><img src="assets/uwfl-logo.jpg" alt="" width="46" height="46"><span class="brand-name">UWFL<small>PAY IT FORWARD</small></span></a>`;
+const brand=()=>`<a class="brand" href="#home" aria-label="United Woodfloor Layers — Pay It Forward"><img src="assets/uwfl-logo.jpg" alt="" width="46" height="46"><span class="brand-name">United <span>Woodfloor Layers</span><small>PAY IT FORWARD</small></span></a>`;
 const topicHref=topic=>({join:'#join',makers:'#makers',help:'#help',about:'#about',visitors:'#visitors',deelnemers:'#community',landen:'#community',galerij:'#gallery',upload:'#upload',sponsors:'#partners',sponsorform:'#sponsor',orgs:'#organisations',orgform:'#organisation',panelidea:'#idea',contact:'#contact',suggestions:'#contact/suggestion',specs:'#drawing'}[topic]||'#read/'+topic);
 const topicLabel=topic=>({makers:t('audMakers'),help:t('audContributors'),about:t('whoBehind'),visitors:t('purposeMeaning')}[topic]||q(topic));
 const audiences=()=>[
