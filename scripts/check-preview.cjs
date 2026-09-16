@@ -4,7 +4,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const {JSDOM}=require(process.env.JSDOM_PATH||'jsdom');
 const root=path.resolve(__dirname,'../preview');
-const code=['content.js','translations.js','experience.js','app.js'].map(n=>fs.readFileSync(path.join(root,'assets',n),'utf8'));
+const code=['content.js','translations.js','experience.js','purpose.js','app.js'].map(n=>fs.readFileSync(path.join(root,'assets',n),'utf8'));
 const fixtures={
  participants:[1,2,3,4].map((n)=>({name:`Fictieve Testdeelnemer ${n}`,company:'QA voorbeeld',country:n%2?'NL':'US',type:n===1?'maker':'participant',message:'Fictief verhaal uitsluitend voor de offline test.',photo_url:'https://example.invalid/photo.jpg',participant_number:n})),
  sponsors:[1,2,3].map(n=>({company:`Fictieve Testsponsor ${n}`,country:'NL',logo_url:'https://example.invalid/logo.jpg',why:'Test',what:'Test'})),

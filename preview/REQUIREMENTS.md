@@ -56,6 +56,30 @@ uitgevoerd of getest.
   productie-integratie niet is voltooid.
 - De bestaande live app wordt pas vervangen na beoordeling en akkoord van Jakko.
 
+## De bedoeling direct zichtbaar
+
+Jakko heeft na het bekijken van de ontwerpversie de kern verder verduidelijkt:
+
+- De gezamenlijke kracht zit in samenwerking van de hele wereldwijde
+  houtenvloerenbranche: makers, fabrikanten, leveranciers, opleiders,
+  vakorganisaties en vakmedia. Iedereen blijft welkom, ook buiten de branche.
+- Houten panelen van afzonderlijke makers vormen samen één gezamenlijk
+  kunstwerk: One Artfloor.
+- Makers leren van elkaar, delen kennis en geven het ambacht door aan volgende
+  generaties.
+- Iedere deelnemer helpt drie mensen en vraagt hun die hulp verder door te geven.
+- Het kunstwerk reist eerst. Tijdens die reis toont de branche haar vakmanschap
+  en de kunstvorm in het ambacht, blijft zij mensen bij het project betrekken
+  en brengt zij het helpen van anderen onder de aandacht.
+- Pas na die reis is het doel schenking aan één of meerdere betekenisvolle
+  publieke locaties. De makers kunnen de vloer daar ook gezamenlijk leggen.
+  Het kunstwerk wordt nooit verkocht.
+- De eerste blik op de startpagina moet de concrete bedoeling én de gezamenlijke
+  ambitie begrijpelijk maken. De vijf bezoekersroutes blijven direct bereikbaar.
+- Mogelijke gezamenlijke impact wordt als ambitie uitgelegd. Geen verzonnen
+  resultaten, gegarandeerde aantallen geholpen mensen of claim dat de hele
+  branche al meedoet.
+
 ## Stand na de ontwerpverbeteringen
 
 De bekeken servercode schrijft nieuwe deelnemers, sponsors, organisaties en

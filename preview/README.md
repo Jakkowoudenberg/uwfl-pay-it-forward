@@ -10,6 +10,8 @@ and his reason for starting UWFL.
 ## Included
 
 - A homepage with five clear entrances: makers, sponsors, organisations, visitors and media. Jakko's portrait, credited to Cora Deutecom, an exact quote from his original story and a link to that story introduce the initiator.
+- The concrete project purpose comes before the entrances: make wooden panels into one artwork, learn and pass on craft, help three people, then travel and eventually donate. An ordered journey explains how showing the art in the craft, involving people and encouraging help remain central while travelling.
+- The visitor page explains the potential of the whole worldwide wood flooring industry working together, including manufacturers, suppliers, schools, associations and trade media. It describes ambitions rather than claiming that the whole industry already participates or inventing measured impact.
 - Separate visitor, help-without-a-panel and about pages. Each participant role can enter registration directly, while changing role remains possible.
 - Persistent audience navigation, including a bottom bar on mobile; a participant hub brings together the drawing, submission, guidelines, ideas and delivery information.
 - The information index searches complete article text as well as titles and common synonyms, with result snippets and links to frequently needed topics.
@@ -31,7 +33,7 @@ The separate Netlify draft preview is not password protected; its URL is an unin
 
 ## Preserved content
 
-`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. That file and the original project stories remain unchanged. The reader adjusts markup and internal navigation. The privacy page has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. New interface copy is in `assets/translations.js` and `assets/experience.js`.
+`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. That file and the original project stories remain unchanged. The reader adjusts markup and internal navigation. The privacy page has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. Interface copy is in `assets/translations.js`, `assets/experience.js` and `assets/purpose.js`.
 
 The generic headline/diagram copy and the sponsor introduction are design proposals. Preserve the movement's inclusivity, the promise to help three people, equal recognition of sponsors and the artwork's eventual donation. Sponsors are not divided into payment tiers.
 
@@ -63,3 +65,9 @@ This folder can be served by any static web server. It needs no package installa
 Jakko found the first design too long and hard to navigate. The homepage now introduces the project immediately and offers five audience entrances. Sponsors and organisations have separate pages; media gets prominent press-contact and gallery actions. A compact footer and expandable related topics replace long menus and the horizontally scrolling article navigation. These are preview-only interface changes, not backend changes.
 
 The draft has been reviewed at 320px, 390px, 768px and a desktop viewport. The five audience routes remain available in a fixed mobile bar, with extra room for long organisation labels. Public totals load from the existing read endpoint, without hardcoded fallback counts. The homepage prioritises the project explanation and entrances, followed by the initiator on mobile. The press ZIP has been downloaded and checked against its source archive. The production deployment remains unchanged.
+
+## Purpose revision after Jakko's clarification
+
+Jakko asked for the strength of the entire worldwide wood flooring industry to be clear alongside the practical purpose. The start now uses four visible points rather than relying on visitors opening articles. The audience entrances sit together below them, and retain their fixed mobile navigation. Jakko's founder feature remains on the start page.
+
+The journey order is explicit: make together, travel/show/involve people, and eventually donate after travelling. Makers may also lay the floor at the recipient location or locations. The work is never sold. Learning from each other, passing skills to younger generations and presenting the craft as art are reflected in the visitor, maker, organisation, sponsor and about pages, and in all six press sheets. The information search includes a direct result for the project purpose. These changes use Jakko's clarified intent; the original long-form stories have not been rewritten.

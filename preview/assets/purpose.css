@@ -1,0 +1,108 @@
+/* The project purpose comes first; every audience keeps a direct entrance. */
+.mission-home .welcome-grid{grid-template-areas:"intro founder" "choices choices";grid-template-columns:minmax(0,1.4fr) minmax(320px,1fr);column-gap:62px;row-gap:27px}
+.mission-home .welcome-intro h1{font-size:clamp(2.3rem,3.65vw,3.35rem);line-height:1.12;letter-spacing:-.045em}
+.mission-home .welcome-intro h1 span{display:block}
+.mission-home .welcome-intro>p{font-size:1rem;line-height:1.65;max-width:600px;margin-top:16px}
+.purpose-points{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:17px}
+.purpose-points li{display:flex;gap:13px;align-items:flex-start;min-width:0}
+.purpose-points li>.icon{flex-shrink:0;color:#54714f;margin-top:2px;width:21px;height:21px}
+.purpose-points strong{display:block;font-size:.97rem;line-height:1.4;font-weight:650;color:var(--ink)}
+.purpose-points p{font-size:.88rem;line-height:1.65;color:var(--muted);margin-top:3px;max-width:570px}
+.mission-home .welcome-choices{padding-top:23px;border-top:1px solid var(--line)}
+.mission-home .welcome-choices .audience-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.mission-home .welcome-choices .task-card,.mission-home .welcome-choices .task-card:last-child{grid-column:auto!important;min-height:88px;padding:13px 12px;gap:10px}
+.mission-home .welcome-choices .task-icon{width:30px;height:34px}
+.mission-home .welcome-choices .task-icon .icon{width:21px;height:21px}
+.mission-home .welcome-choices .task-card>.icon{display:none}
+.mission-home .welcome-choices .task-copy strong{font-size:.92rem}
+.mission-home .welcome-choices .task-copy small{font-size:.75rem;line-height:1.45}
+.mission-home .helper-entry{padding-block:11px}
+.mission-home .helper-entry>span{display:flex;align-items:baseline;gap:15px;flex-wrap:wrap}
+.mission-home .helper-entry small{margin:0}
+.mission-home .founder-story{padding:21px 24px 23px}
+.mission-home .founder-story blockquote{font-size:1.01rem;line-height:1.65}
+.journey-section{border-top:1px solid var(--line);margin-top:34px;padding-top:28px}
+.journey-heading{display:flex;align-items:baseline;justify-content:space-between;gap:22px}
+.journey-heading h2,.collective-section>h2{font-size:1.55rem;line-height:1.35;letter-spacing:-.03em;font-weight:650}
+.journey-heading .text-link{font-size:.8rem;flex-shrink:0}
+.artwork-journey{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:27px;margin:24px 0 0;padding:0}
+.artwork-journey li{min-width:0;border-top:2px solid #c7d1c0;padding-top:14px}
+.artwork-journey .journey-number{font-size:.7rem;color:#65765e;font-weight:650;letter-spacing:.08em}
+.artwork-journey h3{font-size:1.05rem;line-height:1.4;margin-top:8px;font-weight:650}
+.artwork-journey p{font-size:.87rem;line-height:1.75;margin-top:9px;color:var(--muted)}
+.gift-principle{display:flex;gap:9px;align-items:center;margin-top:20px;font-size:.8rem;color:#466040}
+.gift-principle .icon{flex-shrink:0}
+.collective-section{margin-top:34px;padding:28px;background:#f4f5ef;border:1px solid #dbe1d5;border-radius:8px}
+.collective-section>p{font-size:.95rem;line-height:1.8;color:var(--muted);max-width:940px;margin-top:15px}
+.collective-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:25px;padding-top:22px;border-top:1px solid #d4dccd}
+.collective-benefits h3{font-size:1rem;line-height:1.45;font-weight:650}
+.collective-benefits p{font-size:.88rem;line-height:1.75;color:var(--muted);margin-top:8px}
+.learning-note{display:flex;gap:13px;padding:17px 20px;border-left:3px solid #829677;background:#f4f6f0;border-radius:0 5px 5px 0;margin:0 0 27px;align-items:flex-start;font-size:.91rem;line-height:1.75;color:var(--muted)}
+.learning-note .icon{flex-shrink:0;color:#58764e;margin-top:3px}
+.group-examples+.learning-note{margin-top:20px}
+.about-principles .text-link{font-size:.85rem;margin-top:12px}
+@media(max-width:1190px){
+ .mission-home .welcome-grid{column-gap:34px;grid-template-columns:minmax(0,1.35fr) minmax(290px,1fr)}
+ .mission-home .welcome-intro h1{font-size:2.6rem}
+ .mission-home .welcome-choices .audience-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .mission-home .welcome-choices .task-card{min-height:74px}
+ .mission-home .welcome-choices .task-card>.icon{display:block;width:16px}
+ .journey-heading{display:block}.journey-heading .text-link{margin-top:13px}
+}
+@media(max-width:800px){
+ .mission-home .welcome-grid{grid-template-columns:1fr;grid-template-areas:"intro" "choices" "founder";row-gap:24px}
+ .mission-home .welcome-intro h1{font-size:2.65rem}
+ .mission-home .welcome-intro>p{max-width:650px}
+ .mission-home .welcome-choices{padding-top:21px}
+ .purpose-points{gap:15px}
+ .purpose-points p{max-width:650px}
+ .collective-benefits{gap:20px}
+}
+@media(max-width:700px){
+ .mission-home .welcome-intro h1{font-size:2rem;line-height:1.16;letter-spacing:-.045em}
+ .mission-home .welcome-intro .eyebrow{font-size:.57rem;margin-bottom:12px}
+ .mission-home .welcome-intro>p{font-size:.92rem;line-height:1.6;margin-top:14px}
+ .purpose-points{margin-top:20px;gap:15px}
+ .purpose-points li{gap:11px}
+ .purpose-points li>.icon{width:20px;height:20px}
+ .purpose-points strong{font-size:.94rem}
+ .purpose-points p{font-size:.86rem;line-height:1.6;margin-top:3px}
+ .mission-home .welcome-choices>h2{font-size:1rem}
+ .mission-home .welcome-choices .audience-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .mission-home .welcome-choices .task-card{min-height:54px;padding:11px 12px;gap:9px}
+ .mission-home .welcome-choices .task-card:last-child{grid-column:1/-1!important;min-height:54px}
+ .mission-home .welcome-choices .task-copy strong{font-size:.9rem;line-height:1.4}
+ .mission-home .welcome-choices .task-copy small{display:none}
+ .mission-home .welcome-choices .task-icon{width:26px;height:29px}
+ .mission-home .welcome-choices .task-icon .icon{width:19px;height:19px}
+ .mission-home .welcome-choices .task-card>.icon{display:none}
+ .mission-home .helper-entry>span{display:block}
+ .mission-home .helper-entry{padding:12px;margin-top:9px}
+ .mission-home .helper-entry strong{font-size:.86rem}
+ .mission-home .helper-entry small{font-size:.75rem;margin-top:3px}
+ .mission-home .founder-story{padding:21px}
+ .journey-section{margin-top:27px;padding-top:24px}
+ .journey-heading h2,.collective-section>h2{font-size:1.35rem;line-height:1.4}
+ .journey-heading .text-link{font-size:.84rem;line-height:1.6}
+ .artwork-journey{grid-template-columns:1fr;gap:21px;margin-top:21px}
+ .artwork-journey li{padding:0 0 0 17px;border-top:0;border-left:2px solid #b9c8b0}
+ .artwork-journey h3{font-size:1rem;margin-top:5px}
+ .artwork-journey p{font-size:.89rem;line-height:1.7;margin-top:7px}
+ .gift-principle{font-size:.81rem;line-height:1.6;align-items:flex-start;margin-top:21px}
+ .gift-principle .icon{margin-top:3px}
+ .collective-section{padding:21px 19px;margin-top:28px}
+ .collective-section>p{font-size:.93rem;line-height:1.75}
+ .collective-benefits{grid-template-columns:1fr;gap:21px;margin-top:20px;padding-top:20px}
+ .collective-benefits p{font-size:.9rem;line-height:1.75;margin-top:6px}
+ .learning-note{font-size:.9rem;padding:15px;gap:11px;line-height:1.7;margin-bottom:23px}
+}
+@media(max-width:370px){
+ .mission-home .welcome-intro h1{font-size:1.8rem}
+ .mission-home .welcome-choices .task-card{padding-inline:10px;gap:7px}
+ .mission-home .welcome-choices .task-icon{display:none}
+ .mission-home .welcome-choices .task-copy strong{font-size:.88rem}
+}
+
+.visitor-page .collective-section{margin-top:0}
+.visitor-page .visitor-tasks{margin-top:29px}
+.visitor-original{margin-top:22px;font-size:.86rem}

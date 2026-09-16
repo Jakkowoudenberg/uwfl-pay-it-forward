@@ -5,7 +5,7 @@ const vm=require('node:vm');
 const {execFileSync}=require('node:child_process');
 const root=path.resolve(__dirname,'../preview');
 const context={window:{}};vm.createContext(context);
-for(const name of ['content.js','translations.js','experience.js'])vm.runInContext(fs.readFileSync(path.join(root,'assets',name),'utf8'),context);
+for(const name of ['content.js','translations.js','experience.js','purpose.js'])vm.runInContext(fs.readFileSync(path.join(root,'assets',name),'utf8'),context);
 const {UWFL_UI:ui,UWFL_LOCALES:locales,UWFL_CONTENT:content}=context.window;
 const dir=path.join(root,'assets/press');fs.mkdirSync(dir,{recursive:true});
 const plain=s=>String(s).replace(/<br\s*\/?\s*>/gi,'\n').replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ');
@@ -15,7 +15,11 @@ for(const [i,lang] of locales.entries()){
  const quote=plain((body.match(/<p>[^<]*<strong>[^<]*<\/strong>[^<]*<\/p>/)||[''])[0]);
  const text=[
   'UNITED WOOD FLOOR LAYERS - PAY IT FORWARD',t('pressFactSheet'),
-  '',t('heroIntro'),'',t('answer2'),'',
+  '',t('heroIntro'),'',t('collectiveTitle'),t('collectiveIntro'),
+  ...['Knowledge','Reach','Craft'].flatMap(key=>['',t('collective'+key+'Title'),t('collective'+key+'Text')]),
+  '',t('journeyTitle'),
+  ...['Make','Travel','Gift'].flatMap((key,i)=>['',`${i+1}. ${t('journey'+key+'Title')}`,t('journey'+key+'Text')]),
+  '',t('neverSold'),'',
   'Jakko Woudenberg - '+t('founderRole'),quote,'',
   t('projectResponsibility'),'',t('plannedNext')+': '+t('expoPlace'),t('expoDate'),
   '',t('answer4'),'',t('moderationText'),'',t('equalVisibility'),
