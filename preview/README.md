@@ -33,7 +33,7 @@ The separate Netlify draft preview is not password protected; its URL is an unin
 
 ## Preserved content
 
-`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. The original project stories and drawing remain unchanged. The outdated Expo, kickoff and news bodies are removed from this public source file; `assets/regional.js` supplies their current regional wording. This removal also keeps shipping addresses and contacts out of the public bundle. The reader adjusts markup and internal navigation. The privacy page has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. Interface copy is in `assets/translations.js`, `assets/experience.js`, `assets/purpose.js`, `assets/community.js` and `assets/regional.js`.
+`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. The original project stories and drawing remain unchanged. The outdated Expo, kickoff and news bodies are removed from this public source file; `assets/regional.js` supplies their current regional wording. This removal also keeps shipping addresses and contacts out of the public bundle. The reader adjusts markup and internal navigation. The privacy page has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. Interface copy is in `assets/translations.js`, `assets/experience.js`, `assets/purpose.js`, `assets/community.js` `assets/regional.js` and `assets/panel-story.js`.
 
 The generic headline/diagram copy and the sponsor introduction are design proposals. Preserve the movement's inclusivity, the promise to help three people, equal recognition of sponsors and the artwork's eventual donation. Sponsors are not divided into payment tiers.
 
@@ -54,7 +54,7 @@ The generic headline/diagram copy and the sponsor introduction are design propos
 - Participant route with example details, back navigation, missing-photo feedback, local test image, review and simulated completion.
 - Sponsor enquiry with sample content and simulated confirmation.
 
-The 16 September revision additionally passes 210 offline route/language renders, seven full-content search checks, required-photo checks for all four participant roles, three partner-logo flows, the panel upload flow, private-enquiry isolation and visit-stable shuffle checks. Mocked server-function tests verify the four public queries request approved records. All preview network writes are blocked by the test harness; simulated submissions do not append public cards.
+The 16 September revision additionally passes 234 offline route/language renders, seven full-content search checks, required-photo checks for all four participant roles, three partner-logo flows, the panel upload flow, private-enquiry isolation and visit-stable shuffle checks. Mocked server-function tests verify the four public queries request approved records. All preview network writes are blocked by the test harness; simulated submissions do not append public cards.
 
 Run `JSDOM_PATH=/path/to/jsdom node scripts/check-preview.cjs` from the repository root. The optional QA dependency is kept outside the repository and is not needed to serve the preview. Regenerate the nine-file press archive with `node scripts/build-preview-press.cjs`; this uses Node and Python's standard ZIP library.
 
@@ -110,25 +110,44 @@ the 2027 date was stated explicitly as the working assumption during this
 revision. Do not invent a separate completed 2026 kickoff.
 
 The upload simulation asks which country the panel will actually ship from.
-It shows the regional arrangements, keeps that choice on review, and never
-turns approval into permission to ship. The shared policy recognises ISO codes
-and names in the six languages. EU means the 27 EU countries; other European
-countries follow the individual-arrangements route.
+It shows the regional arrangements and keeps that choice on review. Panel
+approval automatically produces the regional email with shipping details;
+there is no separate shipment-release approval. EU means the 27 EU countries;
+other European countries use individual country arrangements.
 
-Mail concepts can be reviewed at `_mail-review.html` with fictional examples.
-They are generated from the pure server-side preparation module in
-`scripts/mail/approval-mail.cjs`; it sends nothing. Private destinations can
-only appear in a generated delivery message after a trusted, panel-specific
-admin decision confirms the current origin and correct destination. Americas
-Expo delivery additionally requires Expo selection. Unknown routes, missing
-shipping origin, pending panels or mismatched decisions never reveal addresses.
+Mail concepts at `_mail-review.html` switch between a pending panel (no approval
+email) and an approved panel (the complete regional mail). The pure formatter in
+`scripts/mail/approval-mail.cjs` selects a private destination automatically.
+Expo selection only changes the selection information in the same email;
+32–36 panels fit on the stand. A missing country route produces a status update
+rather than an invented destination. All public examples are fictional.
 
 The external Google Apps Script currently sends production mail. Its source
-and deployed templates are not present here. This revision does not claim to
-have changed or tested real delivery. The concrete integration requirements
-are recorded in `scripts/mail/HANDOVER.md` for activation after review.
+and deployed templates are not present here. This revision does not change or
+test real delivery. Integration requirements are in `scripts/mail/HANDOVER.md`.
+The previous preview's separate shipping-release gate has been removed in
+accordance with Jakko's explicit correction.
+
+## Maker stories, meaning and materials
+
+The panel upload now has four steps: identification, the panel, the story and
+review. The panel step groups photos, wood species, pattern/technique, additional
+materials/finish and shipping country. A separate story step keeps the existing
+required story and adds optional prompts for motivation and design meaning.
+
+The review and gallery use the same story presentation: maker's story,
+motivation, meaning, then materials/craft. Empty optional sections are omitted
+and existing stories remain intact, including line breaks. User text is escaped.
+All of these fields are included in the approval explanation; no upload becomes
+public on submission. All new labels and hints are available in six languages.
+
+The draft mapping and production requirements are in `scripts/panels/HANDOVER.md`.
+No database migration or actual submission has taken place. The current backend
+still needs the new fields wired into storage, private review and approved-only
+public reads before production activation.
 
 Regenerate with `node scripts/build-preview-press.cjs` and
 `node scripts/build-preview-mail.cjs`. Run `node scripts/check-regional.cjs`
-for offline country, mail and public-address checks. The existing UI checks
-also cover the updated articles, four-stage journey and shipping-country field.
+for offline country, automatic approval mail and public-address checks. The UI
+checks cover four-step upload, back navigation, regional changes, new and legacy
+stories, escaping, moderation and all 234 route/language combinations.

@@ -1,0 +1,12 @@
+.panel-form-section{margin:28px 0 0;padding:26px 0 0;border:0;border-top:1px solid var(--line);min-width:0}
+.panel-form-section legend{float:left;width:100%;padding:0;font-family:var(--display);font-size:1.15rem;font-weight:650}
+.panel-form-section legend+.field,.panel-form-section legend+.field-row{clear:both;padding-top:1px}
+.panel-story-details{margin:32px 0}
+.panel-story-section{margin:0 0 30px}
+.panel-story-section h2,.panel-craft h2{font-family:var(--display);font-size:1.3rem;line-height:1.35;margin:0 0 12px}
+.panel-story-section p,.panel-craft dd,.panel-review dd{white-space:pre-wrap;overflow-wrap:anywhere}
+.panel-story-section p{margin:0}
+.panel-craft{padding:25px;background:var(--wash,#f3f5f0);border:1px solid var(--line);border-radius:8px;margin:28px 0}
+.panel-craft .review-list{margin:0}
+.panel-craft .review-list dt,.panel-craft .review-list dd{min-width:0}
+@media(max-width:700px){.panel-craft{padding:20px}.panel-form-section{margin-top:24px;padding-top:22px}.panel-story-section h2,.panel-craft h2{font-size:1.2rem}}

@@ -1,65 +1,71 @@
-# Regional mail handover — not connected to production
+# Automatic regional approval mail — prepared, not connected to production
 
-Jakko asked for regional collection and shipping instructions to remain private,
-with different messages for the Americas, the EU and other countries. The
-approved development approach remains: prepare and review first, activate later.
+Jakko clarified the workflow: **one panel approval automatically sends the maker
+one email with the shipping details for their region**. There is no separate
+shipment-release approval. Expo selection is distinct because the NWFA booth
+has room for 32–36 panels; it must not block the automatic approval email.
 
 ## Ready to review
 
-- `approval-mail.cjs` builds six-language approval/status emails and separately
-  released delivery instructions. It never sends mail or changes a record.
-- `preview/assets/shipping-policy.js` is shared by the upload preview and this
-  renderer. EU means the 27 EU member states. European countries outside the EU
-  follow the other-regions route until Jakko makes an arrangement for them.
-  ISO codes, country names in the six app languages and common aliases are
-  handled. Unknown countries safely receive a status update without an address.
-- `build-preview-mail.cjs` exports the reviewed regional wording and generates
-  strictly fictional examples at `preview/_mail-review.html`. No live recipient,
-  address book or provider credential is used.
-- The upload preview asks explicitly where the panel will be shipped from.
-  That choice takes precedence over nationality, the maker's registration
-  country and the country where the panel was originally made.
-- `check-regional.cjs` tests country mapping, languages, regional boundaries,
-  pending panels, separate Expo selection, origin/panel mismatches, missing
-  decisions and private-address release. It makes no external requests.
+- `approval-mail.cjs` formats the complete approval email in six languages.
+  `buildApprovalMail(approvedPanel, privateDestinations)` selects the regional
+  destination immediately. Pending/rejected panels return no approval email.
+  It never sends mail or changes a record.
+- The private configuration has `eu` and `americas` destinations, each with a
+  matching `region`, `name`, `address` and `instructions`. Include the actual
+  contact and packing/delivery details in `instructions`. No addresses are
+  stored in this repository or the public preview.
+- `privateDestinations.countries` can supply an agreed destination by ISO
+  country code for other countries. There is no worldwide default destination.
+  Without a route the approval still generates an automatic status email,
+  explaining that the maker should wait for delivery instructions.
+- The actual shipping country takes precedence over `country_made`. For legacy
+  records without that new field, `country_made` retains the current fallback.
+  Nationality and registration country do not override the shipping country.
+  An unrecognised explicit origin does not silently fall back to an old country.
+- `expo_selected` only affects the selection information included for an
+  Americas maker. False or missing selection never prevents the regional mail
+  or implies that an approved panel has a guaranteed place on the Expo stand.
+- Shared country policy lives in `preview/assets/shipping-policy.js`. EU means
+  its 27 member states. It recognises those and Americas names in six languages,
+  ISO country codes and common aliases. Other European countries follow the
+  other-regions route until a country-specific arrangement is configured.
+- `_mail-review.html` contains fictional examples, switching between pending
+  and approved. Approval immediately shows the regional instructions; no second
+  approval control exists. `check-regional.cjs` verifies this without sending.
 
-## Current system observed in the repository
+## Existing production sender
 
-`netlify/functions/panel-approve.js` patches a panel's status, then calls an
-external Google Apps Script with `type: panel_approved`, a language and a region.
-The region is derived from `country_made`, with a limited list of country names.
-It treats several non-EU European countries as EU and misses ISO codes and
-some translations. The actual mail templates and recipient-side delivery are
-outside this repository and have not been inspected or changed.
+`netlify/functions/panel-approve.js` already patches panel status and calls an
+external Google Apps Script with `type: panel_approved`. Its old country mapping
+is incomplete. The actual email templates and delivery code are outside this
+repository and have not been inspected or changed. Its demonstrated payload
+contains metadata, not a supported `subject`/`text` template contract.
 
-Do not assume the Google script accepts a new `subject`, `text` or shipping
-decision field: its current contract only demonstrates the existing payload.
-No POST to that script was made. The old backend and live mail behavior are
-unchanged by this preview.
+No POST to that service has been made. The production app and sender are
+unchanged; formatter tests do not prove email receipt or live approval behavior.
 
-## Before activating the reviewed version
+## Integration after design review
 
-1. Store a panel's explicit shipping country, separately from `country_made`.
-   Validate it on the server and show it in Jakko's authenticated panel review.
-   A legacy `country_made` value may choose a status message, but must not
-   release a shipping address without confirmation of the current origin.
-2. Keep project approval, Expo selection and shipment release separate. Build
-   the mail only from trusted server-side approval and review records. The
-   renderer is a formatter, not an authentication or authorisation boundary.
-3. Keep destinations and contacts in private server configuration/storage, never
-   in the public bundle, repository examples, public API or downloadable kit.
-   A released destination must match the panel, its verified current origin and
-   the region. EU releases are collection instructions. An Americas Expo release
-   additionally requires explicit selection for that Expo. No route is inferred
-   for other countries.
-4. Integrate the reviewed subject/body into the existing private Google script
-   after its source and deployment access are available, or into a separately
-   authorised sender. Preserve the current sender and recipients unless Jakko
-   authorises a change. Do not send test emails to real participants.
-5. In a test environment, verify authenticated approval, persisted decisions,
-   the provider response, retries without duplicate sends and receipt at an
-   authorised test mailbox. A failed database approval must not produce an
-   approval mail. A failed send must remain visible for follow-up.
-6. Only after Jakko approves the new app and mail behavior should production be
-   connected. No migration, outbound mail or live deployment is part of this
-   design-preview revision.
+1. Persist `shipping_country` with the submitted panel. Display it in the
+   authenticated review alongside photos, story, why, meaning and materials.
+   Missing route configuration is visible to the administrator, not solved by
+   inventing an address or introducing another maker approval step.
+2. Keep the existing administrator authentication. After successful database
+   approval, automatically queue exactly one regional approval email using
+   the saved panel, verified recipient and private destination configuration.
+   Do not trust status, destination, selection or recipient overrides from
+   an unauthenticated browser. A failed database update must not send a mail.
+3. Keep addresses and contacts in private server configuration/storage. The
+   public panel endpoint must not expose them, `shipping_country`, recipient
+   email, queue details or other private delivery metadata.
+4. Integrate the formatter with the existing private Google script once its
+   source and deployment access are available, or an explicitly authorised
+   sender. Do not assume it accepts a new payload. Preserve the intended sender
+   and recipient. No test messages to real participants.
+5. Test automatic dispatch, successful delivery to an authorised test mailbox,
+   retries without duplicate sends, and visible failure status in staging.
+   Changing Expo selection is not a second panel approval and must not send
+   another approval mail. A later route update is a distinct logistics update.
+6. Connect production only after the new app and mail behavior are reviewed.
+   This revision makes no migration, outbound send or production deployment.

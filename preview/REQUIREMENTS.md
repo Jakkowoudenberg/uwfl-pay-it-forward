@@ -154,20 +154,34 @@ worden gecontroleerd. De bestaande live app en haar gegevens zijn niet gewijzigd
 - Aanmelden en goedgekeurd meedoen aan UWFL staan los van selectie voor één Expo.
   Expo-deadlines zijn geen sluitingsdatum voor het hele project.
 
-## Privé verzendgegevens en mails per locatie
+## Privé verzendgegevens en automatische regiomails
 
 - Verzendadressen, contactgegevens en persoonlijke aanleverafspraken staan
   uitsluitend in persoonlijke mails, nooit in de openbare app of downloads.
-- Het huidige land waaruit het paneel wordt verzonden bepaalt de route,
-  samen met de bestemming die Jakko voor dat paneel bevestigt. Nationaliteit
-  of een oude registratieplaats mogen geen verkeerde verzendmail veroorzaken.
-- Alleen paneelgoedkeuring is geen verzendtoestemming. Eerst moeten bestemming
-  en verzending zijn bevestigd; voor Expo-aanlevering ook de selectie.
-- Bij ontbrekende of onbekende afspraken krijgt iemand een statusbericht en
-  wacht die op persoonlijke instructies. Er worden geen adressen gegokt.
-- EU-inzameling, Amerika’s/Expo en overige landen krijgen passende berichten
-  in de gekozen taal. Jakko moet de bedoelde route en instructies kunnen
-  controleren voordat echte verzending wordt vrijgegeven.
-- De nieuwe mailteksten en regioselectie worden eerst offline en met fictieve
-  voorbeelden beoordeeld. De bestaande externe mailverzending wordt pas bij
-  de latere productie-integratie aangesloten en getest.
+- Jakko's paneelgoedkeuring start automatisch de mail met verzendgegevens voor
+  de regio van de maker. Er is geen extra verzendgoedkeuring nodig.
+- Het huidige land waaruit het paneel wordt verstuurd bepaalt de route.
+  EU-panelen krijgen de T&G-inzamelinstructies, de Amerika’s hun eigen gegevens.
+- Voor landen zonder geregelde route volgt automatisch een bericht met de
+  stand van zaken. Er worden geen bestemmingen of adressen gegokt.
+- Selectie voor de NWFA Expo staat los van deze automatische mail. Er is
+  ruimte voor 32–36 panelen. Dat is de publieke uitleg voor de selectie.
+  De bestaande deelnamevoorwaarden en inhoudelijke beoordeling blijven gelden.
+- De automatische regiomail vervangt het eerdere ontwerp met een afzonderlijke
+  verzendvrijgave; die extra stap is door Jakko uitdrukkelijk vervallen.
+- De mailteksten en regioselectie worden eerst offline met fictieve voorbeelden
+  beoordeeld. De externe mailverzending wordt later aangesloten en getest.
+
+## Het verhaal bij ieder paneel
+
+- Makers kunnen hun verhaal, persoonlijke drijfveer, betekenis van het ontwerp,
+  houtsoorten, overige materialen, afwerking en gebruikte techniek toelichten.
+- Het bestaande verhaal blijft verplicht. De extra persoonlijke vragen zijn
+  optioneel; iedereen kiest zelf wat die wil delen.
+- Foto’s, tekst en toelichting worden samen door Jakko beoordeeld. Nieuwe of
+  gewijzigde inhoud wordt pas na goedkeuring openbaar.
+- Bij het paneel staan de ingevulde verhalen en materiaalgegevens leesbaar bij
+  elkaar. Bij oude panelen ontbreken geen verplichte nieuwe antwoorden: hun
+  bestaande tekst blijft intact en lege onderdelen worden niet getoond.
+- De upload heeft vier overzichtelijke stappen: gegevens, paneel, verhaal,
+  controleren. Teruggaan en een regio wijzigen mogen geen invoer verliezen.
