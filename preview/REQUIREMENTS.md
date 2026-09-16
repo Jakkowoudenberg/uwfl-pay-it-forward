@@ -90,6 +90,21 @@ Jakko heeft na het bekijken van de ontwerpversie de kern verder verduidelijkt:
 - De aanmelding gebruikt de bestaande rol `contributor`. De verplichte foto,
   goedkeuring door Jakko en gelijkwaardige zichtbaarheid gelden ook voor hen.
 
+## Overzicht per land en bijdrage
+
+- Het overzicht onderscheidt makers, sponsors, organisaties, bijdragers/helpers
+  en mediapartners. Vakorganisaties, scholen en opleidingen vallen onder organisaties.
+- Een landfilter werkt zowel op de groepsaantallen als op de bijbehorende profielen.
+  Verschillende schrijfwijzen van hetzelfde land tellen als één land.
+- De eigen aanmeldrol blijft zichtbaar op ieder persoonlijk profiel. De bestaande
+  rol Initiator wordt niet zonder besluit omgezet naar Maker.
+- Alleen gegevens uit de bestaande goedgekeurde publieke lijsten tellen mee.
+  Een onbekend aantal of een laadfout wordt niet als nul gepresenteerd.
+- Media kunnen bijdragen door over het project te vertellen, publiceren of uitzenden.
+  Zij krijgen een eigen profielroute met verplicht logo en goedkeuring door Jakko.
+  In de ontwerpversie is die route een simulatie. Voor livegang is een expliciete
+  mediacategorie en bijbehorende goedgekeurde openbare gegevensbron nodig.
+
 ## Stand na de ontwerpverbeteringen
 
 De bekeken servercode schrijft nieuwe deelnemers, sponsors, organisaties en
