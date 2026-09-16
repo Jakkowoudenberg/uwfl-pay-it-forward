@@ -41,12 +41,16 @@ Reading the code tells you what the app says. It does not tell you why. So:
 
 ## How the code is organised
 
-- Almost everything lives in one large file: `index.html` (~740 KB).
+- The reviewed interface lives in `preview/`. `scripts/build-production.cjs`
+  builds the live app into `dist/` and enables real forms with `production.js`.
+  The original large `index.html` is retained as historical source and is not
+  deployed. Read `RELEASE.md` for the active storage and mail boundaries.
 - Serverless functions are in `netlify/functions/`.
-- Six languages: **EN, NL, ES, FR, DE, IT**. Each has its own block inside the
-  `LANG` object, containing `ql` labels (the quick-link buttons) and `cards`
-  (the info panels).
-- Beyond those six, the app machine-translates the interface on demand.
+- Shared function logic is in `netlify/lib/`. Schema migrations are in
+  `supabase/migrations/`; new images remain private until a reviewer approves.
+- Six languages: **EN, NL, ES, FR, DE, IT**. Existing articles are in
+  `preview/assets/content.js`; shared labels and the focused additions live
+  in the neighboring JavaScript files. Keep all six translations complete.
 - The admin panel (key button) is the moderation queue for new sign-ups. It
   authenticates against a shared `ADMIN_KEY` environment variable.
 

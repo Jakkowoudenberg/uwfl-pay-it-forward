@@ -28,4 +28,9 @@
     Cache-Control = "public, max-age=86400"
 
 [build]
+  command = "node scripts/build-production.cjs"
+  publish = "dist"
   functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
