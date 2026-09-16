@@ -5,6 +5,8 @@ fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
 const excluded=new Set(['qa.js','qa.css','mail-review.js','mail-review.css','mail-examples.json']);
 function copy(dir,target){fs.mkdirSync(target,{recursive:true});for(const entry of fs.readdirSync(dir,{withFileTypes:true})){if(excluded.has(entry.name))continue;const src=path.join(dir,entry.name),dest=path.join(target,entry.name);if(entry.isDirectory())copy(src,dest);else fs.copyFileSync(src,dest);}}
 copy(path.join(source,'assets'),path.join(out,'assets'));
+// Responsive review tools exist only on a Netlify deploy preview.
+if(process.env.CONTEXT==='deploy-preview'){fs.copyFileSync(path.join(source,'_qa.html'),path.join(out,'_qa.html'));for(const file of ['qa.js','qa.css'])fs.copyFileSync(path.join(source,'assets',file),path.join(out,'assets',file));}
 const version=crypto.createHash('sha256').update(fs.readFileSync(path.join(out,'assets/app.js'))).update(fs.readFileSync(path.join(out,'assets/production.js'))).digest('hex').slice(0,12);
 for(const file of ['index.html','admin.html']){
  let html=fs.readFileSync(path.join(source,file),'utf8');

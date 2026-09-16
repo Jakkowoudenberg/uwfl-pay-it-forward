@@ -125,13 +125,13 @@ participant number, artwork name, first name, last name, company (if any), natio
 
 GALLERY OF FINISHED PANELS:
 - Makers upload their own finished panels: multiple photos (including process shots), the wood species, the pattern, and their story. It links to their participant number.
-- Nothing appears publicly until Jakko or Lenny approve it. Anyone can then browse all finished panels.
+- Nothing appears publicly until an authorised UWFL reviewer approves it. Anyone can then browse all finished panels.
 - To upload, a maker needs their participant number and the email they registered with (some early participants without an email on file can upload with just their number). The number is in their registration confirmation email; if they don't have it, they can reach us via the contact form.
 
 SPONSORS:
 - Companies can sign up to support the movement. Core principle: EQUALITY, exactly like the makers — no gold/silver/bronze tiers, no one's logo bigger or higher than another's. The order reshuffles every time the app opens, so no one is ever permanently on top.
 - A sponsor contributes however they want — money, materials, services, knowledge. They tell what they contribute to the movement and the trade, NOT why people should buy their product.
-- Each sponsor is approved by Jakko or Lenny before appearing. Business contact details are shown publicly on their card. If someone wants to sponsor, they can sign up in the app or reach us via the contact form.
+- Each sponsor is approved by an authorised UWFL reviewer before appearing. Business contact details are shown publicly on their card. If someone wants to sponsor, they can sign up in the app or reach us via the contact form.
 
 TRADE BODIES / ORGANISATIONS (associations, guilds):
 - These are organisations that already CARRY the trade (like guilds and trade associations). This is about RECOGNITION and honour, not contribution — different from sponsors.
