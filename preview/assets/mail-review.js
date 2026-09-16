@@ -8,7 +8,7 @@
   const region=window.UWFL_SHIPPING.regionForCountry(country.value),message=examples[language.value][region][state.value];
   document.querySelector('article').lang=message?.lang||'nl';
   document.getElementById('mail-subject').textContent=message?.subject||'Er wordt nog geen goedkeuringsmail verstuurd';
-  document.getElementById('mail-body').textContent=message?.text||'Het paneel wacht op beoordeling door Jakko. Zodra hij het goedkeurt, volgt automatisch de mail voor de regio van de maker.';
+  document.getElementById('mail-body').textContent=message?.text||'Het paneel wacht op beoordeling door het UWFL-team. Zodra het is goedgekeurd, volgt automatisch de mail voor de regio van de maker.';
   document.getElementById('mail-status').textContent='Regio: '+({eu:'EU',americas:'Amerika’s, inclusief Canada',other:'overige / nog te bepalen'}[region])+' · '+(!message?'wacht op paneelgoedkeuring':message.readyToShip?'automatische goedkeuringsmail met verzendgegevens':'automatische goedkeuringsmail; aanleverroute nog niet beschikbaar');
  }
  document.getElementById('review-controls').addEventListener('submit',event=>event.preventDefault());

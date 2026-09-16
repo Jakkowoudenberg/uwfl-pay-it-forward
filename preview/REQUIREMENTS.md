@@ -4,10 +4,14 @@ Door Jakko bevestigd na de bezoekersaudit van 16 september 2026. Deze afspraken
 sturen de verdere bouw; dit bestand zegt niet dat de productie-integratie al is
 uitgevoerd of getest.
 
-## Eerst goedkeuring door Jakko
+## Eerst goedkeuring door het UWFL-team
 
+- Beoordeling, selectie en praktisch contact zijn taken van bevoegde UWFL-teamleden.
+  Ze zijn niet persoonlijk aan de initiatiefnemer gekoppeld en kunnen worden
+  overgedragen. De openbare teksten gebruiken neutrale proceswoorden of
+  “het UWFL-team”. Jakko blijft vermeld als initiatiefnemer.
 - Alle aanmeldingen van makers, overige deelnemers, sponsors en organisaties
-  wachten op handmatige goedkeuring door Jakko voordat zij in de app verschijnen.
+  wachten op handmatige goedkeuring door het UWFL-team voordat zij in de app verschijnen.
 - Ook alle paneelinzendingen, foto's en andere uploads wachten op goedkeuring.
   Een upload door een reeds goedgekeurde deelnemer is niet automatisch goedgekeurd.
 - Nieuwe of gewijzigde openbare inhoud mag de goedkeuringsstap niet overslaan.
@@ -88,7 +92,7 @@ Jakko heeft na het bekijken van de ontwerpversie de kern verder verduidelijkt:
   met vervoer, communicatie, fotografie, vertalen, kennis of tijd.
 - Ook iedere bijdrager helpt drie mensen en vraagt hun die hulp door te geven.
 - De aanmelding gebruikt de bestaande rol `contributor`. De verplichte foto,
-  goedkeuring door Jakko en gelijkwaardige zichtbaarheid gelden ook voor hen.
+  goedkeuring door het UWFL-team en gelijkwaardige zichtbaarheid gelden ook voor hen.
 
 ## Overzicht per land en bijdrage
 
@@ -101,7 +105,7 @@ Jakko heeft na het bekijken van de ontwerpversie de kern verder verduidelijkt:
 - Alleen gegevens uit de bestaande goedgekeurde publieke lijsten tellen mee.
   Een onbekend aantal of een laadfout wordt niet als nul gepresenteerd.
 - Media kunnen bijdragen door over het project te vertellen, publiceren of uitzenden.
-  Zij krijgen een eigen profielroute met verplicht logo en goedkeuring door Jakko.
+  Zij krijgen een eigen profielroute met verplicht logo en goedkeuring door het UWFL-team.
   In de ontwerpversie is die route een simulatie. Voor livegang is een expliciete
   mediacategorie en bijbehorende goedgekeurde openbare gegevensbron nodig.
 
@@ -158,7 +162,7 @@ worden gecontroleerd. De bestaande live app en haar gegevens zijn niet gewijzigd
 
 - Verzendadressen, contactgegevens en persoonlijke aanleverafspraken staan
   uitsluitend in persoonlijke mails, nooit in de openbare app of downloads.
-- Jakko's paneelgoedkeuring start automatisch de mail met verzendgegevens voor
+- Paneelgoedkeuring door het UWFL-team start automatisch de mail met verzendgegevens voor
   de regio van de maker. Er is geen extra verzendgoedkeuring nodig.
 - Het huidige land waaruit het paneel wordt verstuurd bepaalt de route.
   EU-panelen krijgen de T&G-inzamelinstructies, de Amerika’s hun eigen gegevens.
@@ -178,7 +182,7 @@ worden gecontroleerd. De bestaande live app en haar gegevens zijn niet gewijzigd
   houtsoorten, overige materialen, afwerking en gebruikte techniek toelichten.
 - Het bestaande verhaal blijft verplicht. De extra persoonlijke vragen zijn
   optioneel; iedereen kiest zelf wat die wil delen.
-- Foto’s, tekst en toelichting worden samen door Jakko beoordeeld. Nieuwe of
+- Foto’s, tekst en toelichting worden samen door het UWFL-team beoordeeld. Nieuwe of
   gewijzigde inhoud wordt pas na goedkeuring openbaar.
 - Bij het paneel staan de ingevulde verhalen en materiaalgegevens leesbaar bij
   elkaar. Bij oude panelen ontbreken geen verplichte nieuwe antwoorden: hun

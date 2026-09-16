@@ -24,13 +24,13 @@ nl:{
  euText:'EU-panelen worden voorlopig verzameld via T&G Wood International. Transport naar de Amerikaanse Expo is nog niet geregeld. Een mogelijk Europees toonmoment in 2027 is in voorbereiding: om EU-panelen te tonen, het project bekend te maken en nieuwe deelnemers en partners te betrekken.',
  otherText:'Ook vanuit andere landen kun je meedoen. Verzameling, vervoer en mogelijke lokale toonmomenten stemmen we per regio af. Wacht op persoonlijke instructies; er is nog geen algemene aanleverroute voor deze landen.',
  expoIntro:'We hebben ruimte gekregen in de NWFA-stand om panelen te tonen en UWFL onder de aandacht te brengen. Dit is een kickoff en een uitnodiging om mee te doen. Het project groeit daarna verder, met een open einde.',
- expoSelection:"In de NWFA-stand is ruimte voor 32–36 panelen. Daarom selecteren Jakko en Lenny op basis van de ingestuurde foto’s welke goedgekeurde panelen hier worden getoond. Ook zonder plek op deze Expo blijft jouw goedgekeurde paneel onderdeel van UWFL.",
+ expoSelection:"In de NWFA-stand is ruimte voor 32–36 panelen. Daarom selecteert het UWFL-team op basis van de ingestuurde foto’s welke goedgekeurde panelen hier worden getoond. Ook zonder plek op deze Expo blijft jouw goedgekeurde paneel onderdeel van UWFL.",
  expoSchedule:'Huidige planning voor het Amerikaanse Expo-traject',
  photoDeadline:'31 januari 2027 · paneelfoto’s ingestuurd voor beoordeling en selectie',
  arrivalDeadline:"25 maart 2027 · uiterste ontvangst voor het Expo-traject; volg de verzendinstructies uit je persoonlijke mail",
  expoDatesNote:'Deze data gelden voor dit Expo-traject. Het zijn geen einddata voor UWFL of voor deelname vanuit andere regio’s.',
  privateTitle:'Verzendgegevens ontvang je persoonlijk',
- privateText:"Zodra Jakko je paneel goedkeurt, ontvang je automatisch een e-mail met het verzendadres, contactgegevens en aanleverinstructies voor jouw regio. Deze gegevens staan nooit openbaar. Is er voor jouw land nog geen aanleverroute geregeld, dan krijg je automatisch bericht over de vervolgstappen en wacht je met verzenden.",
+ privateText:"Zodra je paneel is goedgekeurd, ontvang je automatisch een e-mail met het verzendadres, contactgegevens en aanleverinstructies voor jouw regio. Deze gegevens staan nooit openbaar. Is er voor jouw land nog geen aanleverroute geregeld, dan krijg je automatisch bericht over de vervolgstappen en wacht je met verzenden.",
  shippingCountry:'Vanuit welk land lever je het paneel aan?',
  shippingCountryHelp:'Kies het land waar het paneel zich bevindt wanneer je het gaat versturen. Hiermee stemmen we de instructies af. Een land kiezen is nog geen toestemming om te verzenden.',
  shippingReview:'Aanleverroute',
@@ -45,7 +45,7 @@ nl:{
  answer4:'UWFL heeft geen vaste einddatum. De huidige Expo-planning geldt voor geselecteerde panelen uit de Amerika’s. EU-panelen worden verzameld via T&G; een mogelijk Europees toonmoment in 2027 is in voorbereiding. Bekijk de afspraken voor jouw regio en wacht op persoonlijke verzendinstructies.',
  regionalRead:'Bekijk de plannen per regio',
  contactTransport:'Help mee met vervoer, opslag of een toonmoment',
- contactTransportText:'Kun jij in jouw regio ruimte, vervoer of een netwerk bieden? Bespreek met Jakko hoe je kunt bijdragen.'
+ contactTransportText:'Kun jij in jouw regio ruimte, vervoer of een netwerk bieden? Bespreek met het UWFL-team hoe je kunt bijdragen.'
 },
 en:{
  regionalTitle:'Growing across continents. One shared artwork.',
@@ -69,13 +69,13 @@ en:{
  euText:'EU panels are currently being collected through T&G Wood International. Transport to the US Expo has not been arranged. A possible European presentation in 2027 is in preparation: to show EU panels, introduce the project and involve new participants and partners.',
  otherText:'You can also take part from other countries. Collection, transport and possible local presentations will be agreed region by region. Wait for personal instructions; there is no general delivery route for these countries yet.',
  expoIntro:'We have been given space in the NWFA booth to show panels and introduce UWFL. This is a kickoff and an invitation to take part. The project will continue to grow with an open end.',
- expoSelection:"The NWFA booth has room for 32–36 panels. Jakko and Lenny therefore select which approved panels will be shown, based on submitted photographs. Your approved panel remains part of UWFL even without a place at this Expo.",
+ expoSelection:"The NWFA booth has room for 32–36 panels. The UWFL team therefore selects which approved panels will be shown, based on submitted photographs. Your approved panel remains part of UWFL even without a place at this Expo.",
  expoSchedule:'Current schedule for the Americas Expo route',
  photoDeadline:'31 January 2027 · panel photographs submitted for review and selection',
  arrivalDeadline:"25 March 2027 · latest arrival for the Expo route; follow the shipping instructions in your personal email",
  expoDatesNote:'These dates apply to this Expo route. They are not closing dates for UWFL or for participation from other regions.',
  privateTitle:'Delivery details are sent to you personally',
- privateText:"As soon as Jakko approves your panel, you automatically receive an email with the shipping address, contact details and delivery instructions for your region. These details are never public. If a delivery route has not yet been arranged for your country, you automatically receive an update about the next steps and wait before shipping.",
+ privateText:"As soon as your panel is approved, you automatically receive an email with the shipping address, contact details and delivery instructions for your region. These details are never public. If a delivery route has not yet been arranged for your country, you automatically receive an update about the next steps and wait before shipping.",
  shippingCountry:'Which country will you ship your panel from?',
  shippingCountryHelp:'Choose the country where the panel will be when you send it. This helps us tailor the instructions. Selecting a country does not authorise shipment.',
  shippingReview:'Delivery route',
@@ -90,7 +90,7 @@ en:{
  answer4:'UWFL has no fixed end date. The current Expo schedule applies to selected panels from the Americas. EU panels are collected through T&G; a possible European presentation in 2027 is in preparation. Check the arrangements for your region and wait for personal shipping instructions.',
  regionalRead:'Explore the regional plans',
  contactTransport:'Help with transport, storage or a presentation',
- contactTransportText:'Can you offer space, transport or a network in your region? Discuss with Jakko how you could contribute.'
+ contactTransportText:'Can you offer space, transport or a network in your region? Discuss with the UWFL team how you could contribute.'
 },
 de:{
  regionalTitle:'Auf allen Kontinenten wachsen. Ein gemeinsames Kunstwerk.',
@@ -114,13 +114,13 @@ de:{
  euText:'EU-Paneele werden zunächst über T&G Wood International gesammelt. Der Transport zur Expo in den USA ist noch nicht organisiert. Eine mögliche europäische Präsentation im Jahr 2027 wird vorbereitet, um EU-Paneele zu zeigen und neue Teilnehmende und Partner zu gewinnen.',
  otherText:'Auch aus anderen Ländern kannst du teilnehmen. Sammlung, Transport und mögliche lokale Präsentationen stimmen wir je Region ab. Warte auf persönliche Hinweise; für diese Länder gibt es noch keinen allgemeinen Lieferweg.',
  expoIntro:'Wir haben Platz am NWFA-Stand erhalten, um Paneele zu zeigen und UWFL vorzustellen. Dies ist ein Auftakt und eine Einladung zum Mitmachen. Das Projekt wächst danach mit offenem Ende weiter.',
- expoSelection:"Im NWFA-Stand ist Platz für 32–36 Paneele. Deshalb wählen Jakko und Lenny anhand der eingereichten Fotos aus, welche freigegebenen Paneele dort gezeigt werden. Auch ohne Platz auf dieser Expo bleibt dein freigegebenes Paneel Teil von UWFL.",
+ expoSelection:"Im NWFA-Stand ist Platz für 32–36 Paneele. Deshalb wählt das UWFL-Team anhand der eingereichten Fotos aus, welche freigegebenen Paneele dort gezeigt werden. Auch ohne Platz auf dieser Expo bleibt dein freigegebenes Paneel Teil von UWFL.",
  expoSchedule:'Aktueller Zeitplan für den Expo-Lieferweg aus Amerika',
  photoDeadline:'31. Januar 2027 · Paneelfotos zur Prüfung und Auswahl eingereicht',
  arrivalDeadline:"25. März 2027 · spätester Eingang für das Expo-Verfahren; beachte die Versandhinweise in deiner persönlichen E-Mail",
  expoDatesNote:'Diese Termine gelten für diesen Expo-Lieferweg. Sie sind keine Endtermine für UWFL oder für die Teilnahme aus anderen Regionen.',
  privateTitle:'Lieferdaten erhältst du persönlich',
- privateText:"Sobald Jakko dein Paneel freigibt, erhältst du automatisch eine E-Mail mit Versandadresse, Kontaktdaten und Lieferhinweisen für deine Region. Diese Angaben sind nie öffentlich. Gibt es für dein Land noch keinen geregelten Lieferweg, erhältst du automatisch eine Nachricht zu den nächsten Schritten und wartest mit dem Versand.",
+ privateText:"Sobald dein Paneel freigegeben ist, erhältst du automatisch eine E-Mail mit Versandadresse, Kontaktdaten und Lieferhinweisen für deine Region. Diese Angaben sind nie öffentlich. Gibt es für dein Land noch keinen geregelten Lieferweg, erhältst du automatisch eine Nachricht zu den nächsten Schritten und wartest mit dem Versand.",
  shippingCountry:'Aus welchem Land wirst du dein Paneel versenden?',
  shippingCountryHelp:'Wähle das Land, in dem sich dein Paneel beim Versand befindet. Daran passen wir die Hinweise an. Die Auswahl eines Landes ist noch keine Versandfreigabe.',
  shippingReview:'Lieferweg',
@@ -135,7 +135,7 @@ de:{
  answer4:'UWFL hat kein festes Enddatum. Der aktuelle Expo-Zeitplan gilt für ausgewählte Paneele aus Amerika. EU-Paneele werden über T&G gesammelt; eine mögliche europäische Präsentation 2027 wird vorbereitet. Prüfe die Vereinbarungen für deine Region und warte auf persönliche Versandhinweise.',
  regionalRead:'Regionale Pläne ansehen',
  contactTransport:'Bei Transport, Lagerung oder Präsentationen helfen',
- contactTransportText:'Kannst du in deiner Region Raum, Transport oder Kontakte anbieten? Besprich mit Jakko, wie du beitragen kannst.'
+ contactTransportText:'Kannst du in deiner Region Raum, Transport oder Kontakte anbieten? Besprich mit dem UWFL-Team, wie du beitragen kannst.'
 },
 fr:{
  regionalTitle:'Grandir sur chaque continent. Une œuvre commune.',
@@ -159,13 +159,13 @@ fr:{
  euText:'Les panneaux de l’UE sont actuellement collectés par T&G Wood International. Le transport vers l’Expo américaine n’est pas organisé. Une éventuelle présentation européenne en 2027 est en préparation pour montrer ces panneaux et mobiliser de nouveaux participants et partenaires.',
  otherText:'Vous pouvez aussi participer depuis d’autres pays. La collecte, le transport et les éventuelles présentations locales seront convenus par région. Attendez vos consignes personnelles ; aucun acheminement général n’est encore prévu pour ces pays.',
  expoIntro:'La NWFA nous a accordé un espace sur son stand pour montrer des panneaux et faire connaître UWFL. C’est un lancement et une invitation à participer. Le projet continuera ensuite à grandir sans date de fin fixée.',
- expoSelection:"Le stand NWFA peut accueillir 32 à 36 panneaux. Jakko et Lenny choisissent donc les panneaux validés qui y seront présentés à partir des photos reçues. Même sans place à cette Expo, votre panneau validé reste dans le projet UWFL.",
+ expoSelection:"Le stand NWFA peut accueillir 32 à 36 panneaux. L’équipe UWFL choisit donc les panneaux validés qui y seront présentés à partir des photos reçues. Même sans place à cette Expo, votre panneau validé reste dans le projet UWFL.",
  expoSchedule:'Calendrier actuel pour l’acheminement des Amériques vers l’Expo',
  photoDeadline:'31 janvier 2027 · photos des panneaux soumises à validation et sélection',
  arrivalDeadline:"25 mars 2027 · réception au plus tard pour le parcours Expo ; suivez les consignes d’expédition de votre e-mail personnel",
  expoDatesNote:'Ces dates concernent cet acheminement vers l’Expo. Elles ne constituent pas une date de fin pour UWFL ou pour la participation depuis d’autres régions.',
  privateTitle:'Les coordonnées de livraison vous sont communiquées personnellement',
- privateText:"Dès que Jakko valide votre panneau, vous recevez automatiquement un e-mail avec l’adresse, les coordonnées et les consignes de livraison pour votre région. Ces informations ne sont jamais publiques. Si aucun acheminement n’est encore prévu pour votre pays, vous recevez automatiquement des informations sur la suite et attendez avant d’expédier.",
+ privateText:"Dès que votre panneau est validé, vous recevez automatiquement un e-mail avec l’adresse, les coordonnées et les consignes de livraison pour votre région. Ces informations ne sont jamais publiques. Si aucun acheminement n’est encore prévu pour votre pays, vous recevez automatiquement des informations sur la suite et attendez avant d’expédier.",
  shippingCountry:'Depuis quel pays expédierez-vous votre panneau ?',
  shippingCountryHelp:'Choisissez le pays où se trouvera le panneau au moment de l’envoi. Nous adapterons les consignes en conséquence. Choisir un pays n’autorise pas l’expédition.',
  shippingReview:'Acheminement',
@@ -180,7 +180,7 @@ fr:{
  answer4:'UWFL n’a pas de date de fin fixée. Le calendrier actuel de l’Expo concerne des panneaux sélectionnés des Amériques. Les panneaux de l’UE sont collectés par T&G ; une éventuelle présentation européenne en 2027 est en préparation. Consultez les dispositions régionales et attendez vos consignes personnelles.',
  regionalRead:'Découvrir les projets par région',
  contactTransport:'Aider au transport, au stockage ou à une présentation',
- contactTransportText:'Pouvez-vous proposer un espace, du transport ou un réseau dans votre région ? Échangez avec Jakko sur votre contribution.'
+ contactTransportText:'Pouvez-vous proposer un espace, du transport ou un réseau dans votre région ? Échangez avec l’équipe UWFL sur votre contribution.'
 },
 es:{
  regionalTitle:'Crecer en cada continente. Una obra compartida.',
@@ -204,13 +204,13 @@ es:{
  euText:'Los paneles de la UE se recogen por ahora a través de T&G Wood International. El transporte a la Expo estadounidense no está organizado. Se prepara una posible presentación europea en 2027 para mostrar estos paneles y atraer nuevos participantes y colaboradores.',
  otherText:'También puedes participar desde otros países. La recogida, el transporte y las posibles presentaciones locales se acordarán por región. Espera tus instrucciones personales; aún no existe una ruta general de entrega para estos países.',
  expoIntro:'Tenemos espacio en el stand de la NWFA para mostrar paneles y dar a conocer UWFL. Es un lanzamiento y una invitación a participar. El proyecto seguirá creciendo sin una fecha de finalización fijada.',
- expoSelection:"El estand de la NWFA tiene espacio para 32–36 paneles. Por eso, Jakko y Lenny seleccionan qué paneles aprobados se mostrarán a partir de las fotos recibidas. Tu panel aprobado sigue formando parte de UWFL aunque no tenga espacio en esta Expo.",
+ expoSelection:"El estand de la NWFA tiene espacio para 32–36 paneles. Por eso, el equipo de UWFL selecciona qué paneles aprobados se mostrarán a partir de las fotos recibidas. Tu panel aprobado sigue formando parte de UWFL aunque no tenga espacio en esta Expo.",
  expoSchedule:'Calendario actual de la ruta de las Américas a la Expo',
  photoDeadline:'31 de enero de 2027 · fotos de los paneles presentadas para revisión y selección',
  arrivalDeadline:"25 de marzo de 2027 · recepción máxima para la ruta Expo; sigue las instrucciones de envío de tu correo personal",
  expoDatesNote:'Estas fechas corresponden a esta ruta de la Expo. No son fechas de cierre de UWFL ni de participación desde otras regiones.',
  privateTitle:'Recibirás los datos de entrega personalmente',
- privateText:"En cuanto Jakko apruebe tu panel, recibirás automáticamente un correo con la dirección, los datos de contacto y las instrucciones de entrega para tu región. Estos datos nunca son públicos. Si aún no hay una ruta de entrega para tu país, recibirás automáticamente información sobre los siguientes pasos y esperarás antes de enviar.",
+ privateText:"En cuanto se apruebe tu panel, recibirás automáticamente un correo con la dirección, los datos de contacto y las instrucciones de entrega para tu región. Estos datos nunca son públicos. Si aún no hay una ruta de entrega para tu país, recibirás automáticamente información sobre los siguientes pasos y esperarás antes de enviar.",
  shippingCountry:'¿Desde qué país enviarás tu panel?',
  shippingCountryHelp:'Elige el país donde estará el panel al enviarlo. Así adaptaremos las instrucciones. Elegir un país no autoriza el envío.',
  shippingReview:'Ruta de entrega',
@@ -225,7 +225,7 @@ es:{
  answer4:'UWFL no tiene una fecha de finalización fija. El calendario actual de la Expo corresponde a paneles seleccionados de las Américas. Los paneles de la UE se recogen a través de T&G; se prepara una posible presentación europea en 2027. Consulta los acuerdos regionales y espera tus instrucciones personales.',
  regionalRead:'Consulta los planes por región',
  contactTransport:'Ayuda con transporte, almacenamiento o una presentación',
- contactTransportText:'¿Puedes ofrecer espacio, transporte o contactos en tu región? Habla con Jakko sobre cómo contribuir.'
+ contactTransportText:'¿Puedes ofrecer espacio, transporte o contactos en tu región? Habla con el equipo de UWFL sobre cómo contribuir.'
 },
 it:{
  regionalTitle:'Crescere in ogni continente. Un’opera comune.',
@@ -249,13 +249,13 @@ it:{
  euText:'I pannelli dell’UE vengono per ora raccolti tramite T&G Wood International. Il trasporto all’Expo negli Stati Uniti non è organizzato. Una possibile presentazione europea nel 2027 è in preparazione per mostrare questi pannelli e coinvolgere nuovi partecipanti e partner.',
  otherText:'Puoi partecipare anche da altri paesi. Raccolta, trasporto ed eventuali presentazioni locali saranno concordati per regione. Attendi le istruzioni personali: per questi paesi non esiste ancora un percorso generale di consegna.',
  expoIntro:'Abbiamo ricevuto spazio nello stand NWFA per mostrare i pannelli e presentare UWFL. È un lancio e un invito a partecipare. Il progetto continuerà a crescere senza una data finale stabilita.',
- expoSelection:"Lo stand NWFA può ospitare 32–36 pannelli. Jakko e Lenny scelgono quindi quali pannelli approvati esporre in base alle foto ricevute. Il tuo pannello approvato resta parte di UWFL anche senza un posto a questa Expo.",
+ expoSelection:"Lo stand NWFA può ospitare 32–36 pannelli. Il team UWFL sceglie quindi quali pannelli approvati esporre in base alle foto ricevute. Il tuo pannello approvato resta parte di UWFL anche senza un posto a questa Expo.",
  expoSchedule:'Programma attuale del percorso dalle Americhe all’Expo',
  photoDeadline:'31 gennaio 2027 · foto dei pannelli inviate per valutazione e selezione',
  arrivalDeadline:"25 marzo 2027 · ricezione entro questa data per il percorso Expo; segui le istruzioni di spedizione della tua e-mail personale",
  expoDatesNote:'Queste date riguardano questo percorso dell’Expo. Non sono scadenze finali per UWFL o per partecipare da altre regioni.',
  privateTitle:'Riceverai personalmente i dati per la consegna',
- privateText:"Appena Jakko approva il tuo pannello, ricevi automaticamente un’e-mail con l’indirizzo, i contatti e le istruzioni di consegna per la tua regione. Questi dati non sono mai pubblici. Se per il tuo paese non è ancora previsto un percorso di consegna, ricevi automaticamente informazioni sui prossimi passi e attendi prima di spedire.",
+ privateText:"Appena il tuo pannello viene approvato, ricevi automaticamente un’e-mail con l’indirizzo, i contatti e le istruzioni di consegna per la tua regione. Questi dati non sono mai pubblici. Se per il tuo paese non è ancora previsto un percorso di consegna, ricevi automaticamente informazioni sui prossimi passi e attendi prima di spedire.",
  shippingCountry:'Da quale paese spedirai il pannello?',
  shippingCountryHelp:'Scegli il paese in cui si troverà il pannello al momento della spedizione. Adatteremo le istruzioni di conseguenza. Scegliere un paese non autorizza la spedizione.',
  shippingReview:'Percorso di consegna',
@@ -270,7 +270,7 @@ it:{
  answer4:'UWFL non ha una data finale fissa. Il programma attuale dell’Expo riguarda pannelli selezionati delle Americhe. I pannelli dell’UE vengono raccolti tramite T&G; una possibile presentazione europea nel 2027 è in preparazione. Consulta gli accordi regionali e attendi le istruzioni personali.',
  regionalRead:'Scopri i programmi per regione',
  contactTransport:'Aiuta con trasporto, deposito o una presentazione',
- contactTransportText:'Puoi offrire spazi, trasporto o contatti nella tua regione? Parla con Jakko di come contribuire.'
+ contactTransportText:'Puoi offrire spazi, trasporto o contatti nella tua regione? Parla con il team UWFL di come contribuire.'
 }
 };
 for(const key of Object.keys(copy.nl))window.UWFL_UI[key]=window.UWFL_LOCALES.map(lang=>copy[lang][key]);

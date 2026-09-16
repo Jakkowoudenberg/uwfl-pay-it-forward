@@ -37,7 +37,7 @@ nl:{
  groupLearningText:'Verbind ervaren makers met leerlingen en studenten. Deel kennis en betrek jullie netwerk bij het kunstwerk én het helpen van mensen.',
  heroIntro:'UWFL nodigt de wereldwijde houtenvloerenbranche uit om samen één kunstwerk van houten panelen te maken. Makers leren van elkaar en geven vakmanschap door. Iedere deelnemer belooft drie mensen te helpen en vraagt hun die hulp verder door te geven.',
  answer2:'Het kunstwerk is bedoeld om eerst internationaal te reizen en te groeien. Tijdens die reis laten we de kunst in ons ambacht zien en blijven we mensen betrekken bij het project en bij het helpen van anderen. Na de reis is het doel schenking aan één of meer betekenisvolle publieke locaties, waar de makers de vloer ook samen kunnen leggen. Het kunstwerk wordt nooit verkocht.',
- partnerIntro:'Met materiaal, vervoer, kennis of financiële steun help je de hele branche samen één kunstwerk te maken, vakmanschap te delen en mensen te helpen. Bespreek met Jakko hoe jouw bijdrage kan aansluiten.',
+ partnerIntro:'Met materiaal, vervoer, kennis of financiële steun help je de hele branche samen één kunstwerk te maken, vakmanschap te delen en mensen te helpen. Bespreek met het UWFL-team hoe jouw bijdrage kan aansluiten.',
  organisationIntro:'Breng jouw school, vereniging of vakorganisatie samen met makers uit de hele branche. Geef kennis door en betrek jullie netwerk bij het kunstwerk en bij het helpen van anderen.'
 },
 en:{
@@ -74,7 +74,7 @@ en:{
  groupLearningText:'Connect experienced makers with pupils and students. Share knowledge and involve your network in the artwork and in helping people.',
  heroIntro:'UWFL invites the worldwide wood flooring industry to create one shared artwork from wooden panels. Makers learn from each other and pass their craft on. Every participant promises to help three people and asks them to pass that help on.',
  answer2:'The artwork is intended to travel internationally and grow first. Along that journey, we show the art in our craft and keep involving people in the project and in helping others. After the journey, the aim is to donate it to one or more meaningful public locations, where the makers could also lay the floor together. The artwork will never be sold.',
- partnerIntro:'Materials, transport, knowledge or financial support can help the whole industry create one artwork, share its craft and help people. Discuss with Jakko how your contribution could fit.',
+ partnerIntro:'Materials, transport, knowledge or financial support can help the whole industry create one artwork, share its craft and help people. Discuss with the UWFL team how your contribution could fit.',
  organisationIntro:'Connect your school, association or trade organisation with makers across the industry. Pass on knowledge and involve your network in the artwork and in helping others.'
 },
 de:{
@@ -111,7 +111,7 @@ de:{
  groupLearningText:'Bringt erfahrene Handwerker mit Schülern und Studierenden zusammen. Teilt Wissen und beteiligt euer Netzwerk am Kunstwerk und an der Hilfe für andere.',
  heroIntro:'UWFL lädt die weltweite Holzfußbodenbranche ein, ein gemeinsames Kunstwerk aus Holzpaneelen zu schaffen. Die Mitwirkenden lernen voneinander und geben ihr Handwerk weiter. Alle Teilnehmenden versprechen, drei Menschen zu helfen, und bitten sie, diese Hilfe weiterzugeben.',
  answer2:'Das Kunstwerk soll zunächst international reisen und wachsen. Dabei zeigen wir die Kunst in unserem Handwerk und beziehen immer wieder Menschen in das Projekt und die Hilfe für andere ein. Nach der Reise soll es an einen oder mehrere bedeutungsvolle öffentliche Orte verschenkt werden, wo die Mitwirkenden den Boden auch gemeinsam verlegen können. Das Kunstwerk wird niemals verkauft.',
- partnerIntro:'Mit Material, Transport, Wissen oder finanzieller Unterstützung hilfst du der ganzen Branche, ein Kunstwerk zu schaffen, ihr Handwerk zu teilen und Menschen zu helfen. Besprich mit Jakko, wie dein Beitrag passen kann.',
+ partnerIntro:'Mit Material, Transport, Wissen oder finanzieller Unterstützung hilfst du der ganzen Branche, ein Kunstwerk zu schaffen, ihr Handwerk zu teilen und Menschen zu helfen. Besprich mit dem UWFL-Team, wie dein Beitrag passen kann.',
  organisationIntro:'Verbindet eure Schule, euren Verein oder Fachverband mit Mitwirkenden aus der ganzen Branche. Gebt Wissen weiter und beteiligt euer Netzwerk am Kunstwerk und an der Hilfe für andere.'
 },
 fr:{
@@ -148,7 +148,7 @@ fr:{
  groupLearningText:'Reliez artisans expérimentés, élèves et étudiants. Partagez les connaissances et mobilisez votre réseau autour de l’œuvre et de l’entraide.',
  heroIntro:'UWFL invite la filière mondiale des sols en bois à créer une œuvre collective composée de panneaux en bois. Les créateurs apprennent les uns des autres et transmettent leur savoir-faire. Chaque participant promet d’aider trois personnes et leur demande de transmettre cette aide.',
  answer2:'L’œuvre est destinée à voyager à travers le monde et à grandir dans un premier temps. Ce voyage permet de montrer l’art de notre métier et de continuer à mobiliser les gens autour du projet et de l’entraide. Après le voyage, l’objectif est d’offrir l’œuvre à un ou plusieurs lieux publics porteurs de sens, où les créateurs pourront aussi poser le sol ensemble. L’œuvre ne sera jamais vendue.',
- partnerIntro:'Matériaux, transport, savoir-faire ou soutien financier : ta contribution peut aider toute la filière à créer une œuvre, transmettre son métier et aider les gens. Échange avec Jakko sur la place de ta contribution.',
+ partnerIntro:'Matériaux, transport, savoir-faire ou soutien financier : ta contribution peut aider toute la filière à créer une œuvre, transmettre son métier et aider les gens. Échange avec l’équipe UWFL sur la place de ta contribution.',
  organisationIntro:'Reliez votre école, association ou organisation professionnelle aux créateurs de toute la filière. Transmettez vos connaissances et mobilisez votre réseau autour de l’œuvre et de l’entraide.'
 },
 es:{
@@ -185,7 +185,7 @@ es:{
  groupLearningText:'Conectad a profesionales experimentados con alumnos y estudiantes. Compartid conocimientos e implicad a vuestra red en la obra y en la ayuda a otras personas.',
  heroIntro:'UWFL invita al sector mundial de los suelos de madera a crear una obra colectiva de paneles de madera. Los creadores aprenden entre sí y transmiten su oficio. Cada participante promete ayudar a tres personas y les pide que sigan transmitiendo esa ayuda.',
  answer2:'La obra está pensada para viajar internacionalmente y crecer primero. Durante ese viaje mostramos el arte de nuestro oficio y seguimos implicando a las personas en el proyecto y en la ayuda a los demás. Después del viaje, el objetivo es donarla a uno o más espacios públicos con significado, donde los creadores también podrán instalar el suelo juntos. La obra nunca se venderá.',
- partnerIntro:'Con materiales, transporte, conocimientos o apoyo económico ayudas a todo el sector a crear una obra, compartir su oficio y ayudar a las personas. Habla con Jakko sobre cómo puede encajar tu aportación.',
+ partnerIntro:'Con materiales, transporte, conocimientos o apoyo económico ayudas a todo el sector a crear una obra, compartir su oficio y ayudar a las personas. Habla con el equipo de UWFL sobre cómo puede encajar tu aportación.',
  organisationIntro:'Conectad vuestra escuela, asociación u organización profesional con creadores de todo el sector. Transmitid conocimientos e implicad a vuestra red en la obra y en la ayuda a los demás.'
 },
 it:{
@@ -222,7 +222,7 @@ it:{
  groupLearningText:'Mettete in contatto artigiani esperti, allievi e studenti. Condividete conoscenze e coinvolgete la vostra rete nell’opera e nell’aiuto alle persone.',
  heroIntro:'UWFL invita il settore mondiale dei pavimenti in legno a creare un’opera collettiva di pannelli in legno. Gli autori imparano gli uni dagli altri e trasmettono il mestiere. Ogni partecipante promette di aiutare tre persone e chiede loro di trasmettere quell’aiuto.',
  answer2:'L’opera è pensata per viaggiare nel mondo e crescere prima di essere donata. Durante il viaggio mostriamo l’arte del nostro mestiere e continuiamo a coinvolgere le persone nel progetto e nell’aiuto agli altri. Dopo il viaggio, l’obiettivo è donarla a uno o più luoghi pubblici significativi, dove gli autori potranno anche posare il pavimento insieme. L’opera non sarà mai venduta.',
- partnerIntro:'Con materiali, trasporto, conoscenze o sostegno economico aiuti l’intero settore a creare un’opera, condividere il mestiere e aiutare le persone. Parla con Jakko di come inserire il tuo contributo.',
+ partnerIntro:'Con materiali, trasporto, conoscenze o sostegno economico aiuti l’intero settore a creare un’opera, condividere il mestiere e aiutare le persone. Parla con il team UWFL di come inserire il tuo contributo.',
  organisationIntro:'Collegate la vostra scuola, associazione o organizzazione professionale agli autori di tutto il settore. Trasmettete conoscenze e coinvolgete la vostra rete nell’opera e nell’aiuto agli altri.'
 }
 };

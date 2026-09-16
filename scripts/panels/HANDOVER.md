@@ -2,7 +2,7 @@
 
 The four-step upload preview collects details, panel/photos/materials, the
 maker's story, and a final review. Every text and image remains subject to
-Jakko's approval. The extra personal prompts are optional; an existing story
+approval by an authorised UWFL reviewer. The extra personal prompts are optional; an existing story
 and the required panel photo are not replaced by new mandatory personal answers.
 
 | Preview field | Public panel field | Meaning |
@@ -33,7 +33,7 @@ breaks, remains unchanged; user text is escaped before HTML rendering.
 - Extend `panel-submit` to persist these fields in a **pending** record, with
   existing participant authentication and image checks. The current endpoint
   does not yet accept/persist these additional fields.
-- Include why/meaning/materials in Jakko's authenticated panel review. Include
+- Include why/meaning/materials in the authenticated UWFL panel review. Include
   them in the approved-only public panel projection after approval. Keep email,
   origin country and private shipping data out of that public response.
 - Later edits to text or photos must also wait for approval; do not overwrite

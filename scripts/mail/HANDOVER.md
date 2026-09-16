@@ -47,6 +47,10 @@ unchanged; formatter tests do not prove email receipt or live approval behavior.
 
 ## Integration after design review
 
+Approval and logistics are tasks for authorised UWFL team members and may be
+delegated. Do not tie the review workflow or mail text to the initiator’s name.
+Keep existing authentication; this copy revision grants no new access.
+
 1. Persist `shipping_country` with the submitted panel. Display it in the
    authenticated review alongside photos, story, why, meaning and materials.
    Missing route configuration is visible to the administrator, not solved by

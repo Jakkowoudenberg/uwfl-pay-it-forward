@@ -3,7 +3,7 @@
 This is a separate, interactive design preview requested by Jakko on 15 September 2026. The production `index.html`, Netlify functions and configuration are unchanged. Do not replace the live app with this folder until the design has been reviewed and production integration is completed.
 
 The confirmed requirements in [REQUIREMENTS.md](REQUIREMENTS.md) govern this
-revision: Jakko's approval before publication, mandatory participant photos and
+revision: approval by the UWFL team before publication, mandatory participant photos and
 partner logos, shuffled public profiles, and a visible place for the initiator
 and his reason for starting UWFL.
 
@@ -33,7 +33,7 @@ The separate Netlify draft preview is not password protected; its URL is an unin
 
 ## Preserved content
 
-`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. The original project stories and drawing remain unchanged. The outdated Expo, kickoff and news bodies are removed from this public source file; `assets/regional.js` supplies their current regional wording. This removal also keeps shipping addresses and contacts out of the public bundle. The reader adjusts markup and internal navigation. The privacy page has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. Interface copy is in `assets/translations.js`, `assets/experience.js`, `assets/purpose.js`, `assets/community.js` `assets/regional.js` and `assets/panel-story.js`.
+`assets/content.js` contains the existing `LANG`, `JOIN_TEXTS`, `BACKPANEL` and drawing definitions extracted from production commit `630b12f336cbd793d96b2cda9c0a7005602197ab`. The original project stories and drawing remain unchanged. The outdated Expo, kickoff and news bodies are removed from this public source file; `assets/regional.js` supplies their current regional wording. This removal also keeps shipping addresses and contacts out of the public bundle. The reader adjusts markup and internal navigation. The privacy access paragraph describes authorised UWFL reviewers instead of named individuals and retains the disclosure of access from the United States. The privacy page also has targeted rendering updates to reflect mandatory photos, explain moderation and distinguish private participant contact details from optional public partner fields. The drawing label parser splits actual newlines; dimensions and labels remain unchanged. Interface copy is in `assets/translations.js`, `assets/experience.js`, `assets/purpose.js`, `assets/community.js` `assets/regional.js` and `assets/panel-story.js`.
 
 The generic headline/diagram copy and the sponsor introduction are design proposals. Preserve the movement's inclusivity, the promise to help three people, equal recognition of sponsors and the artwork's eventual donation. Sponsors are not divided into payment tiers.
 
@@ -43,7 +43,7 @@ The generic headline/diagram copy and the sponsor introduction are design propos
 2. Map country codes, participant roles, photo uploads and form fields explicitly to the current schema. Do not change or migrate production records as a side effect of the visual redesign.
 3. Implement the initial sponsor enquiry as a private contact message, separate from any public sponsor profile. Confirm delivery handling before enabling it.
 4. Integrate the existing AI assistant into the new interface, then test its real error and loading states.
-5. Enforce required images and moderation on the server, including later uploads and public-profile changes. Verify submission, Jakko's approval and subsequent public visibility in a suitable test environment. Preview tests are not evidence that production persistence or current admin access has been verified. Existing approved records are not automatically hidden, changed or deleted.
+5. Enforce required images and moderation on the server, including later uploads and public-profile changes. Verify submission, approval by an authorised UWFL reviewer and subsequent public visibility in a suitable test environment. Preview tests are not evidence that production persistence or current admin access has been verified. Existing approved records are not automatically hidden, changed or deleted.
 6. Reconcile the current project dates/content and image credits before release. Keep the current app available until Jakko approves the replacement.
 
 ## Validation performed
@@ -84,7 +84,7 @@ The worldwide summary now separates makers, sponsors, organisations, contributor
 
 Makers are counted only when the existing registration type says Maker, case-insensitively. Other personal registrations appear under contributors/helpers, retaining their original role label: Contributor, Participant, Student or Initiator. Jakko is not silently reclassified as a maker. Organisations include trade bodies, associations and education; existing records are not assigned invented subtypes. People and organisations are shown in one shuffled list that stays stable while filtering and returning during the visit.
 
-There is no separate approved public media endpoint or structured media category in the current reads. The media tile therefore shows a dash and explains that media are not yet counted separately. It opens an explanatory empty state and a media-profile registration simulation, requiring a logo and Jakko's approval. Private press enquiries remain separate from that draft. Production integration must add an explicit media category/public read and reviewed submission handling before enabling this flow; no existing organisation is guessed to be a media partner from its name or free text.
+There is no separate approved public media endpoint or structured media category in the current reads. The media tile therefore shows a dash and explains that media are not yet counted separately. It opens an explanatory empty state and a media-profile registration simulation, requiring a logo and UWFL team approval. Private press enquiries remain separate from that draft. Production integration must add an explicit media category/public read and reviewed submission handling before enabling this flow; no existing organisation is guessed to be a media partner from its name or free text.
 
 Failed reads remain unknown rather than becoming zero. The overview warns if results are partial, and available categories still work. Regression checks cover country aliases, combined totals, group/country links, stable order through filters, partial reads and media-draft isolation, in addition to the existing approval, image and no-write checks.
 
@@ -151,3 +151,13 @@ Regenerate with `node scripts/build-preview-press.cjs` and
 for offline country, automatic approval mail and public-address checks. The UI
 checks cover four-step upload, back navigation, regional changes, new and legacy
 stories, escaping, moderation and all 234 route/language combinations.
+
+## Review and coordination belong to the UWFL team
+
+Approval, Expo selection and practical contact use neutral process wording or
+“the UWFL team” in all six languages. These tasks can be assigned to authorised
+reviewers and are not hardcoded to the initiator. The founder story, founder
+credit and photo credits remain unchanged. The automatic regional email still
+follows panel approval, and all public submissions still require review.
+This copy revision does not change permissions, create accounts or activate the
+production mail integration.

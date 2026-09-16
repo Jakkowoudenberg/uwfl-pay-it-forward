@@ -212,12 +212,12 @@ const copy={
   "Iscriviti come partner media"
  ],
  "mediaProfileIntro": [
-  "Vertel via welk medium je bijdraagt en hoe je UWFL onder de aandacht wilt brengen. Jouw profiel en logo verschijnen pas na goedkeuring door Jakko.",
-  "Tell us which medium you represent and how you would like to share UWFL. Your profile and logo appear only after Jakko approves them.",
-  "Erzähle uns, welches Medium du vertrittst und wie du UWFL bekannt machen möchtest. Dein Profil und Logo erscheinen erst nach Jakkos Freigabe.",
-  "Indiquez le média que vous représentez et comment vous souhaitez faire connaître UWFL. Votre profil et votre logo apparaissent après approbation par Jakko.",
-  "Indica qué medio representas y cómo quieres dar a conocer UWFL. Tu perfil y logo aparecen solo tras la aprobación de Jakko.",
-  "Indica quale mezzo rappresenti e come vuoi far conoscere UWFL. Il tuo profilo e logo compaiono solo dopo l’approvazione di Jakko."
+  "Vertel via welk medium je bijdraagt en hoe je UWFL onder de aandacht wilt brengen. Jouw profiel en logo verschijnen pas na goedkeuring.",
+  "Tell us which medium you represent and how you would like to share UWFL. Your profile and logo appear only after approval.",
+  "Erzähle uns, welches Medium du vertrittst und wie du UWFL bekannt machen möchtest. Dein Profil und Logo erscheinen erst nach Freigabe.",
+  "Indiquez le média que vous représentez et comment vous souhaitez faire connaître UWFL. Votre profil et votre logo apparaissent après approbation.",
+  "Indica qué medio representas y cómo quieres dar a conocer UWFL. Tu perfil y logo aparecen solo tras su aprobación.",
+  "Indica quale mezzo rappresenti e come vuoi far conoscere UWFL. Il tuo profilo e logo compaiono solo dopo l’approvazione."
  ],
  "mediaName": [
   "Naam van het medium",
