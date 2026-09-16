@@ -4,7 +4,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const {JSDOM}=require(process.env.JSDOM_PATH||'jsdom');
 const root=path.resolve(__dirname,'../preview');
-const code=['content.js','translations.js','admin-copy.js','experience.js','purpose.js','community.js','shipping-policy.js','regional.js','panel-story.js','app.js'].map(n=>fs.readFileSync(path.join(root,'assets',n),'utf8'));
+const code=['content.js','translations.js','admin-copy.js','social.js','experience.js','purpose.js','community.js','shipping-policy.js','regional.js','panel-story.js','app.js'].map(n=>fs.readFileSync(path.join(root,'assets',n),'utf8'));
 const fixtures={
  participants:[1,2,3,4].map((n)=>({name:`Fictieve Testdeelnemer ${n}`,company:'QA voorbeeld',country:n%2?'NL':'US',type:['Maker','Contributor','Participant','Initiator'][n-1],message:'Fictief verhaal uitsluitend voor de offline test.',photo_url:'https://example.invalid/photo.jpg',participant_number:n})),
  sponsors:[1,2,3].map(n=>({company:`Fictieve Testsponsor ${n}`,country:'Nederland',logo_url:'https://example.invalid/logo.jpg',why:'Test',what:'Test'})),
@@ -27,7 +27,7 @@ function selectImage(x,id,size=200){const input=x.d.getElementById(id);const fil
 function ensureReadOnly(x){assert(x.requests.every(r=>r.method==='GET'),'Preview attempted a mutation');}
 (async()=>{
  let routeChecks=0;
- const routes=['home','makers','visitors','help','about','partners','sponsor','organisations','organisation','media-partner','community','community?group=makers&country=NL','community?group=contributors','community?group=media','gallery','gallery/1','read/project','read/press','read/initiator','read/privacy','read/expo','read/kickoff','read/news','read/kunstwerk','read/regels','resources','drawing','panel','idea','join','join/maker','join/participant','join/contributor','join/student','upload','contact','contact/support','contact/organisation-support','contact/media'];
+ const routes=['home','makers','visitors','help','about','partners','sponsor','organisations','organisation','media-partner','community','community?group=makers&country=NL','community?group=contributors','community?group=media','gallery','gallery/1','read/project','read/share','read/press','read/initiator','read/privacy','read/expo','read/kickoff','read/news','read/kunstwerk','read/regels','resources','drawing','panel','idea','join','join/maker','join/participant','join/contributor','join/student','upload','contact','contact/support','contact/organisation-support','contact/media'];
  for(const lang of ['nl','en','de','fr','es','it']){
   const x=await create(lang);
   for(const [key,values] of Object.entries(x.w.UWFL_UI))assert(values.length===6&&values.every(v=>v!==undefined&&v!==''),`Incomplete translation: ${key}`);

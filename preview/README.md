@@ -223,3 +223,38 @@ management without horizontal overflow, and the footer key opening login at
 The existing production login endpoint returned 401 without a key and exposed
 the expected CORS headers; no real password was used to log in. The draft deploy
 was checked to leave the published production deployment unchanged.
+
+## Social channels for sharing and learning
+
+The footer now includes the existing UWFL Facebook group alongside Instagram
+and a direct link to Share your journey. The maker page links to the group next
+to the learning explanation; My panel links to both the group and the sharing
+guide. The homepage's returning-participant links also include Share your journey.
+
+Only the practical list in the Share your journey article is replaced during
+rendering. The original source stories remain unchanged. Two clearly labelled
+cards explain the channel roles in all six languages:
+
+- Instagram: makers, contributors, businesses, sponsors and organisations post
+  on their own account and invite `@unitedwoodfloorlayers` as a collaborator.
+  The UWFL team reviews the invitation; the post also appears on UWFL after
+  acceptance. This page does not promise automatic publication or send invites.
+- Facebook group: makers share panels and progress, ask technical questions
+  and exchange knowledge. The group URL is preserved from production markup:
+  `https://www.facebook.com/share/g/1A7TcWkA3R/`. Access or membership has not
+  been changed. External verification of the group was unavailable; no group
+  content, membership data or posts were accessed.
+
+The existing all-participants paragraph is explicitly labelled Instagram. The
+new note keeps social posting separate from registration and panel submission.
+Search includes the rendered instructions. All social links open externally
+with `noopener noreferrer`; no feeds, embeds or social SDKs have been added.
+
+The existing offline UI suite now includes the sharing route and passes 240
+route/language renders. Public form simulation, review requirements, profile
+shuffle, administration and the production source are unchanged by this revision.
+
+The sharing page was reviewed in the draft browser at desktop, 390px and
+320px. The mobile layouts fit without horizontal overflow. Button text contrast
+was corrected against the reader's inherited link colour. The production
+deployment remains unchanged.

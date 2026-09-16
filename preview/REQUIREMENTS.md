@@ -194,3 +194,18 @@ worden gecontroleerd. De bestaande live app en haar gegevens zijn niet gewijzigd
   bestaande tekst blijft intact en lege onderdelen worden niet getoond.
 - De upload heeft vier overzichtelijke stappen: gegevens, paneel, verhaal,
   controleren. Teruggaan en een regio wijzigen mogen geen invoer verliezen.
+
+## Instagram en de Facebookgroep
+
+- Instagram is voor makers, andere bijdragers, bedrijven, sponsors en
+  organisaties om zichzelf voor te stellen en hun bijdrage, paneel, verhaal of
+  voortgang te delen. Zij plaatsen op hun eigen account en nodigen
+  `@unitedwoodfloorlayers` uit als medebijdrager. Het UWFL-team beoordeelt de
+  uitnodiging; na acceptatie verschijnt de gezamenlijke post ook bij UWFL.
+- De Facebookgroep is bedoeld voor makers: werk en voortgang delen, technische
+  vragen stellen, tips uitwisselen en elkaar helpen. Gebruik de bestaande
+  groepslink uit de huidige app.
+- Beide kanalen zijn bereikbaar vanuit de footer. Makers vinden de groep ook
+  op hun eigen pagina en bij Mijn paneel. De praktische deeluitleg staat bij
+  Deel je reis, bereikbaar vanaf de startpagina en Mijn paneel.
+- Delen op sociale media vervangt de aanmelding of paneelinzending in de app niet.
