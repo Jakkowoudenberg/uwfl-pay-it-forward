@@ -31,9 +31,9 @@ for(const [i,lang] of locales.entries()){
 }
 fs.writeFileSync(path.join(dir,'CREDITS.txt'),[
  'UWFL Pay It Forward - press assets',
- '', 'Jakko-Woudenberg-Cora-Deutecom.jpg',
+ '', 'Jakko-Woudenberg-Bram-Belloni.jpg',
  'Jakko Woudenberg / Dutch Wood Artist with The Nightwatch in Wood.',
- 'Photograph: Cora Deutecom. Credit both the photographer and UWFL Pay It Forward.',
+ 'Photograph: Bram Belloni. Credit both the photographer and UWFL Pay It Forward.',
  'The Nightwatch in Wood is a separate artwork. This image is not a completed UWFL collective artwork.',
  '', 'UWFL-logo.jpg', 'UWFL Pay It Forward project logo.',
  '', 'Files are supplied for reporting about UWFL Pay It Forward.',
@@ -50,7 +50,7 @@ target=root/'assets/press'
 with ZipFile(target/'UWFL-press-kit.zip','w',ZIP_DEFLATED) as archive:
  for item in sorted(target.glob('*.txt')):
   archive.write(item,item.name)
- archive.write(root/'assets/jakko-woudenberg.jpg','Jakko-Woudenberg-Cora-Deutecom.jpg')
+ archive.write(root/'assets/jakko-woudenberg.jpg','Jakko-Woudenberg-Bram-Belloni.jpg')
  archive.write(root/'assets/uwfl-logo.jpg','UWFL-logo.jpg')
 `]);
 console.log('Press kit generated: six information sheets, credits, portrait and logo.');

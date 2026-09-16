@@ -43,7 +43,7 @@ uitgevoerd of getest.
   persoonlijke aanleiding en de verbinding tussen vakmanschap, creativiteit en
   mensen helpen. Het bestaande initiatorverhaal vormt de inhoudelijke basis.
 - Gebruik zijn eigen portret en behoud de bijbehorende fotocredits. Bij het
-  bestaande beeld met De Nachtwacht in Hout: Cora Deutecom.
+  bestaande beeld met open armen op De Nachtwacht in Hout: Bram Belloni.
 - Verwijs rechtstreeks door naar het volledige bestaande initiatorverhaal.
 - Deze uitleg over het ontstaan staat los van de wisselende deelnemerslijsten.
 - Bestaande verhaalteksten worden niet ongevraagd herschreven. Nieuwe formuleringen
