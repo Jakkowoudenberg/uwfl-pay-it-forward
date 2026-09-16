@@ -1,38 +1,7 @@
-exports.handler = async function(event, context) {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json'
-  };
-
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers, body: '' };
-  }
-
-  try {
-    const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/registrations?select=name,company,country,type,message,photo_url,participant_number&status=eq.approved&order=participant_number.asc`,
-      {
-        headers: {
-          'apikey': process.env.SUPABASE_SERVICE_KEY,
-          'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-
-    const data = await response.json();
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify(Array.isArray(data) ? data : [])
-    };
-
-  } catch (err) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify([])
-    };
-  }
-};
+'use strict';
+const { endpoint, db, fail } = require('../lib/core');
+exports.handler = endpoint('GET', async () => {
+ const rows = await db('registrations?select=name,company,country,type,message,photo_url,participant_number&status=eq.approved');
+ if (!Array.isArray(rows)) fail(502,'service_unavailable');
+ return rows;
+});

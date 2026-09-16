@@ -2,7 +2,8 @@
    ?demo=1 uses fictional, in-memory records and never calls the production API. */
 (()=>{
 'use strict';
-const API='https://app.unitedwoodfloorlayers.com/.netlify/functions/';
+const LIVE=window.UWFL_LIVE===true;
+const API=LIVE?'/.netlify/functions/':'https://app.unitedwoodfloorlayers.com/.netlify/functions/';
 const groups={
  registrations:{label:'adminRegistrations',read:'admin-pending',write:'approve'},
  panels:{label:'adminPanels',read:'admin-panels-pending',write:'panel-approve'},
@@ -10,6 +11,7 @@ const groups={
  organisations:{label:'audOrganisations',read:'admin-orgs-pending',write:'org-approve'}
 };
 const demo=new URLSearchParams(location.search).get('demo')==='1';
+if(LIVE&&!demo){groups.organisations.label='adminOrgMedia';groups.messages={label:'adminMessages',read:'admin-messages-pending',write:'message-archive'};groups.mail={label:'adminMailStatus',read:'admin-mail-status',readonly:true};}
 const locales=window.UWFL_LOCALES,main=document.getElementById('admin-main'),dialog=document.getElementById('admin-dialog');
 let lang='en',password='',authenticated=demo,busy=false,epoch=0,current='registrations',query='',message='',error='',rejectTarget=null;
 let queues={};
@@ -18,7 +20,7 @@ try{const saved=localStorage.getItem('uwfl_preview_lang'),detected=(navigator.la
 const t=key=>window.UWFL_UI[key]?.[locales.indexOf(lang)]??key;
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const validId=value=>/^(?:[0-9]+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(String(value??''));
-const title=(group,row)=>String(group==='panels'?(row.artwork_name||`#${row.participant_number||row.id}`):(group==='sponsors'?row.company:row.name)||`#${row.id}`);
+const title=(group,row)=>group==='mail'?`${row.kind} #${row.record_id} · ${row.state}`:String(group==='panels'?(row.artwork_name||`#${row.participant_number||row.id}`):(group==='sponsors'?row.company:row.name)||`#${row.id}`);
 const safeUrl=value=>{try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}};
 const demoRows={
  registrations:[{id:1001,name:'Fictieve deelnemer / Demo participant',company:'UWFL demo',country:'Netherlands',type:'Contributor',message:'Fictief voorbeeld. Ik help met vervoer en geef mijn kennis door. / Fictional example: helping with transport and sharing skills.'}],
@@ -41,8 +43,8 @@ async function request(group,action='',id='',key=password){
   const endpoint=action?`${groups[group].write}?id=${encodeURIComponent(id)}&action=${action}`:groups[group].read;
   const response=await fetch(API+endpoint,{method:action?'POST':'GET',headers:{'X-Admin-Key':key},cache:'no-store',credentials:'omit',redirect:'error',referrerPolicy:'no-referrer',signal:controller.signal});
   if(response.status===401){const e=new Error('Unauthorized');e.unauthorized=true;throw e;}
-  if(!response.ok)throw new Error('Request failed');
   const data=await response.json();
+  if(!response.ok){const error=new Error('Request failed');error.code=data?.error;throw error;}
   if(action){if(data?.ok!==true)throw new Error('Unconfirmed');}
   else if(!Array.isArray(data)||data.some(row=>!row||typeof row!=='object'||!validId(row.id)))throw new Error('Invalid queue');
   return data;
@@ -75,17 +77,18 @@ function images(group,row){
  return `<div class="admin-images">${urls.map(url=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer"><img src="${esc(url)}" alt="${esc(title(group,row))}" loading="lazy" referrerpolicy="no-referrer"></a>`).join('')}</div>`;
 }
 function details(group,row){
- let content=images(group,row);
+ if(group==='mail')return `<p>${t('adminMailPending')}</p><dl class="review-list">${field('adminType',row.kind)}${field('adminMadeOn',row.created_at)}${field('adminMailStatus',row.state)}</dl>`;
+ let content=group==='messages'?'':images(group,row);
  content+=`<dl class="review-list">${field('adminCountry',row.country||row.country_made)}${field('adminCompany',row.company)}${field('participantNumber',row.participant_number)}${field('adminType',row.type||row.role)}${group==='panels'?field('adminMaker',[row.first_name,row.last_name].filter(Boolean).join(' '))+field('adminPlace',row.place_made)+field('adminMadeOn',row.production_date)+field('adminNationality',row.nationality)+field('adminShippingCountry',row.shipping_country):''}</dl>`;
  if(group==='panels'){
   content+=window.UWFL_PANEL.sections(row).map(part=>section(part.label,part.value)).join('');
   const craft=window.UWFL_PANEL.craft(row);if(craft.length)content+=`<h3>${t('panelCraft')}</h3><dl class="review-list">${craft.map(part=>field(part.label,part.value)).join('')}</dl>`;
- }else if(group==='registrations')content+=section('yourStory',row.message);
+ }else if(group==='registrations'||group==='messages')content+=section(group==='messages'?'message':'yourStory',row.message);
  else if(group==='sponsors')content+=section('adminWhy',row.why)+section('adminWhat',row.what);
- const contacts=[row.contact_email,row.contact_phone,row.contact_website].filter(value=>typeof value==='string'&&value.trim());
+ const contacts=[...new Set([row.email,row.phone,row.submitter_email,row.contact_email,row.contact_phone,row.contact_website])].filter(value=>typeof value==='string'&&value.trim());
  if(contacts.length)content+=section('adminContact',contacts.join('\n'));
  if(group==='panels'&&!demo)content+=`<p class="admin-subtle">${t('adminMailNote')}</p>`;
- return content+`<div class="admin-actions"><button type="button" class="button" data-admin="approve" data-id="${esc(row.id)}" ${busy?'disabled':''}>${t('adminApprove')}</button><button type="button" class="button reject" data-admin="reject" data-id="${esc(row.id)}" ${busy?'disabled':''}>${t('adminReject')}</button></div>`;
+ return content+`<div class="admin-actions"><button type="button" class="button" data-admin="approve" data-id="${esc(row.id)}" ${busy?'disabled':''}>${t(group==='messages'?'adminHandled':'adminApprove')}</button><button type="button" class="button reject" data-admin="reject" data-id="${esc(row.id)}" ${busy?'disabled':''}>${t('adminReject')}</button></div>`;
 }
 function renderList(){
  const list=document.getElementById('admin-list');if(!list)return;
@@ -132,18 +135,18 @@ async function decide(group,id,action){
   if(session!==epoch||!authenticated)return;
   queues[group]={rows:before,state:'ready'};
   if(!before.some(row=>String(row.id)===id)){message='adminGone';return;}
-  await request(group,action,id);
+  const decision=await request(group,action,id);
   if(session!==epoch||!authenticated)return;
   const after=await request(group);
   if(session!==epoch||!authenticated)return;
   queues[group]={rows:after,state:'ready'};
   if(after.some(row=>String(row.id)===id))throw new Error('Still pending');
-  message=action==='approve'?'adminApproved':'adminRejected';
+  message=action==='approve'?(decision.notification&& !['accepted','previously_requested'].includes(decision.notification)?'adminMailUnknown':'adminApproved'):'adminRejected';
  }catch(e){
   if(session!==epoch)return;
   if(e.unauthorized){endSession('adminSessionExpired');return;}
   // No automatic retry: an interrupted panel approval may already have sent mail.
-  queues[group]={rows:[],state:'error'};error='adminUnconfirmed';
+  if(e.code==='maker_pending'||e.code==='image_required'){error=e.code==='maker_pending'?'adminMakerPending':'adminImageRequired';}else{queues[group]={rows:[],state:'error'};error='adminUnconfirmed';}
  }finally{if(session===epoch&&authenticated){busy=false;render();document.querySelector('.admin-message:not([hidden]),.admin-error:not([hidden])')?.scrollIntoView({block:'nearest'});}}
 }
 document.addEventListener('submit',event=>{if(event.target.id==='admin-login-form')signIn(event);});

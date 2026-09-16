@@ -1,3 +1,3 @@
 'use strict';
 const { pending } = require('../lib/review');
-exports.handler = pending('organisations');
+exports.handler = pending('uwfl_messages');

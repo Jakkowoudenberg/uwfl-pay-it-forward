@@ -1,3 +1,3 @@
 'use strict';
 const { decision } = require('../lib/review');
-exports.handler = decision('panels');
+exports.handler = decision('uwfl_messages');

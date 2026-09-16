@@ -89,9 +89,9 @@ function mutationCount(x){return x.requests.filter(r=>r.method==='POST').length;
   for(const endpoint of [...Object.keys(reads),...Object.keys(writes)]){
    const {handler}=require(path.resolve(__dirname,'../netlify/functions',endpoint+'.js'));const before=calls;
    assert.equal((await handler({httpMethod:'OPTIONS',headers:{}})).statusCode,200);
-   assert.equal((await handler({httpMethod:'POST',headers:{},queryStringParameters:{id:'9999',action:'reject'}})).statusCode,401);assert.equal(calls,before);
+   assert.equal((await handler({httpMethod:reads[endpoint]?'GET':'POST',headers:{},queryStringParameters:{id:'9999',action:'reject'}})).statusCode,401);assert.equal(calls,before);
    const result=await handler({httpMethod:reads[endpoint]?'GET':'POST',headers:{'x-admin-key':secret},queryStringParameters:{id:'9999',action:'reject'}});
-   assert.equal(result.statusCode,200);assert.equal(result.headers['Access-Control-Allow-Origin'],'*');assert(result.headers['Access-Control-Allow-Headers'].includes('X-Admin-Key'));assert(calls>before);
+   assert.equal(result.statusCode,reads[endpoint]?200:409);assert.equal(result.headers['Access-Control-Allow-Origin'],'*');assert(result.headers['Access-Control-Allow-Headers'].includes('X-Admin-Key'));assert(calls>before);
   }
  }finally{global.fetch=oldFetch;for(const [key,value] of Object.entries(oldEnv)){if(value===undefined)delete process.env[key];else process.env[key]=value;}}
  console.log(JSON.stringify({languages:6,authentication:'passed',safeRendering:'passed',approvalAndRejection:'passed',duplicateAndStaleReview:'passed',failureAndLogoutIsolation:'passed',demoNetworkRequests:0,existingServerContract:'passed',productionMutations:0}));

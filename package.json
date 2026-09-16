@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "United Wood Floor Layers Pay It Forward",
   "main": "index.js",
+  "scripts": {
+    "build": "node scripts/build-production.cjs",
+    "test:release": "node scripts/check-release.cjs"
+  },
   "dependencies": {},
   "devDependencies": {}
 }

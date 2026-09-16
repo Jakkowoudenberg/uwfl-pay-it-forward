@@ -1,7 +1,9 @@
 (()=>{
 'use strict';
 const C=window.UWFL_CONTENT, LABELS=window.UWFL_UI, locales=window.UWFL_LOCALES;
-const API='https://app.unitedwoodfloorlayers.com/.netlify/functions/';
+const LIVE=window.UWFL_LIVE===true;
+const API=LIVE?'/.netlify/functions/':'https://app.unitedwoodfloorlayers.com/.netlify/functions/';
+let submitting=false;
 const main=document.getElementById('main');
 let lang='nl', route='', noticeTimer;
 const publicLoads=new Map(),searchIndexes=new Map();
@@ -87,7 +89,7 @@ function founderCard(){
 }
 const directoryGroups=()=>[['makers','networkMakers'],['sponsors','audSponsors'],['organisations','networkOrganisations'],['contributors','networkContributors'],['media','networkMedia']];
 function directoryHref(group='',country='',search=''){const params=new URLSearchParams();if(group)params.set('group',group);if(country)params.set('country',country);if(search)params.set('q',search);return '#community'+(params.size?'?'+params:'');}
-function progressStrip(){return `<section class="network-summary" aria-labelledby="network-title"><div class="network-heading"><div><h2 id="network-title">${t('networkTitle')}</h2><p>${t('networkIntro')}</p></div><div class="field"><label for="stats-country">${jt().country}</label><select id="stats-country" disabled><option value="">${t('allCountries')}</option></select></div></div><div class="network-stats"><a href="#community" class="network-stat"><span class="network-number" data-stat="countries">—</span><strong>${t('networkCountries')}</strong><small>${t('networkWorldwide')}</small></a>${directoryGroups().map(([group,label])=>`<a class="network-stat" href="${directoryHref(group,statsCountry)}" data-directory-group="${group}"><span class="network-number" data-stat="${group}">—</span><strong>${t(label)}</strong>${group==='media'?`<small>${t('networkMediaPending')}</small>`:''}</a>`).join('')}</div><div class="network-all">${link(t('networkViewAll'),directoryHref('',statsCountry))}</div><p id="stats-error" class="stats-error" role="status" hidden></p></section><a class="network-event" href="#read/expo"><div><span class="eyebrow">${t('plannedNext')}</span><strong>NWFA Expo 2027 · Texas</strong></div><span>${t('expoDate')}${icon('arrow',19)}</span></a>`;}
+function progressStrip(){return `<section class="network-summary" aria-labelledby="network-title"><div class="network-heading"><div><h2 id="network-title">${t('networkTitle')}</h2><p>${t('networkIntro')}</p></div><div class="field"><label for="stats-country">${jt().country}</label><select id="stats-country" disabled><option value="">${t('allCountries')}</option></select></div></div><div class="network-stats"><a href="#community" class="network-stat"><span class="network-number" data-stat="countries">—</span><strong>${t('networkCountries')}</strong><small>${t('networkWorldwide')}</small></a>${directoryGroups().map(([group,label])=>`<a class="network-stat" href="${directoryHref(group,statsCountry)}" data-directory-group="${group}"><span class="network-number" data-stat="${group}">—</span><strong>${t(label)}</strong>${group==='media'&&!LIVE?`<small>${t('networkMediaPending')}</small>`:''}</a>`).join('')}</div><div class="network-all">${link(t('networkViewAll'),directoryHref('',statsCountry))}</div><p id="stats-error" class="stats-error" role="status" hidden></p></section><a class="network-event" href="#read/expo"><div><span class="eyebrow">${t('plannedNext')}</span><strong>NWFA Expo 2027 · Texas</strong></div><span>${t('expoDate')}${icon('arrow',19)}</span></a>`;}
 function moderationNote(){return `<div class="moderation-note">${icon('check',23)}<div><strong>${t('moderationTitle')}</strong><p>${t('moderationText')}</p></div></div>`;}
 function numberedSteps(labels){return `<ol class="simple-steps">${labels.map((label,i)=>`<li><span>${i+1}</span><p>${label}</p></li>`).join('')}</ol>`;}
 function enquiryStrip(href='#contact'){return `<div class="enquiry-strip"><div><strong>${t('helpNeed')}</strong><p>${t('privateEnquiry')}</p></div>${button(t('askContact'),href,'outline')}</div>`;}
@@ -124,7 +126,7 @@ function logisticsPage(){
 }
 
 async function getPublic(name){
- if(!['participants','sponsors','organisations','panels'].includes(name))throw new Error('Unsupported read');
+ if(!['participants','sponsors','organisations','panels',...(LIVE?['media']:[])].includes(name))throw new Error('Unsupported read');
  if(publicLoads.has(name))return publicLoads.get(name);
  const pending=(async()=>{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);try{const r=await fetch(API+name,{method:'GET',signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});if(!r.ok)throw new Error('Unavailable');const data=await r.json();if(!Array.isArray(data))throw new Error('Invalid data');return shuffled(data);}finally{clearTimeout(timer);}})();
  publicLoads.set(name,pending);
@@ -134,7 +136,7 @@ function countryName(value){return window.UWFL_COMMUNITY.countryLabel(value,lang
 async function getDirectory(){
  if(directoryData)return directoryData;
  if(!directoryPromise)directoryPromise=(async()=>{
-  const names=['participants','sponsors','organisations'],results=await Promise.allSettled(names.map(getPublic)),sources={},failed=[];
+  const names=['participants','sponsors','organisations',...(LIVE?['media']:[])],results=await Promise.allSettled(names.map(getPublic)),sources={},failed=[];
   results.forEach((result,i)=>{if(result.status==='fulfilled')sources[names[i]]=result.value;else failed.push(names[i]);});
   return directoryData={profiles:shuffled(window.UWFL_COMMUNITY.profiles(sources)),failed};
  })().catch(error=>{directoryPromise=null;throw error;});
@@ -146,7 +148,7 @@ function sourceForGroup(group){return ['makers','contributors'].includes(group)?
 function renderHomeStats(){
  if(!directoryData)return;
  const profiles=directoryData.profiles.filter(p=>!statsCountry||p.country===statsCountry);
- document.querySelectorAll('[data-stat]').forEach(el=>{const group=el.dataset.stat;const available=group!=='media'&&(group==='countries'?!directoryData.failed.length:!directoryData.failed.includes(sourceForGroup(group)));el.textContent=available?(group==='countries'?directoryCountries().length:profiles.filter(p=>p.group===group).length):'—';if(!available)el.title=t(group==='media'?'networkMediaPending':'unavailable');else el.removeAttribute('title');});
+ document.querySelectorAll('[data-stat]').forEach(el=>{const group=el.dataset.stat;const available=(LIVE||group!=='media')&&(group==='countries'?!directoryData.failed.length:!directoryData.failed.includes(sourceForGroup(group)));el.textContent=available?(group==='countries'?directoryCountries().length:profiles.filter(p=>p.group===group).length):'—';if(!available)el.title=t(group==='media'?'networkMediaPending':'unavailable');else el.removeAttribute('title');});
  document.querySelectorAll('[data-directory-group]').forEach(el=>el.href=directoryHref(el.dataset.directoryGroup,statsCountry));
  const all=document.querySelector('.network-all a');if(all)all.href=directoryHref('',statsCountry);
  const error=document.getElementById('stats-error');if(error){error.hidden=!directoryData.failed.length;error.textContent=t('networkPartial');}
@@ -224,14 +226,14 @@ async function community(){
  main.innerHTML=`${heading(t('networkTitle'),t('networkIntro'))}<section class="page-content"><div class="shell directory-page"><div class="directory-filters"><div class="field"><label for="people-search">${t('search')}</label><input id="people-search" type="search" value="${esc(directoryFilters.search)}" placeholder="${esc(t('search'))}" aria-controls="people-grid"></div><div class="field"><label for="people-country">${jt().country}</label><select id="people-country" disabled aria-controls="people-grid"><option value="">${t('allCountries')}</option></select></div><div class="field"><label for="people-group">${t('networkGroup')}</label><select id="people-group" aria-controls="people-grid"><option value="">${t('networkAll')}</option>${directoryGroups().map(([group,label])=>`<option value="${group}" ${directoryFilters.group===group?'selected':''}>${t(label)}</option>`).join('')}</select></div><button type="button" class="text-button" data-action="reset-community">${t('networkReset')}</button></div><p class="directory-hint" id="directory-hint"></p><p class="equality-note">${icon('people',19)}${t('equalVisibility')}</p><p class="directory-error" id="directory-error" role="status" hidden></p><div class="result-count" id="people-count" aria-live="polite"></div><div id="people-grid" class="cards-grid"><p class="loading">${t('loading')}</p></div></div></section>`;
  try{await getDirectory();if(route!=='community')return;const select=document.getElementById('people-country');select.innerHTML=countryOptions(directoryFilters.country);if(directoryFilters.country&&![...select.options].some(o=>o.value===directoryFilters.country)){select.insertAdjacentHTML('beforeend',`<option selected value="${esc(directoryFilters.country)}">${esc(countryName(directoryFilters.country))}</option>`);}select.disabled=false;renderPeople();}catch{loadError('people-grid');}
 }
-function directoryRole(profile){const j=jt();return profile.source==='participants'?({maker:j.maker_title,contributor:j.contrib_title,participant:t('networkHelper'),student:j.student_title,initiator:t('networkInitiator')}[profile.role]||t('networkOther')):t(profile.group==='sponsors'?'audSponsors':'networkOrganisations');}
-function directoryCard(profile){const p=profile.record,person=profile.source==='participants',title=person||profile.source==='organisations'?p.name:p.company,src=imageUrl(person?p.photo_url:p.logo_url),story=person?p.message:p.role||p.why;return `<article class="maker-card directory-card" data-profile-key="${esc(profile.key)}" data-profile-group="${profile.group}"><div class="portrait${person?'':' directory-logo'}">${src?`<img src="${src}" alt="" loading="lazy" referrerpolicy="no-referrer">`:icon(person?'people':'hand',45)}</div><div class="maker-card-body"><div class="maker-meta"><span>${esc(countryName(p.country)||t('networkCountryMissing'))}</span>${person?`<span data-participant-number>#${esc(String(p.participant_number||'').padStart(4,'0'))}</span>`:''}</div><p class="directory-role">${esc(directoryRole(profile))}</p><h3>${esc(title)}</h3>${person&&p.company?`<p>${esc(p.company)}</p>`:''}${story?`<p class="maker-story">${esc(story)}</p><button type="button" data-action="story" aria-expanded="false">${t('readMore')}</button>`:''}${!person&&urlSafe(p.contact_website)?`<a class="text-link" href="${urlSafe(p.contact_website)}" target="_blank" rel="noopener noreferrer">Website ${icon('arrow',17)}</a>`:''}</div></article>`;}
+function directoryRole(profile){const j=jt();return profile.source==='participants'?({maker:j.maker_title,contributor:j.contrib_title,participant:t('networkHelper'),student:j.student_title,initiator:t('networkInitiator')}[profile.role]||t('networkOther')):t(profile.group==='media'?'networkMedia':profile.group==='sponsors'?'audSponsors':'networkOrganisations');}
+function directoryCard(profile){const p=profile.record,person=profile.source==='participants',title=person||['organisations','media'].includes(profile.source)?p.name:p.company,src=imageUrl(person?p.photo_url:p.logo_url),story=person?p.message:p.role||p.why;return `<article class="maker-card directory-card" data-profile-key="${esc(profile.key)}" data-profile-group="${profile.group}"><div class="portrait${person?'':' directory-logo'}">${src?`<img src="${src}" alt="" loading="lazy" referrerpolicy="no-referrer">`:icon(person?'people':'hand',45)}</div><div class="maker-card-body"><div class="maker-meta"><span>${esc(countryName(p.country)||t('networkCountryMissing'))}</span>${person?`<span data-participant-number>#${esc(String(p.participant_number||'').padStart(4,'0'))}</span>`:''}</div><p class="directory-role">${esc(directoryRole(profile))}</p><h3>${esc(title)}</h3>${person&&p.company?`<p>${esc(p.company)}</p>`:''}${story?`<p class="maker-story">${esc(story)}</p><button type="button" data-action="story" aria-expanded="false">${t('readMore')}</button>`:''}${!person&&urlSafe(p.contact_website)?`<a class="text-link" href="${urlSafe(p.contact_website)}" target="_blank" rel="noopener noreferrer">Website ${icon('arrow',17)}</a>`:''}</div></article>`;}
 function renderPeople(){
  const grid=document.getElementById('people-grid');if(!grid||!directoryData)return;
  const term=(document.getElementById('people-search').value||'').toLocaleLowerCase(lang).trim(),country=directoryFilters.country,group=directoryFilters.group;
  const hintKey={makers:'networkMakerHint',contributors:'networkContributorHint',organisations:'networkOrgHint',media:'networkMediaHint'}[group];document.getElementById('directory-hint').textContent=hintKey?t(hintKey):'';
  const relevantFailure=group?directoryData.failed.includes(sourceForGroup(group)):directoryData.failed.length>0,error=document.getElementById('directory-error');error.hidden=!directoryData.failed.length;error.textContent=t('networkPartial');
- if(group==='media'){document.getElementById('people-count').textContent=t('networkMediaPending');grid.innerHTML=`<div class="directory-empty"><h2>${t('networkMedia')}</h2><p>${t('networkMediaEmpty')}</p><div class="actions">${button(t('mediaRegister'),'#media-partner')}${link(t('pressContact'),'#contact/media')}</div></div>`;return;}
+ if(group==='media'&&!LIVE){document.getElementById('people-count').textContent=t('networkMediaPending');grid.innerHTML=`<div class="directory-empty"><h2>${t('networkMedia')}</h2><p>${t('networkMediaEmpty')}</p><div class="actions">${button(t('mediaRegister'),'#media-partner')}${link(t('pressContact'),'#contact/media')}</div></div>`;return;}
  const list=directoryData.profiles.filter(p=>(!country||p.country===country)&&(!group||p.group===group)&&(!term||[p.record.name,p.record.company,p.record.country,countryName(p.country),directoryRole(p)].join(' ').toLocaleLowerCase(lang).includes(term)));
  document.getElementById('people-count').textContent=`${group&&relevantFailure?'—':list.length} ${t('networkProfiles')}`;
  grid.innerHTML=list.length?list.map(directoryCard).join(''):relevantFailure?`<div class="directory-empty"><p>${t('unavailable')}</p><button type="button" class="button" data-action="retry">${t('retry')}</button></div>`:`<div class="directory-empty"><p>${t('networkNoResults')}</p><button type="button" class="text-button" data-action="reset-community">${t('networkReset')}</button></div>`;
@@ -275,7 +277,7 @@ function drawing(){main.innerHTML=`${heading(q('specs'),'','Pay It Forward')}<se
 function upload(){
  const d=uploadDraft,labels=[t('stepDetails'),q('paneel'),t('panelStoryStep'),t('stepReview')];let body='';
  if(uploadStep===0){
-  body=`<h2>${t('stepDetails')}</h2><div class="info-note">${t('uploadPreview')}</div>${field('participant-number',t('participantNumber'),'text',d['participant-number'],{required:true,placeholder:'0001',max:20})}${field('panel-email',jt().email,'email',d['panel-email'],{required:true})}<button type="button" data-action="sample-upload" class="text-button" style="margin-top:20px">${t('trySample')}</button>`;
+  body=`<h2>${t('stepDetails')}</h2><div class="info-note">${t('uploadPreview')}</div>${field('participant-number',t('participantNumber'),'text',d['participant-number'],{required:true,placeholder:'0001',max:20})}${field('panel-email',jt().email,'email',d['panel-email'],{required:true})}${LIVE?'':`<button type="button" data-action="sample-upload" class="text-button" style="margin-top:20px">${t('trySample')}</button>`}`;
  }else if(uploadStep===1){
   body=`<h2>${q('paneel')}</h2><p class="form-intro">${t('uploadIntro')}</p>${field('artwork-name',t('artworkName'),'text',d['artwork-name'],{required:true,max:200})}${fileInput('panel-photos',t('photoPanel'),true,uploadPhotos)}<fieldset class="panel-form-section"><legend>${t('panelCraft')}</legend><div class="field-row">${field('wood-species',t('woodSpecies'),'text',d['wood-species'],{required:true,max:300})}${field('pattern',t('panelTechnique'),'text',d.pattern,{optional:true,max:300})}</div>${field('panel-materials',t('panelMaterials'),'textarea',d['panel-materials'],{optional:true,max:2000,hint:t('panelMaterialsHint')})}</fieldset><fieldset class="panel-form-section"><legend>${t('shippingReview')}</legend>${countryField('shipping-country',d['shipping-country'],t('shippingCountry'))}<p class="fineprint">${t('shippingCountryHelp')}</p>${shippingAdvice()}</fieldset>`;
  }else if(uploadStep===2){
@@ -292,7 +294,7 @@ function render(){
  if(route==='community'){const params=new URLSearchParams(rawRoute.split('?')[1]||'');directoryFilters={group:directoryGroups().some(([key])=>key===params.get('group'))?params.get('group'):'',country:window.UWFL_COMMUNITY.countryKey(params.get('country')||''),search:params.get('q')||''};}
  if(route.startsWith('join/')&&route!==previousRoute){const role=route.split('/')[1];if(['maker','participant','contributor','student'].includes(role)){joinDraft.role=role;joinStep=1;}}
  if(route==='join'&&previousRoute!==route)joinStep=0;
- document.documentElement.lang=lang;document.title=`UWFL — Pay It Forward · ${t('preview').split(' · ')[0]}`;header();footer();
+ document.documentElement.lang=lang;document.title=LIVE?'United Woodfloor Layers — Pay It Forward':`UWFL — Pay It Forward · ${t('preview').split(' · ')[0]}`;header();footer();
  if(route==='home')home();else if(route==='makers')makers();else if(route==='visitors')visitors();else if(route==='help')helpPage();else if(route==='about')aboutPage();else if(route==='panel')panelHub();else if(route==='join'||route.startsWith('join/'))join();else if(route==='community')community();else if(route==='gallery')gallery();else if(route.startsWith('gallery/'))showPanel();else if(route==='organisations'||route==='partners/organisations')organisations();else if(route==='partners')partners();else if(route==='drawing')drawing();else if(route.startsWith('read/'))reader(route.slice(5));else if(route==='resources')resources();else if(route==='upload')upload();else if(route==='idea')idea();else if(route.startsWith('contact'))contact(route.split('/')[1]);else if(['sponsor','organisation','media-partner'].includes(route))contact(route);else resources();
  window.scrollTo({top:0,behavior:'instant'});
 }
@@ -302,8 +304,58 @@ function localImage(file){if(!file||!['image/jpeg','image/png','image/webp'].inc
 function revokeImages(files){files.filter(Boolean).forEach(p=>URL.revokeObjectURL(p.url));}
 document.addEventListener('change',event=>{const el=event.target;if(el.id==='language'){capture();lang=el.value;try{localStorage.setItem('uwfl_preview_lang',lang);}catch{}render();return;}if(el.id==='stats-country'){statsCountry=el.value;renderHomeStats();return;}if(el.id==='people-country'||el.id==='people-group'){updateDirectoryFilters();return;}if(el.id==='shipping-country'){capture();upload();document.getElementById('shipping-country')?.focus();return;}if(el.id==='country'||el.id==='profile-country'){capture();if(route.startsWith('join'))join();else contact(route);return;}if(el.name==='role'){joinDraft.role=el.value;header();return;}if(el.name==='share'){joinDraft.share=el.checked?'yes':'no';return;}if(['join-photo','panel-photos','sponsor-logo'].includes(el.id)){capture();try{const selected=[...el.files].map(localImage);if(!selected.length)return;if(el.id==='join-photo'){revokeImages([joinPhoto]);joinPhoto=selected[0];}else if(el.id==='sponsor-logo'){revokeImages([sponsorLogo]);sponsorLogo=selected[0];profileLogos[document.getElementById('work-form').dataset.kind]=sponsorLogo;}else{revokeImages(uploadPhotos);uploadPhotos=selected;}document.getElementById(el.id+'-preview').innerHTML=selected.map(p=>`<img src="${p.url}" alt="${esc(p.file.name)}"><small>${esc(p.file.name)}</small>`).join('');setError('');}catch(err){el.value='';setError(err.message);}}});
 document.addEventListener('input',event=>{if(event.target.id==='people-search')updateDirectoryFilters();if(event.target.id==='topic-search')document.getElementById('topic-results').innerHTML=resourceGroups(event.target.value);});
-document.addEventListener('submit',event=>{const form=event.target;if(form.id!=='work-form')return;event.preventDefault();capture();setError('');const kind=form.dataset.kind;if(kind==='join'){if(joinStep===0&&!joinDraft.role){setError(jt().alert_route);return;}if(joinStep===2&&!joinPhoto){setError(jt().alert_photo);return;}if(joinStep<3){joinStep++;join();focusWorkStep();}else success(t('previewSuccess'),t('nothingSent'),moderationNote());}else if(kind==='upload'){if(uploadStep===1&&!uploadPhotos.length){setError(t('photoPanel')+' — '+t('required'));return;}if(uploadStep<3){uploadStep++;upload();focusWorkStep();}else success(t('uploadDone'),t('messageNotSent'),moderationNote()+shippingAdvice());}else if(kind==='contact'){success(t('messageSuccess'),t('messageNotSent'));}else if(kind==='sponsor'||kind==='organisation'||kind==='media-partner'){if(!sponsorLogo){setError('Logo — '+t('required'));return;}success(t('messageSuccess'),t('messageNotSent'),moderationNote());}else if(kind==='idea'){generatePrompt();}});
-document.addEventListener('click',async event=>{const el=event.target.closest('[data-action]');if(!el)return;const action=el.dataset.action;if(action==='skip'){event.preventDefault();main.focus();main.scrollIntoView({block:'start',behavior:'instant'});return;}if(action==='choose-role'){capture();joinStep=0;setError('');if(route!=='join')location.hash='join';else join();return;}if(action==='previous'){capture();setError('');if(route.startsWith('join')){joinStep=Math.max(0,joinStep-1);join();}else if(route==='upload'){uploadStep=Math.max(0,uploadStep-1);upload();}focusWorkStep();}if(action==='story'){const p=el.previousElementSibling;const open=p.classList.toggle('expanded');el.textContent=t(open?'readLess':'readMore');el.setAttribute('aria-expanded',String(open));}if(action==='retry'){directoryPromise=null;directoryData=null;publicLoads.clear();render();}if(action==='reset-community'){document.getElementById('people-country').value='';document.getElementById('people-group').value='';document.getElementById('people-search').value='';updateDirectoryFilters();}if(action==='sample-upload'){capture();uploadDraft['participant-number']='0001';uploadDraft['panel-email']='preview@example.com';uploadStep=1;upload();focusWorkStep();}if(action==='download-drawing'){const blob=new Blob([C.makeDrawing(lang)],{type:'image/svg+xml'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`UWFL-panel-100x100-${lang}.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}if(action==='print')window.print();if(action==='copy-prompt'){try{await navigator.clipboard.writeText(document.getElementById('prompt-result').innerText);notify(t('copied'));}catch{notify(t('copyError'));}}if(action==='edit-idea'){idea();window.scrollTo({top:0});}});
+function working(form,value){
+ submitting=value;form.setAttribute('aria-busy',String(value));
+ for(const el of form.querySelectorAll('input,select,textarea,button'))el.disabled=value;
+ const button=form.querySelector('[type="submit"]');
+ if(button){if(value){button.dataset.label=button.innerHTML;button.textContent=t('liveSending');}else if(button.dataset.label)button.innerHTML=button.dataset.label;}
+}
+async function sendLive(kind,form){
+ if(submitting)return;
+ const expected=route;working(form,true);
+ try{
+  let result,extra=kind==='contact'?'':moderationNote();
+  if(kind==='join')result=await window.UWFL_SUBMIT.join(joinDraft,joinPhoto,lang);
+  else if(kind==='upload')result=await window.UWFL_SUBMIT.panel(uploadDraft,uploadPhotos,lang);
+  else if(kind==='contact')result=await window.UWFL_SUBMIT.contact(contactDraft,form.dataset.context||'',lang);
+  else result=await window.UWFL_SUBMIT.profile(kind,contactDraft,sponsorLogo,lang);
+  if(result.participant_number)extra=`<p class="registration-number"><strong>${t('participantNumber')}: #${esc(String(result.participant_number).padStart(4,'0'))}</strong></p>`+extra;
+  if(result.notification==='unconfirmed'&&kind!=='contact')extra+=`<p class="info-note">${t('liveMailNote')}</p>`;
+  if(kind==='join'){revokeImages([joinPhoto]);joinPhoto=null;joinDraft={role:joinDraft.role};joinStep=0;}
+  else if(kind==='upload'){revokeImages(uploadPhotos);uploadPhotos=[];uploadDraft={};uploadStep=0;}
+  else{contactDrafts[form.dataset.context||'']={};if(profileLogos[kind]){revokeImages([profileLogos[kind]]);profileLogos[kind]=null;sponsorLogo=null;}contactDraft={};}
+  if(route===expected)success(t('liveSaved'),t(kind==='contact'?'liveContact':'liveReview'),extra);
+  else notify(t('liveSaved'));
+ }catch(error){if(route===expected)setError(t(window.UWFL_SUBMIT.error(error)));else notify(t('liveError'));}
+ finally{working(form,false);}
+}
+document.addEventListener('submit',async event=>{
+ const form=event.target;if(form.id!=='work-form')return;
+ event.preventDefault();if(submitting)return;capture();setError('');const kind=form.dataset.kind;
+ if(kind==='join'){
+  if(joinStep===0&&!joinDraft.role){setError(jt().alert_route);return;}
+  if(joinStep===2&&!joinPhoto){setError(jt().alert_photo);return;}
+  if(joinStep<3){joinStep++;join();focusWorkStep();}
+  else if(LIVE)await sendLive(kind,form);else success(t('previewSuccess'),t('nothingSent'),moderationNote());
+ }else if(kind==='upload'){
+  if(uploadStep===1&&!uploadPhotos.length){setError(t('photoPanel')+' — '+t('required'));return;}
+  if(LIVE&&uploadPhotos.length>8){setError(t('liveImages'));return;}
+  if(LIVE&&uploadStep===0){
+   working(form,true);const expected=route;
+   try{await window.UWFL_SUBMIT.lookup(uploadDraft);if(route===expected){uploadStep=1;upload();focusWorkStep();}}
+   catch(error){if(route===expected)setError(t(window.UWFL_SUBMIT.error(error)));}
+   finally{working(form,false);}return;
+  }
+  if(uploadStep<3){uploadStep++;upload();focusWorkStep();}
+  else if(LIVE)await sendLive(kind,form);else success(t('uploadDone'),t('messageNotSent'),moderationNote()+shippingAdvice());
+ }else if(kind==='contact'){
+  if(LIVE)await sendLive(kind,form);else success(t('messageSuccess'),t('messageNotSent'));
+ }else if(['sponsor','organisation','media-partner'].includes(kind)){
+  if(!sponsorLogo){setError('Logo — '+t('required'));return;}
+  if(LIVE)await sendLive(kind,form);else success(t('messageSuccess'),t('messageNotSent'),moderationNote());
+ }else if(kind==='idea')generatePrompt();
+});
+document.addEventListener('click',async event=>{const el=event.target.closest('[data-action]');if(!el)return;const action=el.dataset.action;if(action==='skip'){event.preventDefault();main.focus();main.scrollIntoView({block:'start',behavior:'instant'});return;}if(action==='choose-role'){capture();joinStep=0;setError('');if(route!=='join')location.hash='join';else join();return;}if(action==='previous'){capture();setError('');if(route.startsWith('join')){joinStep=Math.max(0,joinStep-1);join();}else if(route==='upload'){uploadStep=Math.max(0,uploadStep-1);upload();}focusWorkStep();}if(action==='story'){const p=el.previousElementSibling;const open=p.classList.toggle('expanded');el.textContent=t(open?'readLess':'readMore');el.setAttribute('aria-expanded',String(open));}if(action==='retry'){directoryPromise=null;directoryData=null;publicLoads.clear();render();}if(action==='reset-community'){document.getElementById('people-country').value='';document.getElementById('people-group').value='';document.getElementById('people-search').value='';updateDirectoryFilters();}if(action==='sample-upload'&&!LIVE){capture();uploadDraft['participant-number']='0001';uploadDraft['panel-email']='preview@example.com';uploadStep=1;upload();focusWorkStep();}if(action==='download-drawing'){const blob=new Blob([C.makeDrawing(lang)],{type:'image/svg+xml'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`UWFL-panel-100x100-${lang}.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}if(action==='print')window.print();if(action==='copy-prompt'){try{await navigator.clipboard.writeText(document.getElementById('prompt-result').innerText);notify(t('copied'));}catch{notify(t('copyError'));}}if(action==='edit-idea'){idea();window.scrollTo({top:0});}});
 window.addEventListener('hashchange',render);
 render();
 })();

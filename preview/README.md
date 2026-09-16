@@ -1,5 +1,12 @@
 # UWFL design preview
 
+**Release update, 16 September:** Jakko approved going live. `RELEASE.md` in the
+repository root describes the completed production integration and remaining
+external mail-template boundary. The production build activates real forms;
+serving this folder directly retains the separate simulation. The chronological
+preview notes below describe the design stages and are not the current release
+status.
+
 This is a separate, interactive design preview requested by Jakko on 15 September 2026. The production `index.html`, Netlify functions and configuration are unchanged. Do not replace the live app with this folder until the design has been reviewed and production integration is completed.
 
 The confirmed requirements in [REQUIREMENTS.md](REQUIREMENTS.md) govern this
