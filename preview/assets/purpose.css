@@ -10,12 +10,12 @@
 .purpose-points p{font-size:.88rem;line-height:1.65;color:var(--muted);margin-top:3px;max-width:570px}
 .mission-home .welcome-choices{padding-top:23px;border-top:1px solid var(--line)}
 .mission-home .welcome-choices .audience-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
-.mission-home .welcome-choices .task-card,.mission-home .welcome-choices .task-card:last-child{grid-column:auto!important;min-height:88px;padding:13px 12px;gap:10px}
+.mission-home .welcome-choices .task-card,.mission-home .welcome-choices .task-card:last-child{grid-column:auto!important;min-height:112px;padding:14px 12px;gap:10px;align-items:flex-start}
 .mission-home .welcome-choices .task-icon{width:30px;height:34px}
 .mission-home .welcome-choices .task-icon .icon{width:21px;height:21px}
 .mission-home .welcome-choices .task-card>.icon{display:none}
 .mission-home .welcome-choices .task-copy strong{font-size:.92rem}
-.mission-home .welcome-choices .task-copy small{font-size:.75rem;line-height:1.45}
+.mission-home .welcome-choices .task-copy small{display:block;font-size:.8rem;line-height:1.45;margin-top:5px;overflow-wrap:anywhere}
 .mission-home .founder-story{padding:21px 24px 23px}
 .mission-home .founder-story blockquote{font-size:1.01rem;line-height:1.65}
 .journey-section{border-top:1px solid var(--line);margin-top:34px;padding-top:28px}
@@ -78,11 +78,11 @@
  .purpose-points p{font-size:.86rem;line-height:1.6;margin-top:3px}
  .mission-home .welcome-choices>h2{font-size:1rem}
  .mission-home .welcome-choices .audience-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
- .mission-home .welcome-choices .task-card{min-height:54px;padding:11px 12px;gap:9px}
- .mission-home .welcome-choices .task-card:last-child{grid-column:auto!important;min-height:54px}
+ .mission-home .welcome-choices .task-card{min-height:110px;padding:13px 12px;gap:9px}
+ .mission-home .welcome-choices .task-card:last-child{grid-column:auto!important;min-height:110px}
  .mission-home .welcome-choices .task-copy strong{font-size:.9rem;line-height:1.4}
- .mission-home .welcome-choices .task-copy small{display:none}
- .mission-home .welcome-choices .task-icon{width:26px;height:29px}
+ .mission-home .welcome-choices .task-copy small{display:block;font-size:.8rem;line-height:1.45;margin-top:5px}
+ .mission-home .welcome-choices .task-icon{display:none}
  .mission-home .welcome-choices .task-icon .icon{width:19px;height:19px}
  .mission-home .welcome-choices .task-card>.icon{display:none}
  .mission-home .founder-story{padding:21px}

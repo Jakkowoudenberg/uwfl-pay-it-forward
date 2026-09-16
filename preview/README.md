@@ -9,7 +9,7 @@ and his reason for starting UWFL.
 
 ## Included
 
-- A homepage with six clear entrances: makers, contributors, sponsors, organisations, visitors and media. Jakko's portrait, credited to Bram Belloni, an exact quote from his original story and a link to that story introduce the initiator.
+- A homepage with six clear entrances: makers, contributors, sponsors, organisations, visitors and media. Each tile includes a short explanation in all six languages, also visible on mobile. Contributors are explicitly described as helping without making a panel; tile height follows the text without truncation. Jakko's portrait, credited to Bram Belloni, an exact quote from his original story and a link to that story introduce the initiator.
 - The concrete project purpose comes before the entrances: make wooden panels into one artwork, learn and pass on craft, help three people, then travel and eventually donate. An ordered journey explains how showing the art in the craft, involving people and encouraging help remain central while travelling.
 - The visitor page explains the potential of the whole worldwide wood flooring industry working together, including manufacturers, suppliers, schools, associations and trade media. It describes ambitions rather than claiming that the whole industry already participates or inventing measured impact.
 - Separate visitor, help-without-a-panel and about pages. Each participant role can enter registration directly, while changing role remains possible.

@@ -192,28 +192,28 @@ Object.assign(window.UWFL_UI, {
     "Media"
   ],
   "audMakersText": [
-    "Een paneel maken en meedoen.",
-    "Make a panel and take part.",
-    "Ein Paneel gestalten und mitmachen.",
-    "Créer un panneau et participer.",
-    "Crear un panel y participar.",
-    "Creare un pannello e partecipare."
+    "Maakt een houten paneel.",
+    "Creates a wooden panel.",
+    "Gestaltet ein Holzpaneel.",
+    "Crée un panneau en bois.",
+    "Crea un panel de madera.",
+    "Crea un pannello in legno."
   ],
   "audSponsorsText": [
-    "Het project ondersteunen.",
-    "Support the project.",
-    "Das Projekt unterstützen.",
-    "Soutenir le projet.",
-    "Apoyar el proyecto.",
-    "Sostenere il progetto."
+    "Steunt met geld, materiaal of vervoer.",
+    "Supports with funds, materials or transport.",
+    "Hilft mit Geld, Material oder Transport.",
+    "Soutient par des fonds, des matériaux ou du transport.",
+    "Apoya con fondos, materiales o transporte.",
+    "Sostiene con fondi, materiali o trasporto."
   ],
   "audOrganisationsText": [
-    "Aansluiten met jouw organisatie.",
-    "Get your organisation involved.",
-    "Als Organisation mitwirken.",
-    "Participer avec votre organisation.",
-    "Participar con tu entidad.",
-    "Partecipare con il tuo ente."
+    "Voor scholen, verenigingen en vakorganisaties.",
+    "For schools, associations and trade bodies.",
+    "Für Schulen, Vereine und Fachverbände.",
+    "Pour les écoles, associations et organismes professionnels.",
+    "Para escuelas, asociaciones y entidades del sector.",
+    "Per scuole, associazioni ed enti di settore."
   ],
   "audVisitorsText": [
     "Ontdek het project en de mensen.",
@@ -224,12 +224,12 @@ Object.assign(window.UWFL_UI, {
     "Scoprire il progetto e le persone."
   ],
   "audMediaText": [
-    "Het verhaal, beeld en perscontact.",
-    "The story, images and press contact.",
-    "Geschichte, Bilder und Pressekontakt.",
-    "Le récit, les images et le contact presse.",
-    "La historia, imágenes y contacto de prensa.",
-    "La storia, le immagini e il contatto stampa."
+    "Vertelt over het project in woord en beeld.",
+    "Shares the project through stories and images.",
+    "Erzählt vom Projekt in Wort und Bild.",
+    "Fait connaître le projet en mots et en images.",
+    "Difunde el proyecto con historias e imágenes.",
+    "Racconta il progetto con parole e immagini."
   ],
   "audienceNav": [
     "Voor wie",
