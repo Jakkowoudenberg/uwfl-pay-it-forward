@@ -34,11 +34,18 @@ function ensureReadOnly(x){assert(x.requests.every(r=>r.method==='GET'),'Preview
   for(const route of routes){await nav(x,route);assert.equal(x.d.querySelectorAll('main h1').length,1,`${lang}/${route}: heading`);assert(!/undefined|NaN|\[object Object\]/.test(x.d.querySelector('main').textContent),`${lang}/${route}: invalid content`);routeChecks++;}
   await nav(x,'read/privacy');const first=x.d.querySelector('.reader p').textContent;assert(!/—.*—/.test(first),`${lang}: optional photo wording remains`);assert(x.d.querySelector('.moderation-note'),`${lang}: moderation notice`);
   await nav(x,'read/press');for(const a of x.d.querySelectorAll('a[download]'))assert(fs.existsSync(path.join(root,a.getAttribute('href'))),`Missing press file ${a.getAttribute('href')}`);
+  await nav(x,'home');x.d.querySelector('.audience-grid a[href="#help"]').click();await pause();await pause();
+  assert.equal(x.w.location.hash,'#help','Contributor entrance did not open its own page');
+  assert.equal(x.d.querySelector('#audience-nav [aria-current="page"]').getAttribute('href'),'#help');
+  x.d.querySelector('.help-tasks a[href="#join/contributor"]').click();await pause();await pause();
+  assert(x.d.getElementById('name')&&!x.d.getElementById('trade'),'Contributor entrance opened maker registration');
+  assert.equal(x.d.querySelector('.chosen-role strong').textContent,x.w.UWFL_CONTENT.join[lang].contrib_title);
+  assert.equal(x.d.querySelector('#audience-nav [aria-current="page"]').getAttribute('href'),'#help');
   ensureReadOnly(x);x.close();
  }
  const x=await create('nl');
  await nav(x,'resources');
- for(const [term,target] of [['verzenden','#read/expo'],['hoe verstuur ik mijn paneel','#read/expo'],['kosten','#makers'],['foto','#join'],['helpen','#help'],['bouwtekening','#drawing']]){fill(x,'topic-search',term);assert(x.d.querySelector(`#topic-results a[href="${target}"]`),`Search failed: ${term}`);}
+ for(const [term,target] of [['verzenden','#read/expo'],['hoe verstuur ik mijn paneel','#read/expo'],['kosten','#makers'],['foto','#join'],['helpen','#help'],['bijdragers','#help'],['bouwtekening','#drawing']]){fill(x,'topic-search',term);assert(x.d.querySelector(`#topic-results a[href="${target}"]`),`Search failed: ${term}`);}
  await nav(x,'community');
  const numbers=()=>[...x.d.querySelectorAll('.maker-meta span:last-child')].map(e=>e.textContent);
  const firstOrder=numbers();assert.equal(firstOrder.length,4);assert.notDeepEqual(firstOrder,['#0001','#0002','#0003','#0004']);
@@ -66,5 +73,5 @@ function ensureReadOnly(x){assert(x.requests.every(r=>r.method==='GET'),'Preview
  // Verify the existing public endpoints request approved records. No external I/O.
  const originalFetch=global.fetch;let publicChecks=0;
  try{for(const name of ['participants','sponsors','organisations','panels']){global.fetch=async url=>{assert.equal(new URL(url).searchParams.get('status'),'eq.approved',`${name}: public endpoint does not filter approval`);publicChecks++;return {ok:true,json:async()=>[]};};process.env.SUPABASE_URL='https://qa.invalid';process.env.SUPABASE_SERVICE_KEY='test-only';const handler=require(path.join(root,'../netlify/functions',name+'.js')).handler;const response=await handler({httpMethod:'GET',headers:{}});assert.equal(response.statusCode,200);}}finally{global.fetch=originalFetch;}
- console.log(JSON.stringify({routeChecks,languages:6,searchChecks:6,registrationRoles:4,logoFlows:2,panelFlow:1,publicApprovalFilters:publicChecks,shuffleAndFilter:'passed',privateEnquiryIsolation:'passed',roleChange:'passed',previewMutations:0}));
+ console.log(JSON.stringify({routeChecks,languages:6,contributorEntrances:6,searchChecks:7,registrationRoles:4,logoFlows:2,panelFlow:1,publicApprovalFilters:publicChecks,shuffleAndFilter:'passed',privateEnquiryIsolation:'passed',roleChange:'passed',previewMutations:0}));
 })().catch(error=>{console.error(error.message);process.exit(1);});

@@ -9,7 +9,7 @@ and his reason for starting UWFL.
 
 ## Included
 
-- A homepage with five clear entrances: makers, sponsors, organisations, visitors and media. Jakko's portrait, credited to Cora Deutecom, an exact quote from his original story and a link to that story introduce the initiator.
+- A homepage with six clear entrances: makers, contributors, sponsors, organisations, visitors and media. Jakko's portrait, credited to Cora Deutecom, an exact quote from his original story and a link to that story introduce the initiator.
 - The concrete project purpose comes before the entrances: make wooden panels into one artwork, learn and pass on craft, help three people, then travel and eventually donate. An ordered journey explains how showing the art in the craft, involving people and encouraging help remain central while travelling.
 - The visitor page explains the potential of the whole worldwide wood flooring industry working together, including manufacturers, suppliers, schools, associations and trade media. It describes ambitions rather than claiming that the whole industry already participates or inventing measured impact.
 - Separate visitor, help-without-a-panel and about pages. Each participant role can enter registration directly, while changing role remains possible.
@@ -54,7 +54,7 @@ The generic headline/diagram copy and the sponsor introduction are design propos
 - Participant route with example details, back navigation, missing-photo feedback, local test image, review and simulated completion.
 - Sponsor enquiry with sample content and simulated confirmation.
 
-The 16 September revision additionally passes 186 offline route/language renders, six full-content search checks, required-photo checks for all four participant roles, both partner-logo flows, the panel upload flow, private-enquiry isolation and visit-stable shuffle checks. Mocked server-function tests verify the four public queries request approved records. All preview network writes are blocked by the test harness; simulated submissions do not append public cards.
+The 16 September revision additionally passes 186 offline route/language renders, seven full-content search checks, required-photo checks for all four participant roles, both partner-logo flows, the panel upload flow, private-enquiry isolation and visit-stable shuffle checks. Mocked server-function tests verify the four public queries request approved records. All preview network writes are blocked by the test harness; simulated submissions do not append public cards.
 
 Run `JSDOM_PATH=/path/to/jsdom node scripts/check-preview.cjs` from the repository root. The optional QA dependency is kept outside the repository and is not needed to serve the preview. Regenerate the nine-file press archive with `node scripts/build-preview-press.cjs`; this uses Node and Python's standard ZIP library.
 
@@ -62,12 +62,18 @@ This folder can be served by any static web server. It needs no package installa
 
 ## Navigation revision after feedback
 
-Jakko found the first design too long and hard to navigate. The homepage now introduces the project immediately and offers five audience entrances. Sponsors and organisations have separate pages; media gets prominent press-contact and gallery actions. A compact footer and expandable related topics replace long menus and the horizontally scrolling article navigation. These are preview-only interface changes, not backend changes.
+Jakko found the first design too long and hard to navigate. The homepage now introduces the project immediately and offers six audience entrances. Sponsors and organisations have separate pages; media gets prominent press-contact and gallery actions. A compact footer and expandable related topics replace long menus and the horizontally scrolling article navigation. These are preview-only interface changes, not backend changes.
 
-The draft has been reviewed at 320px, 390px, 768px and a desktop viewport. The five audience routes remain available in a fixed mobile bar, with extra room for long organisation labels. Public totals load from the existing read endpoint, without hardcoded fallback counts. The homepage prioritises the project explanation and entrances, followed by the initiator on mobile. The press ZIP has been downloaded and checked against its source archive. The production deployment remains unchanged.
+The draft has been reviewed at 320px, 390px, 768px and a desktop viewport. The six audience routes remain available in a fixed mobile bar, with extra room for long organisation labels. Public totals load from the existing read endpoint, without hardcoded fallback counts. The homepage prioritises the project explanation and entrances, followed by the initiator on mobile. The press ZIP has been downloaded and checked against its source archive. The production deployment remains unchanged.
 
 ## Purpose revision after Jakko's clarification
 
 Jakko asked for the strength of the entire worldwide wood flooring industry to be clear alongside the practical purpose. The start now uses four visible points rather than relying on visitors opening articles. The audience entrances sit together below them, and retain their fixed mobile navigation. Jakko's founder feature remains on the start page.
 
 The journey order is explicit: make together, travel/show/involve people, and eventually donate after travelling. Makers may also lay the floor at the recipient location or locations. The work is never sold. Learning from each other, passing skills to younger generations and presenting the craft as art are reflected in the visitor, maker, organisation, sponsor and about pages, and in all six press sheets. The information search includes a direct result for the project purpose. These changes use Jakko's clarified intent; the original long-form stories have not been rewritten.
+
+## Contributors without a panel
+
+Contributors now have their own entrance next to makers, with the same prominence in the homepage grid and persistent navigation. They can support the project with time, knowledge, transport, communication, photography, translation or other skills without making a panel. Their promise to help three people and ask them to pass the help on is explicit on the homepage, contributor page, registration role card and all six press sheets. The existing `contributor` role is reused; no schema change is needed.
+
+The contributor page links directly to the correct registration role. It also retains the participant and student options. Required photos and review before publication continue to apply. Mobile navigation uses two rows of three links to keep every audience readable and reachable. The repeated “art floor: One Artfloor” wording has been removed from the short introduction in all six languages. Original long-form source content is unchanged.

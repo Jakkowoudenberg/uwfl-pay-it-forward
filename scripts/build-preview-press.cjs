@@ -15,7 +15,7 @@ for(const [i,lang] of locales.entries()){
  const quote=plain((body.match(/<p>[^<]*<strong>[^<]*<\/strong>[^<]*<\/p>/)||[''])[0]);
  const text=[
   'UNITED WOOD FLOOR LAYERS - PAY IT FORWARD',t('pressFactSheet'),
-  '',t('heroIntro'),'',t('collectiveTitle'),t('collectiveIntro'),
+  '',t('heroIntro'),'',t('audContributors'),t('helpIntro'),'',t('collectiveTitle'),t('collectiveIntro'),
   ...['Knowledge','Reach','Craft'].flatMap(key=>['',t('collective'+key+'Title'),t('collective'+key+'Text')]),
   '',t('journeyTitle'),
   ...['Make','Travel','Gift'].flatMap((key,i)=>['',`${i+1}. ${t('journey'+key+'Title')}`,t('journey'+key+'Text')]),

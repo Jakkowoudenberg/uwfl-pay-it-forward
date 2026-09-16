@@ -75,10 +75,20 @@ Jakko heeft na het bekijken van de ontwerpversie de kern verder verduidelijkt:
   publieke locaties. De makers kunnen de vloer daar ook gezamenlijk leggen.
   Het kunstwerk wordt nooit verkocht.
 - De eerste blik op de startpagina moet de concrete bedoeling én de gezamenlijke
-  ambitie begrijpelijk maken. De vijf bezoekersroutes blijven direct bereikbaar.
+  ambitie begrijpelijk maken. De zes bezoekersroutes blijven direct bereikbaar.
 - Mogelijke gezamenlijke impact wordt als ambitie uitgelegd. Geen verzonnen
   resultaten, gegarandeerde aantallen geholpen mensen of claim dat de hele
   branche al meedoet.
+
+## Bijdragers zonder paneel
+
+- Bijdragers krijgen een eigen, gelijkwaardige ingang naast makers, sponsors,
+  organisaties, bezoekers en media.
+- Zij kunnen het project steunen zonder zelf een paneel te maken, bijvoorbeeld
+  met vervoer, communicatie, fotografie, vertalen, kennis of tijd.
+- Ook iedere bijdrager helpt drie mensen en vraagt hun die hulp door te geven.
+- De aanmelding gebruikt de bestaande rol `contributor`. De verplichte foto,
+  goedkeuring door Jakko en gelijkwaardige zichtbaarheid gelden ook voor hen.
 
 ## Stand na de ontwerpverbeteringen
 
