@@ -509,5 +509,13 @@ var JOIN_TEXTS = {
     sending:'Invio...'
   }
 };
+LANG.pt=LANG.en;
+LANG.pl=LANG.en;
+JOIN_TEXTS.pt=JOIN_TEXTS.en;
+JOIN_TEXTS.pl=JOIN_TEXTS.en;
+BACKPANEL.pt=BACKPANEL.en;
+BACKPANEL.pl=BACKPANEL.en;
+DRW_TEXTS.pt=DRW_TEXTS.en;
+DRW_TEXTS.pl=DRW_TEXTS.en;
 
 window.UWFL_CONTENT={languages:LANG,join:JOIN_TEXTS,backPanel:BACKPANEL,makeDrawing:makeSVG};

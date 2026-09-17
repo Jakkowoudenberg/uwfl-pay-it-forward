@@ -226,5 +226,5 @@ it:{
  organisationIntro:'Collegate la vostra scuola, associazione o organizzazione professionale agli autori di tutto il settore. Trasmettete conoscenze e coinvolgete la vostra rete nell’opera e nell’aiuto agli altri.'
 }
 };
-for(const key of Object.keys(copy.nl))window.UWFL_UI[key]=window.UWFL_LOCALES.map(lang=>copy[lang][key]);
+for(const key of Object.keys(copy.nl))window.UWFL_UI[key]=window.UWFL_LOCALES.map(lang=>(copy[lang]||copy.en)[key]);
 })();

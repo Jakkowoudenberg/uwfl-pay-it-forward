@@ -273,10 +273,10 @@ it:{
  contactTransportText:'Puoi offrire spazi, trasporto o contatti nella tua regione? Parla con il team UWFL di come contribuire.'
 }
 };
-for(const key of Object.keys(copy.nl))window.UWFL_UI[key]=window.UWFL_LOCALES.map(lang=>copy[lang][key]);
+for(const key of Object.keys(copy.nl))window.UWFL_UI[key]=window.UWFL_LOCALES.map(lang=>(copy[lang]||copy.en)[key]);
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 for(const lang of window.UWFL_LOCALES){
- const text=copy[lang],data=window.UWFL_CONTENT.languages[lang];
+ const text=copy[lang]||copy.en,data=window.UWFL_CONTENT.languages[lang]||window.UWFL_CONTENT.languages.en;
  const paragraphs=keys=>keys.map(key=>`<p>${escape(text[key])}</p>`).join('');
  data.ql.expo=text.expoDetails;
  data.cards.expo={title:text.logisticsTitle,body:paragraphs(['regionalIntro','openEnd','americasText','euText','otherText','privateText','expoIntro','expoSelection','photoDeadline','arrivalDeadline','expoDatesNote','packingText'])};

@@ -65,7 +65,7 @@ const websiteJson = {
   '@type': 'WebSite',
   name: 'United Woodfloor Layers — Pay It Forward',
   url: site + '/',
-  inLanguage: ['en', 'nl', 'de', 'fr', 'es', 'it'],
+  inLanguage: ['en', 'nl', 'de', 'fr', 'es', 'it', 'pt', 'pl'],
   description: 'Information, registration and public profiles for the United Woodfloor Layers Pay It Forward project.'
 };
 
