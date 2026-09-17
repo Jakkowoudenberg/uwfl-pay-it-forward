@@ -9,6 +9,7 @@ const headers = {
   'Cache-Control': 'no-store',
   'X-Content-Type-Options': 'nosniff'
 };
+const recaptchaSecret = () => process.env.RECAPTCHA_SECRET_KEY || process.env.RECAPTCHA_SECRET || '';
 const reply = (code, data) => ({ statusCode: code, headers, body: JSON.stringify(data) });
 const fail = (code, message) => { const error = new Error(message); error.status = code; throw error; };
 const uuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
@@ -38,6 +39,21 @@ const language = value => ['nl','en','de','fr','es','it'].includes(value) ? valu
 function body(event) {
   try { const data = JSON.parse(event.body || '{}'); if (!data || Array.isArray(data) || typeof data !== 'object') throw new Error(); return data; }
   catch { fail(400, 'invalid_json'); }
+}
+async function recaptcha(data, action) {
+  const secret = recaptchaSecret();
+  if (!secret) return;
+  const token = text(data.recaptcha_token, 4096, true);
+  const params = new URLSearchParams({ secret, response: token });
+  const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params,
+    signal: AbortSignal.timeout(8000)
+  });
+  if (!response.ok) fail(400, 'recaptcha_failed');
+  const result = await response.json();
+  if (!result.success || (result.action && result.action !== action) || Number(result.score || 0) < 0.4) fail(400, 'recaptcha_failed');
 }
 function admin(event) {
   const given = String(event.headers?.['x-admin-key'] || event.headers?.['X-Admin-Key'] || '');
@@ -95,4 +111,4 @@ async function insert(table, row) {
   if (!previous[0]) fail(409, 'submission_unconfirmed');
   return { row: previous[0], fresh: false };
 }
-module.exports = { headers, reply, fail, uuid, validId, text, email, website, country, language, body, admin, limit, endpoint, config, db, storage, insert };
+module.exports = { headers, reply, fail, uuid, validId, text, email, website, country, language, body, recaptcha, admin, limit, endpoint, config, db, storage, insert };

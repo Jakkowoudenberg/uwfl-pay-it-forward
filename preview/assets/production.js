@@ -15,6 +15,7 @@ const copy={
  liveCredentials:['De combinatie van deelnemersnummer en e-mailadres klopt niet. Controleer je bevestigingsmail of neem contact op.','The participant number and email do not match. Check your confirmation email or contact us.','Teilnehmernummer und E-Mail stimmen nicht überein. Prüfe deine Bestätigung oder kontaktiere uns.','Le numéro et l’e-mail ne correspondent pas. Vérifiez votre confirmation ou contactez-nous.','El número y el correo no coinciden. Revisa tu confirmación o contáctanos.','Numero ed e-mail non corrispondono. Controlla la conferma o contattaci.'],
  liveInvalid:['Controleer je gegevens en verplichte foto of logo. Gebruik bij een website het volledige https://-adres.','Check your details and required photo or logo. Use a full https:// address for a website.','Prüfe deine Angaben und das erforderliche Foto oder Logo. Gib Websites vollständig mit https:// an.','Vérifiez vos données et la photo ou le logo obligatoire. Utilisez une adresse de site complète avec https://.','Revisa tus datos y la foto o logo obligatorio. Usa una dirección web completa con https://.','Controlla i dati e la foto o il logo obbligatorio. Usa l’indirizzo web completo con https://.'],
  liveRate:['Even wachten: er zijn kort achter elkaar meerdere verzoeken gedaan. Probeer het over een minuut opnieuw.','Please wait: several requests were made in a short time. Try again in a minute.','Bitte warte: mehrere Anfragen in kurzer Zeit. Versuche es in einer Minute erneut.','Veuillez patienter : plusieurs demandes rapprochées. Réessayez dans une minute.','Espera un momento: se han hecho varias solicitudes seguidas. Reinténtalo en un minuto.','Attendi: sono state fatte più richieste ravvicinate. Riprova tra un minuto.'],
+ liveCaptcha:['De beveiligingscontrole lukte niet. Ververs de pagina en probeer opnieuw.','The security check failed. Refresh the page and try again.','Die Sicherheitsprüfung ist fehlgeschlagen. Lade die Seite neu und versuche es erneut.','Le contrôle de sécurité a échoué. Actualisez la page et réessayez.','La comprobación de seguridad falló. Actualiza la página e inténtalo de nuevo.','Il controllo di sicurezza non è riuscito. Aggiorna la pagina e riprova.'],
  liveImages:['Kies maximaal acht foto’s, elk maximaal 5 MB.','Choose up to eight photos, each up to 5 MB.','Wähle bis zu acht Fotos mit jeweils höchstens 5 MB.','Choisissez jusqu’à huit photos de 5 Mo maximum chacune.','Elige hasta ocho fotos de un máximo de 5 MB cada una.','Scegli fino a otto foto da massimo 5 MB ciascuna.'],
  liveMailNote:['Je inzending is opgeslagen. De ontvangst van de bevestigingsmail kon niet worden gecontroleerd. Bewaar je deelnemersnummer en neem bij vragen contact op.','Your submission is saved. Receipt of the confirmation email could not be verified. Keep your participant number and contact us with any questions.','Dein Beitrag ist gespeichert. Der Empfang der Bestätigungs-E-Mail konnte nicht geprüft werden. Bewahre deine Teilnehmernummer auf und kontaktiere uns bei Fragen.','Votre envoi est enregistré. La réception du courriel n’a pas pu être vérifiée. Conservez votre numéro et contactez-nous en cas de question.','Tu envío está guardado. No se pudo verificar la recepción del correo. Guarda tu número y contáctanos si tienes preguntas.','Il tuo invio è salvato. La ricezione dell’e-mail non è stata verificata. Conserva il numero e contattaci per domande.'],
  adminLiveNote:['Inzendingen verschijnen pas na goedkeuring. Contactberichten blijven privé.','Submissions appear only after approval. Contact messages stay private.','Beiträge erscheinen erst nach Freigabe. Kontaktnachrichten bleiben privat.','Les envois apparaissent après validation. Les messages restent privés.','Los envíos aparecen tras su aprobación. Los mensajes son privados.','Gli invii appaiono dopo l’approvazione. I messaggi rimangono privati.'],
@@ -30,10 +31,21 @@ const copy={
 };
 Object.assign(window.UWFL_UI,copy);
 const uploaded=new WeakMap();
-async function post(endpoint,data){
+const RECAPTCHA_SITE_KEY='6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B';
+function recaptcha(action){
+ return new Promise((resolve,reject)=>{
+  if(!window.grecaptcha?.ready){resolve('');return;}
+  const timer=setTimeout(()=>reject(Object.assign(new Error('recaptcha_failed'),{code:'recaptcha_failed'})),9000);
+  window.grecaptcha.ready(()=>{
+   window.grecaptcha.execute(RECAPTCHA_SITE_KEY,{action}).then(token=>{clearTimeout(timer);resolve(token||'');},error=>{clearTimeout(timer);reject(Object.assign(error instanceof Error?error:new Error('recaptcha_failed'),{code:'recaptcha_failed'}));});
+  });
+ });
+}
+async function post(endpoint,data,action='submit'){
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),55000);
  try{
-  const response=await fetch('/.netlify/functions/'+endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),credentials:'omit',signal:controller.signal});
+  const token=await recaptcha(action);
+  const response=await fetch('/.netlify/functions/'+endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,recaptcha_token:token}),credentials:'omit',signal:controller.signal});
   const result=await response.json();
   if(!response.ok||result.ok===false){const error=new Error(result.error||'service_unavailable');error.code=result.error;throw error;}
   return result;
@@ -56,7 +68,7 @@ async function imageData(file){
 async function upload(file,endpoint,extra={}){
  let known=uploaded.get(file);if(!known){known=new Map();uploaded.set(file,known);}
  if(known.has(endpoint))return known.get(endpoint);
- const task=(async()=>{const image=await imageData(file);const result=await post(endpoint,{...image,...extra});if(!result.url)throw new Error('upload_failed');return result.url;})();
+ const task=(async()=>{const image=await imageData(file);const result=await post(endpoint,{...image,...extra},'upload');if(!result.url)throw new Error('upload_failed');return result.url;})();
  known.set(endpoint,task);
  try{return await task;}catch(error){known.delete(endpoint);throw error;}
 }
@@ -65,22 +77,22 @@ function selectedCountry(draft,key){return draft[key]==='Other'?draft[key+'-othe
 window.UWFL_SUBMIT={
  async join(draft,photo,lang){
   const data={request_id:id(draft),naam:draft.name,bedrijf:draft.company,email:draft.email,land:selectedCountry(draft,'country'),telefoon:draft.phone,vak:draft.trade,bericht:draft.story,type:{maker:'Maker',contributor:'Contributor',participant:'Participant',student:'Student'}[draft.role],social_post:draft.share,lang};
-  data.photo_url=await upload(photo.file,'upload-photo');return post('register',data);
+  data.photo_url=await upload(photo.file,'upload-photo');return post('register',data,'register');
  },
- lookup(draft){return post('panel-lookup',{participant_number:draft['participant-number'],email:draft['panel-email']});},
+ lookup(draft){return post('panel-lookup',{participant_number:draft['participant-number'],email:draft['panel-email']},'lookup');},
  async panel(draft,photos,lang){
   const data={...window.UWFL_PANEL.fromDraft(draft),request_id:id(draft),participant_number:draft['participant-number'],email:draft['panel-email'],shipping_country:selectedCountry(draft,'shipping-country'),lang};
   if(!photos.length||photos.length>8)throw new Error('image_required');
   data.photos=[];
   for(const photo of photos)data.photos.push(await upload(photo.file,'panel-photo',{participant_number:data.participant_number,email:data.email}));
-  return post('panel-submit',data);
+  return post('panel-submit',data,'panel');
  },
  async profile(kind,draft,logo,lang){
   const org=kind!=='sponsor';
   const data={request_id:id(draft),company:draft['contact-company'],name:draft['contact-company'],country:selectedCountry(draft,'profile-country'),contact_email:draft['contact-email'],submitter_email:draft['contact-email'],contact_phone:draft['contact-phone'],contact_website:draft['contact-website'],why:draft.why,what:draft.what,role:[draft.why,draft.what].filter(Boolean).join('\n\n'),category:kind==='media-partner'?'media':'organisation',lang};
-  data.logo_url=await upload(logo.file,org?'org-logo':'sponsor-logo');return post(org?'org-submit':'sponsor-submit',data);
+  data.logo_url=await upload(logo.file,org?'org-logo':'sponsor-logo');return post(org?'org-submit':'sponsor-submit',data,org?'organisation':'sponsor');
  },
- contact(draft,context,lang){return post('contact-submit',{request_id:id(draft),name:draft['contact-name'],company:draft['contact-company'],email:draft['contact-email'],message:draft['contact-message'],context,lang});},
- error(error){if(error.code==='credentials_mismatch'||error.code==='missing_credentials')return 'liveCredentials';if(error.code==='rate_limited')return 'liveRate';if(/invalid_|image_|missing_/.test(error.code||error.message))return 'liveInvalid';return 'liveError';}
+ contact(draft,context,lang){return post('contact-submit',{request_id:id(draft),name:draft['contact-name'],company:draft['contact-company'],email:draft['contact-email'],message:draft['contact-message'],context,lang},'contact');},
+ error(error){if(error.code==='credentials_mismatch'||error.code==='missing_credentials')return 'liveCredentials';if(error.code==='rate_limited')return 'liveRate';if(error.code==='recaptcha_failed')return 'liveCaptcha';if(/invalid_|image_|missing_/.test(error.code||error.message))return 'liveInvalid';return 'liveError';}
 };
 })();

@@ -96,6 +96,7 @@ for (const file of ['index.html', 'admin.html']) {
   <meta name="twitter:title" content="United Woodfloor Layers — Pay It Forward">
   <meta name="twitter:description" content="A worldwide wood flooring movement where makers create one shared artwork, share craftsmanship and help three people.">
   <meta name="twitter:image" content="${site}/og-uwfl-2026.jpg">
+  <script src="https://www.google.com/recaptcha/api.js?render=6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B" async defer></script>
   <script type="application/ld+json">${JSON.stringify(organizationJson)}</script>
   <script type="application/ld+json">${JSON.stringify(websiteJson)}</script>
   <style>#preview-note{display:none}.registration-number{font-size:1.35rem;margin:1.5rem 0}form[aria-busy=true]{opacity:.8}</style>
@@ -271,7 +272,7 @@ fs.writeFileSync(path.join(out, '_headers'), `/*
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: blob: data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; frame-src 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: blob: data:; connect-src 'self' https://www.google.com/recaptcha/; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; frame-src 'self' https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/
 /index.html
   Cache-Control: no-cache
 /
