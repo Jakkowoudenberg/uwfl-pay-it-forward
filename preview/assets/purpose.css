@@ -16,6 +16,9 @@
 .mission-home .welcome-choices .task-card>.icon{display:none}
 .mission-home .welcome-choices .task-copy strong{font-size:.92rem}
 .mission-home .welcome-choices .task-copy small{display:block;font-size:.8rem;line-height:1.45;margin-top:5px;overflow-wrap:anywhere}
+.mission-home .choice-help{margin:12px 0 0;font-size:.82rem;line-height:1.55;color:var(--muted)}
+.mission-home .choice-help a{font-weight:700;color:var(--ink);text-decoration:none}
+.mission-home .choice-help a:hover{color:var(--accent)}
 .mission-home .founder-story{padding:21px 24px 23px}
 .mission-home .founder-story blockquote{font-size:1.01rem;line-height:1.65}
 .journey-section{border-top:1px solid var(--line);margin-top:34px;padding-top:28px}
