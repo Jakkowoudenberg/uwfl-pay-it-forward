@@ -54,7 +54,10 @@ function header(){
  document.getElementById('preview-note').textContent=t('preview');
  document.querySelector('.skip-link').textContent=({nl:'Ga naar de inhoud',en:'Skip to content',de:'Zum Inhalt',fr:'Aller au contenu',es:'Ir al contenido',it:'Vai al contenuto'}[lang]);
  const navItems=bottom=>nav.map(([label,,href,i])=>`<a href="${href}"${active===href?' aria-current="page"':''}>${bottom?icon(i,21):''}<span>${t(label)}</span></a>`).join('');
- document.getElementById('header').innerHTML=`<div class="shell header-inner">${brand()}<nav class="desktop-nav" aria-label="${t('audienceNav')}">${navItems(false)}</nav><div class="header-tools"><a class="panel-shortcut${['panel','upload','drawing','idea'].includes(route)?' selected':''}" href="#panel">${icon('panel',17)}${t('myPanel')}</a><label class="language">${icon('globe',17)}<select id="language" aria-label="${t('language')}">${locales.map(l=>`<option value="${l}" ${l===lang?'selected':''}>${l.toUpperCase()}</option>`).join('')}</select></label></div></div>`;
+ const menuLinks=[
+  [t('start'),'#home'],[t('allInfo'),'#resources'],[t('myPanel'),'#panel'],[q('specs'),'#drawing'],[t('submitPanel'),'#upload'],[q('galerij'),'#gallery'],[q('payitforward'),'#read/payitforward'],[t('socialShare'),'#read/share'],[q('contact'),'#contact']
+ ];
+ document.getElementById('header').innerHTML=`<div class="shell header-inner">${brand()}<nav class="desktop-nav" aria-label="${t('audienceNav')}">${navItems(false)}</nav><div class="header-tools"><a class="panel-shortcut${['panel','upload','drawing','idea'].includes(route)?' selected':''}" href="#panel">${icon('panel',17)}${t('myPanel')}</a><details class="site-menu"><summary>${icon('menu',17)}<span>${t('menu')}</span></summary><div>${nav.map(([label,,href])=>`<a href="${href}">${t(label)}</a>`).join('')}${menuLinks.map(([label,href])=>`<a href="${href}">${label}</a>`).join('')}<a class="admin-entry" href="admin.html">${icon('key',16)}${t('adminOpen')}</a></div></details><label class="language">${icon('globe',17)}<select id="language" aria-label="${t('language')}">${locales.map(l=>`<option value="${l}" ${l===lang?'selected':''}>${l.toUpperCase()}</option>`).join('')}</select></label></div></div>`;
  document.getElementById('audience-nav').innerHTML=navItems(true);
  document.getElementById('audience-nav').setAttribute('aria-label',t('audienceNav'));
 }
