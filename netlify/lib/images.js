@@ -1,6 +1,6 @@
 'use strict';
 const crypto = require('node:crypto');
-const { fail, config, storage, endpoint, body, limit } = require('./core');
+const { fail, config, storage, endpoint, body, limit, recaptcha } = require('./core');
 const buckets = ['participant-photos','panel-photos','sponsor-logos','org-logos'];
 const types = { jpg: 'image/jpeg', png: 'image/png', webp: 'image/webp' };
 function pendingPath(value, bucket) {
@@ -36,6 +36,7 @@ function upload(bucket, authenticate) {
   return endpoint('POST', async event => {
     limit(event, 24);
     const data = body(event);
+    await recaptcha(data, 'upload');
     if (authenticate) await authenticate(data);
     const image = decode(data), path = bucket + '/' + crypto.randomUUID() + '.' + image.ext;
     const response = await storage('object/uwfl-review/' + path, { method:'POST', headers: { 'Content-Type': image.type, 'x-upsert':'false' }, body:image.bytes });

@@ -2,14 +2,15 @@
 const crypto = require('node:crypto');
 const c = require('./core'), images = require('./images'), { participant } = require('./participant'), { notify } = require('./mail');
 function requestId(data) { return data.request_id || crypto.randomUUID(); }
-function prepare(event) {
+async function prepare(event, action) {
   c.limit(event, 8);
   const data = c.body(event);
   if (data.website_confirm) c.fail(400, 'invalid_fields');
+  await c.recaptcha(data, action);
   return data;
 }
 async function register(event) {
-  const d = prepare(event);
+  const d = await prepare(event, 'register');
   const type = c.text(d.type, 30, true);
   if (!['Maker','Contributor','Participant','Student'].includes(type)) c.fail(400, 'invalid_fields');
   const row = {
@@ -24,7 +25,7 @@ async function register(event) {
   return { ok:true, id:saved.id, participant_number:saved.participant_number, notification };
 }
 async function panel(event) {
-  const d = prepare(event), reg = await participant(d);
+  const d = await prepare(event, 'panel'), reg = await participant(d);
   const photos = Array.isArray(d.photos) ? d.photos : [];
   if (!photos.length || photos.length > 8) c.fail(400,'image_required');
   for (const value of photos) await images.exists(value,'panel-photos');
@@ -44,7 +45,7 @@ async function panel(event) {
 }
 function partner(isOrganisation) {
   return async event => {
-    const d = prepare(event), bucket = isOrganisation ? 'org-logos' : 'sponsor-logos';
+    const d = await prepare(event, isOrganisation ? 'organisation' : 'sponsor'), bucket = isOrganisation ? 'org-logos' : 'sponsor-logos';
     const row = {
       request_id:requestId(d), country:c.country(d.country,false) || null,
       logo_url:images.assertImage(d.logo_url,bucket), contact_website:c.website(d.contact_website),
@@ -63,7 +64,7 @@ function partner(isOrganisation) {
   };
 }
 async function contact(event) {
-  const d = prepare(event);
+  const d = await prepare(event, 'contact');
   const row = { request_id:requestId(d),name:c.text(d.name,120,true),company:c.text(d.company,200) || null,
     email:c.email(d.email),message:c.text(d.message,6000,true),context:c.text(d.context,80) || 'contact',lang:c.language(d.lang),status:'pending' };
   const result = await c.insert('uwfl_messages',row),saved = { ...row,...result.row };
