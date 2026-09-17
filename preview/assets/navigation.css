@@ -8,6 +8,7 @@
 .desktop-nav a[aria-current=page]{border-color:var(--accent-dark)}
 .panel-shortcut{display:flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;white-space:nowrap;font-size:.8rem;font-weight:600}
 .panel-shortcut:hover,.panel-shortcut.selected{background:var(--wash);border-color:#a7b7ab}
+.language select{width:112px;text-overflow:ellipsis}
 .site-menu{position:relative}
 .site-menu summary{list-style:none;display:flex;align-items:center;gap:7px;min-height:39px;padding:8px 11px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:.8rem;font-weight:600;line-height:1.2;cursor:pointer}
 .site-menu summary::-webkit-details-marker{display:none}
@@ -138,7 +139,7 @@
 @media(max-width:700px){
  html{scroll-padding-top:94px}.shell{width:calc(100% - 36px)}
  .header-inner{height:74px;gap:10px}.site-header .brand img{width:54px;height:54px}.brand img{width:34px;height:34px}.brand-name{font-size:.875rem;max-width:82px}.brand-name small{font-size:.44rem;margin-top:5px}.brand{gap:8px}
- .header-tools{gap:7px}.panel-shortcut{font-size:.72rem;gap:6px;padding:7px 9px}.panel-shortcut>.icon{width:15px;height:15px}.site-menu summary{font-size:.72rem;min-height:35px;padding:7px 9px}.site-menu summary>.icon{width:15px;height:15px}.site-menu>div{right:-47px;grid-template-columns:1fr;width:min(310px,calc(100vw - 24px));max-height:min(70vh,560px);overflow:auto}.language>svg{display:none}.language select{width:41px;font-size:.74rem}
+ .header-tools{gap:7px}.panel-shortcut{font-size:.72rem;gap:6px;padding:7px 9px}.panel-shortcut>.icon{width:15px;height:15px}.site-menu summary{font-size:.72rem;min-height:35px;padding:7px 9px}.site-menu summary>.icon{width:15px;height:15px}.site-menu>div{right:-47px;grid-template-columns:1fr;width:min(310px,calc(100vw - 24px));max-height:min(70vh,560px);overflow:auto}.language>svg{display:none}.language select{width:92px;font-size:.74rem}
  .start-page{padding-block:23px 20px}.start-intro{display:block;position:relative}.start-copy .eyebrow{font-size:.56rem;letter-spacing:.07em;margin-bottom:13px}
  .start-copy h1{font-size:1.62rem;line-height:1.18;max-width:100%;padding-right:72px;min-height:90px;letter-spacing:-.04em}
  .start-copy>p{font-size:.86rem;line-height:1.6;margin-top:12px;max-width:100%}
@@ -167,7 +168,7 @@
 }
 @media(max-width:370px){
  .shell,.audience-page{width:calc(100% - 28px)}.brand-name{font-size:.82rem;max-width:76px}.brand-name small{font-size:.4rem}.brand img{width:31px;height:31px}.site-header .brand img{width:50px;height:50px}.brand{gap:6px}
- .header-tools{gap:5px}.panel-shortcut{font-size:.68rem;padding:7px}.panel-shortcut>.icon,.site-menu summary>.icon{display:none}.site-menu summary{font-size:.68rem;padding:7px}.site-menu>div{right:-44px}.language select{width:39px}
+ .header-tools{gap:5px}.panel-shortcut{font-size:.68rem;padding:7px}.panel-shortcut>.icon,.site-menu summary>.icon{display:none}.site-menu summary{font-size:.68rem;padding:7px}.site-menu>div{right:-44px}.language select{width:82px;font-size:.68rem}
  .start-copy h1{font-size:1.48rem;padding-right:57px;min-height:85px}.start-image{width:50px;height:86px}.start-copy .eyebrow{font-size:.52rem;letter-spacing:.025em}
  .start-copy>p{font-size:.83rem}.task-card{gap:10px;padding:11px}.task-copy small{font-size:.7rem}.task-copy strong{font-size:.9rem}
  .audience-nav a{font-size:.6rem}.audience-nav a>.icon{width:19px;height:19px}

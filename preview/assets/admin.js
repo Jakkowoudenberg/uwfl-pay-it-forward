@@ -19,6 +19,7 @@ const controllers=new Set();
 try{const saved=localStorage.getItem('uwfl_preview_lang'),detected=(navigator.language||'en').slice(0,2);lang=locales.includes(saved)?saved:(locales.includes(detected)?detected:'en');}catch{}
 const localeIndex=language=>locales.indexOf(language);
 const t=key=>window.UWFL_LOCALE_OVERRIDES?.[lang]?.[key]??window.UWFL_UI[key]?.[localeIndex(lang)]??window.UWFL_UI[key]?.[localeIndex('en')]??key;
+const languageName=language=>({nl:'Nederlands',en:'English',de:'Deutsch',fr:'Français',es:'Español',it:'Italiano',pt:'Português',pl:'Polski'}[language]||language.toUpperCase());
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const validId=value=>/^(?:[0-9]+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(String(value??''));
 const title=(group,row)=>group==='mail'?`${row.kind} #${row.record_id} · ${row.state}`:String(group==='panels'?(row.artwork_name||`#${row.participant_number||row.id}`):(group==='sponsors'?row.company:row.name)||`#${row.id}`);
@@ -58,7 +59,7 @@ function endSession(reason=''){
 }
 function header(){
  document.documentElement.lang=lang;document.title=t('adminTitle')+' · United Woodfloor Layers';
- document.getElementById('admin-header').innerHTML=`<div class="shell header-inner"><a class="brand" href="./#home" aria-label="United Woodfloor Layers — Pay It Forward"><img src="assets/uwfl-logo.jpg" alt="" width="68" height="68"><span class="brand-name">United <span>Woodfloor Layers</span><small>PAY IT FORWARD</small></span></a><div class="header-tools"><select id="admin-language" aria-label="${t('language')}" ${busy?'disabled':''}>${locales.map(l=>`<option value="${l}" ${l===lang?'selected':''}>${l.toUpperCase()}</option>`).join('')}</select>${authenticated?`<button class="button outline small" type="button" data-admin="logout">${t('adminLogout')}</button>`:''}</div></div>`;
+ document.getElementById('admin-header').innerHTML=`<div class="shell header-inner"><a class="brand" href="./#home" aria-label="United Woodfloor Layers — Pay It Forward"><img src="assets/uwfl-logo.jpg" alt="" width="68" height="68"><span class="brand-name">United <span>Woodfloor Layers</span><small>PAY IT FORWARD</small></span></a><div class="header-tools"><select id="admin-language" aria-label="${t('language')}" ${busy?'disabled':''}>${locales.map(l=>`<option value="${l}" ${l===lang?'selected':''}>${languageName(l)}</option>`).join('')}</select>${authenticated?`<button class="button outline small" type="button" data-admin="logout">${t('adminLogout')}</button>`:''}</div></div>`;
 }
 function render(){
  header();
