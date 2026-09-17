@@ -17,7 +17,8 @@ let lang='en',password='',authenticated=demo,busy=false,epoch=0,current='registr
 let queues={};
 const controllers=new Set();
 try{const saved=localStorage.getItem('uwfl_preview_lang'),detected=(navigator.language||'en').slice(0,2);lang=locales.includes(saved)?saved:(locales.includes(detected)?detected:'en');}catch{}
-const t=key=>window.UWFL_UI[key]?.[locales.indexOf(lang)]??key;
+const localeIndex=language=>locales.indexOf(language);
+const t=key=>window.UWFL_LOCALE_OVERRIDES?.[lang]?.[key]??window.UWFL_UI[key]?.[localeIndex(lang)]??window.UWFL_UI[key]?.[localeIndex('en')]??key;
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const validId=value=>/^(?:[0-9]+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(String(value??''));
 const title=(group,row)=>group==='mail'?`${row.kind} #${row.record_id} · ${row.state}`:String(group==='panels'?(row.artwork_name||`#${row.participant_number||row.id}`):(group==='sponsors'?row.company:row.name)||`#${row.id}`);

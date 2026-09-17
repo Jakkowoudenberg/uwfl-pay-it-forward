@@ -73,7 +73,7 @@ privacyReuseQuestion:['Heb je vragen over het gebruik van jouw foto’s door per
 Object.assign(window.UWFL_UI,additions);
 // Align the preview with the existing image endpoints' 5 MB limit.
 for(const key of ['imageHint','imageError'])window.UWFL_UI[key]=window.UWFL_UI[key].map(s=>s.replace(/10/g,'5'));
-window.UWFL_UI.storyIntro=window.UWFL_UI.storyIntro.map((s,i)=>s+' '+additions.privacyPhoto[i].split('. ')[0]+'.');
+window.UWFL_UI.storyIntro=window.UWFL_UI.storyIntro.map((s,i)=>s+' '+(additions.privacyPhoto[i]||additions.privacyPhoto[1]).split('. ')[0]+'.');
 window.UWFL_EXPERIENCE={
  search:{
   nl:{expo:'verzenden verzending versturen verstuur stuur opsturen verzend transport aanleveren deadline klaar januari april texas',makers:'kosten prijs budget materiaal verzekering douane vracht vervoer nodig beginnen',join:'foto aanmelden registratie goedkeuren goedkeuring telefoon student',privacy:'foto gegevens privacy toestemming openbaar',help:'helpen vrijwilliger vrijwillig bijdragen geen paneel tijd kennis student',partners:'sponsor sponsors sponsoring doneren geld gift materiaal transport opslag',organisations:'school scholen klas vereniging groep organisatie',press:'media pers beelden foto interview logo downloaden'},
