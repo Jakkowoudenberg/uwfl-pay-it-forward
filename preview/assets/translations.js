@@ -154,7 +154,7 @@ Object.assign(window.UWFL_UI, {
   "audMakers": [
     "Makers",
     "Makers",
-    "Mitmachen",
+    "Macher",
     "Créateurs",
     "Creadores",
     "Creatori"
@@ -192,28 +192,28 @@ Object.assign(window.UWFL_UI, {
     "Media"
   ],
   "audMakersText": [
-    "Maakt een houten paneel.",
-    "Creates a wooden panel.",
-    "Gestaltet ein Holzpaneel.",
-    "Crée un panneau en bois.",
-    "Crea un panel de madera.",
-    "Crea un pannello in legno."
+    "Maakt een paneel van 1 m² en deelt het verhaal.",
+    "Creates a 1 m² panel and shares its story.",
+    "Gestaltet ein 1 m² Paneel und teilt die Geschichte.",
+    "Crée un panneau de 1 m² et partage son histoire.",
+    "Crea un panel de 1 m² y comparte su historia.",
+    "Crea un pannello di 1 m² e condivide la storia."
   ],
   "audSponsorsText": [
-    "Steunt met geld, materiaal of vervoer.",
-    "Supports with funds, materials or transport.",
-    "Hilft mit Geld, Material oder Transport.",
-    "Soutient par des fonds, des matériaux ou du transport.",
-    "Apoya con fondos, materiales o transporte.",
-    "Sostiene con fondi, materiali o trasporto."
+    "Steunt met geld, materiaal, vervoer of zichtbaarheid.",
+    "Supports with funds, materials, transport or visibility.",
+    "Hilft mit Geld, Material, Transport oder Sichtbarkeit.",
+    "Soutient par des fonds, matériaux, transport ou visibilité.",
+    "Apoya con fondos, materiales, transporte o visibilidad.",
+    "Sostiene con fondi, materiali, trasporto o visibilità."
   ],
   "audOrganisationsText": [
-    "Voor scholen, verenigingen en vakorganisaties.",
-    "For schools, associations and trade bodies.",
-    "Für Schulen, Vereine und Fachverbände.",
-    "Pour les écoles, associations et organismes professionnels.",
-    "Para escuelas, asociaciones y entidades del sector.",
-    "Per scuole, associazioni ed enti di settore."
+    "Verbindt scholen, verenigingen en vakorganisaties.",
+    "Connects schools, associations and trade bodies.",
+    "Verbindet Schulen, Vereine und Fachverbände.",
+    "Relie écoles, associations et organismes professionnels.",
+    "Conecta escuelas, asociaciones y entidades del sector.",
+    "Collega scuole, associazioni ed enti di settore."
   ],
   "audVisitorsText": [
     "Ontdek het project en de mensen.",
@@ -246,6 +246,14 @@ Object.assign(window.UWFL_UI, {
     "Que recherchez-vous ?",
     "¿Qué te trae por aquí?",
     "Cosa ti porta qui?"
+  ],
+  "choiceHelp": [
+    "Twijfel je?",
+    "Not sure?",
+    "Unsicher?",
+    "Un doute ?",
+    "¿Dudas?",
+    "Hai dubbi?"
   ],
   "alreadyTakingPart": [
     "Doe je al mee?",
