@@ -41,6 +41,8 @@ if (process.env.CONTEXT === 'deploy-preview') {
   for (const file of ['qa.js', 'qa.css']) fs.copyFileSync(path.join(source, 'assets', file), path.join(out, 'assets', file));
 }
 
+fs.copyFileSync(path.join(source,'participant-login.html'),path.join(out,'participant-login.html'));
+
 const assetHash = crypto.createHash('sha256');
 for (const file of fs.readdirSync(path.join(out, 'assets')).filter(name => /\.(?:js|css)$/.test(name)).sort()) {
   assetHash.update(file).update(fs.readFileSync(path.join(out, 'assets', file)));
@@ -277,6 +279,10 @@ fs.writeFileSync(path.join(out, '_headers'), `/*
   Cache-Control: no-cache
 /
   Cache-Control: no-cache
+/participant-login.html
+  Referrer-Policy: no-referrer
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
 /admin.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store

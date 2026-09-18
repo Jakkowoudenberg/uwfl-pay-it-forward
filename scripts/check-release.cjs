@@ -23,6 +23,7 @@ global.fetch=async (input,options={})=>{
  }
  assert.equal(url.hostname,'uwfl-test.invalid','Unexpected network request');
  assert.equal(options.headers.apikey,'fictional-service-key');
+ if(url.pathname==='/auth/v1/user')return json({id:'fictional-user',role:'authenticated',email:'maker@example.invalid',email_confirmed_at:'2026-01-01T00:00:00Z'});
  if(url.pathname.startsWith('/storage/v1/')){
   const key=url.pathname.slice('/storage/v1/object/'.length);
   if(key.startsWith('sign/')){assert(objects.has(key.slice(5)));return json({signedURL:'/object/'+key+'?token=fictional'});}
@@ -87,10 +88,10 @@ const decide=(name,id,action='approve')=>call(name,{}, {admin:true,query:{id:Str
  assert.equal((await call('participants')).data.length,0,'Pending participant exposed');
  assert(![...objects.keys()].some(k=>k.startsWith('participant-photos/')),'Pending image copied into public storage');
  const repeat=await call('register',d);assert.equal(repeat.data.participant_number,registration.data.participant_number);assert.equal(tables.registrations.length,1);assert.equal(sent.length,1);
- const number=registration.data.participant_number,credentials={participant_number:number,email:d.email};
+ const number=registration.data.participant_number,credentials={participant_number:number,email:d.email,access_token:'fictional.access.token'};
  assert.equal((await call('panel-lookup',{...credentials,email:'wrong@example.invalid'})).status,403);
  assert.equal((await call('panel-lookup',credentials)).data.name,d.naam);
- assert.equal((await call('panel-photo',{fileData:png,fileType:'image/png',participant_number:number,email:'wrong@example.invalid'})).status,403);
+ assert.equal((await call('panel-photo',{fileData:png,fileType:'image/png',participant_number:number,email:'wrong@example.invalid',access_token:'fictional.access.token'})).status,403);
  const panelPhoto=await photo('panel-photo',credentials);
  const panel={...credentials,request_id:crypto.randomUUID(),artwork_name:'Fictional release panel',wood_species:'Oak',pattern:'Inlay',story:'Fictional story\nsecond line',why:'Passing skills on',meaning:'Connection',materials:'Natural oil',shipping_country:'NL',photos:[panelPhoto],lang:'nl',status:'approved'};
  const submitted=await call('panel-submit',panel);assert.equal(submitted.status,200);assert.equal(tables.panels[0].why,panel.why);assert.equal(tables.panels[0].shipping_country,'NL');assert.equal(tables.panels[0].status,'pending');
