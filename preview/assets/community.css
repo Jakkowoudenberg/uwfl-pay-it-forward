@@ -29,6 +29,8 @@
 .directory-page>.equality-note{margin:20px 0 16px;font-size:.8rem}
 .directory-error{padding:15px 18px;background:#f6f1e7;border:1px solid #d9cbae;border-radius:6px;font-size:.87rem;line-height:1.6;margin-bottom:18px}
 .directory-card .portrait{aspect-ratio:4/3}
+.directory-card .participant-photo{background:#f6f7f2}
+.directory-card .participant-photo img{object-fit:contain;object-position:center;padding:10px;background:#f6f7f2}
 .directory-card .directory-logo{background:#f6f7f2}
 .directory-card .directory-logo img{object-fit:contain;padding:26px}
 .directory-card .maker-card-body>.directory-role{font-size:.71rem;font-weight:650;color:var(--accent-dark);margin:12px 0 7px}
