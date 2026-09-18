@@ -3,6 +3,8 @@
 'use strict';
 const assert=require('node:assert/strict'),crypto=require('node:crypto');
 process.env.SUPABASE_URL='https://uwfl-test.invalid';
+process.env.RECAPTCHA_SECRET_KEY='fictional-captcha-secret';
+delete process.env.RECAPTCHA_SECRET;
 process.env.SUPABASE_SERVICE_KEY='fictional-service-key';process.env.ADMIN_KEY='fictional-review-key';
 const tables=Object.fromEntries(['registrations','panels','sponsors','organisations','uwfl_messages','uwfl_mail_log'].map(t=>[t,[]]));
 const objects=new Map(),sent=[],requests=[];
@@ -10,6 +12,11 @@ let sequence=100,request=0,failDatabase=false,failMail=false;
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json'}});
 global.fetch=async (input,options={})=>{
  const url=new URL(input),method=options.method||'GET';requests.push({url:url.href,method});
+ if(url.href==='https://www.google.com/recaptcha/api/siteverify'){
+  assert.equal(options.body.get('secret'),'fictional-captcha-secret');
+  const token=options.body.get('response');
+  return json(token.startsWith('fictional:')?{success:true,action:token.slice(10),score:0.9}:{success:false});
+ }
  if(url.hostname==='script.google.com'){
   const payload=JSON.parse(options.body);assert(!payload.email||payload.email.endsWith('@example.invalid'),'A real recipient entered a test');
   sent.push(payload);if(failMail)throw new Error('Simulated uncertain transport');return json({ok:true});
@@ -47,6 +54,8 @@ global.fetch=async (input,options={})=>{
  return json(result);
 };
 async function call(name,data,options={}){
+ const captchaActions={'register':'register','panel-submit':'panel','sponsor-submit':'sponsor','org-submit':'organisation','contact-submit':'contact','panel-lookup':'lookup','upload-photo':'upload','panel-photo':'upload','sponsor-logo':'upload','org-logo':'upload'};
+ if(data!==undefined&&captchaActions[name]&&options.captcha!==false)data={recaptcha_token:'fictional:'+captchaActions[name],...data};
  const event={httpMethod:options.method||(data===undefined?'GET':'POST'),headers:{'x-nf-client-connection-ip':'192.0.2.'+(++request),...(options.admin?{'x-admin-key':process.env.ADMIN_KEY}:{})},body:data===undefined?undefined:JSON.stringify(data),queryStringParameters:options.query||{}};
  const result=await require('../netlify/functions/'+name+'.js').handler(event);
  return {status:result.statusCode,data:JSON.parse(result.body||'{}')};
@@ -58,6 +67,16 @@ async function photo(endpoint='upload-photo',extra={}){
 const participantData=()=>({request_id:crypto.randomUUID(),naam:'Fictional release maker',email:'maker@example.invalid',land:'NL',telefoon:'+31000000000',type:'Maker',vak:'Wood craft',bericht:'Fictional release story.\nOriginal words stay intact.',lang:'nl',status:'approved'});
 const decide=(name,id,action='approve')=>call(name,{}, {admin:true,query:{id:String(id),action}});
 (async()=>{
+ const securityContact={name:'Fictional security check',email:'security@example.invalid',message:'No storage or mail expected'};
+ const beforeSecurity=requests.length;
+ delete process.env.RECAPTCHA_SECRET_KEY;
+ assert.equal((await call('contact-submit',securityContact)).status,503,'Missing CAPTCHA configuration must fail closed');
+ assert.equal(requests.length,beforeSecurity,'Missing CAPTCHA configuration reached an external service');
+ process.env.RECAPTCHA_SECRET_KEY='fictional-captcha-secret';
+ assert.equal((await call('contact-submit',securityContact,{captcha:false})).status,400);
+ assert.equal(requests.length,beforeSecurity,'Missing token reached an external service');
+ for(const recaptcha_token of ['invalid','fictional:register'])assert.equal((await call('contact-submit',{...securityContact,recaptcha_token})).data.error,'recaptcha_failed');
+ assert.equal(tables.uwfl_messages.length,0);assert.equal(sent.length,0);
  const d=participantData();
  assert.equal((await call('register',d)).status,400,'Photo must be required on the server');
  assert.equal(tables.registrations.length,0);

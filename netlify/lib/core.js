@@ -42,7 +42,7 @@ function body(event) {
 }
 async function recaptcha(data, action) {
   const secret = recaptchaSecret();
-  if (!secret) return;
+  if (!secret) fail(503, 'service_unavailable');
   const token = text(data.recaptcha_token, 4096, true);
   const params = new URLSearchParams({ secret, response: token });
   const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
