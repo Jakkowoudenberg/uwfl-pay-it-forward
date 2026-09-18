@@ -58,12 +58,15 @@ async function recaptcha(data, action) {
 function admin(event) {
   const given = String(event.headers?.['x-admin-key'] || event.headers?.['X-Admin-Key'] || '');
   const expected = process.env.ADMIN_KEY || '';
-  if (!expected || !given || !crypto.timingSafeEqual(crypto.createHash('sha256').update(given).digest(), crypto.createHash('sha256').update(expected).digest())) fail(401, 'Unauthorized');
+  if (!expected || !given || !crypto.timingSafeEqual(crypto.createHash('sha256').update(given).digest(), crypto.createHash('sha256').update(expected).digest())) {
+    limit(event, 20, 'admin-failure');
+    fail(401, 'Unauthorized');
+  }
 }
 const limits = new Map();
-function limit(event, max = 12) {
+function limit(event, max = 12, scope = 'submission') {
   const ip = event.headers?.['x-nf-client-connection-ip'] || event.headers?.['x-forwarded-for'] || 'unknown';
-  const key = crypto.createHash('sha256').update(String(ip)).digest('hex');
+  const key = scope + ':' + crypto.createHash('sha256').update(String(ip)).digest('hex');
   const now = Date.now();
   for (const [k,v] of limits) if (v.until < now) limits.delete(k);
   const entry = limits.get(key) || { count: 0, until: now + 60000 };

@@ -288,6 +288,10 @@ IF YOU DO NOT KNOW SOMETHING:
 - Never invent an answer, a detail, a date, a name or a feature. If you are not sure, or it is not in what you know above, say so honestly and warmly — and point the person to the app itself (app.unitedwoodfloorlayers.com), where everything about the project lives, and to the contact form for anything a human needs to answer.
 - It is completely fine to say "I don\'t have that detail — the app has the most up-to-date information, and you can always reach us through the contact form." That honesty protects the trust the whole movement runs on.`; }
 
+const { parseChatRequest } = require('../lib/chat-input');
+// Bound upstream calls and keep provider errors private.
+const upstreamFetch = (url, options = {}) => fetch(url, { ...options, signal: AbortSignal.timeout(20000) });
+
 // Live participant stats from Supabase, cached briefly to avoid a query on every chat message
 let statsCache = { text: null, time: 0 };
 const STATS_CACHE_MS = 5 * 60 * 1000; // 5 minutes
@@ -298,7 +302,7 @@ async function getStatsBlock() {
     return statsCache.text;
   }
   try {
-    const resp = await fetch(
+    const resp = await upstreamFetch(
       `${process.env.SUPABASE_URL}/rest/v1/registrations?status=eq.approved&select=country`,
       {
         headers: {
@@ -350,14 +354,14 @@ async function getCommunityBlock() {
   }
   try {
     // Deelnemers: naam, land, rol, type, verhaal (publiek)
-    const pr = await fetch(BASE + 'registrations?status=eq.approved&select=name,country,type,vak,bericht&order=participant_number.asc', { headers: H });
+    const pr = await upstreamFetch(BASE + 'registrations?status=eq.approved&select=name,country,type,vak,bericht&order=participant_number.asc', { headers: H });
     const parts = await pr.json();
     // Sponsoren: bedrijf, land, waarom, wat, website (publiek)
     let sponsors = [];
-    try { const s = await fetch(BASE + 'sponsors?status=eq.approved&select=company,country,why,what,contact_website', { headers: H }); sponsors = await s.json(); } catch (e) {}
+    try { const s = await upstreamFetch(BASE + 'sponsors?status=eq.approved&select=company,country,why,what,contact_website', { headers: H }); sponsors = await s.json(); } catch (e) {}
     // Organisaties: naam, land, rol, website (publiek)
     let orgs = [];
-    try { const o = await fetch(BASE + 'organisations?status=eq.approved&select=name,country,role,contact_website', { headers: H }); orgs = await o.json(); } catch (e) {}
+    try { const o = await upstreamFetch(BASE + 'organisations?status=eq.approved&select=name,country,role,contact_website', { headers: H }); orgs = await o.json(); } catch (e) {}
 
     let out = '';
     if (Array.isArray(parts) && parts.length) {
@@ -410,9 +414,9 @@ const RATE_LIMIT_MAX_REGISTER = 3;    // max 3 register requests per minute per 
 
 function checkRateLimit(ip, mode) {
   const now = Date.now();
-  const key = ip + ':' + mode;
+  const key = ip + ':' + (mode === 'translate_text' ? 'translate' : mode);
   const limit = mode === 'chat' ? RATE_LIMIT_MAX_CHAT : 
-                mode === 'translate' ? RATE_LIMIT_MAX_TRANSLATE : 
+                (mode === 'translate' || mode === 'translate_text') ? RATE_LIMIT_MAX_TRANSLATE : 
                 RATE_LIMIT_MAX_REGISTER;
   
   if (!rateLimits.has(key)) {
@@ -437,7 +441,7 @@ setInterval(function() {
   for (const [key, val] of rateLimits.entries()) {
     if (now - val.start > RATE_LIMIT_WINDOW * 2) rateLimits.delete(key);
   }
-}, 5 * 60 * 1000);
+}, 5 * 60 * 1000).unref();
 
 exports.handler = async function(event) {
   if (event.httpMethod === 'OPTIONS') {
@@ -459,15 +463,17 @@ exports.handler = async function(event) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-store',
+    'X-Content-Type-Options': 'nosniff'
   };
 
   try {
-    const body = JSON.parse(event.body);
-    const mode = body.mode || 'chat';
+    const body = parseChatRequest(event);
+    const mode = body.mode;
     
     // Rate limit check
-    const ip = event.headers['x-forwarded-for'] || event.headers['client-ip'] || 'unknown';
+    const ip = event.headers?.['x-nf-client-connection-ip'] || 'unknown';
     if (checkRateLimit(ip, mode)) {
       return {
         statusCode: 429,
@@ -483,7 +489,7 @@ exports.handler = async function(event) {
 
     // TRANSLATE TEXT MODE — plain text, no JSON
     if (body.mode === 'translate_text') {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await upstreamFetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -499,6 +505,7 @@ exports.handler = async function(event) {
           }]
         })
       });
+      if (!response.ok) throw new Error('upstream_failure');
       const data = await response.json();
       const translated = data.content && data.content[0] ? data.content[0].text : body.text;
       return {
@@ -510,7 +517,7 @@ exports.handler = async function(event) {
 
     // TRANSLATE MODE
     if (body.mode === 'translate') {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await upstreamFetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -526,6 +533,7 @@ exports.handler = async function(event) {
           }]
         })
       });
+      if (!response.ok) throw new Error('upstream_failure');
       const data = await response.json();
       const translated = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
       return {
@@ -541,7 +549,7 @@ exports.handler = async function(event) {
     const communityBlock = await getCommunityBlock();
     const SYS = buildSys(statsBlock, communityBlock);
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await upstreamFetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -566,11 +574,11 @@ exports.handler = async function(event) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error('Anthropic error:', JSON.stringify(data));
+      console.error('AI upstream request failed');
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ error: data.error?.message || 'Anthropic error' })
+        body: JSON.stringify({ error: 'service_unavailable' })
       };
     }
 
@@ -586,12 +594,10 @@ exports.handler = async function(event) {
     };
 
   } catch (err) {
-    console.error('Function error:', err.message);
     return {
-      statusCode: 500,
+      statusCode: err.status || 502,
       headers,
-      body: JSON.stringify({ error: err.message })
+      body: JSON.stringify({ error: err.status ? err.message : 'service_unavailable' })
     };
   }
 };
-
