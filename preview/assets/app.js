@@ -175,7 +175,22 @@ function privacyContent(){
  if(paragraphs[2])paragraphs[2].textContent=t('privacyContacts');
  return template.innerHTML;
 }
-function reader(topic){if(topic==='expo'){logisticsPage();return;}if(topic==='press'){pressPage();return;}const contentLanguage=C.languages[lang]||C.languages.en;const card=contentLanguage.cards[topic]||C.languages.en.cards[topic];if(!card){resources();return;}const title=card.title.replace(/^[\p{Emoji_Presentation}\p{Extended_Pictographic}\s]+/u,'');main.innerHTML=`${heading(esc(title),'',t('movement'),q(topic))}<section class="page-content"><div class="shell reader-layout">${sideNav(topic)}<article class="reader">${topic==='initiator'?`<figure class="reader-image"><img src="assets/jakko-woudenberg.jpg" alt="${esc(t('founderCaption'))}" width="800" height="533"><figcaption>${t('founderCaption')}</figcaption></figure>`:''}${['project','kunstwerk'].includes(topic)?regionalNotice():''}${topic==='project'?`<div class="media-actions">${button(t('helpWithoutPanel'),'#help')}${button(t('meetMakers'),'#community','outline')}</div>`:''}${['news','kickoff'].includes(topic)?`<div class="reader-update">${link(t('newsCurrent'),'#read/expo')}</div>`:''}${topic==='privacy'?privacyContent():topic==='share'?sharingContent(card.body):cleanContent(card.body)}${topic==='privacy'?moderationNote():''}<div class="route-footer">${topic==='initiator'?button(t('helpWithoutPanel'),'#help'):button(t('join'),'#join')}${button(t('allInfo'),'#resources','outline')}</div></article></div></section>`;}
+function initiatorContent(body){
+ const copy={
+  nl:'Maar dit project gaat niet over mij. Het gaat over alle makers, bijdragers, sponsors, organisaties en mensen wereldwijd die besluiten mee te doen en iets goeds door te geven.',
+  en:'But this project is not about me. It is about all the makers, contributors, sponsors, organisations and people around the world who choose to take part and pass something good forward.',
+  de:'Aber dieses Projekt handelt nicht von mir. Es handelt von allen Machern, Unterstützern, Sponsoren, Organisationen und Menschen weltweit, die sich anschließen und etwas Gutes weitergeben.',
+  fr:'Mais ce projet ne parle pas de moi. Il parle de tous les créateurs, contributeurs, sponsors, organisations et personnes dans le monde qui choisissent de participer et de transmettre quelque chose de bon.',
+  es:'Pero este proyecto no trata de mí. Trata de todos los creadores, colaboradores, patrocinadores, organizaciones y personas de todo el mundo que deciden participar y transmitir algo bueno.',
+  it:'Ma questo progetto non riguarda me. Riguarda tutti i creatori, contributori, sponsor, organizzazioni e persone nel mondo che scelgono di partecipare e trasmettere qualcosa di buono.'
+ };
+ const template=document.createElement('template');template.innerHTML=cleanContent(body);
+ const p=document.createElement('p');p.innerHTML=`${copy[lang]||copy.en} <a href="#community">${t('networkViewAll')}</a>.`;
+ const last=template.content.lastElementChild;
+ template.content.insertBefore(p,last&&last.tagName==='P'?last:null);
+ return template.innerHTML;
+}
+function reader(topic){if(topic==='expo'){logisticsPage();return;}if(topic==='press'){pressPage();return;}const contentLanguage=C.languages[lang]||C.languages.en;const card=contentLanguage.cards[topic]||C.languages.en.cards[topic];if(!card){resources();return;}const title=card.title.replace(/^[\p{Emoji_Presentation}\p{Extended_Pictographic}\s]+/u,'');main.innerHTML=`${heading(esc(title),'',t('movement'),q(topic))}<section class="page-content"><div class="shell reader-layout">${sideNav(topic)}<article class="reader">${topic==='initiator'?`<figure class="reader-image"><img src="assets/jakko-woudenberg.jpg" alt="${esc(t('founderCaption'))}" width="800" height="533"><figcaption>${t('founderCaption')}</figcaption></figure>`:''}${['project','kunstwerk'].includes(topic)?regionalNotice():''}${topic==='project'?`<div class="media-actions">${button(t('helpWithoutPanel'),'#help')}${button(t('meetMakers'),'#community','outline')}</div>`:''}${['news','kickoff'].includes(topic)?`<div class="reader-update">${link(t('newsCurrent'),'#read/expo')}</div>`:''}${topic==='privacy'?privacyContent():topic==='share'?sharingContent(card.body):topic==='initiator'?initiatorContent(card.body):cleanContent(card.body)}${topic==='privacy'?moderationNote():''}<div class="route-footer">${topic==='initiator'?button(t('networkViewAll'),'#community'):button(t('join'),'#join')}${button(t('allInfo'),'#resources','outline')}</div></article></div></section>`;}
 function sharingContent(body){
  const template=document.createElement('template');template.innerHTML=cleanContent(body);
  const list=template.content.querySelector('ul');
