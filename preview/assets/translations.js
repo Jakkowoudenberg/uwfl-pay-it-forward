@@ -26,7 +26,7 @@ window.UWFL_LOCALE_OVERRIDES={
   audMediaText:'Conta a história do projeto em palavras e imagens.',
   browseCommunity:'Comunidade',
   audienceNav:'Encontre seu caminho',
-  chooseEntrance:'O que traz você aqui?',
+  chooseEntrance:'Junte-se à UWFL',
   choiceHelp:'Não tem certeza?',
   alreadyTakingPart:'Já participa?',
   submitPanel:'Enviar painel',
@@ -77,7 +77,7 @@ window.UWFL_LOCALE_OVERRIDES={
   audMediaText:'Opowiada o projekcie słowem i obrazem.',
   browseCommunity:'Społeczność',
   audienceNav:'Znajdź swoją drogę',
-  chooseEntrance:'Co Cię tu sprowadza?',
+  chooseEntrance:'Dołącz do UWFL',
   choiceHelp:'Nie masz pewności?',
   alreadyTakingPart:'Już uczestniczysz?',
   submitPanel:'Prześlij panel',
@@ -345,12 +345,12 @@ Object.assign(window.UWFL_UI, {
     "Il tuo percorso"
   ],
   "chooseEntrance": [
-    "Waar kom je voor?",
-    "What brings you here?",
-    "Was führt dich hierher?",
-    "Que recherchez-vous ?",
-    "¿Qué te trae por aquí?",
-    "Cosa ti porta qui?"
+    "Doe mee met UWFL",
+    "Join UWFL",
+    "Mach mit bei UWFL",
+    "Rejoindre UWFL",
+    "Únete a UWFL",
+    "Unisciti a UWFL"
   ],
   "choiceHelp": [
     "Twijfel je?",
