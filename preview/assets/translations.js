@@ -24,6 +24,7 @@ window.UWFL_LOCALE_OVERRIDES={
   audOrganisationsText:'Conecta escolas, associações e organizações do setor.',
   audVisitorsText:'Descubra o projeto e as pessoas.',
   audMediaText:'Conta a história do projeto em palavras e imagens.',
+  browseCommunity:'Comunidade',
   audienceNav:'Encontre seu caminho',
   chooseEntrance:'O que traz você aqui?',
   choiceHelp:'Não tem certeza?',
@@ -74,6 +75,7 @@ window.UWFL_LOCALE_OVERRIDES={
   audOrganisationsText:'Łączy szkoły, stowarzyszenia i organizacje branżowe.',
   audVisitorsText:'Poznaj projekt i ludzi za nim stojących.',
   audMediaText:'Opowiada o projekcie słowem i obrazem.',
+  browseCommunity:'Społeczność',
   audienceNav:'Znajdź swoją drogę',
   chooseEntrance:'Co Cię tu sprowadza?',
   choiceHelp:'Nie masz pewności?',
@@ -357,6 +359,14 @@ Object.assign(window.UWFL_UI, {
     "Un doute ?",
     "¿Dudas?",
     "Hai dubbi?"
+  ],
+  "browseCommunity": [
+    "Community",
+    "Community",
+    "Community",
+    "Communauté",
+    "Comunidad",
+    "Community"
   ],
   "alreadyTakingPart": [
     "Doe je al mee?",
