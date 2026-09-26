@@ -57,7 +57,7 @@ function header(){
  document.querySelector('.skip-link').textContent=({nl:'Ga naar de inhoud',en:'Skip to content',de:'Zum Inhalt',fr:'Aller au contenu',es:'Ir al contenido',it:'Vai al contenuto'}[lang]||'Skip to content');
  const bottomLabel=k=>t('bottom'+k);
  const navItems=bottom=>{
-  const items=bottom?[['Makers','#makers','panel'],['Helpers','#help','hand'],['Sponsors','#partners','coin'],['Network','#community','people'],['Join','#join','check'],['Share','#read/share','link'],['Panel','#panel','panel'],['Info','#resources','search']]:nav.map(([label,,href,i])=>[t(label),href,i]);
+  const items=bottom?[['Join','#join','check'],['Makers','#makers','panel'],['Helpers','#help','hand'],['Sponsors','#partners','coin'],['Network','#community','people'],['Panel','#panel','panel'],['Share','#read/share','link'],['Info','#resources','search']]:nav.map(([label,,href,i])=>[t(label),href,i]);
   return items.map(([label,href,i])=>`<a href="${href}"${active===href?' aria-current="page"':''}>${bottom?icon(i,21):''}<span>${bottom?bottomLabel(label):label}</span></a>`).join('');
  };
  const menuLinks=[
