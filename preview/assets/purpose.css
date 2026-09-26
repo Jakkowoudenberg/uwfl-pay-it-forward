@@ -1,5 +1,8 @@
 /* The project purpose comes first; every audience keeps a direct entrance. */
 .mission-home .welcome-grid{grid-template-areas:"intro founder" "choices choices";grid-template-columns:minmax(0,1.4fr) minmax(320px,1fr);column-gap:62px;row-gap:27px}
+.mission-home .welcome-network{grid-area:choices}
+.mission-home .welcome-network .network-summary{margin-top:0}
+.mission-home .welcome-network .network-event{margin-top:12px}
 .mission-home .welcome-intro h1{font-size:clamp(2.3rem,3.65vw,3.35rem);line-height:1.12;letter-spacing:-.045em}
 .mission-home .welcome-intro h1 span{display:block}
 .mission-home .welcome-intro>p{font-size:1rem;line-height:1.65;max-width:600px;margin-top:16px}
@@ -8,7 +11,8 @@
 .purpose-points li>.icon{flex-shrink:0;color:#54714f;margin-top:2px;width:21px;height:21px}
 .purpose-points strong{display:block;font-size:.97rem;line-height:1.4;font-weight:650;color:var(--ink)}
 .purpose-points p{font-size:.88rem;line-height:1.65;color:var(--muted);margin-top:3px;max-width:570px}
-.mission-home .welcome-choices{padding-top:23px;border-top:1px solid var(--line)}
+.mission-home .welcome-choices{padding-top:23px;border-top:1px solid var(--line);margin-top:30px}
+.mission-home .welcome-grid .welcome-choices{margin-top:0}
 .mission-home .welcome-choices .audience-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
 .mission-home .welcome-choices .task-card,.mission-home .welcome-choices .task-card:last-child{grid-column:auto!important;min-height:112px;padding:14px 12px;gap:10px;align-items:flex-start}
 .mission-home .welcome-choices .task-icon{width:30px;height:34px}
