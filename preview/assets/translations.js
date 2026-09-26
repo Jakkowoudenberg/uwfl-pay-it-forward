@@ -25,6 +25,14 @@ window.UWFL_LOCALE_OVERRIDES={
   audVisitorsText:'Descubra o projeto e as pessoas.',
   audMediaText:'Conta a história do projeto em palavras e imagens.',
   browseCommunity:'Comunidade',
+  bottomMakers:'Criadores',
+  bottomHelpers:'Ajuda',
+  bottomSponsors:'Sponsors',
+  bottomNetwork:'Rede',
+  bottomJoin:'Entrar',
+  bottomShare:'Partilhar',
+  bottomPanel:'Painel',
+  bottomInfo:'Info',
   audienceNav:'Encontre seu caminho',
   chooseEntrance:'Junte-se à UWFL',
   choiceHelp:'Não tem certeza?',
@@ -76,6 +84,14 @@ window.UWFL_LOCALE_OVERRIDES={
   audVisitorsText:'Poznaj projekt i ludzi za nim stojących.',
   audMediaText:'Opowiada o projekcie słowem i obrazem.',
   browseCommunity:'Społeczność',
+  bottomMakers:'Twórcy',
+  bottomHelpers:'Pomoc',
+  bottomSponsors:'Sponsorzy',
+  bottomNetwork:'Sieć',
+  bottomJoin:'Dołącz',
+  bottomShare:'Udostępnij',
+  bottomPanel:'Panel',
+  bottomInfo:'Info',
   audienceNav:'Znajdź swoją drogę',
   chooseEntrance:'Dołącz do UWFL',
   choiceHelp:'Nie masz pewności?',
@@ -367,6 +383,70 @@ Object.assign(window.UWFL_UI, {
     "Communauté",
     "Comunidad",
     "Community"
+  ],
+  "bottomMakers": [
+    "Makers",
+    "Makers",
+    "Macher",
+    "Créateurs",
+    "Creadores",
+    "Creatori"
+  ],
+  "bottomHelpers": [
+    "Helpers",
+    "Helpers",
+    "Helfer",
+    "Aides",
+    "Ayuda",
+    "Aiuto"
+  ],
+  "bottomSponsors": [
+    "Sponsors",
+    "Sponsors",
+    "Sponsoren",
+    "Sponsors",
+    "Sponsors",
+    "Sponsor"
+  ],
+  "bottomNetwork": [
+    "Netwerk",
+    "Network",
+    "Netzwerk",
+    "Réseau",
+    "Red",
+    "Rete"
+  ],
+  "bottomJoin": [
+    "Join",
+    "Join",
+    "Mitmachen",
+    "Rejoindre",
+    "Unirse",
+    "Unisciti"
+  ],
+  "bottomShare": [
+    "Delen",
+    "Share",
+    "Teilen",
+    "Partager",
+    "Compartir",
+    "Condividi"
+  ],
+  "bottomPanel": [
+    "Paneel",
+    "Panel",
+    "Paneel",
+    "Panneau",
+    "Panel",
+    "Pannello"
+  ],
+  "bottomInfo": [
+    "Info",
+    "Info",
+    "Info",
+    "Infos",
+    "Info",
+    "Info"
   ],
   "alreadyTakingPart": [
     "Doe je al mee?",

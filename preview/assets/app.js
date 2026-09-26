@@ -55,9 +55,10 @@ function header(){
  const active=activeAudience(), nav=audiences();
  document.getElementById('preview-note').textContent=t('preview');
  document.querySelector('.skip-link').textContent=({nl:'Ga naar de inhoud',en:'Skip to content',de:'Zum Inhalt',fr:'Aller au contenu',es:'Ir al contenido',it:'Vai al contenuto'}[lang]||'Skip to content');
+ const bottomLabel=k=>t('bottom'+k);
  const navItems=bottom=>{
-  const items=bottom?[['audMakers','#makers','panel'],['audContributors','#help','hand'],['audSponsors','#partners','coin'],['browseCommunity','#community','people'],['join','#join','check'],['socialShare','#read/share','link'],['myPanel','#panel','panel'],['allInfo','#resources','search']]:nav.map(([label,,href,i])=>[label,href,i]);
-  return items.map(([label,href,i])=>`<a href="${href}"${active===href?' aria-current="page"':''}>${bottom?icon(i,21):''}<span>${t(label)}</span></a>`).join('');
+  const items=bottom?[['Makers','#makers','panel'],['Helpers','#help','hand'],['Sponsors','#partners','coin'],['Network','#community','people'],['Join','#join','check'],['Share','#read/share','link'],['Panel','#panel','panel'],['Info','#resources','search']]:nav.map(([label,,href,i])=>[t(label),href,i]);
+  return items.map(([label,href,i])=>`<a href="${href}"${active===href?' aria-current="page"':''}>${bottom?icon(i,21):''}<span>${bottom?bottomLabel(label):label}</span></a>`).join('');
  };
  const menuLinks=[
   [t('start'),'#home'],[t('allInfo'),'#resources'],[t('myPanel'),'#panel'],[q('specs'),'#drawing'],[t('submitPanel'),'#upload'],[q('galerij'),'#gallery'],[q('payitforward'),'#read/payitforward'],[t('socialShare'),'#read/share'],[q('contact'),'#contact']
