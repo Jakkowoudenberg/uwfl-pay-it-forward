@@ -28,6 +28,8 @@ window.UWFL_LOCALE_OVERRIDES={
   bottomMakers:'Criadores',
   bottomHelpers:'Ajuda',
   bottomSponsors:'Sponsors',
+  bottomOrganisations:'Organizações',
+  bottomMedia:'Mídia',
   bottomNetwork:'Rede',
   bottomJoin:'Entrar',
   bottomShare:'Partilhar',
@@ -87,6 +89,8 @@ window.UWFL_LOCALE_OVERRIDES={
   bottomMakers:'Twórcy',
   bottomHelpers:'Pomoc',
   bottomSponsors:'Sponsorzy',
+  bottomOrganisations:'Organizacje',
+  bottomMedia:'Media',
   bottomNetwork:'Sieć',
   bottomJoin:'Dołącz',
   bottomShare:'Udostępnij',
@@ -407,6 +411,22 @@ Object.assign(window.UWFL_UI, {
     "Sponsors",
     "Sponsors",
     "Sponsor"
+  ],
+  "bottomOrganisations": [
+    "Organisaties",
+    "Organisations",
+    "Organisationen",
+    "Organisations",
+    "Entidades",
+    "Enti"
+  ],
+  "bottomMedia": [
+    "Media",
+    "Media",
+    "Medien",
+    "Médias",
+    "Medios",
+    "Media"
   ],
   "bottomNetwork": [
     "Netwerk",
