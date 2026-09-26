@@ -7,7 +7,7 @@ const tick=()=>new Promise(resolve=>setTimeout(resolve,0));
 async function create(lang='nl'){
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  const dom=new JSDOM(html,{url:'https://release.invalid/#home',runScripts:'outside-only',pretendToBeVisual:true}),w=dom.window,calls=[];
- w.localStorage.setItem('uwfl_preview_lang',lang);w.scrollTo=()=>{};w.HTMLElement.prototype.scrollIntoView=()=>{};
+ w.localStorage.setItem('uwfl_preview_lang',lang);w.sessionStorage.setItem('uwfl_participant_access','fictional.access.token');w.scrollTo=()=>{};w.HTMLElement.prototype.scrollIntoView=()=>{};
  w.URL.createObjectURL=()=> 'blob:https://release.invalid/fictional';w.URL.revokeObjectURL=()=>{};
  w.Image=class{constructor(){this.naturalWidth=1;this.naturalHeight=1;}async decode(){}};
  w.HTMLCanvasElement.prototype.getContext=()=>({drawImage(){}});w.HTMLCanvasElement.prototype.toDataURL=()=>png;
