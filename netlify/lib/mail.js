@@ -26,7 +26,9 @@ async function notify(kind, row, payload) {
   } catch { return 'unconfirmed'; }
 }
 function approvalPayload(panel) {
-  return { type:'panel_approved', naam:[panel.first_name,panel.last_name].filter(Boolean).join(' '), email:panel.submitter_email, lang:panel.lang || 'en', participant_number:panel.participant_number, artwork_name:panel.artwork_name,
-    region:regionForCountry(panel.shipping_country || panel.country_made) };
+  const region = regionForCountry(panel.shipping_country || panel.country_made);
+  const lang = region === 'americas' ? 'en' : (panel.lang || 'en');
+  return { type:'panel_approved', naam:[panel.first_name,panel.last_name].filter(Boolean).join(' '), email:panel.submitter_email, lang, participant_number:panel.participant_number, artwork_name:panel.artwork_name,
+    region };
 }
 module.exports = { notify, approvalPayload };
