@@ -10,3 +10,7 @@
 .panel-craft .review-list{margin:0}
 .panel-craft .review-list dt,.panel-craft .review-list dd{min-width:0}
 @media(max-width:700px){.panel-craft{padding:20px}.panel-form-section{margin-top:24px;padding-top:22px}.panel-story-section h2,.panel-craft h2{font-size:1.2rem}}
+
+/* Keep the complete artwork visible in gallery cards at every screen size. */
+#gallery-content .maker-card .portrait{aspect-ratio:auto;height:auto}
+#gallery-content .maker-card .portrait img{width:100%;height:auto;object-fit:contain}
