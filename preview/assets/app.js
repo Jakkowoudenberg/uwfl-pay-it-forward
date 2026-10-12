@@ -87,10 +87,52 @@ function purposePoints(){return `<ul class="purpose-points" aria-label="${t('mis
 function artworkJourney(showLink=false){return `<section class="journey-section" aria-labelledby="journey-title"><div class="journey-heading"><h2 id="journey-title">${t('journeyTitle')}</h2>${showLink?link(t('collectiveRead'),'#visitors'):''}</div><ol class="artwork-journey">${['Make','Gather','Travel','Gift'].map((key,i)=>`<li data-phase="${key.toLowerCase()}"><span class="journey-number" aria-hidden="true">0${i+1}</span><h3>${t('journey'+key+'Title')}</h3><p>${t('journey'+key+'Text')}</p></li>`).join('')}</ol><p class="journey-open-end">${t('openEnd')}</p><div class="journey-footer"><p class="gift-principle">${icon('check',17)}${t('neverSold')}</p>${link(t('regionalRead'),'#read/expo')}</div></section>`;}
 function collectivePurpose(){return `<section class="collective-section" aria-labelledby="collective-title"><h2 id="collective-title">${t('collectiveTitle')}</h2><p>${t('collectiveIntro')}</p><div class="collective-benefits">${['Knowledge','Reach','Craft'].map(key=>`<div><h3>${t('collective'+key+'Title')}</h3><p>${t('collective'+key+'Text')}</p></div>`).join('')}</div></section>`;}
 function learningNote(key){return `<p class="learning-note">${icon('book',22)}<span>${t(key)}${key==='makerLearningText'?`<span class="maker-group-help">${t('socialFacebookHelp')}${socialLink(t('socialFacebookCta'),'facebook')}</span>`:''}</span></p>`;}
+
+let communityTimer,communityIndex=0,communityProfiles=[],communityPaused=false;
+function communityCopy(key){
+ const copy={
+ title:{nl:'Ontmoet de community',en:'Meet the community',de:'Lerne die Community kennen',fr:'Découvrez la communauté',es:'Conoce a la comunidad',it:'Incontra la community',pt:'Conheça a comunidade',pl:'Poznaj społeczność'},
+ previous:{nl:'Vorige deelnemer',en:'Previous participant'},next:{nl:'Volgende deelnemer',en:'Next participant'},
+ pause:{nl:'Pauzeren',en:'Pause'},play:{nl:'Verder rouleren',en:'Resume rotation'}
+ };
+ return copy[key][lang]||copy[key].en;
+}
+function communitySpotlight(){
+ return `<aside class="founder-card community-spotlight" id="community-spotlight" aria-label="${esc(communityCopy('title'))}"><div id="spotlight-profile"><div class="founder-story"><span class="eyebrow">${communityCopy('title')}</span><p>${t('loading')}</p></div></div><div class="spotlight-controls"><button type="button" data-spotlight="previous" aria-label="${communityCopy('previous')}">‹</button><button type="button" data-spotlight="pause">${communityCopy('pause')}</button><button type="button" data-spotlight="next" aria-label="${communityCopy('next')}">›</button></div></aside>`;
+}
+function showCommunityProfile(){
+ const target=document.getElementById('spotlight-profile');if(!target)return;
+ if(!communityProfiles.length){target.innerHTML=`<div class="founder-story"><span class="eyebrow">${communityCopy('title')}</span>${link(t('networkViewAll'),'#community')}</div>`;return;}
+ const profile=communityProfiles[communityIndex],p=profile.record,person=profile.source==='participants';
+ const name=person||profile.source!=='sponsors'?p.name:p.company;
+ const src=imageUrl(person?p.photo_url:p.logo_url),story=String(person?p.message:(p.why||p.role||'')).trim();
+ const excerpt=story.length>220?story.slice(0,217).replace(/\s+\S*$/,'')+'…':story;
+ target.innerHTML=`<figure class="${person?'spotlight-person':'spotlight-logo'}">${src?`<img src="${src}" alt="${esc(name)}" referrerpolicy="no-referrer">`:icon('people',65)}</figure><div class="founder-story"><span class="eyebrow">${communityCopy('title')}</span><h2>${esc(name)}</h2><p class="spotlight-meta">${esc(directoryRole(profile))} · ${esc(countryName(profile.country)||t('networkCountryMissing'))}</p><p class="spotlight-excerpt">${esc(excerpt)}</p>${link(t('readMore'),directoryHref(profile.group,'',name))}</div>`;
+}
+async function loadCommunitySpotlight(){
+ clearInterval(communityTimer);communityPaused=false;
+ try{const data=await getDirectory();if(route!=='home'||!document.getElementById('community-spotlight'))return;
+ communityProfiles=data.profiles;communityIndex=0;showCommunityProfile();
+ const controls=document.querySelector('.spotlight-controls');if(controls)controls.hidden=communityProfiles.length<2;
+ if(communityProfiles.length>1&&!matchMedia('(prefers-reduced-motion: reduce)').matches)communityTimer=setInterval(()=>{
+ const card=document.getElementById('community-spotlight');
+ if(!card||route!=='home'){clearInterval(communityTimer);return;}
+ if(communityPaused||document.hidden||card.matches(':hover')||card.contains(document.activeElement))return;
+ communityIndex=(communityIndex+1)%communityProfiles.length;showCommunityProfile();
+ },8000);
+ }catch{if(route==='home'){communityProfiles=[];showCommunityProfile();}}
+}
+document.addEventListener('click',event=>{
+ const button=event.target.closest('[data-spotlight]');if(!button||!communityProfiles.length)return;
+ const action=button.dataset.spotlight;
+ if(action==='pause'){communityPaused=!communityPaused;button.textContent=communityCopy(communityPaused?'play':'pause');return;}
+ communityIndex=(communityIndex+(action==='next'?1:-1)+communityProfiles.length)%communityProfiles.length;showCommunityProfile();
+});
+
 function home(){
  const choices=`<section class="welcome-choices" aria-labelledby="start-choices"><h2 id="start-choices">${t('chooseEntrance')}</h2><div class="audience-grid">${audiences().map(([label,description,href,i])=>taskCard(t(label),t(description),href,i)).join('')}</div><p class="choice-help">${t('choiceHelp')} <a href="#resources">${t('allInfo')}</a> · <a href="#contact">${q('contact')}</a></p></section>`;
- main.innerHTML=`<div class="shell welcome-page mission-home route-enter"><div class="welcome-grid"><section class="welcome-intro"><span class="eyebrow">United Wood Floor Layers · Pay It Forward</span><h1>${t('missionTitle').split('\n').map(line=>`<span>${esc(line)}</span>`).join(' ')}</h1><p>${t('missionLead')}</p>${purposePoints()}${window.UWFL_TOOLS?.buttons(lang)||''}</section><section class="welcome-network">${progressStrip()}</section>${founderCard()}</div>${artworkJourney(true)}${choices}<section class="returning-strip"><span>${t('alreadyTakingPart')}</span><div><a href="#drawing">${q('specs')}${icon('arrow',15)}</a><a href="#upload">${t('submitPanel')}${icon('arrow',15)}</a><a href="#panel">${t('participantOverview')}${icon('arrow',15)}</a><a href="#read/share">${t('socialShare')}${icon('arrow',15)}</a></div></section></div>`;
- loadHomeStats();
+ main.innerHTML=`<div class="shell welcome-page mission-home route-enter"><div class="welcome-grid"><section class="welcome-intro"><span class="eyebrow">United Wood Floor Layers · Pay It Forward</span><h1>${t('missionTitle').split('\n').map(line=>`<span>${esc(line)}</span>`).join(' ')}</h1><p>${t('missionLead')}</p>${purposePoints()}${window.UWFL_TOOLS?.buttons(lang)||''}</section><section class="welcome-network">${progressStrip()}</section>${communitySpotlight()}</div>${artworkJourney(true)}${choices}<section class="returning-strip"><span>${t('alreadyTakingPart')}</span><div><a href="#drawing">${q('specs')}${icon('arrow',15)}</a><a href="#upload">${t('submitPanel')}${icon('arrow',15)}</a><a href="#panel">${t('participantOverview')}${icon('arrow',15)}</a><a href="#read/share">${t('socialShare')}${icon('arrow',15)}</a></div></section></div>`;
+ loadHomeStats();loadCommunitySpotlight();
 }
 function founderCard(){
  const template=document.createElement('template');template.innerHTML=(C.languages[lang]||C.languages.en).cards.initiator.body;
@@ -321,6 +363,7 @@ function upload(){
 function idea(){main.innerHTML=`${heading(q('panelidea'),t('ideaIntro'),q('paneel'))}<section class="page-content"><div class="compact-page"><form id="work-form" data-kind="idea" class="form-panel"><h2>${t('yourStory')}</h2>${t('ideaQuestions').map((label,i)=>field('idea-'+i,`${i+1}. ${label}`,'text',ideaDraft['idea-'+i],{required:i===0,max:500})).join('')}<div class="form-actions end"><button type="submit" class="button">${t('makePrompt')}${icon('arrow',18)}</button></div></form></div></section>`;}
 function generatePrompt(){const questions=t('ideaQuestions');const answers=questions.map((q,i)=>ideaDraft['idea-'+i]?`${q}\n${ideaDraft['idea-'+i]}`:'').filter(Boolean).join('\n\n');const prefixes={nl:'Maak een visueel ontwerpconcept voor mijn houten kunstpaneel voor United Wood Floor Layers — Pay It Forward. Het paneel is 100 × 100 cm, met een fysiek eiken molenwiekframe van 5 cm met de klok mee. De binnenruimte is 90 × 90 cm; totale dikte 24 mm. Behoud dat kader en vertaal mijn verhaal naar een voorstel dat ik met hout kan maken. Toon het paneel recht van voren, zonder toegevoegde tekst. Gebruik natuurlijke houtkleuren. Dit is een verkenning, geen afgerond of bestaand paneel.',en:'Create a visual design concept for my wooden art panel for United Wood Floor Layers — Pay It Forward. The panel is 100 × 100 cm, with a physical 5 cm clockwise oak windmill frame. The inner space is 90 × 90 cm; total thickness 24 mm. Preserve the frame and translate my story into a proposal that I can make in wood. Show the panel straight on, without added text, using natural wood colours. This is an exploration, not a finished or existing panel.',de:'Erstelle ein visuelles Konzept für mein Holzkunstpaneel für United Wood Floor Layers — Pay It Forward. Außenmaß 100 × 100 cm, physischer Eichenrahmen 5 cm im Uhrzeigersinn als Windmühlenmuster. Innenraum 90 × 90 cm, Gesamtdicke 24 mm. Behalte den Rahmen bei und übersetze meine Geschichte in einen mit Holz umsetzbaren Entwurf. Zeige das Paneel frontal ohne Text, in natürlichen Holzfarben. Es ist ein Konzept, kein fertiges Paneel.',fr:'Crée un concept visuel pour mon panneau artistique en bois pour United Wood Floor Layers — Pay It Forward. Dimensions 100 × 100 cm, cadre physique en chêne de 5 cm en moulin dans le sens horaire. Espace intérieur 90 × 90 cm, épaisseur totale 24 mm. Préserve le cadre et traduis mon histoire en une proposition réalisable en bois. Vue de face, sans texte ajouté, couleurs naturelles du bois. Il s’agit d’un concept, pas d’un panneau réalisé.',es:'Crea un concepto visual para mi panel artístico de madera para United Wood Floor Layers — Pay It Forward. Medidas 100 × 100 cm, marco físico de roble de 5 cm en molinete horario. Interior 90 × 90 cm, grosor total 24 mm. Conserva el marco y traduce mi historia en un diseño realizable con madera. Vista frontal, sin texto añadido, con colores naturales de madera. Es un concepto, no un panel terminado.',it:'Crea un concetto visivo per il mio pannello artistico in legno per United Wood Floor Layers — Pay It Forward. Dimensioni 100 × 100 cm, cornice fisica in rovere di 5 cm a mulino in senso orario. Interno 90 × 90 cm, spessore totale 24 mm. Conserva la cornice e traduci la mia storia in un progetto realizzabile in legno. Vista frontale, senza testo aggiunto, colori naturali del legno. È un concetto, non un pannello finito.'};const prompt=(prefixes[lang]||prefixes.en)+'\n\n'+answers;main.innerHTML=`${heading(q('panelidea'),t('ideaIntro'))}<section class="page-content"><div class="compact-page"><div class="prompt-result" id="prompt-result">${esc(prompt)}</div><div class="actions"><button type="button" class="button" data-action="copy-prompt">${t('copy')}</button>${button('ChatGPT ↗','https://chatgpt.com/','outline')}<button type="button" class="text-button" data-action="edit-idea">${t('back')}</button></div></div></section>`;window.scrollTo({top:0});}
 function render(){
+ clearInterval(communityTimer);
  capture();formError='';const previousRoute=route;const rawRoute=location.hash.replace(/^#/,'');route=rawRoute.split('?')[0]||'home';
  if(route==='community'){const params=new URLSearchParams(rawRoute.split('?')[1]||'');directoryFilters={group:directoryGroups().some(([key])=>key===params.get('group'))?params.get('group'):'',country:window.UWFL_COMMUNITY.countryKey(params.get('country')||''),search:params.get('q')||''};}
  if(route.startsWith('join/')&&route!==previousRoute){const role=route.split('/')[1];if(['maker','participant','contributor','student'].includes(role)){joinDraft.role=role;joinStep=1;}}
