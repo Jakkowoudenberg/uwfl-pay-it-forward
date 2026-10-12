@@ -120,3 +120,17 @@
 .visitor-page .collective-section{margin-top:0}
 .visitor-page .visitor-tasks{margin-top:29px}
 .visitor-original{margin-top:22px;font-size:.86rem}
+
+/* Equal visibility for approved community profiles on the home page. */
+.community-spotlight{overflow:hidden}
+.community-spotlight figure{height:260px;display:flex;align-items:center;justify-content:center;background:var(--wash);margin:0}
+.welcome-grid>.community-spotlight figure img{width:100%;height:100%;min-height:0;aspect-ratio:auto;object-fit:contain}
+.community-spotlight .spotlight-logo img{padding:24px}
+.community-spotlight .founder-story h2{font-size:1.45rem;line-height:1.25;margin-top:10px}
+.community-spotlight .spotlight-meta{font-size:.8rem;color:var(--muted);margin-top:8px}
+.community-spotlight .spotlight-excerpt{font-size:.92rem;line-height:1.65;height:7.6em;overflow:hidden;margin:14px 0}
+.spotlight-controls{display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px 18px}
+.spotlight-controls button{min-width:44px;min-height:44px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px}
+.spotlight-controls button[data-spotlight="previous"],.spotlight-controls button[data-spotlight="next"]{font-size:1.7rem}
+.about-grid>.founder-card{align-self:start}
+@media(max-width:800px){.welcome-grid>.community-spotlight{display:block}.welcome-grid>.community-spotlight figure{height:260px}.welcome-grid>.community-spotlight figure img{height:100%;min-height:0}}
