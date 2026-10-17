@@ -1,0 +1,20 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {JSDOM}=require(process.env.JSDOM_PATH||'jsdom');
+const root=path.join(__dirname,'..','dist');
+const wait=()=>new Promise(r=>setTimeout(r,0));
+(async()=>{
+ const w=new JSDOM(fs.readFileSync(path.join(root,'index.html'),'utf8'),{url:'https://example.invalid/#upload',runScripts:'outside-only',pretendToBeVisual:true}).window;
+ w.localStorage.setItem('uwfl_preview_lang','nl');w.matchMedia=()=>({matches:true});w.scrollTo=()=>{};w.HTMLElement.prototype.scrollIntoView=()=>{};w.URL.createObjectURL=()=> 'blob:fictional';w.URL.revokeObjectURL=()=>{};w.AbortSignal.timeout=()=>undefined;w.fetch=async()=>({ok:true,json:async()=>[]});
+ for(const name of ['artwork-mode.js','artwork-intake.js','redesign.js'])w.eval(fs.readFileSync(path.join(root,'assets',name),'utf8'));
+ await wait();assert(w.UWFL_ARTWORK_LIVE);assert(w.document.querySelector('#artwork-login'),'Production must verify the maker before showing intake');
+ const el=n=>w.document.querySelector('[name="'+n+'"]');const input=(n,v)=>{el(n).value=v;el(n).dispatchEvent(new w.Event('change',{bubbles:true}));};const submit=()=>w.document.querySelector('form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));
+ let submissions=0;w.UWFL_ARTWORK={lookup:async()=>({name:'Fictional QA Maker',participant_number:99999,country:'NL'}),dossiers:async()=>[],submit:async()=>{submissions++;return {id:1};}};
+ input('number','99999');input('email','fictional@example.invalid');submit();await wait();assert(el('title'));assert(!el('example'),'Public examples must not be selectable in production');
+ submit();await wait();assert(el('title'),'Required answers must block moving forward');
+ input('title','Fictional QA artwork');input('story','Fictional reason');input('meaning','Fictional meaning');input('design','5');assert(el('designDetail').required);input('designDetail','Unknown origin; needs review');input('edition','0');input('process','Fictional handwork');submit();await wait();assert(el('wood'));
+ input('wood','Oak');input('materials','None');input('origin','5');assert(el('unknown').required);input('unknown','Needs supplier check');input('source','Supplier information missing');for(const [n,v]of Object.entries({width:'100',height:'100',thickness:'24',weight:'15',date:'2026-01-01',made:'Fictional town',country:'NL',nationality:'Dutch',shipping:'NL'}))input(n,v);
+ submit();await wait();assert(w.document.querySelector('#intake-error').textContent.includes('techniek'),'A technique must be selected');el('tech0').checked=true;el('tech0').dispatchEvent(new w.Event('change',{bubbles:true}));submit();await wait();assert(el('front'));assert(el('back'));assert(el('detail'));submit();await wait();assert.equal(submissions,0,'Missing photos must not reach the network');assert(el('truth').required);assert(el('rear').required);
+ const original=fs.readFileSync(path.join(root,'information.html'),'utf8');assert(original.includes('assets/content.js'));assert(original.includes('assets/production.js'),'Existing registration and contact forms must remain live');assert(!fs.readFileSync(path.join(root,'index.html'),'utf8').includes('ONTWERPPREVIEW'));
+ w.close();console.log('Artwork UI checks passed: production identity gate, required answers, conditional unknowns, technique validation, rear-side privacy prompts, photo gate and preserved live information/forms. No network or real messages.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

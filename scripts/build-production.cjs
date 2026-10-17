@@ -102,11 +102,23 @@ for (const file of ['index.html', 'admin.html']) {
   <style>#preview-note{display:none}.registration-number{font-size:1.35rem;margin:1.5rem 0}form[aria-busy=true]{opacity:.8}</style>
 </head>`);
   }
-  fs.writeFileSync(path.join(out, file), html);
+  if(file==='index.html'){
+    html=html.replace('</head>','<link rel="stylesheet" href="assets/information-theme.css"></head>');
+    html=html.replace('<script src="assets/app.js', '<script src="assets/information-navigation.js" defer></script><script src="assets/app.js');
+    fs.writeFileSync(path.join(out,'information.html'),html);
+  }else fs.writeFileSync(path.join(out,file),html);
 }
 
 fs.copyFileSync(path.join(source, 'profile-photo.html'), path.join(out, 'profile-photo.html'));
-if (process.env.CONTEXT === 'deploy-preview') fs.copyFileSync(path.join(source, 'redesign.html'), path.join(out, 'redesign.html'));
+const liveArtwork=true;
+fs.writeFileSync(path.join(out,'assets','artwork-mode.js'),'window.UWFL_ARTWORK_LIVE='+JSON.stringify(liveArtwork)+';');
+let redesigned=fs.readFileSync(path.join(source,'redesign.html'),'utf8');
+redesigned=redesigned.replace('<script src="assets/artwork-intake.js"','<script src="assets/artwork-mode.js" defer></script><script src="assets/artwork-api.js" defer></script><script src="assets/artwork-intake.js"');
+redesigned=redesigned.replace('</head>','<script src="https://www.google.com/recaptcha/api.js?render=6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B" async defer></script><link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" href="/icon-192.png"><meta name="description" content="United Woodfloor Layers — Pay It Forward. Discover the artworks and makers, join the project and help three people."><link rel="canonical" href="'+site+'/"></head>');
+if(liveArtwork)redesigned=redesigned.replace('<meta name="robots" content="noindex,nofollow">','<meta name="robots" content="index,follow">').replace(/<div class="preview-bar">[\s\S]*?<\/div>/,'');
+redesigned=redesigned.replace(/(assets\/[^"?]+\.(?:js|css))"/g,'$1?v='+version+'"');
+fs.writeFileSync(path.join(out,'index.html'),redesigned);
+if(process.env.CONTEXT==='deploy-preview'){fs.writeFileSync(path.join(out,'assets','artwork-preview-mode.js'),'window.UWFL_ARTWORK_LIVE=false;');fs.writeFileSync(path.join(out,'redesign.html'),redesigned.replace('artwork-mode.js','artwork-preview-mode.js').replace('<meta name="robots" content="index,follow">','<meta name="robots" content="noindex,nofollow">'));}
 
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
 manifest.background_color = '#ffffff';

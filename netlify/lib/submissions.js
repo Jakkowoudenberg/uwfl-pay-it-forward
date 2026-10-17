@@ -26,20 +26,24 @@ async function register(event) {
 }
 async function panel(event) {
   const d = await prepare(event, 'panel'), reg = await participant(d);
-  const photos = Array.isArray(d.photos) ? d.photos : [];
+  const dossier=require('./artwork-dossier').validate(d.intake);
+  for(const image of Object.values(dossier.photos))await images.exists(image,'panel-photos');
+  const photos = [dossier.photos.front,dossier.photos.detail];
   if (!photos.length || photos.length > 8) c.fail(400,'image_required');
   for (const value of photos) await images.exists(value,'panel-photos');
   const name = String(reg.name || '').split(/\s+/), first = name.shift() || '';
   const row = {
     request_id:requestId(d), participant_number:reg.participant_number, first_name:first, last_name:name.join(' '),
-    company:reg.company || null, country_made:c.country(d.country_made || reg.country),
-    shipping_country:c.country(d.shipping_country), artwork_name:c.text(d.artwork_name,200,true),
-    wood_species:c.text(d.wood_species,300,true), pattern:c.text(d.pattern,300) || null,
-    story:c.text(d.story,4000,true), why:c.text(d.why,2000) || null,
-    meaning:c.text(d.meaning,2000) || null, materials:c.text(d.materials,2000) || null,
+    company:reg.company || null, country_made:c.country(dossier.country), nationality:dossier.nationality, place_made:dossier.made, production_date:dossier.date,
+    shipping_country:c.country(dossier.shipping), artwork_name:c.text(dossier.title,200,true),
+    wood_species:c.text(dossier.wood,300,true), pattern:c.text(d.pattern,300) || null,
+    story:c.text(dossier.story,4000,true), why:null,
+    meaning:c.text(dossier.meaning,4000,true), materials:c.text(dossier.materials,4000,true),
     photos, status:'pending', submitter_email:reg.email || c.email(d.email), lang:c.language(d.lang)
   };
   const result = await c.insert('panels',row), saved = { ...row, ...result.row };
+  const actual=await c.db('panels?id=eq.'+saved.id+'&participant_number=eq.'+reg.participant_number+'&select=id');if(!actual.length)c.fail(409,'submission_conflict');
+  await c.db('artwork_dossiers?on_conflict=panel_id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=representation'},body:JSON.stringify({panel_id:saved.id,participant_number:reg.participant_number,request_id:row.request_id,details:dossier})});
   const notification = result.fresh ? await notify('panel',saved,{ type:'panel', naam:reg.name, email:row.submitter_email, lang:row.lang, participant_number:row.participant_number, artwork_name:row.artwork_name, company:row.company || '', country:row.country_made, wood:row.wood_species, pattern:row.pattern || '' }) : 'previously_requested';
   return { ok:true,id:saved.id,notification };
 }
