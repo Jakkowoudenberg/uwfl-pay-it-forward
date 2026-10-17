@@ -106,6 +106,7 @@ for (const file of ['index.html', 'admin.html']) {
 }
 
 fs.copyFileSync(path.join(source, 'profile-photo.html'), path.join(out, 'profile-photo.html'));
+if (process.env.CONTEXT === 'deploy-preview') fs.copyFileSync(path.join(source, 'redesign.html'), path.join(out, 'redesign.html'));
 
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
 manifest.background_color = '#ffffff';
