@@ -33,6 +33,7 @@ async function create({lang='nl',demo=false}={}){
   if(control.unauthorized||options.headers['X-Admin-Key']!==secret)return response(401,{error:'Unauthorized'});
   if(control.hold===endpoint)await new Promise(resolve=>{control.release=resolve;});
   if(control.fail===endpoint)return response(500,{error:'Fictional failure'});
+  if(endpoint==='admin-artwork-dossiers')return response(200,[]);
   if(reads[endpoint]){assert.equal(options.method,'GET');return response(200,rows[reads[endpoint]]);}
   assert(writes[endpoint],'Unexpected endpoint');assert.equal(options.method,'POST');
   if(!control.keepPending)rows[writes[endpoint]]=rows[writes[endpoint]].filter(row=>String(row.id)!==u.searchParams.get('id'));
@@ -52,7 +53,7 @@ function mutationCount(x){return x.requests.filter(r=>r.method==='POST').length;
   const x=await create({lang});assert.equal(x.requests.length,0,'Private endpoint used before login');
   for(const [key,values] of Object.entries(x.w.UWFL_UI))assert(values.length===6&&values.every(Boolean),`Incomplete label: ${key}`);
   await login(x,'wrong-fictional-password');assert(x.d.querySelector('#admin-login-error:not([hidden])'));privateCleared(x);
-  await login(x);assert.equal(x.d.querySelectorAll('[data-group]').length,4);assert.equal(x.d.querySelector('#admin-password'),null);
+  await login(x);assert.equal(x.d.querySelectorAll('[data-group]').length,5);assert.equal(x.d.querySelector('#admin-password'),null);
   assert(x.d.querySelector('.admin-review-body').textContent.includes('<img src=x onerror="alert(1)">'));assert.equal(x.d.querySelectorAll('[onerror]').length,0);assert(!x.d.querySelector('a[href^="javascript:"]'));
   assert(!x.d.body.innerHTML.includes(secret));
   const search=x.d.querySelector('#admin-search');search.value='no matching fictional name';search.dispatchEvent(new x.w.Event('input',{bubbles:true}));assert.equal(x.d.querySelectorAll('.admin-review').length,0);search.value='applicant';search.dispatchEvent(new x.w.Event('input',{bubbles:true}));assert.equal(x.d.querySelectorAll('.admin-review').length,1);

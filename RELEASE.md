@@ -63,3 +63,32 @@ Checks:
 For rollback, restore the previous Netlify production deploy recorded in the
 release operation. The additive schema is compatible with the previous app and
 can remain in place; do not delete new user submissions as part of a rollback.
+
+## Artwork release — 17 October 2026
+
+The root serves the reviewed four-destination layout. The complete existing
+content and original registration/contact/partner flows remain at
+`information.html`; inbound old routes redirect to the corresponding content.
+The new artwork form verifies the existing participant-number/email pair and
+requires truthful design, origin, dimensions, techniques and photo answers.
+
+`artwork_dossiers` is additive, RLS enabled and unavailable to anon/authenticated
+roles. Only the server may read/write it. Front/detail photos follow the existing
+review/publication flow; rear-side images stay in private review storage. Makers
+retrieve their dossiers through a credential-checked POST; management uses its
+existing admin-key gate. Dossiers can be printed/saved as PDF. No customs
+classification, EUDR exemption or Expo selection is claimed automatically.
+
+Original maker and panel texts are retained in the database. The Steve display
+separates his existing biography and rose story without deleting source text.
+Existing approved artworks are not required to resubmit retrospectively.
+
+Public delivery instructions now identify T&G (EU) and NWFA (Americas) with the
+Expo arrival deadline of 25 March 2027 and ten rear-side identification fields.
+The external Google mail service and its template contents remain external to
+this repository; a successful dispatch still does not prove correct template
+contents or delivery. No real mails or submissions were created during QA.
+
+Validation: release function contracts, artwork intake UI with fake networking,
+six-language admin suite, security checks and production build. Additive schema
+is recorded in scripts/schema-artwork-dossiers.sql.

@@ -18,6 +18,7 @@ function pending(table) {
       if (row.photo_url) result.photo_url = await reviewUrl(row.photo_url);
       if (row.logo_url) result.logo_url = await reviewUrl(row.logo_url);
       if (Array.isArray(row.photos)) result.photos = await Promise.all(row.photos.map(reviewUrl));
+      if(table==='panels'){const dossier=await db('artwork_dossiers?panel_id=eq.'+row.id);result.dossier=await require('./artwork-dossier').signed(dossier[0]);}
       return result;
     }));
   },true);
@@ -36,6 +37,7 @@ function decision(table) {
     }
     const patch = { status:table === 'uwfl_messages' ? 'handled' : 'approved' };
     if (table === 'panels') {
+      if(row.created_at&&row.created_at>='2026-10-17T09:00:00Z'){const dossier=await db('artwork_dossiers?panel_id=eq.'+row.id);if(!dossier.length)fail(409,'artwork_dossier_required');}
       // A panel cannot appear before the maker registration has also been reviewed.
       const maker = await db('registrations?participant_number=eq.' + row.participant_number + '&status=eq.approved&select=id');
       if (!maker.length) fail(409,'maker_pending');

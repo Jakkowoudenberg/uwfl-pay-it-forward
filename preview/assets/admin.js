@@ -3,10 +3,12 @@
 (()=>{
 'use strict';
 const LIVE=window.UWFL_LIVE===true;
+window.UWFL_UI.adminDossiers=['Kunstwerkdossiers','Artwork dossiers','Kunstwerkdossiers','Dossiers des œuvres','Expedientes de obras','Dossier delle opere'];
 const API=LIVE?'/.netlify/functions/':'https://app.unitedwoodfloorlayers.com/.netlify/functions/';
 const groups={
  registrations:{label:'adminRegistrations',read:'admin-pending',write:'approve'},
  panels:{label:'adminPanels',read:'admin-panels-pending',write:'panel-approve'},
+ dossiers:{label:'adminDossiers',read:'admin-artwork-dossiers'},
  sponsors:{label:'audSponsors',read:'admin-sponsors-pending',write:'sponsor-approve'},
  organisations:{label:'audOrganisations',read:'admin-orgs-pending',write:'org-approve'}
 };
@@ -26,6 +28,7 @@ const title=(group,row)=>group==='mail'?`${row.kind} #${row.record_id} · ${row.
 const safeUrl=value=>{try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}};
 const demoRows={
  registrations:[{id:1001,name:'Fictieve deelnemer / Demo participant',company:'UWFL demo',country:'Netherlands',type:'Contributor',message:'Fictief voorbeeld. Ik help met vervoer en geef mijn kennis door. / Fictional example: helping with transport and sharing skills.'}],
+ dossiers:[],
  panels:[{id:1002,participant_number:9999,first_name:'Demo',last_name:'Maker',artwork_name:'Together — fictief voorbeeld',country_made:'Canada',wood_species:'Oak / eiken',pattern:'Geometric inlay / geometrisch inlegwerk',story:'Dit is een fictief paneel om het beheer te bekijken.\nThis is a fictional panel for reviewing the management interface.',photos:['assets/admin-demo-panel.svg']}],
  sponsors:[{id:1003,company:'Fictieve sponsor / Demo sponsor',country:'Germany',logo_url:'assets/admin-demo-panel.svg',why:'Fictief voorbeeld: vakkennis doorgeven. / Fictional example: sharing craft.',what:'Materialen / materials'}],
  organisations:[{id:1004,name:'Fictieve vakorganisatie / Demo association',country:'France',logo_url:'assets/admin-demo-panel.svg',role:'Fictief voorbeeld: makers verbinden. / Fictional example: connecting makers.'}]
@@ -79,10 +82,12 @@ function images(group,row){
  return `<div class="admin-images">${urls.map(url=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer"><img src="${esc(url)}" alt="${esc(title(group,row))}" loading="lazy" referrerpolicy="no-referrer"></a>`).join('')}</div>`;
 }
 function details(group,row){
+ if(group==='dossiers'){return '<h3>'+esc(row.name)+'</h3><p>#'+esc(row.participant_number)+'</p><button type="button" class="button" data-archive-dossier="'+esc(row.id)+'">Dossier PDF</button>';}
  if(group==='mail')return `<p>${t('adminMailPending')}</p><dl class="review-list">${field('adminType',row.kind)}${field('adminMadeOn',row.created_at)}${field('adminMailStatus',row.state)}</dl>`;
  let content=group==='messages'?'':images(group,row);
  content+=`<dl class="review-list">${field('adminCountry',row.country||row.country_made)}${field('adminCompany',row.company)}${field('participantNumber',row.participant_number)}${field('adminType',row.type||row.role)}${group==='panels'?field('adminMaker',[row.first_name,row.last_name].filter(Boolean).join(' '))+field('adminPlace',row.place_made)+field('adminMadeOn',row.production_date)+field('adminNationality',row.nationality)+field('adminShippingCountry',row.shipping_country):''}</dl>`;
  if(group==='panels'){
+  if(row.dossier){content+='<h3>Transport dossier</h3><dl class="review-list">'+Object.entries(row.dossier.details).filter(([k])=>k!=='photos').map(([k,v])=>'<dt>'+esc(k)+'</dt><dd>'+esc(typeof v==='object'?JSON.stringify(v):v)+'</dd>').join('')+'</dl><div class="admin-images">'+Object.entries(row.dossier.details.photos||{}).map(([k,src])=>'<a href="'+esc(safeUrl(src))+'" target="_blank" rel="noopener"><img src="'+esc(safeUrl(src))+'" alt="'+esc(k)+'"></a>').join('')+'</div><button type="button" class="button" data-dossier-id="'+esc(row.id)+'">Dossier PDF</button>'; }
   content+=window.UWFL_PANEL.sections(row).map(part=>section(part.label,part.value)).join('');
   const craft=window.UWFL_PANEL.craft(row);if(craft.length)content+=`<h3>${t('panelCraft')}</h3><dl class="review-list">${craft.map(part=>field(part.label,part.value)).join('')}</dl>`;
  }else if(group==='registrations'||group==='messages')content+=section(group==='messages'?'message':'yourStory',row.message);
@@ -170,4 +175,6 @@ dialog.addEventListener('cancel',()=>{rejectTarget=null;});
 dialog.addEventListener('close',()=>{rejectTarget=null;dialog.innerHTML='';});
 window.addEventListener('pagehide',()=>endSession());
 render();if(demo)refresh();
+
+document.addEventListener('click',event=>{const b=event.target.closest('[data-dossier-id],[data-archive-dossier]');if(!b)return;const row=b.dataset.archiveDossier?queues.dossiers.rows.find(r=>String(r.id)===b.dataset.archiveDossier):queues.panels.rows.find(r=>String(r.id)===b.dataset.dossierId);if(row?.dossier)window.UWFL_PRINT_DOSSIER(row.dossier.details,[row.first_name,row.last_name].join(' '));});
 })();
