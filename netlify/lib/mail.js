@@ -31,4 +31,11 @@ function approvalPayload(panel) {
   return { type:'panel_approved', naam:[panel.first_name,panel.last_name].filter(Boolean).join(' '), email:panel.submitter_email, lang, participant_number:panel.participant_number, artwork_name:panel.artwork_name,
     region };
 }
-module.exports = { notify, approvalPayload };
+async function queueApproval(panel){
+ const payload=require('./approval-message').approvalMessage(panel);
+ // The legacy Apps Script template is unverified and has sent a wrong address.
+ // Queue a complete corrected message without invoking that template.
+ const added=await db('uwfl_mail_log?on_conflict=event_key',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=representation'},body:JSON.stringify({event_key:'panel_approved:'+panel.id,kind:'panel_approved',record_id:panel.id,payload,state:'awaiting_sender'})});
+ return added.length?'awaiting_sender':'previously_requested';
+}
+module.exports = { notify, approvalPayload, queueApproval };

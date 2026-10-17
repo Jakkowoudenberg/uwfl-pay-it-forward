@@ -54,7 +54,7 @@ global.fetch=async (input,options={})=>{
  return json(result);
 };
 async function call(name,data,options={}){
- const captchaActions={'register':'register','panel-submit':'panel','sponsor-submit':'sponsor','org-submit':'organisation','contact-submit':'contact','panel-lookup':'lookup','upload-photo':'upload','panel-photo':'upload','sponsor-logo':'upload','org-logo':'upload'};
+ const captchaActions={'register':'register','panel-submit':'panel','sponsor-submit':'sponsor','org-submit':'organisation','contact-submit':'contact','artwork-progress':'lookup','panel-lookup':'lookup','upload-photo':'upload','panel-photo':'upload','sponsor-logo':'upload','org-logo':'upload'};
  if(data!==undefined&&captchaActions[name]&&options.captcha!==false)data={recaptcha_token:'fictional:'+captchaActions[name],...data};
  const event={httpMethod:options.method||(data===undefined?'GET':'POST'),headers:{'x-nf-client-connection-ip':'192.0.2.'+(++request),...(options.admin?{'x-admin-key':process.env.ADMIN_KEY}:{})},body:data===undefined?undefined:JSON.stringify(data),queryStringParameters:options.query||{}};
  const result=await require('../netlify/functions/'+name+'.js').handler(event);
@@ -67,6 +67,7 @@ async function photo(endpoint='upload-photo',extra={}){
 const participantData=()=>({request_id:crypto.randomUUID(),naam:'Fictional release maker',email:'maker@example.invalid',land:'NL',telefoon:'+31000000000',type:'Maker',vak:'Wood craft',bericht:'Fictional release story.\nOriginal words stay intact.',lang:'nl',status:'approved'});
 const decide=(name,id,action='approve')=>call(name,{}, {admin:true,query:{id:String(id),action}});
 (async()=>{
+ const {approvalMessage}=require('../netlify/lib/approval-message');const usMessage=approvalMessage({status:'approved',id:99,first_name:'Fictional',participant_number:9999,artwork_name:'Test',shipping_country:'US',lang:'nl',submitter_email:'maker@example.invalid'});assert.equal(usMessage.lang,'en');assert(usMessage.text.includes('14 Research Park Drive'));assert(usMessage.text.includes('not been confirmed'));assert(!usMessage.text.includes('5838'));assert(usMessage.text.includes('Signature'));assert.equal(approvalMessage({shipping_country:'Australia',country_made:'US'}).region,'other');
  const securityContact={name:'Fictional security check',email:'security@example.invalid',message:'No storage or mail expected'};
  const beforeSecurity=requests.length;
  delete process.env.RECAPTCHA_SECRET_KEY;
@@ -111,8 +112,18 @@ const decide=(name,id,action='approve')=>call(name,{}, {admin:true,query:{id:Str
  const publicPerson=(await call('participants')).data[0];assert(publicPerson.photo_url.includes('/object/public/participant-photos/'));assert(!('email' in publicPerson));assert(!('phone' in publicPerson));
  const beforeMail=sent.length;
  assert.equal((await decide('panel-approve',submitted.data.id)).status,200);
- assert.equal(sent.length,beforeMail+1);assert.equal(sent.at(-1).type,'panel_approved');assert.equal(sent.at(-1).region,'eu');
- assert.equal((await decide('panel-approve',submitted.data.id)).status,409);assert.equal(sent.length,beforeMail+1,'Approval sent duplicate mail');
+ assert.equal(sent.length,beforeMail,'Unsafe legacy approval sender must not be called');const queued=tables.uwfl_mail_log.find(r=>r.kind==='panel_approved');assert.equal(queued.state,'awaiting_sender');assert.equal(queued.payload.region,'eu');assert(queued.payload.text.includes('Darwinstraat 33'));assert.equal(queued.payload.lang,'en');
+ const ownProgress=await call('artwork-progress',credentials);assert.equal(ownProgress.status,200);assert(ownProgress.data.artworks.some(r=>r.id===submitted.data.id));assert(!('submitter_email' in ownProgress.data.artworks[0]));
+ assert.equal((await call('artwork-progress',{...credentials,email:'stranger@example.invalid'})).status,403);
+ assert.equal((await call('admin-artwork-progress',{id:submitted.data.id,action:'received'})).status,401);
+ assert.equal((await call('admin-artwork-progress',{id:submitted.data.id,action:'received'},{admin:true})).status,200);
+ assert.equal((await call('admin-artwork-progress',{id:submitted.data.id,action:'select_expo'},{admin:true})).status,200);
+ assert.equal((await call('admin-artwork-progress',{id:submitted.data.id,action:'request_information',note:'Missing proof'},{admin:true})).status,409);
+ const progressed=(await call('artwork-progress',credentials)).data.artworks.find(r=>r.id===submitted.data.id);assert(progressed.received_at);assert.equal(progressed.expo_selected,true);
+ assert.equal((await call('admin-artwork-progress',{id:submitted.data.id,action:'unselect_expo'},{admin:true})).status,200);
+ assert.equal((await call('admin-artwork-progress',{id:submitted.data.id,action:'not_received'},{admin:true})).status,200);
+ const draftMail=await call('admin-mail-draft',undefined,{admin:true,query:{id:String(queued.id)}});assert.equal(draftMail.status,200);assert.equal(draftMail.data.email,'maker@example.invalid');assert.equal((await call('admin-mail-draft',undefined,{query:{id:String(queued.id)}})).status,401);
+ assert.equal((await decide('panel-approve',submitted.data.id)).status,409);assert.equal(sent.length,beforeMail,'Approval sent duplicate mail');
  const publicPanel=(await call('panels')).data[0];assert.equal(publicPanel.why,null);assert.equal(publicPanel.story,panel.story);assert(!('shipping_country' in publicPanel));assert(!('submitter_email' in publicPanel));assert(publicPanel.photos[0].includes('/object/public/panel-photos/'));
  const {approvalPayload}=require('../netlify/lib/mail');
  assert.equal(approvalPayload({...tables.panels[0],shipping_country:'Canada',country_made:'NL'}).region,'americas');
