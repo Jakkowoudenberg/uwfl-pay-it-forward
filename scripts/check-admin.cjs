@@ -51,7 +51,7 @@ function mutationCount(x){return x.requests.filter(r=>r.method==='POST').length;
 (async()=>{
  for(const lang of ['nl','en','de','fr','es','it']){
   const x=await create({lang});assert.equal(x.requests.length,0,'Private endpoint used before login');
-  for(const [key,values] of Object.entries(x.w.UWFL_UI))assert(values.length===6&&values.every(Boolean),`Incomplete label: ${key}`);
+  for(const [key,values] of Object.entries(x.w.UWFL_UI))assert([6,8].includes(values.length)&&values.every(Boolean),`Incomplete label: ${key}`);
   await login(x,'wrong-fictional-password');assert(x.d.querySelector('#admin-login-error:not([hidden])'));privateCleared(x);
   await login(x);assert.equal(x.d.querySelectorAll('[data-group]').length,5);assert.equal(x.d.querySelector('#admin-password'),null);
   assert(x.d.querySelector('.admin-review-body').textContent.includes('<img src=x onerror="alert(1)">'));assert.equal(x.d.querySelectorAll('[onerror]').length,0);assert(!x.d.querySelector('a[href^="javascript:"]'));

@@ -1,7 +1,7 @@
 'use strict';
 const { db, fail, validId, endpoint } = require('./core');
 const { reviewUrl, publishImage } = require('./images');
-const { notify, approvalPayload } = require('./mail');
+const { queueApproval } = require('./mail');
 const fields = {
   registrations:'id,name,company,country,type,trade,message,photo_url,participant_number,email,phone,created_at',
   panels:'id,participant_number,first_name,last_name,company,nationality,country_made,place_made,production_date,artwork_name,wood_species,pattern,story,why,meaning,materials,shipping_country,photos,submitter_email,lang,contact_email,contact_website,contact_phone,created_at',
@@ -35,7 +35,7 @@ function decision(table) {
       if (!changed.length) fail(409,'already_reviewed');
       return { ok:true };
     }
-    const patch = { status:table === 'uwfl_messages' ? 'handled' : 'approved' };
+    const patch = { status:table === 'uwfl_messages' ? 'handled' : 'approved', ...(table==='panels'?{needs_information:false,review_note:null}:{}) };
     if (table === 'panels') {
       if(row.created_at&&row.created_at>='2026-10-17T09:00:00Z'){const dossier=await db('artwork_dossiers?panel_id=eq.'+row.id);if(!dossier.length)fail(409,'artwork_dossier_required');}
       // A panel cannot appear before the maker registration has also been reviewed.
@@ -51,7 +51,7 @@ function decision(table) {
     const changed = await db(table + '?id=eq.' + id + '&status=eq.pending',{ method:'PATCH',body:JSON.stringify(patch) });
     if (!changed.length) fail(409,'already_reviewed');
     let notification;
-    if (table === 'panels') notification = row.submitter_email ? await notify('panel_approved',row,approvalPayload(row)) : 'missing_email';
+    if (table === 'panels') notification = row.submitter_email ? await queueApproval({...row,...patch}) : 'missing_email';
     return { ok:true,notification };
   },true);
 }
