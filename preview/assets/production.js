@@ -29,7 +29,10 @@ const copy={
  adminMakerPending:['Keur eerst de aanmelding van deze maker goed. Het paneel blijft in de wachtrij.','Approve this maker’s registration first. The panel remains in the queue.','Gib zuerst die Anmeldung dieses Makers frei. Das Paneel bleibt in der Warteschlange.','Validez d’abord l’inscription de ce créateur. Le panneau reste en attente.','Aprueba primero el registro del creador. El panel permanece en espera.','Approva prima l’iscrizione dell’autore. Il pannello resta in attesa.'],
  adminImageRequired:['Er ontbreekt een geldige foto of een logo. Deze inzending is nog niet goedgekeurd.','A valid photo or logo is missing. This submission has not been approved.','Ein gültiges Foto oder Logo fehlt. Dieser Beitrag wurde nicht freigegeben.','Une photo ou un logo valide manque. Cet envoi n’est pas validé.','Falta una foto o logo válido. Este envío no está aprobado.','Manca una foto o un logo valido. Questo invio non è approvato.']
 };
-Object.assign(window.UWFL_UI,copy);
+Object.assign(window.UWFL_UI,copy,{"loginIntro":["Vraag een eenmalige inloglink aan met je deelnemersnummer en het e-mailadres van je aanmelding. Geen e-mailadres gekoppeld? Neem contact op met UWFL.","Request a one-time sign-in link using your participant number and registration email. No email linked? Contact UWFL.","Fordere mit Teilnehmernummer und Anmelde-E-Mail einen einmaligen Anmeldelink an. Keine E-Mail hinterlegt? Kontaktiere UWFL.","Demandez un lien de connexion unique avec votre numéro et e-mail d’inscription. Aucun e-mail associé ? Contactez UWFL.","Solicita un enlace de acceso de un solo uso con tu número y correo de registro. ¿Sin correo asociado? Contacta con UWFL.","Richiedi un link di accesso monouso con numero partecipante ed e-mail di iscrizione. Nessuna e-mail associata? Contatta UWFL."],"loginSend":["Inloglink aanvragen","Request sign-in link","Anmeldelink anfordern","Demander un lien","Solicitar enlace","Richiedi link"],"loginSent":["Als deze gegevens bij je aanmelding horen, ontvang je een inloglink. Open de link in je e-mail en ga daar verder. Geen mail? Controleer je spammap of neem contact op met UWFL.","If these details match your registration, you will receive a sign-in link. Open the email link and continue there. No email? Check spam or contact UWFL.","Wenn die Angaben zur Anmeldung passen, erhältst du einen Link. Öffne ihn in der E-Mail und fahre dort fort. Keine E-Mail? Prüfe Spam oder kontaktiere UWFL.","Si les informations correspondent, vous recevrez un lien. Ouvrez-le dans votre e-mail pour continuer. Aucun message ? Vérifiez les indésirables ou contactez UWFL.","Si los datos coinciden, recibirás un enlace. Ábrelo desde tu correo y continúa allí. ¿No llega? Revisa spam o contacta con UWFL.","Se i dati corrispondono, riceverai un link. Aprilo dall’e-mail e continua lì. Nessuna e-mail? Controlla lo spam o contatta UWFL."],"loginRequired":["Log eerst in via de link in je e-mail. Is de link verlopen? Vraag een nieuwe aan bij de eerste stap. Je ingevulde gegevens blijven hier staan.","Sign in using your email link. If it expired, request a new one at the first step. Your form details remain here.","Melde dich über den E-Mail-Link an. Ist er abgelaufen, fordere im ersten Schritt einen neuen an. Deine Angaben bleiben hier.","Connectez-vous avec le lien reçu. S’il a expiré, demandez-en un nouveau à la première étape. Vos données restent ici.","Accede con el enlace del correo. Si caducó, solicita otro en el primer paso. Tus datos permanecen aquí.","Accedi tramite il link nell’e-mail. Se è scaduto, richiedine un altro al primo passaggio. I dati rimangono qui."],"loginUnavailable":["Inloggen per e-mail is tijdelijk niet beschikbaar. Probeer later opnieuw of neem contact op met UWFL.","Email sign-in is temporarily unavailable. Try later or contact UWFL.","E-Mail-Anmeldung ist vorübergehend nicht verfügbar. Versuche es später oder kontaktiere UWFL.","La connexion par e-mail est indisponible. Réessayez plus tard ou contactez UWFL.","El acceso por correo no está disponible temporalmente. Inténtalo después o contacta con UWFL.","L’accesso via e-mail non è disponibile al momento. Riprova o contatta UWFL."],"loginOut":["Uitloggen","Sign out","Abmelden","Se déconnecter","Cerrar sesión","Esci"],"loginActive":["Je bent ingelogd via e-mail. Vul je deelnemersnummer en hetzelfde e-mailadres in om verder te gaan.","You are signed in by email. Enter your participant number and the same email to continue.","Du bist per E-Mail angemeldet. Gib Teilnehmernummer und dieselbe E-Mail ein.","Vous êtes connecté par e-mail. Saisissez votre numéro et le même e-mail.","Has accedido por correo. Introduce tu número y el mismo correo para continuar.","Hai effettuato l’accesso via e-mail. Inserisci il numero e la stessa e-mail per continuare."]});
+let participantToken='';
+try{participantToken=sessionStorage.getItem('uwfl_participant_access')||'';}catch{}
+window.UWFL_LOGIN={active:()=>!!participantToken,logout(){participantToken='';try{sessionStorage.removeItem('uwfl_participant_access');}catch{}}};
 const uploaded=new WeakMap();
 const RECAPTCHA_SITE_KEY='6Lddlx4tAAAAAHZCoPVDvaYgUaHXy0Dwf89eRs8B';
 function recaptcha(action){
@@ -42,12 +45,13 @@ function recaptcha(action){
  });
 }
 async function post(endpoint,data,action='submit'){
+ if(['panel-lookup','panel-photo','panel-submit'].includes(endpoint))data={...data,access_token:participantToken};
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),55000);
  try{
   const token=await recaptcha(action);
   const response=await fetch('/.netlify/functions/'+endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,recaptcha_token:token}),credentials:'omit',signal:controller.signal});
   const result=await response.json();
-  if(!response.ok||result.ok===false){const error=new Error(result.error||'service_unavailable');error.code=result.error;throw error;}
+  if(!response.ok||result.ok===false){if(result.error==='login_required')window.UWFL_LOGIN.logout();const error=new Error(result.error||'service_unavailable');error.code=result.error;throw error;}
   return result;
  }finally{clearTimeout(timer);}
 }
@@ -79,6 +83,7 @@ window.UWFL_SUBMIT={
   const data={request_id:id(draft),naam:draft.name,bedrijf:draft.company,email:draft.email,land:selectedCountry(draft,'country'),telefoon:draft.phone,vak:draft.trade,bericht:draft.story,type:{maker:'Maker',contributor:'Contributor',participant:'Participant',student:'Student'}[draft.role],social_post:draft.share,lang};
   data.photo_url=await upload(photo.file,'upload-photo');return post('register',data,'register');
  },
+ login(draft){return post('participant-login',{participant_number:draft['participant-number'],email:draft['panel-email']},'login');},
  lookup(draft){return post('panel-lookup',{participant_number:draft['participant-number'],email:draft['panel-email']},'lookup');},
  async panel(draft,photos,lang){
   const data={...window.UWFL_PANEL.fromDraft(draft),request_id:id(draft),participant_number:draft['participant-number'],email:draft['panel-email'],shipping_country:selectedCountry(draft,'shipping-country'),lang};
@@ -93,6 +98,6 @@ window.UWFL_SUBMIT={
   data.logo_url=await upload(logo.file,org?'org-logo':'sponsor-logo');return post(org?'org-submit':'sponsor-submit',data,org?'organisation':'sponsor');
  },
  contact(draft,context,lang){return post('contact-submit',{request_id:id(draft),name:draft['contact-name'],company:draft['contact-company'],email:draft['contact-email'],message:draft['contact-message'],context,lang},'contact');},
- error(error){if(error.code==='credentials_mismatch'||error.code==='missing_credentials')return 'liveCredentials';if(error.code==='rate_limited')return 'liveRate';if(error.code==='recaptcha_failed')return 'liveCaptcha';if(/invalid_|image_|missing_/.test(error.code||error.message))return 'liveInvalid';return 'liveError';}
+ error(error){if(error.code==='login_required')return 'loginRequired';if(error.code==='login_unavailable')return 'loginUnavailable';if(error.code==='credentials_mismatch'||error.code==='missing_credentials')return 'liveCredentials';if(error.code==='rate_limited')return 'liveRate';if(error.code==='recaptcha_failed')return 'liveCaptcha';if(/invalid_|image_|missing_/.test(error.code||error.message))return 'liveInvalid';return 'liveError';}
 };
 })();
