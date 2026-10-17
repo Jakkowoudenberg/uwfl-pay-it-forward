@@ -105,6 +105,8 @@ for (const file of ['index.html', 'admin.html']) {
   fs.writeFileSync(path.join(out, file), html);
 }
 
+fs.copyFileSync(path.join(source, 'profile-photo.html'), path.join(out, 'profile-photo.html'));
+
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
 manifest.background_color = '#ffffff';
 manifest.theme_color = '#ffffff';
