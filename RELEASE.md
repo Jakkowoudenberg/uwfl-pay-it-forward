@@ -118,3 +118,12 @@ Includes the requested simpler pattern families, grouped herringbone,
 descriptions are stored with each new catalogue row; family filtering includes
 Chevron. All frames stay clockwise. Public browsing remains read-only; no
 reservation, account, database or email behavior changes.
+
+
+## Pattern batch 3 — 18 October 2026
+
+Twenty new geometric studies bring the library to51. The batch broadens the
+weave and ornamental families while retaining quiet long-short, modular and
+cross bonds. All new names/descriptions support Dutch and English; frames
+remain clockwise and previous drawings remain unchanged. Public browsing is
+still read-only. No participant data, reservations, accounts or mail changes.
