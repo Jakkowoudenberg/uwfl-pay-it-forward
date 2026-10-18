@@ -50,7 +50,7 @@ let patternPage=fs.readFileSync(path.join(source,'patterns-preview.html'),'utf8'
  .replace(/<div class="pattern-preview">[\s\S]*?<\/div>/,'')
  .replace('<head>','<head>')
  .replace('</head>','<link rel="canonical" href="'+site+'/patterns.html"></head>')
- .replace('<p class="pattern-demo-note">','<p class="pattern-public-note">De bibliotheek bevat 100 ontwerpen. Reserveren via een geverifieerd deelnemersaccount volgt later. <a href="/#join">Meld je alvast aan bij UWFL ↗</a></p><p class="pattern-demo-note">')
+ .replace('<p class="pattern-demo-note">','<p class="pattern-public-note">De bibliotheek bevat 110 ontwerpen. Reserveren via een geverifieerd deelnemersaccount volgt later. <a href="/#join">Meld je alvast aan bij UWFL ↗</a></p><p class="pattern-demo-note">')
  .replace('niet actief in deze preview.','niet actief.');
 fs.writeFileSync(path.join(out,'patterns.html'),patternPage);
 

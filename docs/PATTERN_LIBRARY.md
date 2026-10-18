@@ -133,3 +133,16 @@ new geometric studies, not claims of exact historic reconstruction.
 All first91 SVGs remain unchanged. Radial partitions include cassette corners
 so non-fourfold stars tile the square field completely. Public completion copy
 now says100 designs; reservation availability has not changed.
+
+
+## Ten large medallions —110 total
+
+P101–P110 each contain ONE large centred medallion, not repeated motifs. The
+circular outside diameter is84 cm within the90 cm inner field. A new Medaillons
+family groups compass, sunburst, turning rosette, weave, cube, floral, rhombic,
+diagonal twill, two-zone spiral and concentric block studies. Circular outlines
+are shared polygonal approximations at1.875-degree intervals. They are geometric
+studies, not cutting plans or exact historic transcriptions.
+
+All prior100 SVGs remain unchanged. Catalogue validation now accepts110 rows;
+NL/EN counts and family labels follow the expanded collection.
