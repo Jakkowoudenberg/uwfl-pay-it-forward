@@ -38,6 +38,7 @@ copy(path.join(source, 'assets'), path.join(out, 'assets'));
 // Responsive review tools exist only on a Netlify deploy preview.
 if (process.env.CONTEXT === 'deploy-preview') {
   fs.copyFileSync(path.join(source, '_qa.html'), path.join(out, '_qa.html'));
+  fs.copyFileSync(path.join(source,'patterns-preview.html'),path.join(out,'patterns-preview.html'));
   for (const file of ['qa.js', 'qa.css']) fs.copyFileSync(path.join(source, 'assets', file), path.join(out, 'assets', file));
 }
 
