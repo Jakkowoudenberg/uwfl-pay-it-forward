@@ -1,0 +1,1 @@
+const c=require('../lib/core');exports.handler=event=>(event.httpMethod==='GET'?c.endpoint('GET',require('../lib/pattern-requests').adminList,true):c.endpoint('POST',require('../lib/pattern-requests').adminChange,true))(event);

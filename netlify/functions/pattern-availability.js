@@ -1,0 +1,1 @@
+const c=require('../lib/core');exports.handler=c.endpoint('GET',async()=>{const rows=await c.db('pattern_requests?select=pattern_id,status&pattern_id=not.is.null&status=in.(approved,in_progress,completed)');return {ok:true,patterns:rows.map(({pattern_id,status})=>({pattern_id,status}))};});
