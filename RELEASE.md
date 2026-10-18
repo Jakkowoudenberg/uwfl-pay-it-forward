@@ -127,3 +127,13 @@ weave and ornamental families while retaining quiet long-short, modular and
 cross bonds. All new names/descriptions support Dutch and English; frames
 remain clockwise and previous drawings remain unchanged. Public browsing is
 still read-only. No participant data, reservations, accounts or mail changes.
+
+
+## Pattern batch 4 — 18 October 2026
+
+Twenty additions bring the public library to71 geometric studies. Adds new
+weaving repeats, cassette and compass fields, English basket with keys,
+quiet strip bonds and point variations. Previous51 SVGs are retained.
+Names/descriptions support Dutch and English. All outer frames stay clockwise;
+public browsing, participant data, accounts, reservations and mail boundaries
+are unchanged.
