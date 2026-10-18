@@ -435,5 +435,185 @@
     "image": "assets/patterns/p051.svg",
     "name_en": "Six-part fan rosette",
     "description_en": "Six triangular fans of parallel staves form a hexagonal rosette."
+  },
+  {
+    "id": "P052",
+    "name": "Kepervlecht twee-over-twee",
+    "family": "Vlechten",
+    "description": "Stroken kruisen in een verschuivend ritme van twee boven en twee onder.",
+    "image": "assets/patterns/p052.svg",
+    "name_en": "Two-over-two twill weave",
+    "description_en": "Strips cross in a shifting rhythm of two over and two under."
+  },
+  {
+    "id": "P053",
+    "name": "Kepervlecht drie-over-drie",
+    "family": "Vlechten",
+    "description": "Langere kruisingsreeksen van drie boven en drie onder vormen diagonale lijnen.",
+    "image": "assets/patterns/p053.svg",
+    "name_en": "Three-over-three twill weave",
+    "description_en": "Longer sequences of three over and three under form diagonal lines."
+  },
+  {
+    "id": "P054",
+    "name": "Panamavlecht",
+    "family": "Vlechten",
+    "description": "Paren naast elkaar gelegen stroken delen dezelfde boven-onderherhaling.",
+    "image": "assets/patterns/p054.svg",
+    "name_en": "Basket-group weave",
+    "description_en": "Pairs of adjoining strips share the same over-under repeat."
+  },
+  {
+    "id": "P055",
+    "name": "Vijfdelige vlechtherhaling",
+    "family": "Vlechten",
+    "description": "Een kruising onderbreekt telkens vier doorgaande kruisingen in een verspringende herhaling.",
+    "image": "assets/patterns/p055.svg",
+    "name_en": "Five-part weave repeat",
+    "description_en": "One interruption follows four continuous crossings in a shifting repeat."
+  },
+  {
+    "id": "P056",
+    "name": "Rechthoekcassettes met ruitensleutels",
+    "family": "Geometrisch",
+    "description": "Omlijste rechthoekige velden met strookvulling sluiten aan op ruitvormige sleutels.",
+    "image": "assets/patterns/p056.svg",
+    "name_en": "Rectangular cassettes with diamond keys",
+    "description_en": "Framed rectangular stave fields meet diamond-shaped keys."
+  },
+  {
+    "id": "P057",
+    "name": "Ruitketting met kruisvulling",
+    "family": "Geometrisch",
+    "description": "Omlijste ruiten bevatten een kruisvormige vlakverdeling met kleine hoekdelen.",
+    "image": "assets/patterns/p057.svg",
+    "name_en": "Diamond chain with cross divisions",
+    "description_en": "Framed diamonds contain cross-shaped divisions with small corner pieces."
+  },
+  {
+    "id": "P058",
+    "name": "Achthoekvelden met sterkern",
+    "family": "Sierpatronen",
+    "description": "Stervormige kernen herhalen zich in achthoekvelden met vierkante aansluitstukken.",
+    "image": "assets/patterns/p058.svg",
+    "name_en": "Octagonal fields with star centres",
+    "description_en": "Star-shaped centres repeat in octagonal fields with square joining pieces."
+  },
+  {
+    "id": "P059",
+    "name": "Cassette met diagonale vlecht",
+    "family": "Vlechten",
+    "description": "Een diagonale strokenvlecht vult ieder vierkant binnen een rechte verstekomlijsting.",
+    "image": "assets/patterns/p059.svg",
+    "name_en": "Cassette with diagonal weave",
+    "description_en": "A diagonal strip weave fills each square within a straight mitred frame."
+  },
+  {
+    "id": "P060",
+    "name": "Cassette met kruisende diagonalen",
+    "family": "Geometrisch",
+    "description": "Diagonaal kruisende stroken verdelen vierkante cassettes in midden- en hoekvlakken.",
+    "image": "assets/patterns/p060.svg",
+    "name_en": "Cassette with crossing diagonals",
+    "description_en": "Crossing diagonal strips divide square cassettes into centre and corner fields."
+  },
+  {
+    "id": "P061",
+    "name": "Kompasvelden met vierkante kern",
+    "family": "Sierpatronen",
+    "description": "Acht uitwaaierende vlakken verbinden een vierkante kern met de buitenhoeken en zijden.",
+    "image": "assets/patterns/p061.svg",
+    "name_en": "Compass fields with square centres",
+    "description_en": "Eight radiating fields connect a square centre to the outer corners and sides."
+  },
+  {
+    "id": "P062",
+    "name": "Achthoekverband met diagonale stroken",
+    "family": "Geometrisch",
+    "description": "Diagonale stroken vullen achthoekige velden tussen kleine vierkante sleutels.",
+    "image": "assets/patterns/p062.svg",
+    "name_en": "Octagonal bond with diagonal staves",
+    "description_en": "Diagonal staves fill octagonal fields between small square keys."
+  },
+  {
+    "id": "P063",
+    "name": "Driehoeksverband met strookvulling",
+    "family": "Geometrisch",
+    "description": "Driehoekige velden krijgen afwisselende legrichtingen door hun evenwijdige strookvulling.",
+    "image": "assets/patterns/p063.svg",
+    "name_en": "Triangular bond with stave infill",
+    "description_en": "Parallel staves give adjoining triangular fields alternating laying directions."
+  },
+  {
+    "id": "P064",
+    "name": "Pijlvormige blokvelden",
+    "family": "Blokken",
+    "description": "Pijlvormige hoofddelen wisselen van richting tussen rechte en driehoekige passtukken.",
+    "image": "assets/patterns/p064.svg",
+    "name_en": "Arrow-shaped block fields",
+    "description_en": "Arrow-shaped main pieces alternate direction between rectangular and triangular infill."
+  },
+  {
+    "id": "P065",
+    "name": "Engels vlechtverband met sleutels",
+    "family": "Vlechten",
+    "description": "Bundels van vijf stroken van zes breedtes lang draaien rond kleine vierkante sleutelstukken.",
+    "image": "assets/patterns/p065.svg",
+    "name_en": "English basket pattern with keys",
+    "description_en": "Bundles of five staves, each six widths long, turn around small square keys."
+  },
+  {
+    "id": "P066",
+    "name": "Wisselbreedteverband",
+    "family": "Verbanden",
+    "description": "Smalle en brede rijen wisselen elkaar af met verspringende kopse voegen.",
+    "image": "assets/patterns/p066.svg",
+    "name_en": "Alternating-width bond",
+    "description_en": "Narrow and broad rows alternate with staggered end joints."
+  },
+  {
+    "id": "P067",
+    "name": "Wild strokenverband",
+    "family": "Verbanden",
+    "description": "Verschillende strooklengtes vormen een rustig veld zonder vaste kopse herhaling.",
+    "image": "assets/patterns/p067.svg",
+    "name_en": "Irregular-length stave bond",
+    "description_en": "Different stave lengths form a quiet field without a fixed end-joint repeat."
+  },
+  {
+    "id": "P068",
+    "name": "Asymmetrische puntvelden",
+    "family": "Hongaarse punt",
+    "description": "Smalle en brede schuine banen ontmoeten elkaar in een asymmetrisch puntritme.",
+    "image": "assets/patterns/p068.svg",
+    "name_en": "Asymmetric chevron fields",
+    "description_en": "Narrow and broad angled lanes meet in an asymmetric chevron rhythm."
+  },
+  {
+    "id": "P069",
+    "name": "Puntverband 30°",
+    "family": "Hongaarse punt",
+    "description": "Kopse sneden van 30° leveren een scherpe puntlijn met steile strookrichtingen.",
+    "image": "assets/patterns/p069.svg",
+    "name_en": "Chevron bond 30°",
+    "description_en": "End cuts at 30° create a sharp chevron line with steep stave directions."
+  },
+  {
+    "id": "P070",
+    "name": "Ruitvormige waaierrozet",
+    "family": "Sierpatronen",
+    "description": "Vier waaiervelden vullen een ruit en worden rondom verbonden door driehoekige hoekdelen.",
+    "image": "assets/patterns/p070.svg",
+    "name_en": "Diamond-shaped fan rosette",
+    "description_en": "Four fan fields fill a diamond surrounded by triangular corner pieces."
+  },
+  {
+    "id": "P071",
+    "name": "Rechthoekige kompasvelden",
+    "family": "Sierpatronen",
+    "description": "Een langwerpige kern en uitwaaierende velden herhalen zich in verspringende rijen.",
+    "image": "assets/patterns/p071.svg",
+    "name_en": "Rectangular compass fields",
+    "description_en": "An elongated centre and radiating fields repeat in staggered rows."
   }
 ]

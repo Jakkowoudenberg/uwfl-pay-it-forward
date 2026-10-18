@@ -437,6 +437,189 @@ def hex_fans():
     if len(p)>=3 and area(p)>1e-6:yield rotate(p,k*60,cx,cy)
 
 
+
+def structured_weave(kind):
+ p=90;w=30
+ def horizontal(i,j):
+  if kind=='twill2':return (i+j)%4<2
+  if kind=='twill3':return (i+j)%6<3
+  if kind=='panama':return (i//2+j//2)%2==0
+  return (i+2*j)%5!=0
+ for j in range(-6,17):
+  start=-1080
+  for i in range(-12,19):
+   if not horizontal(i,j):
+    end=i*p-w/2
+    if end>start:yield rect(start,j*p-w/2,end-start,w)
+    start=i*p+w/2
+  yield rect(start,j*p-w/2,1800-start,w)
+ for i in range(-6,17):
+  start=-1080
+  for j in range(-12,19):
+   if horizontal(i,j):
+    end=j*p-w/2
+    if end>start:yield rect(i*p-w/2,start,w,end-start)
+    start=j*p+w/2
+  yield rect(i*p-w/2,start,w,1800-start)
+ for j in range(-6,17):
+  for i in range(-6,17):yield rect(i*p+w/2,j*p+w/2,p-w,p-w)
+
+def strip_fill(boundary,angle=0,pitch=22.5):
+ cx=sum(x for x,y in boundary)/len(boundary);cy=sum(y for x,y in boundary)/len(boundary)
+ for k in range(-35,36):
+  p=inside_clip(rotate(rect(cx-800,cy+k*pitch,1600,pitch),angle,cx,cy),boundary)
+  if len(p)>=3 and area(p)>1e-6:yield p
+
+def split_by_line(poly,a,b,c):
+ output=[]
+ for sign in [1,-1]:
+  result=[]
+  for p,q in zip(poly,poly[1:]+poly[:1]):
+   u=sign*(a*p[0]+b*p[1]+c);v=sign*(a*q[0]+b*q[1]+c);ip=u>=-1e-8;iq=v>=-1e-8
+   if ip:result.append(p)
+   if ip!=iq:
+    t=u/(u-v);result.append((p[0]+t*(q[0]-p[0]),p[1]+t*(q[1]-p[1])))
+  if len(result)>=3 and area(result)>1e-6:output.append(result)
+ return output
+
+def cross_division(boundary,diagonal=False,size=180):
+ m=size/2;d=16;lines=[(1,0,-m-d),(1,0,-m+d),(0,1,-m-d),(0,1,-m+d)]
+ if diagonal:lines=[(1,1,-size-d),(1,1,-size+d),(1,-1,-d),(1,-1,d)]
+ pieces=[boundary]
+ for a,b,c in lines:pieces=[part for p in pieces for part in split_by_line(p,a,b,c)]
+ yield from pieces
+
+def rectangular_cassettes():
+ a=300;b=180;c=30;outer=[(c,0),(a-c,0),(a,c),(a,b-c),(a-c,b),(c,b),(0,b-c),(0,c)];inner=[(a/2+(x-a/2)*.78,b/2+(y-b/2)*.65) for x,y in outer]
+ pieces=list(rim_shapes(outer,inner))
+ for j in range(-1,6):
+  for i in range(-1,4):
+   p=inside_clip(rect(i*120+(j%2)*60,j*30,120,30),inner)
+   if len(p)>=3 and area(p)>1e-6:pieces.append(p)
+ for j in range(5):
+  for i in range(3):
+   for p in pieces:yield move(p,i*a,j*b)
+ for j in range(6):
+  for i in range(4):yield move([(0,-c),(c,0),(0,c),(-c,0)],i*a,j*b)
+
+def diamond_cross_fields():
+ z=180;outer=[(90,0),(180,90),(90,180),(0,90)];inner=[(90,25),(155,90),(90,155),(25,90)]
+ pieces=list(rim_shapes(outer,inner))+list(cross_division(inner,size=z))
+ pieces +=[[(0,0),(90,0),(0,90)],[(180,0),(180,90),(90,0)],[(180,180),(90,180),(180,90)],[(0,180),(0,90),(90,180)]]
+ for j in range(5):
+  for i in range(5):
+   for p in pieces:yield move(p,i*z,j*z)
+
+def octagon_filled(star=False):
+ z=225;c=z/(2+math.sqrt(2));outer=[(c,0),(z-c,0),(z,c),(z,z-c),(z-c,z),(c,z),(0,z-c),(0,c)]
+ pieces=[]
+ if star:
+  inner=[]
+  for k in range(16):
+   a=k*math.pi/8;r=85 if k%2==0 else 42;inner.append((z/2+r*math.cos(a),z/2+r*math.sin(a)))
+  # Triangular sectors partition the octagon; a notch on every other ray makes a star.
+  boundary=[]
+  for k in range(16):
+   if k%2==0:boundary.append(outer[(k//2+2)%8])
+   else:
+    a=outer[(k//2+2)%8];b=outer[(k//2+3)%8];boundary.append(((a[0]+b[0])/2,(a[1]+b[1])/2))
+  # Align inner rays with the corresponding octagon points.
+  inner=[]
+  for k,(x,y) in enumerate(boundary):
+   ratio=.78 if k%2==0 else .32;inner.append((z/2+(x-z/2)*ratio,z/2+(y-z/2)*ratio))
+  for k in range(16):
+   n=(k+1)%16;pieces.append([(z/2,z/2),inner[k],inner[n]]);pieces.append([inner[k],boundary[k],boundary[n],inner[n]])
+ else:pieces=list(strip_fill(outer,45,22.5))
+ for j in range(4):
+  for i in range(4):
+   for p in pieces:yield move(p,i*z,j*z)
+ for j in range(5):
+  for i in range(5):yield move([(0,-c),(c,0),(0,c),(-c,0)],i*z,j*z)
+
+def cassette_weave():
+ z=300;bounds=rect(20,20,260,260);pieces=list(rim_shapes(rect(0,0,z,z),bounds))
+ for p in single_weave():
+  p=clip(p)
+  if len(p)<3 or area(p)<1e-6:continue
+  p=rotate([(150+(x-450)*.6,150+(y-450)*.6) for x,y in p],45,150,150);p=inside_clip(p,bounds)
+  if len(p)>=3 and area(p)>1e-6:pieces.append(p)
+ for j in range(3):
+  for i in range(3):
+   for p in pieces:yield move(p,i*z,j*z)
+
+def diagonal_cross_cassettes():
+ z=225;bounds=rect(18,18,189,189);pieces=list(rim_shapes(rect(0,0,z,z),bounds))+list(cross_division(bounds,True,z))
+ for j in range(4):
+  for i in range(4):
+   for p in pieces:yield move(p,i*z,j*z)
+
+def compass_fields(rectangular=False):
+ a=300 if rectangular else 225;b=180 if rectangular else 225;cx=a/2;cy=b/2;rx=50 if rectangular else 32;ry=25 if rectangular else 32
+ outer=[(0,0),(cx,0),(a,0),(a,cy),(a,b),(cx,b),(0,b),(0,cy)]
+ inner=[(cx-rx,cy-ry),(cx,cy-ry),(cx+rx,cy-ry),(cx+rx,cy),(cx+rx,cy+ry),(cx,cy+ry),(cx-rx,cy+ry),(cx-rx,cy)]
+ pieces=list(rim_shapes(outer,inner))+[rect(cx-rx,cy-ry,2*rx,2*ry)]
+ for j in range(5 if rectangular else 4):
+  for i in range(-1,4 if rectangular else 4):
+   for p in pieces:yield move(p,i*a+(a/2 if rectangular and j%2 else 0),j*b)
+
+def triangle_strip_fields():
+ a=180;h=math.sqrt(3)*a/2
+ for j in range(-1,7):
+  for i in range(-4,7):
+   x=i*a+j*a/2;y=j*h
+   for n,tri in enumerate([[(x,y),(x+a,y),(x+a/2,y+h)],[(x+a,y),(x+1.5*a,y+h),(x+a/2,y+h)]]):
+    yield from strip_fill(tri,((i+j+n)%3)*60,30)
+
+def arrow_fields():
+ z=180;pieces=[[(0,45),(90,45),(90,0),(180,90),(90,180),(90,135),(0,135)],rect(0,0,90,45),rect(0,135,90,45),[(90,0),(180,0),(180,90)],[(180,90),(180,180),(90,180)]]
+ for j in range(5):
+  for i in range(5):
+   for p in pieces:yield move(rotate(p,180 if (i+j)%2 else 0,90,90),i*z,j*z)
+
+def english_key_basket():
+ u=15;z=11*u;w=5*u
+ for j in range(-1,7):
+  for i in range(-1,7):
+   for p in [rect(0,0,z-w,w),rect(z-w,0,w,z-w),rect(w,z-w,z-w,w),rect(0,w,w,z-w)]:
+    x,y=p[0];a=p[1][0]-x;b=p[2][1]-y
+    for k in range(5):yield move(rect(x+k*u if a==w else x,y+k*u if b==w else y,u if a==w else a,u if b==w else b),i*z,j*z)
+   yield rect(i*z+w,j*z+w,u,u)
+
+def mixed_width_bond():
+ y=0;j=0
+ while y<900:
+  h=30 if j%2==0 else 60
+  for i in range(-1,7):yield rect(i*180+(90 if j%2 else 0),y,180,h)
+  y+=h;j+=1
+
+def irregular_bond():
+ for j in range(20):
+  x=-225;seed=73*(j+1);k=0
+  while x<900:
+   seed=(seed*1103515245+12345)%2147483648;length=[90,135,180,225][(seed//1024)%4]
+   yield rect(x,j*45,length,45);x+=length;k+=1
+
+def asymmetric_chevron():
+ x=0;phase=0
+ for i in range(6):
+  width=120 if i%2==0 else 180;slope=1 if i%2==0 else -1
+  for j in range(-18,35):
+   y=j*45+phase;yield [(x,y),(x+width,y+slope*width),(x+width,y+slope*width+45),(x,y+45)]
+  phase+=slope*width;x+=width
+
+def diamond_fans():
+ z=180;centre=(90,90);vertices=[(90,0),(180,90),(90,180),(0,90)];pieces=[]
+ for k in range(4):
+  tri=[centre,vertices[k],vertices[(k+1)%4]]
+  # These triangles are oriented clockwise in the SVG coordinate system.
+  a=vertices[k];b=vertices[(k+1)%4];angle=math.degrees(math.atan2(b[1]-a[1],b[0]-a[0]))
+  pieces+=list(strip_fill(tri,angle,15))
+ pieces +=[[(0,0),(90,0),(0,90)],[(180,0),(180,90),(90,0)],[(180,180),(90,180),(180,90)],[(0,180),(0,90),(90,180)]]
+ for j in range(5):
+  for i in range(5):
+   for p in pieces:yield move(p,i*z,j*z)
+
+
 meta=[
 ('P001','Blokpatroon','Blokken',705,15,'Afwisselende blokken van parallelle stroken.','De strookverdeling is vereenvoudigd naar drie delen per blok.',blocks),
 ('P002','Visgraat','Verbanden',719,17,'Rechthoekige delen ontmoeten elkaar onder een rechte hoek.','De verhoudingen en herhaling zijn opnieuw opgezet voor het UWFL-vlak.',herringbone),
@@ -505,6 +688,31 @@ for index,(name,family,description,en_name,en_description,fn) in enumerate(next_
  new_english[f'P{index:03d}']=dict(name_en=en_name,description_en=en_description)
 
 
+third_designs=[
+('Kepervlecht twee-over-twee','Vlechten','Stroken kruisen in een verschuivend ritme van twee boven en twee onder.','Two-over-two twill weave','Strips cross in a shifting rhythm of two over and two under.',lambda:structured_weave('twill2')),
+('Kepervlecht drie-over-drie','Vlechten','Langere kruisingsreeksen van drie boven en drie onder vormen diagonale lijnen.','Three-over-three twill weave','Longer sequences of three over and three under form diagonal lines.',lambda:structured_weave('twill3')),
+('Panamavlecht','Vlechten','Paren naast elkaar gelegen stroken delen dezelfde boven-onderherhaling.','Basket-group weave','Pairs of adjoining strips share the same over-under repeat.',lambda:structured_weave('panama')),
+('Vijfdelige vlechtherhaling','Vlechten','Een kruising onderbreekt telkens vier doorgaande kruisingen in een verspringende herhaling.','Five-part weave repeat','One interruption follows four continuous crossings in a shifting repeat.',lambda:structured_weave('satin')),
+('Rechthoekcassettes met ruitensleutels','Geometrisch','Omlijste rechthoekige velden met strookvulling sluiten aan op ruitvormige sleutels.','Rectangular cassettes with diamond keys','Framed rectangular stave fields meet diamond-shaped keys.',rectangular_cassettes),
+('Ruitketting met kruisvulling','Geometrisch','Omlijste ruiten bevatten een kruisvormige vlakverdeling met kleine hoekdelen.','Diamond chain with cross divisions','Framed diamonds contain cross-shaped divisions with small corner pieces.',diamond_cross_fields),
+('Achthoekvelden met sterkern','Sierpatronen','Stervormige kernen herhalen zich in achthoekvelden met vierkante aansluitstukken.','Octagonal fields with star centres','Star-shaped centres repeat in octagonal fields with square joining pieces.',lambda:octagon_filled(True)),
+('Cassette met diagonale vlecht','Vlechten','Een diagonale strokenvlecht vult ieder vierkant binnen een rechte verstekomlijsting.','Cassette with diagonal weave','A diagonal strip weave fills each square within a straight mitred frame.',cassette_weave),
+('Cassette met kruisende diagonalen','Geometrisch','Diagonaal kruisende stroken verdelen vierkante cassettes in midden- en hoekvlakken.','Cassette with crossing diagonals','Crossing diagonal strips divide square cassettes into centre and corner fields.',diagonal_cross_cassettes),
+('Kompasvelden met vierkante kern','Sierpatronen','Acht uitwaaierende vlakken verbinden een vierkante kern met de buitenhoeken en zijden.','Compass fields with square centres','Eight radiating fields connect a square centre to the outer corners and sides.',compass_fields),
+('Achthoekverband met diagonale stroken','Geometrisch','Diagonale stroken vullen achthoekige velden tussen kleine vierkante sleutels.','Octagonal bond with diagonal staves','Diagonal staves fill octagonal fields between small square keys.',octagon_filled),
+('Driehoeksverband met strookvulling','Geometrisch','Driehoekige velden krijgen afwisselende legrichtingen door hun evenwijdige strookvulling.','Triangular bond with stave infill','Parallel staves give adjoining triangular fields alternating laying directions.',triangle_strip_fields),
+('Pijlvormige blokvelden','Blokken','Pijlvormige hoofddelen wisselen van richting tussen rechte en driehoekige passtukken.','Arrow-shaped block fields','Arrow-shaped main pieces alternate direction between rectangular and triangular infill.',arrow_fields),
+('Engels vlechtverband met sleutels','Vlechten','Bundels van vijf stroken van zes breedtes lang draaien rond kleine vierkante sleutelstukken.','English basket pattern with keys','Bundles of five staves, each six widths long, turn around small square keys.',english_key_basket),
+('Wisselbreedteverband','Verbanden','Smalle en brede rijen wisselen elkaar af met verspringende kopse voegen.','Alternating-width bond','Narrow and broad rows alternate with staggered end joints.',mixed_width_bond),
+('Wild strokenverband','Verbanden','Verschillende strooklengtes vormen een rustig veld zonder vaste kopse herhaling.','Irregular-length stave bond','Different stave lengths form a quiet field without a fixed end-joint repeat.',irregular_bond),
+('Asymmetrische puntvelden','Hongaarse punt','Smalle en brede schuine banen ontmoeten elkaar in een asymmetrisch puntritme.','Asymmetric chevron fields','Narrow and broad angled lanes meet in an asymmetric chevron rhythm.',asymmetric_chevron),
+('Puntverband 30°','Hongaarse punt','Kopse sneden van 30° leveren een scherpe puntlijn met steile strookrichtingen.','Chevron bond 30°','End cuts at 30° create a sharp chevron line with steep stave directions.',lambda:chevron(30)),
+('Ruitvormige waaierrozet','Sierpatronen','Vier waaiervelden vullen een ruit en worden rondom verbonden door driehoekige hoekdelen.','Diamond-shaped fan rosette','Four fan fields fill a diamond surrounded by triangular corner pieces.',diamond_fans),
+('Rechthoekige kompasvelden','Sierpatronen','Een langwerpige kern en uitwaaierende velden herhalen zich in verspringende rijen.','Rectangular compass fields','An elongated centre and radiating fields repeat in staggered rows.',lambda:compass_fields(True)),
+]
+for index,(name,family,description,en_name,en_description,fn) in enumerate(third_designs,52):
+ meta.append((f'P{index:03d}',name,family,None,None,description,'Nieuwe geometrische UWFL-studie van het beschreven legverband. Geen exacte historische reconstructie of zaagplan.',fn));new_english[f'P{index:03d}']=dict(name_en=en_name,description_en=en_description)
+
 def contains(poly,p):
  x,y=p;inside=False
  for (x1,y1),(x2,y2) in zip(poly,poly[1:]+poly[:1]):
@@ -543,6 +751,8 @@ for code,name,family,num,page,description,adaptation,fn in meta:
   elif family=='Hongaarse punt':references=['https://mafi.com/en/Products/Natural%20Wood%20Floors/Formats/Chevron']
   elif family in ('Verbanden','Blokken'):references=['https://www.havwoods.com/us/selection/parquet-flooring/']
   elif code in ('P023','P024'):references=['https://archive.org/details/Parquet-fabrikGebrderWyrschBuochsSuisseGegrndet1875']
+  if code=='P065':references=['https://www.junckers.com/wood-flooring/guidance/technical-advice/product-data-sheets/c-floor-systems-commercial-residential/single-stave-blocks-laying-instructions-c-9-0']
+  if code=='P069':references=[]
   allmeta[-1]['source']=dict(kind='geometric-study',title='Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie',references=references)
   inspirations={'P032':(759,22),'P033':(755,21),'P034':(724,18),'P036':(758,22),'P038':(756,21),'P042':(764,23)}
   if code in inspirations:

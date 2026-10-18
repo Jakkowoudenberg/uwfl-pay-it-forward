@@ -93,3 +93,18 @@ interpretation, its internal metadata records that limited relationship.
 
 All first31 drawings are retained unchanged. The clockwise frame, public
 read-only boundary and Dutch/English catalogue behavior remain in force.
+
+
+## Batch 4 — 20 additions (71 total)
+
+P052–P071 add two twills, paired and five-part weaves, rectangular cassettes,
+diamond/cross and octagon/star fields, diagonal weave/cross cassettes, compass
+fields, diagonal octagons, triangular stave fields, arrow blocks, English
+basket with keys, alternating-width and irregular-length bonds, asymmetric
+and30° chevrons, diamond fans and rectangular compass fields.
+
+The new English basket study follows the observed structural principle of
+six-width-long staves grouped five abreast around one-width square keys.
+Other additions remain explicitly geometric studies; the30° point pattern
+is not represented as a manufacturer-supplied or exact historic design.
+All previous51 drawings remain unchanged.
