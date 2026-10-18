@@ -108,3 +108,16 @@ six-width-long staves grouped five abreast around one-width square keys.
 Other additions remain explicitly geometric studies; the30° point pattern
 is not represented as a manufacturer-supplied or exact historic design.
 All previous51 drawings remain unchanged.
+
+
+## Batch 5 — 20 additions (91 total)
+
+P072–P091 add quarter-offset and header-course bonds, mixed block baskets,
+broken/zigzag/grouped weaves, hexagonal ring/triangle fields, unframed stave
+cubes, triangular cassettes, hooked meanders, parquet lattices, kite fields,
+zigzag staves, keyed chevrons, mitred quadrants, divided rhombi, stepped blocks,
+turning octagons and cross fields with diagonal corner infill.
+
+These are geometric studies, not exact historic reconstructions or cutting
+plans. All preceding71 SVGs remain unchanged. Every field passes area and
+interior coverage checks; every outer frame retains clockwise orientation.

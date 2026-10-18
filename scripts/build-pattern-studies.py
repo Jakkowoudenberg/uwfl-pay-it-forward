@@ -620,6 +620,165 @@ def diamond_fans():
    for p in pieces:yield move(p,i*z,j*z)
 
 
+
+# Batch five: independent layouts, retaining every earlier study unchanged.
+def header_courses():
+ for j in range(10):
+  y=j*90
+  for i in range(-1,6):yield rect(i*180+(90 if j%2 else 0),y,180,45)
+  for i in range(20):yield rect(i*45,y+45,45,45)
+
+def mixed_block_basket():
+ for j in range(6):
+  for i in range(6):
+   n=2 if (i+j)%2 else 3
+   for k in range(n):
+    p=rect(0,k*150/n,150,150/n)
+    yield move(rotate(p,90 if (i+j)%2 else 0,75,75),i*150,j*150)
+
+def patterned_weave(mode):
+ p=90;w=30
+ def over(i,j):
+  if mode=='broken':return (i+(j if j%4<2 else -j-1))%4<2
+  if mode=='zigzag':return (i+([0,1,2,3,2,1][j%6]))%4<2
+  return (i//3+j//2)%2==0
+ for j in range(-3,14):
+  start=-900
+  for i in range(-10,22):
+   if not over(i,j):
+    end=i*p-w/2
+    if end>start:yield rect(start,j*p-w/2,end-start,w)
+    start=i*p+w/2
+  yield rect(start,j*p-w/2,2200-start,w)
+ for i in range(-3,14):
+  start=-900
+  for j in range(-10,22):
+   if over(i,j):
+    end=j*p-w/2
+    if end>start:yield rect(i*p-w/2,start,w,end-start)
+    start=j*p+w/2
+  yield rect(i*p-w/2,start,w,2200-start)
+ for j in range(-3,14):
+  for i in range(-3,14):yield rect(i*p+w/2,j*p+w/2,p-w,p-w)
+
+def hex_rings():
+ for outer in plain_hexagons():
+  cx=sum(x for x,y in outer)/6;cy=sum(y for x,y in outer)/6
+  inner=[(cx+(x-cx)*.52,cy+(y-cy)*.52)for x,y in outer]
+  yield from rim_shapes(outer,inner);yield inner
+
+def hex_triangles():
+ for p in plain_hexagons():
+  yield [p[0],p[2],p[4]]
+  for k in [0,2,4]:yield [p[k],p[(k+1)%6],p[(k+2)%6]]
+
+def cube_staves():
+ for p in plain_cubes():
+  a,b,c,d=p
+  for k in range(3):
+   u=k/3;v=(k+1)/3
+   lerp=lambda x,y,t:(x[0]+(y[0]-x[0])*t,x[1]+(y[1]-x[1])*t)
+   yield [lerp(a,d,u),lerp(b,c,u),lerp(b,c,v),lerp(a,d,v)]
+
+def triangular_cassettes():
+ a=180;h=math.sqrt(3)*a/2
+ for j in range(-1,7):
+  for i in range(-4,7):
+   x=i*a+j*a/2;y=j*h
+   for tri in [[(x,y),(x+a,y),(x+a/2,y+h)],[(x+a,y),(x+1.5*a,y+h),(x+a/2,y+h)]]:
+    cx=sum(p[0]for p in tri)/3;cy=sum(p[1]for p in tri)/3
+    inner=[(cx+(px-cx)*.60,cy+(py-cy)*.60)for px,py in tri]
+    yield from rim_shapes(tri,inner);yield inner
+
+def hooked_meander():
+ # Four interlocking L pieces surround a square; not the seven-by-seven spiral.
+ z=180
+ pieces=[[(0,0),(120,0),(120,30),(30,30),(30,60),(0,60)]]
+ pieces=[rotate(pieces[0],k*90,90,90)for k in range(4)]
+ # Fill the remaining stepped cross with individual rectangular staves.
+ occupied=pieces
+ for j in range(6):
+  for i in range(6):
+   cell=rect(i*30,j*30,30,30)
+   if not any(contains(q,(i*30+15,j*30+15)) for q in occupied):pieces.append(cell)
+ for j in range(5):
+  for i in range(5):
+   for q in pieces:yield move(q,i*z,j*z)
+
+def parquet_lattice():
+ z=225;w=30
+ for j in range(4):
+  for i in range(4):
+   x=i*z;y=j*z
+   yield rect(x,y,z-w,w);yield rect(x+z-w,y,w,z-w)
+   yield rect(x+w,y+z-w,z-w,w);yield rect(x,y+w,w,z-w)
+   for k in range(3):
+    q=rect(w,w+k*55,165,55)
+    yield move(rotate(q,90 if (i+j)%2 else 0,z/2,z/2),x,y)
+
+def kite_fields():
+ z=180
+ for j in range(5):
+  for i in range(5):
+   c=(60,75) if (i+j)%2 else (120,105)
+   edge=[(0,0),(90,0),(180,0),(180,90),(180,180),(90,180),(0,180),(0,90)]
+   for k in range(0,8,2):yield move([c,edge[k],edge[(k+1)%8],edge[(k+2)%8]],i*z,j*z)
+
+def zigzag_bond():
+ for j in range(-1,21):
+  for i in range(-1,7):
+   x=i*180+(90 if j%2 else 0);y=j*45
+   a=-22.5 if j%2 else 0;b=0 if j%2 else -22.5
+   yield [(x,y+a),(x+90,y+b),(x+180,y+a),(x+180,y+a+45),(x+90,y+b+45),(x,y+a+45)]
+
+def keyed_chevron():
+ z=180;rail=30
+ for i in range(5):
+  x=i*z;direction=1 if i%2==0 else -1
+  for j in range(30):yield rect(x,j*30,rail,30)
+  for j in range(-30,40):
+   y=j*30
+   yield [(x+rail,y),(x+z,y+direction*150),(x+z,y+direction*150+30),(x+rail,y+30)]
+
+def mitred_quadrants():
+ z=225;centre=(112.5,112.5);v=[(0,0),(z,0),(z,z),(0,z)]
+ for j in range(4):
+  for i in range(4):
+   for k in range(4):
+    for q in strip_fill([centre,v[k],v[(k+1)%4]],45+k*90,22.5):yield move(q,i*z,j*z)
+
+def rhombus_triptych():
+ for p in rhombus_field():
+  a,b,c,d=p
+  e=((a[0]+b[0])/2,(a[1]+b[1])/2);f=((c[0]+d[0])/2,(c[1]+d[1])/2)
+  g=((a[0]+d[0])/2,(a[1]+d[1])/2);h=((b[0]+c[0])/2,(b[1]+c[1])/2)
+  yield [a,e,f,d];yield [e,b,h];yield [h,c,f,e]
+
+def stepped_blocks():
+ z=180
+ for j in range(5):
+  for i in range(5):
+   pieces=[[(0,0),(120,0),(120,60),(60,60),(60,120),(0,120)],[(120,0),(180,0),(180,120),(120,120)],[(60,60),(120,60),(120,120),(180,120),(180,180),(60,180)],rect(0,120,60,60)]
+   for q in pieces:yield move(rotate(q,90 if (i+j)%2 else 0,90,90),i*z,j*z)
+
+def octagon_turns():
+ for outer in octagons():
+  if len(outer)==4:yield outer;continue
+  cx=sum(x for x,y in outer)/8;cy=sum(y for x,y in outer)/8
+  # Alternating inner square corners and edge midpoints create eight unequal arms.
+  core=[(cx-35,cy-35),(cx+10,cy-35),(cx+35,cy-35),(cx+35,cy+10),(cx+35,cy+35),(cx-10,cy+35),(cx-35,cy+35),(cx-35,cy-10)]
+  yield from rim_shapes(outer,core);yield rect(cx-35,cy-35,70,70)
+
+def cross_stave_fields():
+ z=180
+ for j in range(5):
+  for i in range(5):
+   for q in [rect(0,60,180,60),rect(60,0,60,60),rect(60,120,60,60)]:
+    yield move(q,i*z,j*z)
+   for x,y in [(0,0),(120,0),(120,120),(0,120)]:
+    for q in strip_fill(rect(x,y,60,60),45 if (x==y) else -45,20):yield move(q,i*z,j*z)
+
+
 meta=[
 ('P001','Blokpatroon','Blokken',705,15,'Afwisselende blokken van parallelle stroken.','De strookverdeling is vereenvoudigd naar drie delen per blok.',blocks),
 ('P002','Visgraat','Verbanden',719,17,'Rechthoekige delen ontmoeten elkaar onder een rechte hoek.','De verhoudingen en herhaling zijn opnieuw opgezet voor het UWFL-vlak.',herringbone),
@@ -711,6 +870,31 @@ third_designs=[
 ('Rechthoekige kompasvelden','Sierpatronen','Een langwerpige kern en uitwaaierende velden herhalen zich in verspringende rijen.','Rectangular compass fields','An elongated centre and radiating fields repeat in staggered rows.',lambda:compass_fields(True)),
 ]
 for index,(name,family,description,en_name,en_description,fn) in enumerate(third_designs,52):
+ meta.append((f'P{index:03d}',name,family,None,None,description,'Nieuwe geometrische UWFL-studie van het beschreven legverband. Geen exacte historische reconstructie of zaagplan.',fn));new_english[f'P{index:03d}']=dict(name_en=en_name,description_en=en_description)
+
+fourth_designs=[
+('Kwartsteensverband','Verbanden','Kopse voegen verschuiven per rij een kwart van de strooklengte.','Quarter-offset bond','End joints advance a quarter of a stave length per row.',lambda:strip_bond(.25)),
+('Strekken met koppenrijen','Verbanden','Lange stroken wisselen af met aaneengesloten rijen vierkante kopstukken.','Stretcher and header courses','Long staves alternate with continuous rows of square headers.',header_courses),
+('Blokvlecht met twee en drie delen','Blokken','Tweestoks- en driestoksblokken wisselen haaks op elkaar af.','Two-and-three-piece block basket','Two-stave and three-stave blocks alternate at right angles.',mixed_block_basket),
+('Gebroken kepervlecht','Vlechten','De verschuiving van de kruisende stroken wordt telkens onderbroken en omgekeerd.','Broken twill weave','The shift of crossing strips is repeatedly interrupted and reversed.',lambda:patterned_weave('broken')),
+('Zigzagkepervlecht','Vlechten','Een op- en aflopende kruisingsreeks vormt doorlopende zigzaglijnen.','Zigzag twill weave','Rising and falling crossing sequences form continuous zigzag lines.',lambda:patterned_weave('zigzag')),
+('Rechthoekige groepsvlecht','Vlechten','Groepen van drie stroken kruisen groepen van twee in een rechthoekige herhaling.','Rectangular grouped weave','Groups of three strips cross groups of two in a rectangular repeat.',lambda:patterned_weave('groups')),
+('Zeshoek met trapeziumkrans','Geometrisch','Zes trapeziumvormige delen omsluiten een onverdeelde zeshoekige kern.','Hexagon with trapezoid ring','Six trapezoid pieces surround an undivided hexagonal centre.',hex_rings),
+('Zeshoek met driehoekskern','Geometrisch','Een grote driehoek en drie kleinere hoekdriehoeken vullen iedere zeshoek.','Hexagon with triangular centre','One large triangle and three smaller corner triangles fill each hexagon.',hex_triangles),
+('Kubusverband met strookvlakken','Geometrisch','Drie onomlijste ruitvlakken per kubus zijn opgebouwd uit evenwijdige stroken.','Cube bond with stave faces','Three unframed rhombic faces per cube are composed of parallel staves.',cube_staves),
+('Driehoekige cassettes','Geometrisch','Verstekdelen omlijsten driehoekige kernen in een aansluitend driehoeksnet.','Triangular cassettes','Mitred pieces surround triangular centres in a continuous triangular grid.',triangular_cassettes),
+('Haakmeander met blokvulling','Sierpatronen','Vier hoekige haken grijpen rond een raster van kleine vierkante blokjes.','Hook meander with block infill','Four angular hooks interlock around a grid of small square blocks.',hooked_meander),
+('Draaiend raster met parketvelden','Vlechten','Een doorlopend draaiend strokenraster verbindt afwisselend gelegde blokvelden.','Turning lattice with parquet fields','A continuous turning stave lattice connects alternating block fields.',parquet_lattice),
+('Vliegervormige veldverdeling','Geometrisch','Vier ongelijke vlakken ontmoeten elkaar in een verspringend knooppunt.','Kite-shaped field divisions','Four unequal fields meet at an alternating off-centre junction.',kite_fields),
+('Zigzagstroken in halfsteensritme','Verbanden','Geknikte strookdelen sluiten aan in rijen met een halve lengte verspringing.','Zigzag staves in half-offset rows','Bent stave shapes join in rows offset by half a length.',zigzag_bond),
+('Puntverband met blokjesbanen','Hongaarse punt','Schuine stroken worden van elkaar gescheiden door banen vierkante sleutelstukken.','Chevron with square-key lanes','Angled staves are separated by lanes of square keys.',keyed_chevron),
+('Vierdelig verstekveld','Sierpatronen','Vier driehoekige strookvelden ontmoeten elkaar in diagonale versteknaden.','Four-part mitred stave field','Four triangular stave fields meet along diagonal mitred seams.',mitred_quadrants),
+('Ruiten met driedelige verdeling','Geometrisch','Een brede schuine strook ontmoet een driehoek en een vierhoek binnen iedere ruit.','Rhombi with three-part divisions','A broad slanted strip meets a triangle and a quadrilateral within each rhombus.',rhombus_triptych),
+('Getrapt blokverband','Blokken','Getrapte hoofddelen en rechte passtukken vormen afwisselend gedraaide blokken.','Stepped block bond','Stepped main pieces and rectangular infill form alternating turned blocks.',stepped_blocks),
+('Achthoek met draaiende armen','Sierpatronen','Ongelijke armen lopen van een vierkante kern naar de acht zijden van een achthoek.','Octagon with turning arms','Unequal arms connect a square centre to the eight sides of an octagon.',octagon_turns),
+('Kruisverband met schuine hoekvulling','Geometrisch','Brede rechte kruisdelen worden verbonden door kleine velden met diagonale stroken.','Cross bond with diagonal corner infill','Broad straight cross pieces join small fields of diagonal staves.',cross_stave_fields),
+]
+for index,(name,family,description,en_name,en_description,fn) in enumerate(fourth_designs,72):
  meta.append((f'P{index:03d}',name,family,None,None,description,'Nieuwe geometrische UWFL-studie van het beschreven legverband. Geen exacte historische reconstructie of zaagplan.',fn));new_english[f'P{index:03d}']=dict(name_en=en_name,description_en=en_description)
 
 def contains(poly,p):

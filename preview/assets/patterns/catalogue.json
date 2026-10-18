@@ -615,5 +615,185 @@
     "image": "assets/patterns/p071.svg",
     "name_en": "Rectangular compass fields",
     "description_en": "An elongated centre and radiating fields repeat in staggered rows."
+  },
+  {
+    "id": "P072",
+    "name": "Kwartsteensverband",
+    "family": "Verbanden",
+    "description": "Kopse voegen verschuiven per rij een kwart van de strooklengte.",
+    "image": "assets/patterns/p072.svg",
+    "name_en": "Quarter-offset bond",
+    "description_en": "End joints advance a quarter of a stave length per row."
+  },
+  {
+    "id": "P073",
+    "name": "Strekken met koppenrijen",
+    "family": "Verbanden",
+    "description": "Lange stroken wisselen af met aaneengesloten rijen vierkante kopstukken.",
+    "image": "assets/patterns/p073.svg",
+    "name_en": "Stretcher and header courses",
+    "description_en": "Long staves alternate with continuous rows of square headers."
+  },
+  {
+    "id": "P074",
+    "name": "Blokvlecht met twee en drie delen",
+    "family": "Blokken",
+    "description": "Tweestoks- en driestoksblokken wisselen haaks op elkaar af.",
+    "image": "assets/patterns/p074.svg",
+    "name_en": "Two-and-three-piece block basket",
+    "description_en": "Two-stave and three-stave blocks alternate at right angles."
+  },
+  {
+    "id": "P075",
+    "name": "Gebroken kepervlecht",
+    "family": "Vlechten",
+    "description": "De verschuiving van de kruisende stroken wordt telkens onderbroken en omgekeerd.",
+    "image": "assets/patterns/p075.svg",
+    "name_en": "Broken twill weave",
+    "description_en": "The shift of crossing strips is repeatedly interrupted and reversed."
+  },
+  {
+    "id": "P076",
+    "name": "Zigzagkepervlecht",
+    "family": "Vlechten",
+    "description": "Een op- en aflopende kruisingsreeks vormt doorlopende zigzaglijnen.",
+    "image": "assets/patterns/p076.svg",
+    "name_en": "Zigzag twill weave",
+    "description_en": "Rising and falling crossing sequences form continuous zigzag lines."
+  },
+  {
+    "id": "P077",
+    "name": "Rechthoekige groepsvlecht",
+    "family": "Vlechten",
+    "description": "Groepen van drie stroken kruisen groepen van twee in een rechthoekige herhaling.",
+    "image": "assets/patterns/p077.svg",
+    "name_en": "Rectangular grouped weave",
+    "description_en": "Groups of three strips cross groups of two in a rectangular repeat."
+  },
+  {
+    "id": "P078",
+    "name": "Zeshoek met trapeziumkrans",
+    "family": "Geometrisch",
+    "description": "Zes trapeziumvormige delen omsluiten een onverdeelde zeshoekige kern.",
+    "image": "assets/patterns/p078.svg",
+    "name_en": "Hexagon with trapezoid ring",
+    "description_en": "Six trapezoid pieces surround an undivided hexagonal centre."
+  },
+  {
+    "id": "P079",
+    "name": "Zeshoek met driehoekskern",
+    "family": "Geometrisch",
+    "description": "Een grote driehoek en drie kleinere hoekdriehoeken vullen iedere zeshoek.",
+    "image": "assets/patterns/p079.svg",
+    "name_en": "Hexagon with triangular centre",
+    "description_en": "One large triangle and three smaller corner triangles fill each hexagon."
+  },
+  {
+    "id": "P080",
+    "name": "Kubusverband met strookvlakken",
+    "family": "Geometrisch",
+    "description": "Drie onomlijste ruitvlakken per kubus zijn opgebouwd uit evenwijdige stroken.",
+    "image": "assets/patterns/p080.svg",
+    "name_en": "Cube bond with stave faces",
+    "description_en": "Three unframed rhombic faces per cube are composed of parallel staves."
+  },
+  {
+    "id": "P081",
+    "name": "Driehoekige cassettes",
+    "family": "Geometrisch",
+    "description": "Verstekdelen omlijsten driehoekige kernen in een aansluitend driehoeksnet.",
+    "image": "assets/patterns/p081.svg",
+    "name_en": "Triangular cassettes",
+    "description_en": "Mitred pieces surround triangular centres in a continuous triangular grid."
+  },
+  {
+    "id": "P082",
+    "name": "Haakmeander met blokvulling",
+    "family": "Sierpatronen",
+    "description": "Vier hoekige haken grijpen rond een raster van kleine vierkante blokjes.",
+    "image": "assets/patterns/p082.svg",
+    "name_en": "Hook meander with block infill",
+    "description_en": "Four angular hooks interlock around a grid of small square blocks."
+  },
+  {
+    "id": "P083",
+    "name": "Draaiend raster met parketvelden",
+    "family": "Vlechten",
+    "description": "Een doorlopend draaiend strokenraster verbindt afwisselend gelegde blokvelden.",
+    "image": "assets/patterns/p083.svg",
+    "name_en": "Turning lattice with parquet fields",
+    "description_en": "A continuous turning stave lattice connects alternating block fields."
+  },
+  {
+    "id": "P084",
+    "name": "Vliegervormige veldverdeling",
+    "family": "Geometrisch",
+    "description": "Vier ongelijke vlakken ontmoeten elkaar in een verspringend knooppunt.",
+    "image": "assets/patterns/p084.svg",
+    "name_en": "Kite-shaped field divisions",
+    "description_en": "Four unequal fields meet at an alternating off-centre junction."
+  },
+  {
+    "id": "P085",
+    "name": "Zigzagstroken in halfsteensritme",
+    "family": "Verbanden",
+    "description": "Geknikte strookdelen sluiten aan in rijen met een halve lengte verspringing.",
+    "image": "assets/patterns/p085.svg",
+    "name_en": "Zigzag staves in half-offset rows",
+    "description_en": "Bent stave shapes join in rows offset by half a length."
+  },
+  {
+    "id": "P086",
+    "name": "Puntverband met blokjesbanen",
+    "family": "Hongaarse punt",
+    "description": "Schuine stroken worden van elkaar gescheiden door banen vierkante sleutelstukken.",
+    "image": "assets/patterns/p086.svg",
+    "name_en": "Chevron with square-key lanes",
+    "description_en": "Angled staves are separated by lanes of square keys."
+  },
+  {
+    "id": "P087",
+    "name": "Vierdelig verstekveld",
+    "family": "Sierpatronen",
+    "description": "Vier driehoekige strookvelden ontmoeten elkaar in diagonale versteknaden.",
+    "image": "assets/patterns/p087.svg",
+    "name_en": "Four-part mitred stave field",
+    "description_en": "Four triangular stave fields meet along diagonal mitred seams."
+  },
+  {
+    "id": "P088",
+    "name": "Ruiten met driedelige verdeling",
+    "family": "Geometrisch",
+    "description": "Een brede schuine strook ontmoet een driehoek en een vierhoek binnen iedere ruit.",
+    "image": "assets/patterns/p088.svg",
+    "name_en": "Rhombi with three-part divisions",
+    "description_en": "A broad slanted strip meets a triangle and a quadrilateral within each rhombus."
+  },
+  {
+    "id": "P089",
+    "name": "Getrapt blokverband",
+    "family": "Blokken",
+    "description": "Getrapte hoofddelen en rechte passtukken vormen afwisselend gedraaide blokken.",
+    "image": "assets/patterns/p089.svg",
+    "name_en": "Stepped block bond",
+    "description_en": "Stepped main pieces and rectangular infill form alternating turned blocks."
+  },
+  {
+    "id": "P090",
+    "name": "Achthoek met draaiende armen",
+    "family": "Sierpatronen",
+    "description": "Ongelijke armen lopen van een vierkante kern naar de acht zijden van een achthoek.",
+    "image": "assets/patterns/p090.svg",
+    "name_en": "Octagon with turning arms",
+    "description_en": "Unequal arms connect a square centre to the eight sides of an octagon."
+  },
+  {
+    "id": "P091",
+    "name": "Kruisverband met schuine hoekvulling",
+    "family": "Geometrisch",
+    "description": "Brede rechte kruisdelen worden verbonden door kleine velden met diagonale stroken.",
+    "image": "assets/patterns/p091.svg",
+    "name_en": "Cross bond with diagonal corner infill",
+    "description_en": "Broad straight cross pieces join small fields of diagonal staves."
   }
 ]
