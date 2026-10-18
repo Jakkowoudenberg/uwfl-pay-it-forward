@@ -1,0 +1,79 @@
+[
+  {
+    "id": "P001",
+    "name": "Blokpatroon",
+    "family": "Blokken",
+    "description": "Afwisselende blokken van parallelle stroken.",
+    "image": "assets/patterns/p001.svg"
+  },
+  {
+    "id": "P002",
+    "name": "Visgraat",
+    "family": "Verbanden",
+    "description": "Rechthoekige delen ontmoeten elkaar onder een rechte hoek.",
+    "image": "assets/patterns/p002.svg"
+  },
+  {
+    "id": "P003",
+    "name": "Vierkantenvlecht",
+    "family": "Vlechten",
+    "description": "Doorlopende beweging rond vierkante middenstukken.",
+    "image": "assets/patterns/p003.svg"
+  },
+  {
+    "id": "P004",
+    "name": "Dubbele strokenvlecht",
+    "family": "Vlechten",
+    "description": "Gepaarde stroken maken de vlechtbeweging zichtbaar.",
+    "image": "assets/patterns/p004.svg"
+  },
+  {
+    "id": "P005",
+    "name": "Raster met vierkante accenten",
+    "family": "Vlechten",
+    "description": "Kleine vierkanten verbinden een ritmisch raster van stroken.",
+    "image": "assets/patterns/p005.svg"
+  },
+  {
+    "id": "P006",
+    "name": "Zeshoekrozet",
+    "family": "Geometrisch",
+    "description": "Driehoekige delen vormen een veld van zeshoekige rozetten.",
+    "image": "assets/patterns/p006.svg"
+  },
+  {
+    "id": "P007",
+    "name": "Achthoeken en vierkanten",
+    "family": "Geometrisch",
+    "description": "Achthoekige velden sluiten aan op vierkante verbindingsstukken.",
+    "image": "assets/patterns/p007.svg"
+  },
+  {
+    "id": "P008",
+    "name": "Ruitenraster",
+    "family": "Geometrisch",
+    "description": "Ruiten en driehoekige delen vormen een doorlopend raster.",
+    "image": "assets/patterns/p008.svg"
+  },
+  {
+    "id": "P009",
+    "name": "Gecombineerde parketvelden",
+    "family": "Blokken",
+    "description": "Afwisselend gerichte stroken binnen vierkante veldmodules.",
+    "image": "assets/patterns/p009.svg"
+  },
+  {
+    "id": "P010",
+    "name": "Sterrozet",
+    "family": "Sierpatronen",
+    "description": "Een ritme van stervormen, punten en aansluitende vlakken.",
+    "image": "assets/patterns/p010.svg"
+  },
+  {
+    "id": "P011",
+    "name": "Kubusverband met zeshoekige omlijsting",
+    "family": "Geometrisch",
+    "description": "Drie ruitvormige vlakken per zeshoek vormen samen een kubusbeeld.",
+    "image": "assets/patterns/p011.svg"
+  }
+]

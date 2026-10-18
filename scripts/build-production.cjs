@@ -38,8 +38,21 @@ copy(path.join(source, 'assets'), path.join(out, 'assets'));
 // Responsive review tools exist only on a Netlify deploy preview.
 if (process.env.CONTEXT === 'deploy-preview') {
   fs.copyFileSync(path.join(source, '_qa.html'), path.join(out, '_qa.html'));
+  fs.copyFileSync(path.join(source,'patterns-preview.html'),path.join(out,'patterns-preview.html'));
   for (const file of ['qa.js', 'qa.css']) fs.copyFileSync(path.join(source, 'assets', file), path.join(out, 'assets', file));
 }
+
+// The public library is browse-only until verified reservations are available.
+let patternPage=fs.readFileSync(path.join(source,'patterns-preview.html'),'utf8')
+ .replace('<title>UWFL · Patronenbibliotheek · Preview</title>','<title>UWFL · Patronenbibliotheek</title>')
+ .replace('<meta name="robots" content="noindex,nofollow">','<meta name="robots" content="index,follow">')
+ .replace('<body>','<body class="pattern-public">')
+ .replace(/<div class="pattern-preview">[\s\S]*?<\/div>/,'')
+ .replace('<head>','<head>')
+ .replace('</head>','<link rel="canonical" href="'+site+'/patterns.html"></head>')
+ .replace('<p class="pattern-demo-note">','<p class="pattern-public-note">De bibliotheek groeit naar 100 ontwerpen. Reserveren via een geverifieerd deelnemersaccount volgt later. <a href="/#join">Meld je alvast aan bij UWFL ↗</a></p><p class="pattern-demo-note">')
+ .replace('niet actief in deze preview.','niet actief.');
+fs.writeFileSync(path.join(out,'patterns.html'),patternPage);
 
 const assetHash = crypto.createHash('sha256');
 for (const file of fs.readdirSync(path.join(out, 'assets')).filter(name => /\.(?:js|css)$/.test(name)).sort()) {
