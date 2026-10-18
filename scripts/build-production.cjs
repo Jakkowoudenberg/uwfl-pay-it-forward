@@ -42,7 +42,7 @@ if (process.env.CONTEXT === 'deploy-preview') {
   for (const file of ['qa.js', 'qa.css']) fs.copyFileSync(path.join(source, 'assets', file), path.join(out, 'assets', file));
 }
 
-// The public library is browse-only until verified reservations are available.
+// Public catalogue links to credential-checked requests, reviewed in management.
 let patternPage=fs.readFileSync(path.join(source,'patterns-preview.html'),'utf8')
  .replace('<title>UWFL · Patronenbibliotheek · Preview</title>','<title>UWFL · Patronenbibliotheek</title>')
  .replace('<meta name="robots" content="noindex,nofollow">','<meta name="robots" content="index,follow">')
@@ -50,8 +50,10 @@ let patternPage=fs.readFileSync(path.join(source,'patterns-preview.html'),'utf8'
  .replace(/<div class="pattern-preview">[\s\S]*?<\/div>/,'')
  .replace('<head>','<head>')
  .replace('</head>','<link rel="canonical" href="'+site+'/patterns.html"></head>')
- .replace('<p class="pattern-demo-note">','<p class="pattern-public-note">De bibliotheek bevat 110 ontwerpen. Reserveren via een geverifieerd deelnemersaccount volgt later. <a href="/#join">Meld je alvast aan bij UWFL ↗</a></p><p class="pattern-demo-note">')
+ .replace('<p class="pattern-demo-note">','<p class="pattern-public-note">Kies een patroon of stel een eigen ontwerp voor. UWFL beoordeelt je aanvraag voordat de reservering vaststaat. <a href="pattern-request.html">Aanvragen en mijn aanvragen ↗</a></p><p class="pattern-demo-note">')
  .replace('niet actief in deze preview.','niet actief.');
+fs.copyFileSync(path.join(source,'pattern-request.html'),path.join(out,'pattern-request.html'));
+patternPage=patternPage.replace('Zo gaat het straks werken','Zo werkt aanvragen').replace('Een persoonlijke e-maillink bevestigt wie je bent. Maximaal twee openstaande keuzes per deelnemer; meer werken maken kan in overleg.','Gebruik je deelnemersnummer en het e-mailadres van je inschrijving. Maximaal twee openstaande keuzes per deelnemer.').replace('De reserveringsfunctie, e-mailverificatie en automatische herinneringen zijn nog niet actief.','Bekijk de status en vragen van UWFL bij Mijn aanvragen. Automatische e-mails en herinneringen volgen later.');
 fs.writeFileSync(path.join(out,'patterns.html'),patternPage);
 
 const assetHash = crypto.createHash('sha256');

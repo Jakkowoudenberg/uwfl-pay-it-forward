@@ -156,3 +156,32 @@ pass; all nine drawings visually reviewed.
 Added P101–P110, each with one large medallion inside the clockwise oak frame.
 Added a Medaillons filter, NL/EN metadata and updated catalogue totals. Retained
 the previous100 drawings. Geometry, public/preview and language checks pass.
+
+## Pattern requests and management —18 October2026
+
+Participants request catalogue designs or propose their own design at
+`pattern-request.html`, using the existing participant-number/email check and
+reCAPTCHA. No new email dispatch is added. This is not mailbox verification;
+a personal-email-link flow remains deferred. Accounts with the exceptional
+email-free upload flag must contact management for pattern requests.
+
+Management's Pattern requests tab reviews requests, asks for information,
+rejects, reserves, marks progress/completion or releases designs. Maker replies
+and status are visible in My requests. The table retains decisions and separate
+private status events. It does not alter artwork approval or Expo selection.
+
+The additive migration20261018112515_pattern_requests_management was applied.
+RLS and revoked public/anon/authenticated grants keep records private; server
+service_role access uses SECURITY INVOKER RPCs. Participant advisory locks cap
+active requests at two, idempotency prevents duplicate retries and a partial
+unique index prevents two assigned makers per catalogue design. Pending
+requests do not reserve a pattern. Completed patterns remain assigned unless
+management explicitly releases them. Public availability contains only pattern
+IDs and statuses, never names, email addresses or participant numbers.
+
+Validation: rollback-only database scenarios (limit, idempotency, conflicting
+approvals, owner isolation, stale status, maker approval, information/resubmit,
+withdrawal and role permissions); fictional function and NL/EN UI checks;
+existing management six-language and release tests. No real submissions or
+emails created for QA. Supabase security advisor's no-policy notices are
+intentional for these server-only tables, consistent with existing app storage.

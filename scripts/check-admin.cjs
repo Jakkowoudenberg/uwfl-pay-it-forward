@@ -4,10 +4,10 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const {JSDOM}=require(process.env.JSDOM_PATH||'jsdom');
 const root=path.resolve(__dirname,'../preview');
 const code=['translations.js','admin-copy.js','panel-story.js','admin.js'].map(n=>fs.readFileSync(path.join(root,'assets',n),'utf8'));
-const reads={'admin-pending':'registrations','admin-panels-pending':'panels','admin-sponsors-pending':'sponsors','admin-orgs-pending':'organisations'};
+const reads={'admin-pattern-requests':'patterns','admin-pending':'registrations','admin-panels-pending':'panels','admin-sponsors-pending':'sponsors','admin-orgs-pending':'organisations'};
 const writes={approve:'registrations','panel-approve':'panels','sponsor-approve':'sponsors','org-approve':'organisations'};
 const secret='fictional-test-password';
-const fixtures={
+const fixtures={patterns:[{id:'11111111-1111-4111-8111-111111111101',participant_number:9999,name:'Fictional maker',title:'Fictional design',pattern_id:'P101',motivation:'Fictional request',collaboration:'With an apprentice',status:'pending'}],
  registrations:[{id:41,name:'Fictional applicant',country:'NL',type:'Contributor',message:'PRIVATE-FIXTURE <img src=x onerror="alert(1)">\nA fictional story.',photo_url:'javascript:alert(1)'}],
  panels:[{id:'e5d69d87-7b4e-4d0e-a39e-cf8bf17a0712',artwork_name:'Fictional panel',first_name:'Demo',last_name:'Maker',participant_number:9999,country_made:'Canada',wood_species:'Oak',story:'Original fictional story.\nSecond line.',why:'A fictional motivation.',meaning:'A fictional meaning.',materials:'Test finish',photos:['https://example.invalid/panel.jpg','javascript:alert(1)'],contact_email:'demo@example.invalid'}],
  sponsors:[{id:43,company:'Fictional sponsor',country:'DE',logo_url:'https://example.invalid/logo.jpg',why:'Fictional motivation',what:'Fictional supplies'}],
@@ -53,7 +53,7 @@ function mutationCount(x){return x.requests.filter(r=>r.method==='POST').length;
   const x=await create({lang});assert.equal(x.requests.length,0,'Private endpoint used before login');
   for(const [key,values] of Object.entries(x.w.UWFL_UI))assert([6,8].includes(values.length)&&values.every(Boolean),`Incomplete label: ${key}`);
   await login(x,'wrong-fictional-password');assert(x.d.querySelector('#admin-login-error:not([hidden])'));privateCleared(x);
-  await login(x);assert.equal(x.d.querySelectorAll('[data-group]').length,5);assert.equal(x.d.querySelector('#admin-password'),null);
+  await login(x);assert.equal(x.d.querySelectorAll('[data-group]').length,6);assert.equal(x.d.querySelector('#admin-password'),null);
   assert(x.d.querySelector('.admin-review-body').textContent.includes('<img src=x onerror="alert(1)">'));assert.equal(x.d.querySelectorAll('[onerror]').length,0);assert(!x.d.querySelector('a[href^="javascript:"]'));
   assert(!x.d.body.innerHTML.includes(secret));
   const search=x.d.querySelector('#admin-search');search.value='no matching fictional name';search.dispatchEvent(new x.w.Event('input',{bubbles:true}));assert.equal(x.d.querySelectorAll('.admin-review').length,0);search.value='applicant';search.dispatchEvent(new x.w.Event('input',{bubbles:true}));assert.equal(x.d.querySelectorAll('.admin-review').length,1);
