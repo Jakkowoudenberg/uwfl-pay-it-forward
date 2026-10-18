@@ -148,6 +148,106 @@ def stars():
     yield [(cx,cy),inner[k],inner[n]]
     yield [inner[k],outer[k],outer[n],inner[n]]
 
+
+def grouped_herringbone(count):
+ # Same overall scale; the number of parallel pieces changes the joint structure.
+ w=22.5;g=w*count;L=6/count
+ for m in range(-8,9):
+  for n in range(-22,23):
+   x=(m*L-n)*g+450;y=(m*L+n)*g+450
+   for k in range(count):
+    yield rotate(rect(x,y+k*w,L*g,w),45)
+    yield rotate(rect(x+L*g+k*w,y,w,L*g),45)
+
+def chevron(cut_angle=45,rail=0):
+ # Cut angle is measured between the end cut and the long edge of a stave.
+ z=150;pitch=45;slope=math.tan(math.radians(90-cut_angle))
+ for i in range(-1,7):
+  x=i*z;direction=1 if i%2==0 else -1;phase=0 if i%2==0 else z*slope
+  if rail:
+   for j in range(-1,7):yield rect(x,j*150,rail,150)
+  for j in range(-12,30):
+   y=j*pitch+phase;start=y+direction*slope*rail;end=y+direction*slope*z
+   yield [(x+rail,start),(x+z,end),(x+z,end+pitch),(x+rail,start+pitch)]
+
+def strip_bond(offset=0,paired=False):
+ z=180;h=45
+ for j in range(20):
+  shift=((j//2 if paired else j)*offset*z)%z
+  for i in range(-1,6):yield rect(i*z+shift,j*h,z,h)
+
+def ladder(rails=1):
+ z=180;rail=30;gap=z-rails*rail
+ for j in range(5):
+  for i in range(5):
+   x=i*z;y=j*z
+   for k in range(rails):yield rect(x,y+k*rail,z,rail)
+   for k in range(5):yield rect(x+k*36,y+rails*rail,36,gap)
+
+def two_strip_basket():
+ z=180
+ for j in range(5):
+  for i in range(5):
+   for k in range(2):yield rect(i*z+(k*z/2 if (i+j)%2 else 0),j*z+(0 if (i+j)%2 else k*z/2),z/2 if (i+j)%2 else z,z if (i+j)%2 else z/2)
+
+def single_weave():
+ z=150;w=30
+ for j in range(-2,9):
+  for i in range(-2,9):
+   cx=i*z;cy=j*z
+   if (i+j)%2==0:yield rect(cx-z+w/2,cy-w/2,2*z-w,w)
+   else:yield rect(cx-w/2,cy-z+w/2,w,2*z-w)
+   yield rect(cx+w/2,cy+w/2,z-w,z-w)
+
+def plain_cubes():
+ r=100;h=math.sqrt(3)*r/2
+ for i in range(-1,9):
+  for j in range(-1,9):
+   cx=i*1.5*r;cy=(2*j+(i%2))*h
+   p=[(cx+r*math.cos(k*math.pi/3),cy+r*math.sin(k*math.pi/3)) for k in range(6)]
+   for k in range(0,6,2):yield [(cx,cy),p[k],p[(k+1)%6],p[(k+2)%6]]
+
+def rhombus_field():
+ a=90;b=a/math.sqrt(3)
+ for i in range(-12,13):
+  for j in range(-12,13):
+   x=(i-j)*a+450;y=(i+j)*b+450
+   yield [(x,y),(x+a,y+b),(x,y+2*b),(x-a,y+b)]
+
+def plain_hexagons():
+ r=90;h=math.sqrt(3)*r/2
+ for i in range(-1,9):
+  for j in range(-1,9):
+   cx=i*1.5*r;cy=(2*j+(i%2))*h
+   yield [(cx+r*math.cos(k*math.pi/3),cy+r*math.sin(k*math.pi/3)) for k in range(6)]
+
+def square_field():
+ for j in range(6):
+  for i in range(6):yield rect(i*150,j*150,150,150)
+
+def plain_diamond_panels():
+ z=180;m=z/2;inset=25
+ for j in range(5):
+  for i in range(5):
+   outer=[(m,0),(z,m),(m,z),(0,m)];inner=[(m,inset),(z-inset,m),(m,z-inset),(inset,m)]
+   for k in range(4):yield move([outer[k],outer[(k+1)%4],inner[(k+1)%4],inner[k]],i*z,j*z)
+   yield move(inner,i*z,j*z)
+   for p in [[(0,0),(m,0),(0,m)],[(z,0),(z,m),(m,0)],[(z,z),(m,z),(z,m)],[(0,z),(0,m),(m,z)]]:yield move(p,i*z,j*z)
+
+def four_point_stars():
+ z=225
+ for j in range(4):
+  for i in range(4):
+   cx=i*z+z/2;cy=j*z+z/2;inner=[];outer=[]
+   for k in range(8):
+    a=k*math.pi/4;dx=math.cos(a);dy=math.sin(a);r=100 if k%2==0 else 40
+    inner.append((cx+dx*r,cy+dy*r));q=z/2/max(abs(dx),abs(dy));outer.append((cx+dx*q,cy+dy*q))
+   for k in range(8):
+    n=(k+1)%8
+    yield [(cx,cy),inner[k],inner[n]]
+    yield [inner[k],outer[k],outer[n],inner[n]]
+
+
 meta=[
 ('P001','Blokpatroon','Blokken',705,15,'Afwisselende blokken van parallelle stroken.','De strookverdeling is vereenvoudigd naar drie delen per blok.',blocks),
 ('P002','Visgraat','Verbanden',719,17,'Rechthoekige delen ontmoeten elkaar onder een rechte hoek.','De verhoudingen en herhaling zijn opnieuw opgezet voor het UWFL-vlak.',herringbone),
@@ -162,6 +262,32 @@ meta=[
 ]
 meta.append(('P011','Kubusverband met zeshoekige omlijsting','Geometrisch',71,48,'Drie ruitvormige vlakken per zeshoek vormen samen een kubusbeeld.','Geometrische studie naar Wyrsch nr. 71; de smalle meervoudige randen zijn vereenvoudigd tot één omlijsting.',framed_cubes))
 
+
+new_designs=[
+('Dubbele visgraat','Verbanden','Twee parallelle stroken per been maken het dubbele visgraatverband.','Double herringbone','Two parallel staves in each arm create the double herringbone pattern.',lambda:grouped_herringbone(2)),
+('Driedubbele visgraat','Verbanden','Drie stroken per been vormen een breder ritme met verspringende haakse aansluitingen.','Triple herringbone','Three staves in each arm create a broader rhythm with staggered right-angle joints.',lambda:grouped_herringbone(3)),
+('Viervoudige visgraat','Verbanden','Vier parallelle stroken per been geven het visgraatverband een gebundeld karakter.','Four-strip herringbone','Four parallel staves in each arm give the herringbone pattern a bundled structure.',lambda:grouped_herringbone(4)),
+('Hongaarse punt 45°','Hongaarse punt','Schuine kopse aansluitingen van 45° vormen een doorlopende puntlijn.','Chevron 45°','End cuts at 45° meet along a continuous chevron line.',lambda:chevron(45)),
+('Hongaarse punt 60°','Hongaarse punt','Kopse zaagsneden van 60° leveren een vlakkere punt dan de uitvoering met 45° kopse sneden.','Chevron 60°','End cuts at 60° create a shallower chevron than the version with 45° end cuts.',lambda:chevron(60)),
+('Recht strokenverband','Verbanden','Rechthoekige stroken liggen in rechte rijen met doorlopende kopse voegen.','Stack-bond strips','Rectangular staves form straight rows with aligned end joints.',lambda:strip_bond()),
+('Halfsteensverband','Verbanden','Iedere rij verspringt een halve strooklengte ten opzichte van de vorige.','Half-offset running bond','Each row is offset by half a stave length from the previous row.',lambda:strip_bond(.5)),
+('Een derde verspringend verband','Verbanden','De kopse voegen schuiven per rij een derde strooklengte op.','Third-offset running bond','End joints shift by one third of a stave length in each successive row.',lambda:strip_bond(1/3)),
+('Ladderverband','Verbanden','Dwarsstroken verbinden velden met evenwijdige korte stroken tot een ladderritme.','Ladder pattern','Cross strips connect fields of parallel short staves in a ladder rhythm.',lambda:ladder(1)),
+('Dubbel ladderverband','Verbanden','Twee dwarsstroken per herhaling wisselen af met velden van korte evenwijdige stroken.','Double ladder pattern','Two cross strips in each repeat alternate with fields of parallel short staves.',lambda:ladder(2)),
+('Tweestrooks blokverband','Blokken','Blokken van twee stroken wisselen haaks van legrichting.','Two-strip basket pattern','Blocks of two staves alternate at right angles.',two_strip_basket),
+('Enkele strokenvlecht','Vlechten','Enkele doorlopende stroken kruisen afwisselend boven en onder rond vierkante open velden.','Single-strip weave','Single continuous strips alternate over and under around square fields.',single_weave),
+('Kubusverband zonder binnenrand','Geometrisch','Drie ruitvormige vlakken sluiten rechtstreeks op elkaar aan tot een kubusbeeld, zonder randjes rond de vlakken.','Cube pattern without inner borders','Three rhombus faces meet directly to form a cube image, with no edging around the faces.',plain_cubes),
+('Ruitenverband 60°','Geometrisch','Gelijke ruiten vormen een rustig doorlopend veld zonder omlijsting binnen het patroon.','60° rhombus field','Equal rhombi form a continuous field without internal framing.',rhombus_field),
+('Zeshoekenverband','Geometrisch','Aaneengesloten zeshoeken tonen het honingraatritme zonder verdere vlakverdeling.','Hexagon field','Adjoining hexagons show a honeycomb rhythm without further subdivisions.',plain_hexagons),
+('Vierkantenverband','Blokken','Gelijke vierkante delen vormen een regelmatig tegelverband.','Square field','Equal square pieces form a regular tiled field.',square_field),
+('Ruitvelden met hoekstukken','Geometrisch','Omlijste ruitvormige middenvelden worden verbonden door driehoekige hoekstukken.','Framed diamond fields','Framed diamond centres connect through triangular corner pieces.',plain_diamond_panels),
+('Vierpuntige stervelden','Sierpatronen','Vier lange punten per ster vormen een herhalend veld met aansluitende hoekvlakken.','Four-point star fields','Four long points in each star form repeating fields with adjoining corner pieces.',four_point_stars),
+('Gepaarde rijen in halfsteensverband','Verbanden','Telkens twee rijen hebben gelijke kopse voegen; het volgende rijpaar verspringt een halve lengte.','Paired-row running bond','Two rows share aligned end joints; the next pair is offset by half a stave length.',lambda:strip_bond(.5,True)),
+('Hongaarse punt met tussenstroken','Hongaarse punt','Smalle rechte tussenstroken scheiden de schuine puntvelden binnen het patroon.','Chevron with separating strips','Narrow straight strips separate the angled chevron fields within the pattern.',lambda:chevron(45,18)),
+]
+for index,(name,family,description,en_name,en_description,fn) in enumerate(new_designs,12):
+ meta.append((f'P{index:03d}',name,family,None,None,description,'Nieuwe geometrische studie van het beschreven legverband; geen overtrek, historische reconstructie of zaagplan.',fn))
+new_english={f'P{i:03d}':dict(name_en=n,description_en=d) for i,(_,_,_,n,d,_) in enumerate(new_designs,12)}
 
 def contains(poly,p):
  x,y=p;inside=False
@@ -192,8 +318,17 @@ for code,name,family,num,page,description,adaptation,fn in meta:
  body=''.join('<polygon points="'+' '.join(f'{fmt(x+50)},{fmt(y+50)}'for x,y in p)+'"/>'for p in shapes)
  svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc"><title id="title">{title}</title><desc id="desc">Zwart-witte geometrische studie. Werkvlak 90 bij 90 cm binnen de vaste eiken molenwiekband van 5 cm. Geen zaagplan.</desc><rect width="1000" height="1000" fill="white"/><g fill="white" stroke="#171717" stroke-width="1.7" stroke-linejoin="round">{body}</g><g fill="none" stroke="#171717" stroke-width="3">{outlines}</g><g fill="white" stroke="#171717" stroke-width="2.4"><path d="M50 0H1000V50H50Z"/><path d="M950 50H1000V1000H950Z"/><path d="M0 950H950V1000H0Z"/><path d="M0 0H50V950H0Z"/></g></svg>'''
  (OUT/f'{code.lower()}.svg').write_text(svg)
- allmeta.append(dict(id=code,name=name,family=family,description=description,adaptation=adaptation,image=f'assets/patterns/{code.lower()}.svg',source=dict(title='Interior Hardwood Co. · Book of Designs',year=1892,number=num,scanPage=page,printedPage=page-2,url=f'https://floorborders.com/pubs/Book-of-Designs-1892/w{page:02d}.htm')))
+ allmeta.append(dict(id=code,name=name,family=family,description=description,adaptation=adaptation,image=f'assets/patterns/{code.lower()}.svg',source=dict(title='Interior Hardwood Co. · Book of Designs',year=1892,number=num,scanPage=page,printedPage=page-2 if page else None,url=f'https://floorborders.com/pubs/Book-of-Designs-1892/w{page:02d}.htm' if page else None)))
  if code=='P011':allmeta[-1]['source']=dict(title='Gebrüder Wyrsch · Parquet-Fabrik',year=1910,number=71,scanPage=48,url='https://archive.org/details/Parquet-fabrikGebrderWyrschBuochsSuisseGegrndet1875')
+ if code in new_english:
+  allmeta[-1].update(new_english[code])
+  references=[]
+  if 'visgraat' in name:references=['https://www.junckers.com/wood-flooring/solid-hardwood-flooring/herringbone-flooring/herringbone-flooring']
+  elif family=='Hongaarse punt':references=['https://mafi.com/en/Products/Natural%20Wood%20Floors/Formats/Chevron']
+  elif family in ('Verbanden','Blokken'):references=['https://www.havwoods.com/us/selection/parquet-flooring/']
+  elif code in ('P023','P024'):references=['https://archive.org/details/Parquet-fabrikGebrderWyrschBuochsSuisseGegrndet1875']
+  allmeta[-1]['source']=dict(kind='geometric-study',title='Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie',references=references)
+
  publicmeta.append({k:v for k,v in allmeta[-1].items() if k not in ('source','adaptation')})
  print(code,len(shapes),'pieces · complete field')
 (ROOT/'docs/pattern-provenance.json').write_text(json.dumps(allmeta,ensure_ascii=False,indent=2)+'\n')

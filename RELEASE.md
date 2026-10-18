@@ -108,3 +108,13 @@ pieces to show repeats inside the mandatory 90 cm inner field. The library
 supports Dutch and English, with English fallback for other interface languages.
 The intended total is 100; the public count accurately reflects the current eleven. The first cube study is adapted from Wyrsch no. 71.
 No additional historical designs are claimed before drawings are checked.
+
+
+## Pattern batch 2 — 18 October 2026
+
+The library grows from 11 to 31 drawings with 20 additional geometric studies.
+Includes the requested simpler pattern families, grouped herringbone,
+45°/60° chevron and cubes without internal edging. English names and
+descriptions are stored with each new catalogue row; family filtering includes
+Chevron. All frames stay clockwise. Public browsing remains read-only; no
+reservation, account, database or email behavior changes.
