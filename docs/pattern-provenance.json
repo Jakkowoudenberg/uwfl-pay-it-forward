@@ -505,5 +505,351 @@
     },
     "name_en": "Chevron with separating strips",
     "description_en": "Narrow straight strips separate the angled chevron fields within the pattern."
+  },
+  {
+    "id": "P032",
+    "name": "Drievoudige vlecht met vierkante sleutel",
+    "family": "Vlechten",
+    "description": "Drie stroken per arm draaien rond kleine vierkante sleutelstukken.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p032.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [],
+      "inspiration": {
+        "number": 759,
+        "scanPage": 22,
+        "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w22.htm",
+        "note": "Alleen het algemene motief is als vertrekpunt gebruikt; de geometrie is nieuw uitgewerkt."
+      }
+    },
+    "name_en": "Triple weave with square keys",
+    "description_en": "Three staves in each arm turn around small square keys."
+  },
+  {
+    "id": "P033",
+    "name": "Driedelige strokenvlecht",
+    "family": "Vlechten",
+    "description": "Bundels van drie smalle stroken kruisen afwisselend boven en onder.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p033.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [],
+      "inspiration": {
+        "number": 755,
+        "scanPage": 21,
+        "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w21.htm",
+        "note": "Alleen het algemene motief is als vertrekpunt gebruikt; de geometrie is nieuw uitgewerkt."
+      }
+    },
+    "name_en": "Three-strip ribbon weave",
+    "description_en": "Bundles of three narrow strips alternate over and under."
+  },
+  {
+    "id": "P034",
+    "name": "Verspringende vierkantvelden",
+    "family": "Geometrisch",
+    "description": "Verschoven vierkante kernen zorgen voor afwisselend brede en smalle verstekdelen.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p034.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [],
+      "inspiration": {
+        "number": 724,
+        "scanPage": 18,
+        "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w18.htm",
+        "note": "Alleen het algemene motief is als vertrekpunt gebruikt; de geometrie is nieuw uitgewerkt."
+      }
+    },
+    "name_en": "Offset square fields",
+    "description_en": "Offset square centres create alternating broad and narrow mitred pieces."
+  },
+  {
+    "id": "P035",
+    "name": "Rechthoekige veldvlecht",
+    "family": "Vlechten",
+    "description": "Lange rechthoekige velden wisselen af met kortere haaks gelegde strookvelden.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p035.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Rectangular field weave",
+    "description_en": "Long rectangular fields alternate with shorter fields of perpendicular staves."
+  },
+  {
+    "id": "P036",
+    "name": "Haakse meandervelden",
+    "family": "Sierpatronen",
+    "description": "Rechthoekige delen vormen een herhalende vierkante spiraalstructuur.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p036.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [],
+      "inspiration": {
+        "number": 758,
+        "scanPage": 22,
+        "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w22.htm",
+        "note": "Alleen het algemene motief is als vertrekpunt gebruikt; de geometrie is nieuw uitgewerkt."
+      }
+    },
+    "name_en": "Angular meander fields",
+    "description_en": "Rectangular pieces form repeating square spiral structures."
+  },
+  {
+    "id": "P037",
+    "name": "Schuine ruitenvlecht",
+    "family": "Vlechten",
+    "description": "Schuin kruisende stroken vormen een vlechtwerk met ruitvormige tussenvelden.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p037.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Oblique diamond weave",
+    "description_en": "Obliquely crossing strips form a weave around rhombus-shaped fields."
+  },
+  {
+    "id": "P038",
+    "name": "Achthoekvelden met schakelrand",
+    "family": "Geometrisch",
+    "description": "Achthoekige middenvelden krijgen een gedeelde ritmiek van randdelen en vierkante sleutels.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p038.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [],
+      "inspiration": {
+        "number": 756,
+        "scanPage": 21,
+        "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w21.htm",
+        "note": "Alleen het algemene motief is als vertrekpunt gebruikt; de geometrie is nieuw uitgewerkt."
+      }
+    },
+    "name_en": "Octagon fields with linked rims",
+    "description_en": "Octagonal centres share a rhythm of rim pieces and square keys."
+  },
+  {
+    "id": "P039",
+    "name": "Twaalfhoekvelden met driehoekaccenten",
+    "family": "Geometrisch",
+    "description": "Afgeschuinde zeshoeken vormen twaalfzijdige velden met driehoekige aansluitstukken.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p039.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Twelve-sided fields with triangle accents",
+    "description_en": "Truncated hexagons form twelve-sided fields with triangular joining pieces."
+  },
+  {
+    "id": "P040",
+    "name": "Zeshoekvelden in driehoeksraster",
+    "family": "Geometrisch",
+    "description": "Zeshoekige kernen en driehoekige aansluitstukken volgen een gelijkzijdig driehoeksraster.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p040.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Hexagon fields in a triangular lattice",
+    "description_en": "Hexagonal centres and triangular joining pieces follow an equilateral triangular lattice."
+  },
+  {
+    "id": "P041",
+    "name": "Zespuntige stervelden",
+    "family": "Sierpatronen",
+    "description": "Zes lange punten per ster herhalen zich binnen aansluitende zeshoekvelden.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p041.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Six-point star fields",
+    "description_en": "Six long points in each star repeat within adjoining hexagonal fields."
+  },
+  {
+    "id": "P042",
+    "name": "Twaalfpuntige stervelden",
+    "family": "Sierpatronen",
+    "description": "Twaalf punten per rozet vormen een dicht ritme van ster- en hoekdelen.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p042.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [],
+      "inspiration": {
+        "number": 764,
+        "scanPage": 23,
+        "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w23.htm",
+        "note": "Alleen het algemene motief is als vertrekpunt gebruikt; de geometrie is nieuw uitgewerkt."
+      }
+    },
+    "name_en": "Twelve-point star fields",
+    "description_en": "Twelve points in each rosette create a dense rhythm of star and corner pieces."
+  },
+  {
+    "id": "P043",
+    "name": "Vierdelige waaierrozet",
+    "family": "Sierpatronen",
+    "description": "Vier driehoekige waaiers van evenwijdige delen ontmoeten elkaar in het midden.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p043.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Four-part fan rosette",
+    "description_en": "Four triangular fans of parallel pieces meet at the centre."
+  },
+  {
+    "id": "P044",
+    "name": "Wisselend lang-kortverband",
+    "family": "Verbanden",
+    "description": "Lange en korte stroken wisselen elkaar af; de kopse voegen verspringen per rij.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p044.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [
+        "https://www.havwoods.com/us/selection/parquet-flooring/"
+      ]
+    },
+    "name_en": "Alternating long-short bond",
+    "description_en": "Long and short staves alternate, with end joints shifting between rows."
+  },
+  {
+    "id": "P045",
+    "name": "Modulair verband met drie formaten",
+    "family": "Blokken",
+    "description": "Een vierkant en twee rechthoekige formaten vormen afwisselend gerichte modules.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p045.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [
+        "https://www.havwoods.com/us/selection/parquet-flooring/"
+      ]
+    },
+    "name_en": "Three-format modular bond",
+    "description_en": "A square and two rectangular formats form alternating modules."
+  },
+  {
+    "id": "P046",
+    "name": "Vierkant-ruitenverband",
+    "family": "Geometrisch",
+    "description": "Vierkante kernen en driehoekige hoekdelen vormen samen een ruitritme.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p046.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Square-and-diamond bond",
+    "description_en": "Square centres and triangular corner pieces combine in a diamond rhythm."
+  },
+  {
+    "id": "P047",
+    "name": "Zeshoekverband met diagonale kern",
+    "family": "Geometrisch",
+    "description": "Een diagonale kern en twee driehoekige delen vullen iedere zeshoek.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p047.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Hexagon bond with diagonal centres",
+    "description_en": "A diagonal centre and two triangular pieces fill each hexagon."
+  },
+  {
+    "id": "P048",
+    "name": "Kruisverband met hoekvierkanten",
+    "family": "Blokken",
+    "description": "Lange middenstroken en korte dwarsdelen kruisen tussen vierkante hoekstukken.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p048.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [
+        "https://www.havwoods.com/us/selection/parquet-flooring/"
+      ]
+    },
+    "name_en": "Cross bond with corner squares",
+    "description_en": "Long central staves and short cross pieces meet between square corner pieces."
+  },
+  {
+    "id": "P049",
+    "name": "Omlijste visgraatvelden",
+    "family": "Verbanden",
+    "description": "Kleine visgraatvelden worden samengebracht binnen vierkante verstekomlijstingen.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p049.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [
+        "https://www.junckers.com/wood-flooring/solid-hardwood-flooring/herringbone-flooring/herringbone-flooring"
+      ]
+    },
+    "name_en": "Framed herringbone fields",
+    "description_en": "Small herringbone fields sit within square mitred frames."
+  },
+  {
+    "id": "P050",
+    "name": "Omlijste diagonale strookvelden",
+    "family": "Verbanden",
+    "description": "Diagonale stroken vullen vierkante velden met een rechte verstekomlijsting.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p050.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": [
+        "https://www.havwoods.com/us/selection/parquet-flooring/"
+      ]
+    },
+    "name_en": "Framed diagonal stave fields",
+    "description_en": "Diagonal staves fill square fields with straight mitred frames."
+  },
+  {
+    "id": "P051",
+    "name": "Zesdelige waaierrozet",
+    "family": "Sierpatronen",
+    "description": "Zes driehoekige waaiers met evenwijdige stroken vormen samen een zeshoekrozet.",
+    "adaptation": "Nieuwe geometrische UWFL-studie; details en verbindingen zijn zelfstandig uitgewerkt. Geen exacte historische reconstructie of zaagplan.",
+    "image": "assets/patterns/p051.svg",
+    "source": {
+      "kind": "geometric-study",
+      "title": "Geometrische UWFL-uitwerking van het beschreven legverband; geen exacte historische reconstructie",
+      "references": []
+    },
+    "name_en": "Six-part fan rosette",
+    "description_en": "Six triangular fans of parallel staves form a hexagonal rosette."
   }
 ]

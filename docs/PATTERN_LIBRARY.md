@@ -79,3 +79,17 @@ Grouped herringbone uses equal individual stave proportions (6:1), changing
 the group size rather than presenting simple rotations or different scales.
 All 31 drawings keep the required clockwise outer frame. Coverage, overlap
 sampling and unique inner geometry are checked before deployment.
+
+
+## Batch 3 — 20 additions (51 total)
+
+P032–P051 add square-key, three-strip, rectangular and oblique weaves;
+offset fields, angular meanders and octagon rims; twelve-sided and triangular
+hexagon fields; six/twelve-point stars and four/six-part fan studies;
+long-short and modular bonds; square/diamond, diagonal-core and cross fields;
+and framed herringbone/diagonal stave fields. These are new geometric studies,
+not exact historical transcriptions. Where a scanned motif informed an
+interpretation, its internal metadata records that limited relationship.
+
+All first31 drawings are retained unchanged. The clockwise frame, public
+read-only boundary and Dutch/English catalogue behavior remain in force.
