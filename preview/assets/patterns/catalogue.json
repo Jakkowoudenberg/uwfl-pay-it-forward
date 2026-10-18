@@ -75,5 +75,185 @@
     "family": "Geometrisch",
     "description": "Drie ruitvormige vlakken per zeshoek vormen samen een kubusbeeld.",
     "image": "assets/patterns/p011.svg"
+  },
+  {
+    "id": "P012",
+    "name": "Dubbele visgraat",
+    "family": "Verbanden",
+    "description": "Twee parallelle stroken per been maken het dubbele visgraatverband.",
+    "image": "assets/patterns/p012.svg",
+    "name_en": "Double herringbone",
+    "description_en": "Two parallel staves in each arm create the double herringbone pattern."
+  },
+  {
+    "id": "P013",
+    "name": "Driedubbele visgraat",
+    "family": "Verbanden",
+    "description": "Drie stroken per been vormen een breder ritme met verspringende haakse aansluitingen.",
+    "image": "assets/patterns/p013.svg",
+    "name_en": "Triple herringbone",
+    "description_en": "Three staves in each arm create a broader rhythm with staggered right-angle joints."
+  },
+  {
+    "id": "P014",
+    "name": "Viervoudige visgraat",
+    "family": "Verbanden",
+    "description": "Vier parallelle stroken per been geven het visgraatverband een gebundeld karakter.",
+    "image": "assets/patterns/p014.svg",
+    "name_en": "Four-strip herringbone",
+    "description_en": "Four parallel staves in each arm give the herringbone pattern a bundled structure."
+  },
+  {
+    "id": "P015",
+    "name": "Hongaarse punt 45°",
+    "family": "Hongaarse punt",
+    "description": "Schuine kopse aansluitingen van 45° vormen een doorlopende puntlijn.",
+    "image": "assets/patterns/p015.svg",
+    "name_en": "Chevron 45°",
+    "description_en": "End cuts at 45° meet along a continuous chevron line."
+  },
+  {
+    "id": "P016",
+    "name": "Hongaarse punt 60°",
+    "family": "Hongaarse punt",
+    "description": "Kopse zaagsneden van 60° leveren een vlakkere punt dan de uitvoering met 45° kopse sneden.",
+    "image": "assets/patterns/p016.svg",
+    "name_en": "Chevron 60°",
+    "description_en": "End cuts at 60° create a shallower chevron than the version with 45° end cuts."
+  },
+  {
+    "id": "P017",
+    "name": "Recht strokenverband",
+    "family": "Verbanden",
+    "description": "Rechthoekige stroken liggen in rechte rijen met doorlopende kopse voegen.",
+    "image": "assets/patterns/p017.svg",
+    "name_en": "Stack-bond strips",
+    "description_en": "Rectangular staves form straight rows with aligned end joints."
+  },
+  {
+    "id": "P018",
+    "name": "Halfsteensverband",
+    "family": "Verbanden",
+    "description": "Iedere rij verspringt een halve strooklengte ten opzichte van de vorige.",
+    "image": "assets/patterns/p018.svg",
+    "name_en": "Half-offset running bond",
+    "description_en": "Each row is offset by half a stave length from the previous row."
+  },
+  {
+    "id": "P019",
+    "name": "Een derde verspringend verband",
+    "family": "Verbanden",
+    "description": "De kopse voegen schuiven per rij een derde strooklengte op.",
+    "image": "assets/patterns/p019.svg",
+    "name_en": "Third-offset running bond",
+    "description_en": "End joints shift by one third of a stave length in each successive row."
+  },
+  {
+    "id": "P020",
+    "name": "Ladderverband",
+    "family": "Verbanden",
+    "description": "Dwarsstroken verbinden velden met evenwijdige korte stroken tot een ladderritme.",
+    "image": "assets/patterns/p020.svg",
+    "name_en": "Ladder pattern",
+    "description_en": "Cross strips connect fields of parallel short staves in a ladder rhythm."
+  },
+  {
+    "id": "P021",
+    "name": "Dubbel ladderverband",
+    "family": "Verbanden",
+    "description": "Twee dwarsstroken per herhaling wisselen af met velden van korte evenwijdige stroken.",
+    "image": "assets/patterns/p021.svg",
+    "name_en": "Double ladder pattern",
+    "description_en": "Two cross strips in each repeat alternate with fields of parallel short staves."
+  },
+  {
+    "id": "P022",
+    "name": "Tweestrooks blokverband",
+    "family": "Blokken",
+    "description": "Blokken van twee stroken wisselen haaks van legrichting.",
+    "image": "assets/patterns/p022.svg",
+    "name_en": "Two-strip basket pattern",
+    "description_en": "Blocks of two staves alternate at right angles."
+  },
+  {
+    "id": "P023",
+    "name": "Enkele strokenvlecht",
+    "family": "Vlechten",
+    "description": "Enkele doorlopende stroken kruisen afwisselend boven en onder rond vierkante open velden.",
+    "image": "assets/patterns/p023.svg",
+    "name_en": "Single-strip weave",
+    "description_en": "Single continuous strips alternate over and under around square fields."
+  },
+  {
+    "id": "P024",
+    "name": "Kubusverband zonder binnenrand",
+    "family": "Geometrisch",
+    "description": "Drie ruitvormige vlakken sluiten rechtstreeks op elkaar aan tot een kubusbeeld, zonder randjes rond de vlakken.",
+    "image": "assets/patterns/p024.svg",
+    "name_en": "Cube pattern without inner borders",
+    "description_en": "Three rhombus faces meet directly to form a cube image, with no edging around the faces."
+  },
+  {
+    "id": "P025",
+    "name": "Ruitenverband 60°",
+    "family": "Geometrisch",
+    "description": "Gelijke ruiten vormen een rustig doorlopend veld zonder omlijsting binnen het patroon.",
+    "image": "assets/patterns/p025.svg",
+    "name_en": "60° rhombus field",
+    "description_en": "Equal rhombi form a continuous field without internal framing."
+  },
+  {
+    "id": "P026",
+    "name": "Zeshoekenverband",
+    "family": "Geometrisch",
+    "description": "Aaneengesloten zeshoeken tonen het honingraatritme zonder verdere vlakverdeling.",
+    "image": "assets/patterns/p026.svg",
+    "name_en": "Hexagon field",
+    "description_en": "Adjoining hexagons show a honeycomb rhythm without further subdivisions."
+  },
+  {
+    "id": "P027",
+    "name": "Vierkantenverband",
+    "family": "Blokken",
+    "description": "Gelijke vierkante delen vormen een regelmatig tegelverband.",
+    "image": "assets/patterns/p027.svg",
+    "name_en": "Square field",
+    "description_en": "Equal square pieces form a regular tiled field."
+  },
+  {
+    "id": "P028",
+    "name": "Ruitvelden met hoekstukken",
+    "family": "Geometrisch",
+    "description": "Omlijste ruitvormige middenvelden worden verbonden door driehoekige hoekstukken.",
+    "image": "assets/patterns/p028.svg",
+    "name_en": "Framed diamond fields",
+    "description_en": "Framed diamond centres connect through triangular corner pieces."
+  },
+  {
+    "id": "P029",
+    "name": "Vierpuntige stervelden",
+    "family": "Sierpatronen",
+    "description": "Vier lange punten per ster vormen een herhalend veld met aansluitende hoekvlakken.",
+    "image": "assets/patterns/p029.svg",
+    "name_en": "Four-point star fields",
+    "description_en": "Four long points in each star form repeating fields with adjoining corner pieces."
+  },
+  {
+    "id": "P030",
+    "name": "Gepaarde rijen in halfsteensverband",
+    "family": "Verbanden",
+    "description": "Telkens twee rijen hebben gelijke kopse voegen; het volgende rijpaar verspringt een halve lengte.",
+    "image": "assets/patterns/p030.svg",
+    "name_en": "Paired-row running bond",
+    "description_en": "Two rows share aligned end joints; the next pair is offset by half a stave length."
+  },
+  {
+    "id": "P031",
+    "name": "Hongaarse punt met tussenstroken",
+    "family": "Hongaarse punt",
+    "description": "Smalle rechte tussenstroken scheiden de schuine puntvelden binnen het patroon.",
+    "image": "assets/patterns/p031.svg",
+    "name_en": "Chevron with separating strips",
+    "description_en": "Narrow straight strips separate the angled chevron fields within the pattern."
   }
 ]

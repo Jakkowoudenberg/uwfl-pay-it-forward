@@ -64,3 +64,18 @@ descriptions and the public catalogue therefore show no source names, dates,
 catalogue references or source links. Research provenance is retained only in
 `docs/pattern-provenance.json`, outside the published assets. This display change
 does not assert any copyright or licensing status.
+
+
+## Batch 2 — 20 additions (31 total)
+
+P012–P031 add grouped herringbone, chevron at 45°/60°, straight and offset
+strip bonds, ladder patterns, two-strip basket, single-strip weave, cubes
+without inner edging, plain rhombi/hexagons/squares, diamond fields and stars.
+These are new geometric studies of the described structures; they are not
+claimed as exact historical transcriptions. Family references, where relevant,
+remain internal. Public cards have Dutch/English names and descriptions.
+
+Grouped herringbone uses equal individual stave proportions (6:1), changing
+the group size rather than presenting simple rotations or different scales.
+All 31 drawings keep the required clockwise outer frame. Coverage, overlap
+sampling and unique inner geometry are checked before deployment.
