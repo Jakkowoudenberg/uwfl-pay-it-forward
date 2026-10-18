@@ -185,3 +185,16 @@ withdrawal and role permissions); fictional function and NL/EN UI checks;
 existing management six-language and release tests. No real submissions or
 emails created for QA. Supabase security advisor's no-policy notices are
 intentional for these server-only tables, consistent with existing app storage.
+
+## Home pattern rotation —18 October2026
+
+The home pattern callout now cycles through a shuffled deck of all110 designs,
+including medallions. It retains the clockwise-framed SVGs and shows the code
+and name with previous/next/pause controls. Every design appears once before
+reshuffling; the last/first boundary cannot repeat the same design.
+
+It shares the existing eight-second home timer, stops on other routes and
+pauses for hidden pages, open artwork dialogs, hover/focus and reduced-motion
+preferences. Reduced-motion users retain manual controls. Catalogue failures
+retain the original local P004 study. No participant records or backend writes
+are involved. Offline shuffle/lifecycle checks and artwork UI regression pass.
