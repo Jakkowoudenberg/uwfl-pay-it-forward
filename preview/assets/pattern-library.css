@@ -4,3 +4,5 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pattern-drawing-button img{transition:none}.pattern-drawing-button:hover img{transform:none}}
 
 .pattern-public .pattern-choose,.pattern-public .pattern-demo-note,.pattern-public #pattern-choice-tray,.pattern-public .pattern-detail-grid .pattern-caption{display:none!important}.pattern-public-note{padding:18px 22px;border-left:3px solid #9d764b;background:#f3efe6;line-height:1.65}.pattern-public-note a{color:inherit;text-decoration:underline}
+
+@media(max-width:400px){.pattern-public .header-inner{gap:8px}.pattern-public .brand span{display:none}.pattern-public .brand img{width:42px;height:42px}}
