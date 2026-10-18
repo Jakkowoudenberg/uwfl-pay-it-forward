@@ -828,6 +828,85 @@ def ornamental_stars(kind):
    for q in pieces:yield move(q,i*z,j*z)
 
 
+
+def large_medallion(kind):
+ # Exactly ONE large medallion in the 90 x 90 cm field. Circular edges are
+ # polygonal approximations at 1.875-degree intervals, sharing all vertices.
+ c=450;N=192
+ def point(r,k,twist=0):
+  a=2*math.pi*k/N+twist;return(c+r*math.cos(a),c+r*math.sin(a))
+ def circle(r):return [point(r,k)for k in range(N)]
+ def annulus(ro,ri,start,end,twist_outer=0,twist_inner=0):
+  return [point(ro,k,twist_outer)for k in range(start,end+1)]+[point(ri,k,twist_inner)for k in range(end,start-1,-1)]
+ outer=circle(420);inner=circle(390)
+ # Four background corner fields meet the outside of the circular medallion.
+ for q in range(4):
+  piece=[(900,450),(900,900),(450,900)]+[point(420,k)for k in range(N//4,-1,-1)]
+  yield rotate(piece,q*90,c,c)
+ # Twelve curved rim segments form the medallion's internal circular frame.
+ for k in range(0,N,N//12):yield annulus(420,390,k,k+N//12)
+ if kind in (104,105,107,108):
+  if kind==104:source=single_weave()
+  elif kind==105:source=plain_cubes()
+  elif kind==107:source=rhombus_field()
+  else:source=(rotate(q,45,c,c)for q in structured_weave('twill2'))
+  for q in source:
+   part=inside_clip(q,inner)
+   if len(part)>=3 and area(part)>1e-6:yield part
+  return
+ if kind in (103,109):
+  arms=8 if kind==103 else 12;core=65 if kind==103 else 100
+  # Twisting the radial joints changes the sector shape rather than only
+  # rotating the motif. All adjoining boundaries share the same samples.
+  twist=math.pi/3 if kind==103 else -math.pi/2
+  for k in range(arms):
+   start=k*N/arms;end=(k+1)*N/arms
+   for r0,r1 in ([(core,390)] if kind==103 else [(100,245),(245,390)]):
+    def edge(a):return [point(r0+(r1-r0)*t/12,a,twist*(1-(r0+(r1-r0)*t/12)/390))for t in range(13)]
+    # Circular arcs use the shared circle sampling.
+    arc=lambda r,a,b:[point(r,t,twist*(1-r/390))for t in range(int(a),int(b)+1)]
+    yield edge(start)+arc(r1,start,end)[1:]+list(reversed(edge(end)))[1:]+list(reversed(arc(r0,start,end)))[1:]
+  yield [point(core,k,twist*(1-core/390))for k in range(N)]
+  return
+ if kind==110:
+  # Concentric curved block courses, with staggered radial joints.
+  radii=[0,65,145,225,305,390]
+  yield circle(65)
+  for band in range(1,5):
+   count=8 if band<3 else 16;step=N//count;phase=step//2 if band%2 else 0
+   for k in range(count):yield annulus(radii[band+1],radii[band],k*step+phase,(k+1)*step+phase)
+  return
+ if kind==106:
+  # Eight lobes with curved outlines surround a single circular heart.
+  heart=circle(60)
+  petal=[point(235-100*math.cos(16*math.pi*k/N),k)for k in range(N)]
+  for start in range(0,N,N//8):
+   ix=[k%N for k in range(start,start+N//8+1)]
+   yield [petal[k]for k in ix]+[heart[k]for k in reversed(ix)]
+   yield [inner[k]for k in ix]+[petal[k]for k in reversed(ix)]
+  yield heart;return
+ # Compass and sunburst medallions use ray-intersections with a star outline.
+ n=8 if kind==101 else 24;core=52 if kind==101 else 86
+ star=[]
+ for k in range(2*n):
+  r=(140 if kind==101 else 215)if k%2 else (350 if kind==101 and k%4==0 else 300 if kind==101 else 365)
+  a=2*math.pi*k/(2*n);star.append((c+r*math.cos(a),c+r*math.sin(a)))
+ def ray(poly,k):
+  a=2*math.pi*k/N;dx=math.cos(a);dy=math.sin(a);hits=[]
+  for p,q in zip(poly,poly[1:]+poly[:1]):
+   ax=p[0]-c;ay=p[1]-c;ex=q[0]-p[0];ey=q[1]-p[1];den=dx*ey-dy*ex
+   if abs(den)<1e-9:continue
+   t=(ax*ey-ay*ex)/den;u=(ax*dy-ay*dx)/den
+   if t>0 and -1e-8<=u<=1+1e-8:hits.append(t)
+  return point(min(hits),k)
+ outline=[ray(star,k)for k in range(N)];heart=circle(core);step=N//(2*n)
+ for start in range(0,N,step):
+  ix=[k%N for k in range(start,start+step+1)]
+  yield [outline[k]for k in ix]+[heart[k]for k in reversed(ix)]
+  yield [inner[k]for k in ix]+[outline[k]for k in reversed(ix)]
+ yield heart
+
+
 meta=[
 ('P001','Blokpatroon','Blokken',705,15,'Afwisselende blokken van parallelle stroken.','De strookverdeling is vereenvoudigd naar drie delen per blok.',blocks),
 ('P002','Visgraat','Verbanden',719,17,'Rechthoekige delen ontmoeten elkaar onder een rechte hoek.','De verhoudingen en herhaling zijn opnieuw opgezet voor het UWFL-vlak.',herringbone),
@@ -959,6 +1038,21 @@ star_designs=[
 ]
 for index,(name,description,en_name,en_description) in enumerate(star_designs,92):
  meta.append((f'P{index:03d}',name,'Sierpatronen',None,None,description,'Nieuwe geometrische UWFL-siersterstudie. Geen exacte historische reconstructie of zaagplan.',lambda index=index:ornamental_stars(index)));new_english[f'P{index:03d}']=dict(name_en=en_name,description_en=en_description)
+
+medallion_designs=[
+('Groot windroosmedaillon','Eén grote windroos met acht afwisselend lange en korte punten ligt binnen een cirkelvormige omlijsting.','Large compass medallion','One large compass star with eight alternating long and short points sits within a circular frame.'),
+('Groot zonnestraalmedaillon','Vierentwintig smalle stralen omringen een rond hart in één groot medaillon.','Large sunburst medallion','Twenty-four slender rays surround a round heart in one large medallion.'),
+('Groot draaiend rozetmedaillon','Acht gebogen sectoren draaien rond één rond middenstuk en vullen samen het medaillon.','Large turning rosette medallion','Eight curved sectors turn around one round centre and together fill the medallion.'),
+('Groot vlechtmedaillon','Een rechte strokenvlecht met vierkante tussenstukken vult één groot cirkelvormig veld.','Large woven medallion','A straight strip weave with square infill fills one large circular field.'),
+('Groot kubusmedaillon','Onomlijste ruitvlakken vormen samen een kubusveld binnen één grote ronde omlijsting.','Large cube medallion','Unframed rhombic faces form a cube field within one large round frame.'),
+('Groot achtbladig bloemmedaillon','Acht gebogen bloembladen omsluiten een rond hart binnen één groot medaillon.','Large eight-petal floral medallion','Eight curved petals surround a round heart within one large medallion.'),
+('Groot ruitenmedaillon','Een rustig doorlopend ruitenveld wordt opgenomen in één grote cirkelvormige omlijsting.','Large diamond-field medallion','A quiet continuous rhombic field sits within one large circular frame.'),
+('Groot diagonaal kepermedaillon','Een diagonale twee-over-twee-vlecht vult het grote ronde middenveld.','Large diagonal twill medallion','A diagonal two-over-two weave fills the large round central field.'),
+('Groot spiraalmedaillon met twee zones','Twaalf gebogen armen lopen door twee concentrische zones rond een ruim rond hart.','Large two-zone spiral medallion','Twelve curved arms continue through two concentric zones around a broad round heart.'),
+('Groot concentrisch blokmedaillon','Verspringende gebogen blokken vormen vier concentrische banen rond één rond middenstuk.','Large concentric block medallion','Staggered curved blocks form four concentric courses around one round centre.'),
+]
+for index,(name,description,en_name,en_description) in enumerate(medallion_designs,101):
+ meta.append((f'P{index:03d}',name,'Medaillons',None,None,description,'Nieuwe geometrische UWFL-medaillonstudie: één groot medaillon per binnenvlak. Geen exacte historische reconstructie of zaagplan.',lambda index=index:large_medallion(index)));new_english[f'P{index:03d}']=dict(name_en=en_name,description_en=en_description)
 
 def contains(poly,p):
  x,y=p;inside=False

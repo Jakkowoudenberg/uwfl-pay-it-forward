@@ -150,3 +150,9 @@ Added nine ornamental star studies P092–P100 with Dutch/English names and
 descriptions. Preserved prior91 SVGs and clockwise frame. Updated growth copy
 to100 available studies. Geometry, public/preview behaviour and language checks
 pass; all nine drawings visually reviewed.
+
+
+### Ten large medallions:110 studies
+Added P101–P110, each with one large medallion inside the clockwise oak frame.
+Added a Medaillons filter, NL/EN metadata and updated catalogue totals. Retained
+the previous100 drawings. Geometry, public/preview and language checks pass.

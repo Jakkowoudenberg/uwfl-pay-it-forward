@@ -876,5 +876,95 @@
     "image": "assets/patterns/p100.svg",
     "name_en": "Double eight-point ornamental star",
     "description_en": "A smaller turned eight-point star sits inside the outer star and has its own octagonal heart."
+  },
+  {
+    "id": "P101",
+    "name": "Groot windroosmedaillon",
+    "family": "Medaillons",
+    "description": "Eén grote windroos met acht afwisselend lange en korte punten ligt binnen een cirkelvormige omlijsting.",
+    "image": "assets/patterns/p101.svg",
+    "name_en": "Large compass medallion",
+    "description_en": "One large compass star with eight alternating long and short points sits within a circular frame."
+  },
+  {
+    "id": "P102",
+    "name": "Groot zonnestraalmedaillon",
+    "family": "Medaillons",
+    "description": "Vierentwintig smalle stralen omringen een rond hart in één groot medaillon.",
+    "image": "assets/patterns/p102.svg",
+    "name_en": "Large sunburst medallion",
+    "description_en": "Twenty-four slender rays surround a round heart in one large medallion."
+  },
+  {
+    "id": "P103",
+    "name": "Groot draaiend rozetmedaillon",
+    "family": "Medaillons",
+    "description": "Acht gebogen sectoren draaien rond één rond middenstuk en vullen samen het medaillon.",
+    "image": "assets/patterns/p103.svg",
+    "name_en": "Large turning rosette medallion",
+    "description_en": "Eight curved sectors turn around one round centre and together fill the medallion."
+  },
+  {
+    "id": "P104",
+    "name": "Groot vlechtmedaillon",
+    "family": "Medaillons",
+    "description": "Een rechte strokenvlecht met vierkante tussenstukken vult één groot cirkelvormig veld.",
+    "image": "assets/patterns/p104.svg",
+    "name_en": "Large woven medallion",
+    "description_en": "A straight strip weave with square infill fills one large circular field."
+  },
+  {
+    "id": "P105",
+    "name": "Groot kubusmedaillon",
+    "family": "Medaillons",
+    "description": "Onomlijste ruitvlakken vormen samen een kubusveld binnen één grote ronde omlijsting.",
+    "image": "assets/patterns/p105.svg",
+    "name_en": "Large cube medallion",
+    "description_en": "Unframed rhombic faces form a cube field within one large round frame."
+  },
+  {
+    "id": "P106",
+    "name": "Groot achtbladig bloemmedaillon",
+    "family": "Medaillons",
+    "description": "Acht gebogen bloembladen omsluiten een rond hart binnen één groot medaillon.",
+    "image": "assets/patterns/p106.svg",
+    "name_en": "Large eight-petal floral medallion",
+    "description_en": "Eight curved petals surround a round heart within one large medallion."
+  },
+  {
+    "id": "P107",
+    "name": "Groot ruitenmedaillon",
+    "family": "Medaillons",
+    "description": "Een rustig doorlopend ruitenveld wordt opgenomen in één grote cirkelvormige omlijsting.",
+    "image": "assets/patterns/p107.svg",
+    "name_en": "Large diamond-field medallion",
+    "description_en": "A quiet continuous rhombic field sits within one large circular frame."
+  },
+  {
+    "id": "P108",
+    "name": "Groot diagonaal kepermedaillon",
+    "family": "Medaillons",
+    "description": "Een diagonale twee-over-twee-vlecht vult het grote ronde middenveld.",
+    "image": "assets/patterns/p108.svg",
+    "name_en": "Large diagonal twill medallion",
+    "description_en": "A diagonal two-over-two weave fills the large round central field."
+  },
+  {
+    "id": "P109",
+    "name": "Groot spiraalmedaillon met twee zones",
+    "family": "Medaillons",
+    "description": "Twaalf gebogen armen lopen door twee concentrische zones rond een ruim rond hart.",
+    "image": "assets/patterns/p109.svg",
+    "name_en": "Large two-zone spiral medallion",
+    "description_en": "Twelve curved arms continue through two concentric zones around a broad round heart."
+  },
+  {
+    "id": "P110",
+    "name": "Groot concentrisch blokmedaillon",
+    "family": "Medaillons",
+    "description": "Verspringende gebogen blokken vormen vier concentrische banen rond één rond middenstuk.",
+    "image": "assets/patterns/p110.svg",
+    "name_en": "Large concentric block medallion",
+    "description_en": "Staggered curved blocks form four concentric courses around one round centre."
   }
 ]
