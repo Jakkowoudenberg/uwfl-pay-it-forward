@@ -121,3 +121,15 @@ turning octagons and cross fields with diagonal corner infill.
 These are geometric studies, not exact historic reconstructions or cutting
 plans. All preceding71 SVGs remain unchanged. Every field passes area and
 interior coverage checks; every outer frame retains clockwise orientation.
+
+
+## Final batch — nine ornamental stars (100 total)
+
+P092–P100 complete the catalogue with four-, five-, six-, eight-, ten-, twelve-
+and sixteen-point star layouts, a long/short compass star and a nested double
+eight-point star. Their centres, ray proportions and joints differ; these are
+new geometric studies, not claims of exact historic reconstruction.
+
+All first91 SVGs remain unchanged. Radial partitions include cassette corners
+so non-fourfold stars tile the square field completely. Public completion copy
+now says100 designs; reservation availability has not changed.

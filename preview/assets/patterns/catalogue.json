@@ -795,5 +795,86 @@
     "image": "assets/patterns/p091.svg",
     "name_en": "Cross bond with diagonal corner infill",
     "description_en": "Broad straight cross pieces join small fields of diagonal staves."
+  },
+  {
+    "id": "P092",
+    "name": "Vierpuntige ster met ruitkern",
+    "family": "Sierpatronen",
+    "description": "Vier lange punten vertrekken vanuit een in vier delen opgebouwde ruitvormige kern.",
+    "image": "assets/patterns/p092.svg",
+    "name_en": "Four-point star with diamond centre",
+    "description_en": "Four long points extend from a diamond centre made of four pieces."
+  },
+  {
+    "id": "P093",
+    "name": "Vijfpuntige ster met vijfhoekshart",
+    "family": "Sierpatronen",
+    "description": "Vijf brede sterarmen omsluiten een rustig vijfhoekig middenstuk.",
+    "image": "assets/patterns/p093.svg",
+    "name_en": "Five-point star with pentagonal heart",
+    "description_en": "Five broad star arms surround a quiet pentagonal centre."
+  },
+  {
+    "id": "P094",
+    "name": "Zespuntige ster met driehoekshart",
+    "family": "Sierpatronen",
+    "description": "Gedeelde sterarmen verbinden zes punten met een in drie delen verdeelde driehoekskern.",
+    "image": "assets/patterns/p094.svg",
+    "name_en": "Six-point star with triangular heart",
+    "description_en": "Divided arms connect six points to a three-piece triangular centre."
+  },
+  {
+    "id": "P095",
+    "name": "Windroos met lange en korte punten",
+    "family": "Sierpatronen",
+    "description": "Vier lange hoofdpunten en vier kortere tussenpunten komen samen rond een achthoekig hart.",
+    "image": "assets/patterns/p095.svg",
+    "name_en": "Compass star with long and short points",
+    "description_en": "Four long main points and four shorter intermediate points meet around an octagonal heart."
+  },
+  {
+    "id": "P096",
+    "name": "Achtpuntige ster met gedeelde armen",
+    "family": "Sierpatronen",
+    "description": "Dubbel opgebouwde armen lopen van een vierdelige vierkante kern naar acht gelijke punten.",
+    "image": "assets/patterns/p096.svg",
+    "name_en": "Eight-point star with divided arms",
+    "description_en": "Two-part arms extend from a four-piece square centre to eight equal points."
+  },
+  {
+    "id": "P097",
+    "name": "Tienpuntige sterrozet",
+    "family": "Sierpatronen",
+    "description": "Tien smalle punten vormen een gesloten rozet rond een onverdeeld tienhoekig hart.",
+    "image": "assets/patterns/p097.svg",
+    "name_en": "Ten-point star rosette",
+    "description_en": "Ten slender points form a closed rosette around an undivided decagonal heart."
+  },
+  {
+    "id": "P098",
+    "name": "Twaalfpuntige ster met zeshoekshart",
+    "family": "Sierpatronen",
+    "description": "Twaalf gelede punten wisselen rond een zeshoekige kern van zes driehoekige delen.",
+    "image": "assets/patterns/p098.svg",
+    "name_en": "Twelve-point star with hexagonal heart",
+    "description_en": "Twelve articulated points surround a hexagonal centre made of six triangles."
+  },
+  {
+    "id": "P099",
+    "name": "Zestienpuntige kompasrozet",
+    "family": "Sierpatronen",
+    "description": "Lange en korte gelede stralen vormen samen een zestienpuntige rozet rond een achtdelige kern.",
+    "image": "assets/patterns/p099.svg",
+    "name_en": "Sixteen-point compass rosette",
+    "description_en": "Long and short articulated rays form a sixteen-point rosette around an eight-piece centre."
+  },
+  {
+    "id": "P100",
+    "name": "Dubbele achtpuntige sierster",
+    "family": "Sierpatronen",
+    "description": "Een kleinere gedraaide achtpuntige ster ligt binnen de buitenste ster en heeft een eigen achthoekig hart.",
+    "image": "assets/patterns/p100.svg",
+    "name_en": "Double eight-point ornamental star",
+    "description_en": "A smaller turned eight-point star sits inside the outer star and has its own octagonal heart."
   }
 ]

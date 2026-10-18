@@ -143,3 +143,10 @@ are unchanged.
 Added P072–P091 with NL/EN names and descriptions. Preserved P001–P071, the
 clockwise oak frame, browsing-only public library and mobile layout. Validated
 geometry coverage, unique inner SVGs, search/filter/dialog and NL/EN fallback.
+
+
+### Complete100-pattern catalogue
+Added nine ornamental star studies P092–P100 with Dutch/English names and
+descriptions. Preserved prior91 SVGs and clockwise frame. Updated growth copy
+to100 available studies. Geometry, public/preview behaviour and language checks
+pass; all nine drawings visually reviewed.

@@ -779,6 +779,55 @@ def cross_stave_fields():
     for q in strip_fill(rect(x,y,60,60),45 if (x==y) else -45,20):yield move(q,i*z,j*z)
 
 
+
+def ornamental_stars(kind):
+ # Radial partitions use all star vertices AND square corners. This keeps
+ # each cassette a complete tiling even for five-, six- and tenfold symmetry.
+ config={92:(4,42,4,28,45),93:(5,56,5,31,0),94:(6,62,3,35,0),95:(8,57,8,25,22.5),96:(8,64,4,33,0),97:(10,73,10,29,0),98:(12,78,6,37,0),99:(16,84,8,34,22.5),100:(8,62,8,0,0)}
+ n,valley,cn,cr,core_angle=config[kind];z=300;c=150;offset=-90
+ polar=lambda radius,angle:(c+radius*math.cos(math.radians(angle)),c+radius*math.sin(math.radians(angle)))
+ star=[]
+ for k in range(2*n):
+  r=valley if k%2 else 136
+  if kind in (95,99) and k%4==2:r=106
+  star.append(polar(r,offset+k*180/n))
+ if kind==100:
+  core=[polar(28 if k%2 else 52,offset+22.5+k*22.5)for k in range(16)]
+ else:core=[polar(cr,offset+core_angle+k*360/cn)for k in range(cn)]
+ def ray(poly,angle):
+  dx=math.cos(math.radians(angle));dy=math.sin(math.radians(angle));hits=[]
+  for a,b in zip(poly,poly[1:]+poly[:1]):
+   ax=a[0]-c;ay=a[1]-c;ex=b[0]-a[0];ey=b[1]-a[1];den=dx*ey-dy*ex
+   if abs(den)<1e-9:continue
+   t=(ax*ey-ay*ex)/den;u=(ax*dy-ay*dx)/den
+   if t>0 and -1e-8<=u<=1+1e-8:hits.append(t)
+  r=min(hits);return polar(r,angle)
+ angles=sorted(set(round(math.degrees(math.atan2(y-c,x-c))%360,8)for x,y in star+core+rect(0,0,z,z)))
+ a=[ray(star,t)for t in angles];b=[ray(core,t)for t in angles];o=[polar(150/max(abs(math.cos(math.radians(t))),abs(math.sin(math.radians(t)))),t)for t in angles]
+ pieces=[]
+ for k in range(len(angles)):
+  nxt=(k+1)%len(angles)
+  ring=[b[k],a[k],a[nxt],b[nxt]]
+  if kind in (94,96,98,99):
+   # A second joint splits the arm into two construction pieces.
+   mid=lambda p,q:((p[0]+q[0])/2,(p[1]+q[1])/2)
+   u=mid(b[k],a[k]);v=mid(b[nxt],a[nxt]);pieces.extend([[b[k],u,v,b[nxt]],[u,a[k],a[nxt],v]])
+  else:pieces.append(ring)
+  pieces.append([a[k],o[k],o[nxt],a[nxt]])
+ if kind in (93,95,97):pieces.append(core)
+ elif kind==100:
+  # The central eight-point star has its own small octagonal heart.
+  small=[polar(22,offset+22.5+k*45)for k in range(8)]
+  ca=sorted(set(round(math.degrees(math.atan2(y-c,x-c))%360,8)for x,y in core+small))
+  aa=[ray(core,t)for t in ca];bb=[ray(small,t)for t in ca]
+  pieces.extend(rim_shapes(aa,bb));pieces.append(small)
+ else:
+  for k in range(len(core)):pieces.append([(c,c),core[k],core[(k+1)%len(core)]])
+ for j in range(3):
+  for i in range(3):
+   for q in pieces:yield move(q,i*z,j*z)
+
+
 meta=[
 ('P001','Blokpatroon','Blokken',705,15,'Afwisselende blokken van parallelle stroken.','De strookverdeling is vereenvoudigd naar drie delen per blok.',blocks),
 ('P002','Visgraat','Verbanden',719,17,'Rechthoekige delen ontmoeten elkaar onder een rechte hoek.','De verhoudingen en herhaling zijn opnieuw opgezet voor het UWFL-vlak.',herringbone),
@@ -896,6 +945,20 @@ fourth_designs=[
 ]
 for index,(name,family,description,en_name,en_description,fn) in enumerate(fourth_designs,72):
  meta.append((f'P{index:03d}',name,family,None,None,description,'Nieuwe geometrische UWFL-studie van het beschreven legverband. Geen exacte historische reconstructie of zaagplan.',fn));new_english[f'P{index:03d}']=dict(name_en=en_name,description_en=en_description)
+
+star_designs=[
+('Vierpuntige ster met ruitkern','Vier lange punten vertrekken vanuit een in vier delen opgebouwde ruitvormige kern.','Four-point star with diamond centre','Four long points extend from a diamond centre made of four pieces.'),
+('Vijfpuntige ster met vijfhoekshart','Vijf brede sterarmen omsluiten een rustig vijfhoekig middenstuk.','Five-point star with pentagonal heart','Five broad star arms surround a quiet pentagonal centre.'),
+('Zespuntige ster met driehoekshart','Gedeelde sterarmen verbinden zes punten met een in drie delen verdeelde driehoekskern.','Six-point star with triangular heart','Divided arms connect six points to a three-piece triangular centre.'),
+('Windroos met lange en korte punten','Vier lange hoofdpunten en vier kortere tussenpunten komen samen rond een achthoekig hart.','Compass star with long and short points','Four long main points and four shorter intermediate points meet around an octagonal heart.'),
+('Achtpuntige ster met gedeelde armen','Dubbel opgebouwde armen lopen van een vierdelige vierkante kern naar acht gelijke punten.','Eight-point star with divided arms','Two-part arms extend from a four-piece square centre to eight equal points.'),
+('Tienpuntige sterrozet','Tien smalle punten vormen een gesloten rozet rond een onverdeeld tienhoekig hart.','Ten-point star rosette','Ten slender points form a closed rosette around an undivided decagonal heart.'),
+('Twaalfpuntige ster met zeshoekshart','Twaalf gelede punten wisselen rond een zeshoekige kern van zes driehoekige delen.','Twelve-point star with hexagonal heart','Twelve articulated points surround a hexagonal centre made of six triangles.'),
+('Zestienpuntige kompasrozet','Lange en korte gelede stralen vormen samen een zestienpuntige rozet rond een achtdelige kern.','Sixteen-point compass rosette','Long and short articulated rays form a sixteen-point rosette around an eight-piece centre.'),
+('Dubbele achtpuntige sierster','Een kleinere gedraaide achtpuntige ster ligt binnen de buitenste ster en heeft een eigen achthoekig hart.','Double eight-point ornamental star','A smaller turned eight-point star sits inside the outer star and has its own octagonal heart.'),
+]
+for index,(name,description,en_name,en_description) in enumerate(star_designs,92):
+ meta.append((f'P{index:03d}',name,'Sierpatronen',None,None,description,'Nieuwe geometrische UWFL-siersterstudie. Geen exacte historische reconstructie of zaagplan.',lambda index=index:ornamental_stars(index)));new_english[f'P{index:03d}']=dict(name_en=en_name,description_en=en_description)
 
 def contains(poly,p):
  x,y=p;inside=False
