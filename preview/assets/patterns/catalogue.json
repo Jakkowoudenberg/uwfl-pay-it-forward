@@ -4,159 +4,69 @@
     "name": "Blokpatroon",
     "family": "Blokken",
     "description": "Afwisselende blokken van parallelle stroken.",
-    "adaptation": "De strookverdeling is vereenvoudigd naar drie delen per blok.",
-    "image": "assets/patterns/p001.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 705,
-      "scanPage": 15,
-      "printedPage": 13,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w15.htm"
-    }
+    "image": "assets/patterns/p001.svg"
   },
   {
     "id": "P002",
     "name": "Visgraat",
     "family": "Verbanden",
     "description": "Rechthoekige delen ontmoeten elkaar onder een rechte hoek.",
-    "adaptation": "De verhoudingen en herhaling zijn opnieuw opgezet voor het UWFL-vlak.",
-    "image": "assets/patterns/p002.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 719,
-      "scanPage": 17,
-      "printedPage": 15,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w17.htm"
-    }
+    "image": "assets/patterns/p002.svg"
   },
   {
     "id": "P003",
     "name": "Vierkantenvlecht",
     "family": "Vlechten",
     "description": "Doorlopende beweging rond vierkante middenstukken.",
-    "adaptation": "Een vereenvoudigde geometrische studie van de stroken rond de vierkante accenten.",
-    "image": "assets/patterns/p003.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 713,
-      "scanPage": 15,
-      "printedPage": 13,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w15.htm"
-    }
+    "image": "assets/patterns/p003.svg"
   },
   {
     "id": "P004",
     "name": "Dubbele strokenvlecht",
     "family": "Vlechten",
     "description": "Gepaarde stroken maken de vlechtbeweging zichtbaar.",
-    "adaptation": "De kruisingen wisselen boven en onder; de strookverdeling en schaal zijn aangepast.",
-    "image": "assets/patterns/p004.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 723,
-      "scanPage": 17,
-      "printedPage": 15,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w17.htm"
-    }
+    "image": "assets/patterns/p004.svg"
   },
   {
     "id": "P005",
     "name": "Raster met vierkante accenten",
     "family": "Vlechten",
     "description": "Kleine vierkanten verbinden een ritmisch raster van stroken.",
-    "adaptation": "Strookritme en accenten zijn vereenvoudigd; houtkleur is bewust weggelaten.",
-    "image": "assets/patterns/p005.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 742,
-      "scanPage": 18,
-      "printedPage": 16,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w18.htm"
-    }
+    "image": "assets/patterns/p005.svg"
   },
   {
     "id": "P006",
     "name": "Zeshoekrozet",
     "family": "Geometrisch",
     "description": "Driehoekige delen vormen een veld van zeshoekige rozetten.",
-    "adaptation": "Geometrische studie naar het zeshoekige sterritme; geen exacte overtrek.",
-    "image": "assets/patterns/p006.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 712,
-      "scanPage": 15,
-      "printedPage": 13,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w15.htm"
-    }
+    "image": "assets/patterns/p006.svg"
   },
   {
     "id": "P007",
     "name": "Achthoeken en vierkanten",
     "family": "Geometrisch",
     "description": "Achthoekige velden sluiten aan op vierkante verbindingsstukken.",
-    "adaptation": "De interne houtvulling en accentlijnen zijn weggelaten om de hoofdindeling te tonen.",
-    "image": "assets/patterns/p007.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 757,
-      "scanPage": 22,
-      "printedPage": 20,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w22.htm"
-    }
+    "image": "assets/patterns/p007.svg"
   },
   {
     "id": "P008",
     "name": "Ruitenraster",
     "family": "Geometrisch",
     "description": "Ruiten en driehoekige delen vormen een doorlopend raster.",
-    "adaptation": "Nieuwe geometrische uitwerking van het diagonale raster; geen exacte overtrek.",
-    "image": "assets/patterns/p008.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 700,
-      "scanPage": 14,
-      "printedPage": 12,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w14.htm"
-    }
+    "image": "assets/patterns/p008.svg"
   },
   {
     "id": "P009",
     "name": "Gecombineerde parketvelden",
     "family": "Blokken",
     "description": "Afwisselend gerichte stroken binnen vierkante veldmodules.",
-    "adaptation": "De hoekaccenten en profielen zijn vereenvoudigd tot verstekdelen.",
-    "image": "assets/patterns/p009.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 744,
-      "scanPage": 19,
-      "printedPage": 17,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w19.htm"
-    }
+    "image": "assets/patterns/p009.svg"
   },
   {
     "id": "P010",
     "name": "Sterrozet",
     "family": "Sierpatronen",
     "description": "Een ritme van stervormen, punten en aansluitende vlakken.",
-    "adaptation": "Eigen symmetrische uitwerking naar het historische sterritme; de historische draairichting is niet gekopieerd.",
-    "image": "assets/patterns/p010.svg",
-    "source": {
-      "title": "Interior Hardwood Co. · Book of Designs",
-      "year": 1892,
-      "number": 752,
-      "scanPage": 20,
-      "printedPage": 18,
-      "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w20.htm"
-    }
+    "image": "assets/patterns/p010.svg"
   }
 ]

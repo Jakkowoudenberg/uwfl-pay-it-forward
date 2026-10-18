@@ -11,7 +11,7 @@ frame (100 × 100 cm overall). No additional outer borders are offered.
 
 ## Provenance and geometry
 
-`preview/assets/patterns/catalogue.json` records the historic source number, scan
+`docs/pattern-provenance.json` records the historic source number, scan
 page, descriptive title and adaptation for every study. Source: Interior Hardwood
 Co., *Book of Designs: Ornamental Parquet Floors and Borders*, 15th edition, 1892,
 scans made available by Floor Borders. The original source pages were inspected.
@@ -56,3 +56,11 @@ The existing release function suite also remains unchanged and passes.
 
 Nothing in this preview claims that live reservations or 100 finished designs
 already exist. No production participant record has been changed.
+
+## Display decision
+
+Jakko requested no public source attribution. Public cards, detail views, SVG
+descriptions and the public catalogue therefore show no source names, dates,
+catalogue references or source links. Research provenance is retained only in
+`docs/pattern-provenance.json`, outside the published assets. This display change
+does not assert any copyright or licensing status.

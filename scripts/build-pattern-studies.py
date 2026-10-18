@@ -157,6 +157,7 @@ def contains(poly,p):
   if (y1>y)!=(y2>y) and x<(x2-x1)*(y-y1)/(y2-y1)+x1:inside=not inside
  return inside
 allmeta=[]
+publicmeta=[]
 for code,name,family,num,page,description,adaptation,fn in meta:
  shapes=[clip(p)for p in fn()];shapes=[p for p in shapes if len(p)>=3 and area(p)>1e-6]
  total=sum(area(p)for p in shapes)
@@ -177,8 +178,10 @@ for code,name,family,num,page,description,adaptation,fn in meta:
     if len(p)>=3 and area(p)>1e-6:outlines+='<polygon points="'+' '.join(f'{fmt(x+50)},{fmt(y+50)}'for x,y in p)+'"/>'
 
  body=''.join('<polygon points="'+' '.join(f'{fmt(x+50)},{fmt(y+50)}'for x,y in p)+'"/>'for p in shapes)
- svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc"><title id="title">{title}</title><desc id="desc">Zwart-witte geometrische studie. Werkvlak 90 bij 90 cm binnen de vaste eiken molenwiekband van 5 cm. Bewerking naar Interior Hardwood Co., 1892, nummer {num}. Geen zaagplan.</desc><rect width="1000" height="1000" fill="white"/><g fill="white" stroke="#171717" stroke-width="1.7" stroke-linejoin="round">{body}</g><g fill="none" stroke="#171717" stroke-width="3">{outlines}</g><g fill="white" stroke="#171717" stroke-width="2.4"><path d="M0 0H950V50H0Z"/><path d="M950 0H1000V950H950Z"/><path d="M50 950H1000V1000H50Z"/><path d="M0 50H50V1000H0Z"/></g></svg>'''
+ svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc"><title id="title">{title}</title><desc id="desc">Zwart-witte geometrische studie. Werkvlak 90 bij 90 cm binnen de vaste eiken molenwiekband van 5 cm. Geen zaagplan.</desc><rect width="1000" height="1000" fill="white"/><g fill="white" stroke="#171717" stroke-width="1.7" stroke-linejoin="round">{body}</g><g fill="none" stroke="#171717" stroke-width="3">{outlines}</g><g fill="white" stroke="#171717" stroke-width="2.4"><path d="M0 0H950V50H0Z"/><path d="M950 0H1000V950H950Z"/><path d="M50 950H1000V1000H50Z"/><path d="M0 50H50V1000H0Z"/></g></svg>'''
  (OUT/f'{code.lower()}.svg').write_text(svg)
  allmeta.append(dict(id=code,name=name,family=family,description=description,adaptation=adaptation,image=f'assets/patterns/{code.lower()}.svg',source=dict(title='Interior Hardwood Co. · Book of Designs',year=1892,number=num,scanPage=page,printedPage=page-2,url=f'https://floorborders.com/pubs/Book-of-Designs-1892/w{page:02d}.htm')))
+ publicmeta.append({k:v for k,v in allmeta[-1].items() if k not in ('source','adaptation')})
  print(code,len(shapes),'pieces · complete field')
-(OUT/'catalogue.json').write_text(json.dumps(allmeta,ensure_ascii=False,indent=2)+'\n')
+(ROOT/'docs/pattern-provenance.json').write_text(json.dumps(allmeta,ensure_ascii=False,indent=2)+'\n')
+(OUT/'catalogue.json').write_text(json.dumps(publicmeta,ensure_ascii=False,indent=2)+'\n')
