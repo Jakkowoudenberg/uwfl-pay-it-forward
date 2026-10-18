@@ -137,3 +137,9 @@ quiet strip bonds and point variations. Previous51 SVGs are retained.
 Names/descriptions support Dutch and English. All outer frames stay clockwise;
 public browsing, participant data, accounts, reservations and mail boundaries
 are unchanged.
+
+
+### Pattern library:91 studies
+Added P072–P091 with NL/EN names and descriptions. Preserved P001–P071, the
+clockwise oak frame, browsing-only public library and mobile layout. Validated
+geometry coverage, unique inner SVGs, search/filter/dialog and NL/EN fallback.
