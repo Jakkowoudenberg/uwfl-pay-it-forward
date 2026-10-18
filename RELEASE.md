@@ -198,3 +198,16 @@ pauses for hidden pages, open artwork dialogs, hover/focus and reduced-motion
 preferences. Reduced-motion users retain manual controls. Catalogue failures
 retain the original local P004 study. No participant records or backend writes
 are involved. Offline shuffle/lifecycle checks and artwork UI regression pass.
+
+
+## Prominent app sharing
+
+The main header now contains an explicit Share the app button (eight language
+labels), with three connected nodes instead of an upload arrow. It uses the
+existing native Web Share / copy-link fallback and shares only the canonical
+public homepage URL. Narrow screens place the labelled button on a full-width
+header row. The information-page sharing icon is corrected too.
+
+Verified native share, cancellation and fallback with fictional browser mocks,
+clipboard denial, header integration and unchanged home pattern rotation. No
+messages were sent to a real recipient during QA.

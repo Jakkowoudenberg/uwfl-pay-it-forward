@@ -15,8 +15,10 @@ const locale=element=>element?.closest('[data-tools-language]')?.dataset.toolsLa
 const text=language=>copy[language]||copy.en;
 const displayMode=window.matchMedia?.('(display-mode: standalone)');
 let installed=!!(displayMode?.matches||navigator.standalone),installPrompt=null,installBusy=false,shareBusy=false,noticeTimer;
-const svg=kind=>`<svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${kind==='share'?'<path d="M12 16V3m-4 4 4-4 4 4M5 12v8h14v-8"/>':'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>'}</svg>`;
+const svg=kind=>`<svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${kind==='share'?'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/>':'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>'}</svg>`;
 function buttons(language){const t=text(language);return `<div class="app-quick-actions" role="group" aria-label="${esc(t.group)}" data-tools-language="${esc(language)}"><button type="button" class="button outline" data-app-tool="share" ${shareBusy?'disabled':''}>${svg('share')}<span>${esc(t.share)}</span></button><button type="button" class="button outline" data-app-tool="install" ${installed||installBusy?'disabled':''}>${svg('install')}<span>${esc(installed?t.installed:t.install)}</span></button></div>`;}
+const shareAppLabels={nl:'Deel de app',en:'Share the app',de:'App teilen',fr:'Partager l’application',es:'Compartir la app',it:'Condividi l’app',pt:'Partilhar a app',pl:'Udostępnij aplikację'};
+function shareButton(language){return `<button type="button" class="header-app-share" data-app-tool="share" data-tools-language="${esc(language)}" ${shareBusy?'disabled':''}>${svg('share')}<span>${esc(shareAppLabels[language]||shareAppLabels.en)}</span></button>`;}
 function refresh(){document.querySelectorAll('[data-app-tool="install"]').forEach(button=>{button.disabled=installed||installBusy;button.querySelector('span').textContent=text(locale(button))[installed?'installed':'install'];});document.querySelectorAll('[data-app-tool="share"]').forEach(button=>{button.disabled=shareBusy;});}
 function announce(message){const notice=document.getElementById('notice');if(!notice)return;notice.textContent=message;notice.classList.add('active');clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>notice.classList.remove('active'),4500);}
 function showDialog(kind,trigger){
@@ -61,5 +63,5 @@ window.addEventListener('appinstalled',()=>{installed=true;installPrompt=null;re
 displayMode?.addEventListener?.('change',event=>{if(event.matches){installed=true;refresh();}});
 document.addEventListener('click',event=>{const button=event.target.closest('[data-app-tool]');if(!button||button.disabled)return;if(button.dataset.appTool==='share')share(button);else install(button);});
 window.addEventListener('load',()=>{if(live()&&'serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js',{updateViaCache:'none'}).catch(()=>{});});
-window.UWFL_TOOLS={buttons,refresh};
+window.UWFL_TOOLS={buttons,refresh,shareButton};
 })();
