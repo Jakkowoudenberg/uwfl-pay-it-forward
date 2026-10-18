@@ -4,7 +4,7 @@ const {JSDOM}=require(process.env.JSDOM_PATH||'jsdom');
 const root=path.resolve(__dirname,'../dist'),publicUrl='https://unitedwoodfloorlayers.com/';
 const tick=()=>new Promise(resolve=>setTimeout(resolve,0));
 async function create(lang='nl',options={}){
- const dom=new JSDOM(fs.readFileSync(path.join(root,'index.html'),'utf8'),{url:options.url||publicUrl+'?fixture=private#home',runScripts:'outside-only',pretendToBeVisual:true});
+ const dom=new JSDOM(fs.readFileSync(path.join(root,'information.html'),'utf8'),{url:options.url||publicUrl+'?fixture=private#home',runScripts:'outside-only',pretendToBeVisual:true});
  const w=dom.window,d=w.document,calls={share:[],copy:[],worker:[],fetch:[]};
  w.localStorage.setItem('uwfl_preview_lang',lang);w.scrollTo=()=>{};w.HTMLElement.prototype.scrollIntoView=()=>{};
  w.matchMedia=query=>({matches:query.includes('prefers-color-scheme')||!!options.standalone,addEventListener(){}});
@@ -15,7 +15,7 @@ async function create(lang='nl',options={}){
  Object.defineProperty(w.navigator,'clipboard',{configurable:true,value:{writeText:async value=>{calls.copy.push(value);}}});
  w.navigator.share=async payload=>{calls.share.push(payload);};
  w.fetch=async(url,config={})=>{assert(!config.method||config.method==='GET','Tools must not submit data');calls.fetch.push(String(url));return {ok:true,json:async()=>[]};};
- for(const element of d.querySelectorAll('script[src]'))w.eval(fs.readFileSync(path.join(root,element.getAttribute('src').split('?')[0]),'utf8'));
+ for(const element of [...d.querySelectorAll('script[src]')].filter(el=>el.getAttribute('src').startsWith('assets/')&&!el.getAttribute('src').includes('information-navigation.js')))w.eval(fs.readFileSync(path.join(root,element.getAttribute('src').split('?')[0]),'utf8'));
  await tick();await tick();
  return {w,d,calls,close:()=>w.close(),share:()=>d.querySelector('[data-app-tool=share]'),install:()=>d.querySelector('[data-app-tool=install]')};
 }
