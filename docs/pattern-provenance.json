@@ -158,5 +158,20 @@
       "printedPage": 18,
       "url": "https://floorborders.com/pubs/Book-of-Designs-1892/w20.htm"
     }
+  },
+  {
+    "id": "P011",
+    "name": "Kubusverband met zeshoekige omlijsting",
+    "family": "Geometrisch",
+    "description": "Drie ruitvormige vlakken per zeshoek vormen samen een kubusbeeld.",
+    "adaptation": "Geometrische studie naar Wyrsch nr. 71; de smalle meervoudige randen zijn vereenvoudigd tot één omlijsting.",
+    "image": "assets/patterns/p011.svg",
+    "source": {
+      "title": "Gebrüder Wyrsch · Parquet-Fabrik",
+      "year": 1910,
+      "number": 71,
+      "scanPage": 48,
+      "url": "https://archive.org/details/Parquet-fabrikGebrderWyrschBuochsSuisseGegrndet1875"
+    }
   }
 ]

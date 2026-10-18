@@ -92,3 +92,19 @@ contents or delivery. No real mails or submissions were created during QA.
 Validation: release function contracts, artwork intake UI with fake networking,
 six-language admin suite, security checks and production build. Additive schema
 is recorded in scripts/schema-artwork-dossiers.sql.
+
+## Pattern library — 18 October 2026
+
+The public `patterns.html` page now exposes the first eleven checked pattern
+studies. The homepage, artwork overview, menu and footer link to it. Public
+visitors can search, filter and enlarge drawings; the memory-only demo choices
+remain limited to the deploy-preview review page. There are no reservation,
+identity, mail or database writes from the public library. The agreed verified
+reservation workflow is described as a future feature, not offered as live.
+
+The page explains equal appreciation for pattern floors and free designs,
+invites craftspeople to involve the next generation, and explains scaling
+pieces to show repeats inside the mandatory 90 cm inner field. The library
+supports Dutch and English, with English fallback for other interface languages.
+The intended total is 100; the public count accurately reflects the current eleven. The first cube study is adapted from Wyrsch no. 71.
+No additional historical designs are claimed before drawings are checked.

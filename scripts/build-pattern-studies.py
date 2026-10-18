@@ -1,4 +1,4 @@
-"""Ten geometric studies after Interior Hardwood Co., Book of Designs (1892).
+"""Geometric studies after Interior Hardwood Co., Book of Designs (1892).
 These are explicitly adapted studies, not exact transcriptions or cutting plans.
 The geometry covers each field; the shared outer frame is always 5 cm.
 No external libraries or source scans are needed to regenerate the SVGs.
@@ -86,6 +86,17 @@ def hexagons():
    # Six triangular wood pieces per hexagon, a readable rosette study.
    for k in range(6):yield [(cx,cy),p[k],p[(k+1)%6]]
 
+def framed_cubes():
+ # Three rhombi per hexagon: the classic cube field, after Wyrsch no. 71.
+ r=100;h=math.sqrt(3)*r/2;ratio=.78
+ for i in range(-1,9):
+  for j in range(-1,9):
+   cx=i*1.5*r;cy=(2*j+(i%2))*h
+   outer=[(cx+r*math.cos(k*math.pi/3),cy+r*math.sin(k*math.pi/3)) for k in range(6)]
+   inner=[(cx+(x-cx)*ratio,cy+(y-cy)*ratio) for x,y in outer]
+   for k in range(6):yield [outer[k],outer[(k+1)%6],inner[(k+1)%6],inner[k]]
+   for k in range(0,6,2):yield [(cx,cy),inner[k],inner[(k+1)%6],inner[(k+2)%6]]
+
 def octagons():
  z=225;c=z/(2+math.sqrt(2))
  for i in range(4):
@@ -149,7 +160,8 @@ meta=[
 ('P009','Gecombineerde parketvelden','Blokken',744,19,'Afwisselend gerichte stroken binnen vierkante veldmodules.','De hoekaccenten en profielen zijn vereenvoudigd tot verstekdelen.',panels),
 ('P010','Sterrozet','Sierpatronen',752,20,'Een ritme van stervormen, punten en aansluitende vlakken.','Eigen symmetrische uitwerking naar het historische sterritme; de historische draairichting is niet gekopieerd.',stars),
 ]
-# Keep the more source-specific ten above; paired herringbone is retained as a reusable constructor.
+meta.append(('P011','Kubusverband met zeshoekige omlijsting','Geometrisch',71,48,'Drie ruitvormige vlakken per zeshoek vormen samen een kubusbeeld.','Geometrische studie naar Wyrsch nr. 71; de smalle meervoudige randen zijn vereenvoudigd tot één omlijsting.',framed_cubes))
+
 
 def contains(poly,p):
  x,y=p;inside=False
@@ -181,6 +193,7 @@ for code,name,family,num,page,description,adaptation,fn in meta:
  svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc"><title id="title">{title}</title><desc id="desc">Zwart-witte geometrische studie. Werkvlak 90 bij 90 cm binnen de vaste eiken molenwiekband van 5 cm. Geen zaagplan.</desc><rect width="1000" height="1000" fill="white"/><g fill="white" stroke="#171717" stroke-width="1.7" stroke-linejoin="round">{body}</g><g fill="none" stroke="#171717" stroke-width="3">{outlines}</g><g fill="white" stroke="#171717" stroke-width="2.4"><path d="M0 0H950V50H0Z"/><path d="M950 0H1000V950H950Z"/><path d="M50 950H1000V1000H50Z"/><path d="M0 50H50V1000H0Z"/></g></svg>'''
  (OUT/f'{code.lower()}.svg').write_text(svg)
  allmeta.append(dict(id=code,name=name,family=family,description=description,adaptation=adaptation,image=f'assets/patterns/{code.lower()}.svg',source=dict(title='Interior Hardwood Co. · Book of Designs',year=1892,number=num,scanPage=page,printedPage=page-2,url=f'https://floorborders.com/pubs/Book-of-Designs-1892/w{page:02d}.htm')))
+ if code=='P011':allmeta[-1]['source']=dict(title='Gebrüder Wyrsch · Parquet-Fabrik',year=1910,number=71,scanPage=48,url='https://archive.org/details/Parquet-fabrikGebrderWyrschBuochsSuisseGegrndet1875')
  publicmeta.append({k:v for k,v in allmeta[-1].items() if k not in ('source','adaptation')})
  print(code,len(shapes),'pieces · complete field')
 (ROOT/'docs/pattern-provenance.json').write_text(json.dumps(allmeta,ensure_ascii=False,indent=2)+'\n')

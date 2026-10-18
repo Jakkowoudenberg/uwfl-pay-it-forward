@@ -68,5 +68,12 @@
     "family": "Sierpatronen",
     "description": "Een ritme van stervormen, punten en aansluitende vlakken.",
     "image": "assets/patterns/p010.svg"
+  },
+  {
+    "id": "P011",
+    "name": "Kubusverband met zeshoekige omlijsting",
+    "family": "Geometrisch",
+    "description": "Drie ruitvormige vlakken per zeshoek vormen samen een kubusbeeld.",
+    "image": "assets/patterns/p011.svg"
   }
 ]
